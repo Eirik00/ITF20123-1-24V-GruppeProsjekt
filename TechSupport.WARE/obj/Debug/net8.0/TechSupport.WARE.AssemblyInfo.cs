@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TechSupport.WARE")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07781c4dce4af4780c7264a58a65a1d8fac4de64")]
 [assembly: System.Reflection.AssemblyProductAttribute("TechSupport.WARE")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TechSupport.WARE")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
