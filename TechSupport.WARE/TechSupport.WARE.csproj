@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="InterfaceIsle.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="IIsle" />
+    <None Remove="InterfaceIsle" />
+    <None Remove="NewFile1.txt" />
+  </ItemGroup>
+
 </Project>
