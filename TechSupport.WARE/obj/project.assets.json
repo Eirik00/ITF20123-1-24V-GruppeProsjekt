@@ -8,24 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\eirik\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Martin MT\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\eirik\\Source\\Repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE\\TechSupport.WARE.csproj",
+      "projectUniqueName": "C:\\Users\\Martin MT\\Documents\\GitHub\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE\\TechSupport.WARE.csproj",
       "projectName": "TechSupport.WARE",
-      "projectPath": "C:\\Users\\eirik\\Source\\Repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE\\TechSupport.WARE.csproj",
-      "packagesPath": "C:\\Users\\eirik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\eirik\\Source\\Repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE\\obj\\",
+      "projectPath": "C:\\Users\\Martin MT\\Documents\\GitHub\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE\\TechSupport.WARE.csproj",
+      "packagesPath": "C:\\Users\\Martin MT\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Martin MT\\Documents\\GitHub\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\eirik\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Martin MT\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
