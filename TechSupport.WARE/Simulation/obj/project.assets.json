@@ -98,9 +98,9 @@
   },
   "logs": [
     {
-      "code": "NU1105",
+      "code": "NU1104",
       "level": "Error",
-      "message": "Unable to find project information for 'C:\\Users\\eirik\\source\\repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.WarehouseSimulation\\TechSupport.WARE.WarehouseSimulation.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
+      "message": "Unable to find project 'C:\\Users\\eirik\\source\\repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.WarehouseSimulation\\TechSupport.WARE.WarehouseSimulation.csproj'. Check that the project reference is valid and that the project file exists.",
       "libraryId": "C:\\Users\\eirik\\source\\repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.WarehouseSimulation\\TechSupport.WARE.WarehouseSimulation.csproj",
       "targetGraphs": [
         "net8.0"
