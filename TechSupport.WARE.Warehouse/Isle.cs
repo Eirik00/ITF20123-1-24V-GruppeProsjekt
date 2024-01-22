@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE
 {
-    internal interface IIsle
+    public class Isle : IIsle
     {
-        void addPackage();
-        void removePackage();
+        public Isle(int isleid)
+        {
+            isleId = isleid;
+        }
+
+        public int isleId { get; set; }
+
     }
 }
