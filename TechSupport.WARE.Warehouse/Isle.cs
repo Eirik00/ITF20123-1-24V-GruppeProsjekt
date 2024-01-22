@@ -17,6 +17,8 @@ namespace TechSupport.WARE
         private int weightLimitInGrams;
         private int category;
 
+        private string testingString = "string";
+
         private Package test = null;
 
         public Isle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, int category, int isleId)
