@@ -15,7 +15,7 @@ namespace TechSupport.WARE
         static void Main(string[] args)
         {
 
-            //Package class has parameters: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
+            //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //category storageSpecifications[], boolean isFragile
 
             //productId is not uniqe, represents the type of product the package is. (e.g. productId 16327 represents televisions)
