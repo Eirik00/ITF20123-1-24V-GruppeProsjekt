@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE
 {
-    internal class Package
+    public class Package
     {
         private int packageId;
         private int packageLenghtInMm;
@@ -15,8 +15,8 @@ namespace TechSupport.WARE
         private int packageDepthInMm;
         private int packageWeighInMm;
         private bool isFragile;
-        int storageSpecification;
-        int status;
+        private int storageSpecification;
+        private int status;
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, int status = 0)
         {

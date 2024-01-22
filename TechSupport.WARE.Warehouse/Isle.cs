@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,15 @@ namespace TechSupport.WARE
 {
     public class Isle : IIsle
     {
+        private Dictionary<int, Package> shelf;
         private int numberOfSpaces;
         private int lengthOfSpaceInMm;
         private int heightOfSpaceInMm;
         private int depthOfSpaceInMm;
         private int weightLimitInGrams;
         private int category;
+
+        private Package test = null;
 
         public Isle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, int category, int isleId)
         {
@@ -24,18 +28,35 @@ namespace TechSupport.WARE
             this.weightLimitInGrams = weightLimitInGrams;
             this.category = category;
             this.isleId = isleId;
-        }
+            this.shelf = new Dictionary<int, Package>();
+            for(int i = 1;i<=numberOfSpaces; i++)
+            {
+                this.shelf.Add(i, null);
+            }
+
+    }
 
         public int isleId { get; set; }
 
-        public void addPackage()
+        public void addPackage(Package package, int placement)
         {
-            throw new NotImplementedException();
+            DateTime timeNow = DateTime.Now;
+            this.shelf.Add(placement, package);
+
+            // for testing purposes later when simulating
+            Console.WriteLine("Package Added");
         }
 
-        public void removePackage()
+        public void removePackage(Package package)
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= this.numberOfSpaces; ++i)
+            {
+                if (this.shelf[i] == package)
+                {
+                    this.shelf[i] = null;
+                }
+            }
+
         }
     }
 }
