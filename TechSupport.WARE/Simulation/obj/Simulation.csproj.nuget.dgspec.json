@@ -31,7 +31,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\eirik\\source\\repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.WarehouseSimulation\\TechSupport.WARE.WarehouseSimulation.csproj": {
+                "projectPath": "C:\\Users\\eirik\\source\\repos\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.WarehouseSimulation\\TechSupport.WARE.WarehouseSimulation.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
