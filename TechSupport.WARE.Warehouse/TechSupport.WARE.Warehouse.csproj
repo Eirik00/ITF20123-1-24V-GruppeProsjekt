@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TechSupport.WARE.WarehouseSimulation\TechSupport.WARE.WarehouseSimulation.csproj" />
-  </ItemGroup>
-
 </Project>
