@@ -10,11 +10,35 @@ using System.Collections;
 
 namespace TechSupport.WARE
 {
-    internal class main
+    internal class Program
     {
         static void Main(string[] args)
         {
-            Isle isle = new Isle();
+            Isle isle = new Isle(20, 20000, 8000, 1000, 500000, 1, 1);
+
+            Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0);
+            Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0);
+            Package pakke2 = new Package(1, 2000, 1000, 500, 20000, true, 0);
+            Package pakke3 = new Package(2, 3000, 1000, 500, 20000, true, 0);
+
+
+
+            isle.addPackage(myGamingPc, 1);
+            isle.addPackage(pakke1, 10);
+            isle.addPackage(pakke2, 7);
+            isle.addPackage(pakke3, 20);
+
+            for(int i = 1; i < isle.shelf.Count+1; i++)
+            {
+                Console.WriteLine(i + ": " + isle.shelf[i]);
+            }
+            isle.removePackage(pakke1);
+
+            for (int i = 1; i < isle.shelf.Count+1; i++)
+            {
+                Console.WriteLine(i + ": " + isle.shelf[i]);
+            }
+
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //category storageSpecifications[], boolean isFragile
 
@@ -24,36 +48,36 @@ namespace TechSupport.WARE
 
             //When a new package is registered it automatically gets put to Reception.
 
-//            Package myPackage = new Package(123456, 400, 500, 200, 400000, 2, 0);
+            //            Package myPackage = new Package(123456, 400, 500, 200, 400000, 2, 0);
 
             //Isle class has parameters: int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int capableWeightInGrams,
             //category storageSpecifications[]
 
-//            Isle isle1 = new Isle(50, 400, 500, 1000, 100000, 2);
+            //            Isle isle1 = new Isle(50, 400, 500, 1000, 100000, 2);
 
             //isle.addPackage takes the parameters: Package package, int space
             //(if no space parameter is given package is placed in lowest vailable space)
 
-//            isle1.addPackage(myPackage, 1);
+            //            isle1.addPackage(myPackage, 1);
 
             //locate returns isle, category and space
-//            myPackage.getLocation();
+            //            myPackage.getLocation();
 
             //return status, is it Reception, Storage, picking or delivery
-//            myPackage.getStatus();
+            //            myPackage.getStatus();
 
             //update status, 1:Reception, 2:Storage, 3:Picking, 4:Delivery
-//            myPackage.updateStatus(2);
+            //            myPackage.updateStatus(2);
 
             //Delivery class has parameters: datetime timeOfDelivery, arraylist packagesInDelivery
 
             //Delivery delivery_1 = new Delivery();
 
-//            ArrayList deliveryList_1 = new ArrayList();
-//            deliveryList_1.Add(myPackage);
+            //            ArrayList deliveryList_1 = new ArrayList();
+            //            deliveryList_1.Add(myPackage);
 
             //addPackages(ArrayList/object of Packages)
-//            delivery_1.addPackages(deliveryList_1);
+            //            delivery_1.addPackages(deliveryList_1);
 
             //Reception collection = new Reception;
         }

@@ -1,0 +1,16 @@
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\bin\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.deps.json
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\bin\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.dll
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\bin\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.pdb
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\bin\Debug\net8.0\TechSupport.WARE.Warehouse.dll
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\bin\Debug\net8.0\TechSupport.WARE.Warehouse.pdb
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.csproj.AssemblyReference.cache
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.AssemblyInfoInputs.cache
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.AssemblyInfo.cs
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.csproj.CoreCompileInputs.cache
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.sourcelink.json
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.csproj.CopyComplete
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.dll
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\refint\TechSupport.WARE.WarehouseSimulation.dll
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\TechSupport.WARE.WarehouseSimulation.pdb
+C:\Users\eirik\source\repos\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.WarehouseSimulation\obj\Debug\net8.0\ref\TechSupport.WARE.WarehouseSimulation.dll

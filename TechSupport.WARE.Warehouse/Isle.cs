@@ -9,7 +9,7 @@ namespace TechSupport.WARE
 {
     public class Isle : IIsle
     {
-        private Dictionary<int, Package> shelf;
+        public Dictionary<int, Package> shelf;
         private int numberOfSpaces;
         private int lengthOfSpaceInMm;
         private int heightOfSpaceInMm;
@@ -41,7 +41,7 @@ namespace TechSupport.WARE
         public void addPackage(Package package, int placement)
         {
             DateTime timeNow = DateTime.Now;
-            this.shelf.Add(placement, package);
+            this.shelf[placement] = package;
 
             // for testing purposes later when simulating
             Console.WriteLine("Package Added");

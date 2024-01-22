@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Simulation/1.0.0": {
+        "dependencies": {
+          "TechSupport.WARE.Warehouse": "1.0.0"
+        },
+        "runtime": {
+          "Simulation.dll": {}
+        }
+      },
+      "TechSupport.WARE.Warehouse/1.0.0": {
+        "runtime": {
+          "TechSupport.WARE.Warehouse.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Simulation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TechSupport.WARE.Warehouse/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
