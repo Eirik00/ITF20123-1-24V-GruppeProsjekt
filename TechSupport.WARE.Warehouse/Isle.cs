@@ -36,11 +36,11 @@ namespace TechSupport.WARE
                 this.shelf.Add(i, null);
             }
 
-    }
+        }
 
         public int isleId { get; set; }
 
-        public void addPackage(Package package, int placement)
+        public void AddPackage(Package package, int placement)
         {
             DateTime timeNow = DateTime.Now;
             this.shelf[placement] = package;
@@ -49,7 +49,7 @@ namespace TechSupport.WARE
             Console.WriteLine("Package Added");
         }
 
-        public void removePackage(Package package)
+        public void RemovePackage(Package package)
         {
             for (int i = 1; i <= this.numberOfSpaces; ++i)
             {
