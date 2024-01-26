@@ -39,7 +39,13 @@ namespace TechSupport.WARE
                 Console.WriteLine(i + ": " + isle.shelf[i]);
             }
 
-            Console.WriteLine(pakke1.Status);
+            pakke1.ChangeStatus(StatusList.Delivery);
+            Dictionary<DateTime, StatusList> pakke1Historikk = pakke1.StatusLog;
+
+            foreach(var status in pakke1Historikk)
+            {
+                Console.WriteLine($"{status.Key} Kjedde det en endring hvor statusen var {status.Value}");
+            }
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //category storageSpecifications[], boolean isFragile
 
