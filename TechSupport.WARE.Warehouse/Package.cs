@@ -31,9 +31,14 @@ namespace TechSupport.WARE
             this.status = status;
         }
 
-        public string getStatus(Package package)
+        public statusList getStatus()
         {
-            return this.status.ToString;
+            return this.status;
+        }
+
+        public void changeStatus(statusList newStatus)
+        {
+            this.status = newStatus;
         }
 
     }
