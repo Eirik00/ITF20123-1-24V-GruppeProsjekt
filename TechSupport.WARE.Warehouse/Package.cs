@@ -28,6 +28,7 @@ namespace TechSupport.WARE
             this.status = status;
 
             this.statusLog = new Dictionary<DateTime, StatusList>();
+            statusLog.Add(DateTime.Now, status);
         }
 
         public Dictionary<DateTime, StatusList> StatusLog
