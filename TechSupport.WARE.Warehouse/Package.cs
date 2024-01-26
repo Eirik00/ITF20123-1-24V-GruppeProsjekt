@@ -30,11 +30,11 @@ namespace TechSupport.WARE
             this.statusLog = new Dictionary<DateTime, StatusList>();
         }
 
-        public Dictionary<DateTime, StatusList> StatusListLog
+        public Dictionary<DateTime, StatusList> StatusLog
         {
             get
             {
-                return StatusListLog;
+                return statusLog;
             }
         }
 
