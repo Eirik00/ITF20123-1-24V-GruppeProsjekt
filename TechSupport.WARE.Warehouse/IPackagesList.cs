@@ -8,6 +8,9 @@ namespace TechSupport.WARE.Warehouse
 {
     internal interface IPackagesList
     {
-        public void addPackageToList(Package package);
+        public void addPackage(Package package);
+        public void removePackage(Package package);
+
+        public String seePackagesInList();
     }
 }

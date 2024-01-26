@@ -52,6 +52,9 @@ namespace TechSupport.WARE
         ///     >>>returns the package status history
         /// </example>
         /// </summary>
+        /// 
+
+        public int getPackageId => this.packageId;
         public Dictionary<DateTime, StatusList> StatusLog
         {
             get
@@ -75,6 +78,8 @@ namespace TechSupport.WARE
         /// (Isle, String, int) <c>GetLocation</c> returns the current location and equivelent information of that package
         /// </summary>
         /// <returns>Isle <c>isle</c>, String <c>category</c>, int <c>place</c></returns>
+        /// 
+
         public (Isle isle, String category, int place) GetLocation()
         {
             return (null, null, 0);

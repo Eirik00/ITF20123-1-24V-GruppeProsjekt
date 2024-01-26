@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using TechSupport.WARE.Warehouse;
 
 namespace TechSupport.WARE
 {
@@ -18,8 +19,8 @@ namespace TechSupport.WARE
 
             Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0);
             Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke2 = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke3 = new Package(2, 3000, 1000, 500, 20000, true, 0);
+            Package pakke2 = new Package(2, 2000, 1000, 500, 20000, true, 0);
+            Package pakke3 = new Package(3, 3000, 1000, 500, 20000, true, 0);
 
 
 
@@ -46,6 +47,19 @@ namespace TechSupport.WARE
             {
                 Console.WriteLine($"{status.Key} Kjedde det en endring hvor statusen var {status.Value}");
             }
+
+            PackagesList packagesList = new PackagesList(1);
+
+            packagesList.addPackage(pakke1);
+            packagesList.addPackage(pakke2);
+            packagesList.addPackage(pakke3);
+
+            Console.WriteLine(packagesList.seePackagesInList());
+
+            packagesList.removePackage(pakke2);
+
+            Console.WriteLine(packagesList.seePackagesInList());
+
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //category storageSpecifications[], boolean isFragile
 

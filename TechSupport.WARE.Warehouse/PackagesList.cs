@@ -10,17 +10,43 @@ namespace TechSupport.WARE.Warehouse
     public class PackagesList : IPackagesList
     {
         private int listId;
-        private ArrayList packages;
+        private HashSet<Package> packages;
 
-        public PackagesList(int listId, ArrayList packages)
+        public PackagesList(int listId)
         {
             this.listId = listId;
-            this.packages = packages;
+            this.packages = new HashSet<Package>();
 
         }
-        public void addPackageToList(Package package)
+        public void addPackage(Package package)
         {
-            this.packages.Add(package);
+            try
+            {
+                this.packages.Add(package);
+            }
+            catch(Exception exception){
+
+            
+            }
+           
+        }
+
+        public void removePackage(Package package)
+        {
+            this.packages.Remove(package);
+        }
+
+        public String seePackagesInList()
+        {
+            String temp = "The list contains packages with following Id: ";
+
+            foreach(Package package in this.packages)
+            {
+                temp += package.getPackageId + ", ";
+            }
+
+            return temp;
+            
         }
     }
 }
