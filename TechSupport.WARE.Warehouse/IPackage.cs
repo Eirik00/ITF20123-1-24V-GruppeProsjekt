@@ -10,12 +10,12 @@ namespace TechSupport.WARE
 {
     internal interface IPackage
     {
-//        Isle isle { get; }
-//        Category category { get; }
-//        int Id { get; set; }
-
-        (Isle isle, String category, int place) getLocation();
-        int getStatus();
-        string updateStatus();
+        //        Isle isle { get; }
+        //        Category category { get; }
+        //        int Id { get; set; }
+        StatusList Status { get; }
+        Dictionary<DateTime, StatusList> StatusLog { get; }
+        (Isle isle, String category, int place) GetLocation();
+        void ChangeStatus(StatusList newStatus);
     }
 }

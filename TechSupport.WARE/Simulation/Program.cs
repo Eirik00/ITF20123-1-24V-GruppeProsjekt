@@ -39,6 +39,7 @@ namespace TechSupport.WARE
                 Console.WriteLine(i + ": " + isle.shelf[i]);
             }
 
+            Console.WriteLine(pakke1.Status);
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //category storageSpecifications[], boolean isFragile
 

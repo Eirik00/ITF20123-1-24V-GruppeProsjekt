@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE
 {
-    public enum statusList { Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
-    public class Package
+    public enum StatusList { Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
+    public class Package : IPackage
     {
-        private int packageId;
-        private int packageLenghtInMm;
-        private int packageHeightInMm;
-        private int packageDepthInMm;
-        private int packageWeighInGrams;
+        private int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
         private bool isFragile;
         private int storageSpecification;
-        private statusList status;
+        private StatusList status;
+        private Dictionary<DateTime, StatusList> statusLog;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, statusList status = statusList.Reception)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, StatusList status = StatusList.Reception)
         {
             this.packageId = packageId;
             this.packageLenghtInMm = packageLenghtInMm;
@@ -29,14 +26,31 @@ namespace TechSupport.WARE
             this.isFragile = isFragile;
             this.storageSpecification = storageSpecification;
             this.status = status;
+
+            this.statusLog = new Dictionary<DateTime, StatusList>();
         }
 
-        public statusList getStatus()
+        public Dictionary<DateTime, StatusList> StatusListLog
         {
-            return this.status;
+            get
+            {
+                return StatusListLog;
+            }
         }
 
-        public void changeStatus(statusList newStatus)
+        public StatusList Status
+        {
+            get
+            {
+                return status;
+            }
+        }
+
+        public (Isle isle, String category, int place) GetLocation()
+        {
+            return (null, null, 0);
+        }
+        public void ChangeStatusList(StatusList newStatus)
         {
             this.status = newStatus;
         }
