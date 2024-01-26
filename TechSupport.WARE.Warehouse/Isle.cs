@@ -42,7 +42,8 @@ namespace TechSupport.WARE
 
         public void AddPackage(Package package, int placement)
         {
-            DateTime timeNow = DateTime.Now;
+            package.ChangeStatus(StatusList.Storage);
+
             this.shelf[placement] = package;
 
             // for testing purposes later when simulating
