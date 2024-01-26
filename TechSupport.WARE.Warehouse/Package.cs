@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechSupport.WARE.Warehouse;
 
 namespace TechSupport.WARE
 {
@@ -26,8 +27,10 @@ namespace TechSupport.WARE
         private int storageSpecification;
         private StatusList status;
         private Dictionary<DateTime, StatusList> statusLog;
+        private Contact sender;
+        private Contact receiver;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, StatusList status = StatusList.Reception)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, Contact sender, Contact receiver, StatusList status = StatusList.Reception)
         {
             this.packageId = packageId;
             this.packageLenghtInMm = packageLenghtInMm;
@@ -37,6 +40,8 @@ namespace TechSupport.WARE
             this.isFragile = isFragile;
             this.storageSpecification = storageSpecification;
             this.status = status;
+            this.sender = sender;
+            this.receiver = receiver;
 
             this.statusLog = new Dictionary<DateTime, StatusList>();
             statusLog.Add(DateTime.Now, status);
