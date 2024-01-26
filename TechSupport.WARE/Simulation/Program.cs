@@ -23,16 +23,16 @@ namespace TechSupport.WARE
 
 
 
-            isle.addPackage(myGamingPc, 1);
-            isle.addPackage(pakke1, 10);
-            isle.addPackage(pakke2, 7);
-            isle.addPackage(pakke3, 20);
+            isle.AddPackage(myGamingPc, 1);
+            isle.AddPackage(pakke1, 10);
+            isle.AddPackage(pakke2, 7);
+            isle.AddPackage(pakke3, 20);
 
             for(int i = 1; i < isle.shelf.Count+1; i++)
             {
                 Console.WriteLine(i + ": " + isle.shelf[i]);
             }
-            isle.removePackage(pakke1);
+            isle.RemovePackage(pakke1);
 
             for (int i = 1; i < isle.shelf.Count+1; i++)
             {

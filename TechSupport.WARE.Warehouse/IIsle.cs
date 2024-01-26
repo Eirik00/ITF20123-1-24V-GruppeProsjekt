@@ -8,7 +8,7 @@ namespace TechSupport.WARE
 {
     internal interface IIsle
     {
-        void addPackage(Package package, int placement);
-        void removePackage(Package package);
+        void AddPackage(Package package, int placement);
+        void RemovePackage(Package package);
     }
 }
