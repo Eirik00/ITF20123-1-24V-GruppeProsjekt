@@ -59,6 +59,8 @@ namespace TechSupport.WARE
         /// </summary>
         /// 
 
+
+        //LAG TOSTRING
         public int getPackageId => this.packageId;
         public Dictionary<DateTime, StatusList> StatusLog
         {

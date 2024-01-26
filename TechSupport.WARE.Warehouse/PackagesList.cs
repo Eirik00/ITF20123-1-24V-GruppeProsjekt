@@ -20,14 +20,9 @@ namespace TechSupport.WARE.Warehouse
         }
         public void addPackage(Package package)
         {
-            try
-            {
-                this.packages.Add(package);
-            }
-            catch(Exception exception){
-
+            this.packages.Add(package);
             
-            }
+          
            
         }
 

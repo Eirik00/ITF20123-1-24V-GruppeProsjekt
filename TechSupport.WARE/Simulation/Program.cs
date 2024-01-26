@@ -16,11 +16,12 @@ namespace TechSupport.WARE
         static void Main(string[] args)
         {
             Isle isle = new Isle(20, 20000, 8000, 1000, 500000, 1, 1);
+            Contact tore = new Contact("rjkjkjkdfg", "vfhf", "tuisddfs", "dfssdfe", "sdajhksdh", 9281645, 2742);
 
-            Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke2 = new Package(2, 2000, 1000, 500, 20000, true, 0);
-            Package pakke3 = new Package(3, 3000, 1000, 500, 20000, true, 0);
+            Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0, tore, tore);
+            Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0, tore, tore);
+            Package pakke2 = new Package(2, 2000, 1000, 500, 20000, true, 0, tore, tore);
+            Package pakke3 = new Package(3, 3000, 1000, 500, 20000, true, 0, tore, tore);
 
 
 
@@ -52,6 +53,7 @@ namespace TechSupport.WARE
 
             packagesList.addPackage(pakke1);
             packagesList.addPackage(pakke2);
+            packagesList.addPackage(pakke3);
             packagesList.addPackage(pakke3);
 
             Console.WriteLine(packagesList.seePackagesInList());
