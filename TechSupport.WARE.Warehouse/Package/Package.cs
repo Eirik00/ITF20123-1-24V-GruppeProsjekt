@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechSupport.WARE.Warehouse;
 
-namespace TechSupport.WARE
+namespace TechSupport.WARE.Warehouse
 {
     /// <summary>
     /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
@@ -36,14 +35,14 @@ namespace TechSupport.WARE
             this.packageLenghtInMm = packageLenghtInMm;
             this.packageHeightInMm = packageHeightInMm;
             this.packageDepthInMm = packageDepthInMm;
-            this.packageWeighInGrams = packageWeighInMm;
+            packageWeighInGrams = packageWeighInMm;
             this.isFragile = isFragile;
             this.storageSpecification = storageSpecification;
             this.status = status;
             this.sender = sender;
             this.receiver = receiver;
 
-            this.statusLog = new Dictionary<DateTime, StatusList>();
+            statusLog = new Dictionary<DateTime, StatusList>();
             statusLog.Add(DateTime.Now, status);
         }
 
@@ -61,7 +60,7 @@ namespace TechSupport.WARE
 
 
         //LAG TOSTRING
-        public int getPackageId => this.packageId;
+        public int getPackageId => packageId;
         public Dictionary<DateTime, StatusList> StatusLog
         {
             get
@@ -87,15 +86,15 @@ namespace TechSupport.WARE
         /// <returns>Isle <c>isle</c>, String <c>category</c>, int <c>place</c></returns>
         /// 
 
-        public (Isle isle, String category, int place) GetLocation()
+        public (Isle isle, string category, int place) GetLocation()
         {
             return (null, null, 0);
         }
         public void ChangeStatus(StatusList newStatus)
         {
-            statusLog.Add(DateTime.Now, this.status);
-            this.status = newStatus;
-            this.statusLog.Add(DateTime.Now, this.status);
+            statusLog.Add(DateTime.Now, status);
+            status = newStatus;
+            statusLog.Add(DateTime.Now, status);
         }
 
     }

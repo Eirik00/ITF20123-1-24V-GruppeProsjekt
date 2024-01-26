@@ -6,7 +6,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE
+namespace TechSupport.WARE.Warehouse
 {
     internal interface IPackage
     {
@@ -15,7 +15,7 @@ namespace TechSupport.WARE
         //        int Id { get; set; }
         StatusList Status { get; }
         Dictionary<DateTime, StatusList> StatusLog { get; }
-        (Isle isle, String category, int place) GetLocation();
+        (Isle isle, string category, int place) GetLocation();
         void ChangeStatus(StatusList newStatus);
     }
 }

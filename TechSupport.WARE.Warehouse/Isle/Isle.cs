@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechSupport.WARE.Warehouse;
 
-namespace TechSupport.WARE
+namespace TechSupport.WARE.Warehouse
 {
     public class Isle : IIsle
     {
@@ -30,10 +31,10 @@ namespace TechSupport.WARE
             this.weightLimitInGrams = weightLimitInGrams;
             this.category = category;
             this.isleId = isleId;
-            this.shelf = new Dictionary<int, Package>();
-            for(int i = 1;i<=numberOfSpaces; i++)
+            shelf = new Dictionary<int, Package>();
+            for (int i = 1; i <= numberOfSpaces; i++)
             {
-                this.shelf.Add(i, null);
+                shelf.Add(i, null);
             }
 
         }
@@ -44,7 +45,7 @@ namespace TechSupport.WARE
         {
             package.ChangeStatus(StatusList.Storage);
 
-            this.shelf[placement] = package;
+            shelf[placement] = package;
 
             // for testing purposes later when simulating
             Console.WriteLine("Package Added");
@@ -52,11 +53,11 @@ namespace TechSupport.WARE
 
         public void RemovePackage(Package package)
         {
-            for (int i = 1; i <= this.numberOfSpaces; ++i)
+            for (int i = 1; i <= numberOfSpaces; ++i)
             {
-                if (this.shelf[i] == package)
+                if (shelf[i] == package)
                 {
-                    this.shelf[i] = null;
+                    shelf[i] = null;
                 }
             }
 

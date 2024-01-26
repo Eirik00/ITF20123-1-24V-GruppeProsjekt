@@ -11,6 +11,6 @@ namespace TechSupport.WARE.Warehouse
         public void addPackage(Package package);
         public void removePackage(Package package);
 
-        public String seePackagesInList();
+        public string seePackagesInList();
     }
 }

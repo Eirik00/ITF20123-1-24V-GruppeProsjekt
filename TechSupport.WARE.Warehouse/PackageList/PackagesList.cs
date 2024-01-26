@@ -15,33 +15,33 @@ namespace TechSupport.WARE.Warehouse
         public PackagesList(int listId)
         {
             this.listId = listId;
-            this.packages = new HashSet<Package>();
+            packages = new HashSet<Package>();
 
         }
         public void addPackage(Package package)
         {
-            this.packages.Add(package);
-            
-          
-           
+            packages.Add(package);
+
+
+
         }
 
         public void removePackage(Package package)
         {
-            this.packages.Remove(package);
+            packages.Remove(package);
         }
 
-        public String seePackagesInList()
+        public string seePackagesInList()
         {
-            String temp = "The list contains packages with following Id: ";
+            string temp = "The list contains packages with following Id: ";
 
-            foreach(Package package in this.packages)
+            foreach (Package package in packages)
             {
                 temp += package.getPackageId + ", ";
             }
 
             return temp;
-            
+
         }
     }
 }
