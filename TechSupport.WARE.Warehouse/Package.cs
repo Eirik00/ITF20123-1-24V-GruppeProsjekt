@@ -50,7 +50,7 @@ namespace TechSupport.WARE
         {
             return (null, null, 0);
         }
-        public void ChangeStatusList(StatusList newStatus)
+        public void ChangeStatus(StatusList newStatus)
         {
             this.status = newStatus;
         }
