@@ -54,6 +54,7 @@ namespace TechSupport.WARE
         public void ChangeStatus(StatusList newStatus)
         {
             this.status = newStatus;
+            this.statusLog.Add(DateTime.Now, this.status);
         }
 
     }
