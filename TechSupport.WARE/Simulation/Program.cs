@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using TechSupport.WARE.Warehouse;
 
 namespace TechSupport.WARE
 {
@@ -14,38 +15,38 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
-            Isle isle = new Isle(20, 20000, 8000, 1000, 500000, 1, 1);
+            //isle isle = new isle(20, 20000, 8000, 1000, 500000, 1, 1);
 
-            Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke2 = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke3 = new Package(2, 3000, 1000, 500, 20000, true, 0);
+            //package mygamingpc = new package(1, 2000, 1000, 500, 20000, true, 0);
+            //package pakke1 = new package(1, 2000, 1000, 500, 20000, true, 0);
+            //package pakke2 = new package(1, 2000, 1000, 500, 20000, true, 0);
+            //package pakke3 = new package(2, 3000, 1000, 500, 20000, true, 0);
 
 
 
-            isle.AddPackage(myGamingPc, 1);
-            isle.AddPackage(pakke1, 10);
-            isle.AddPackage(pakke2, 7);
-            isle.AddPackage(pakke3, 20);
+            //isle.addpackage(mygamingpc, 1);
+            //isle.addpackage(pakke1, 10);
+            //isle.addpackage(pakke2, 7);
+            //isle.addpackage(pakke3, 20);
 
-            for(int i = 1; i < isle.shelf.Count+1; i++)
-            {
-                Console.WriteLine(i + ": " + isle.shelf[i]);
-            }
-            isle.RemovePackage(pakke1);
+            //for (int i = 1; i < isle.shelf.count + 1; i++)
+            //{
+            //    console.writeline(i + ": " + isle.shelf[i]);
+            //}
+            //isle.removepackage(pakke1);
 
-            for (int i = 1; i < isle.shelf.Count+1; i++)
-            {
-                Console.WriteLine(i + ": " + isle.shelf[i]);
-            }
+            //for (int i = 1; i < isle.shelf.count + 1; i++)
+            //{
+            //    console.writeline(i + ": " + isle.shelf[i]);
+            //}
 
-            pakke1.ChangeStatus(StatusList.Delivery);
-            Dictionary<DateTime, StatusList> pakke1Historikk = pakke1.StatusLog;
+            //pakke1.changestatus(statuslist.delivery);
+            //dictionary<datetime, statuslist> pakke1historikk = pakke1.statuslog;
 
-            foreach(var status in pakke1Historikk)
-            {
-                Console.WriteLine($"{status.Key} Kjedde det en endring hvor statusen var {status.Value}");
-            }
+            //foreach (var status in pakke1historikk)
+            //{
+            //    console.writeline($"{status.key} kjedde det en endring hvor statusen var {status.value}");
+            //}
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //category storageSpecifications[], boolean isFragile
 
@@ -87,6 +88,11 @@ namespace TechSupport.WARE
             //            delivery_1.addPackages(deliveryList_1);
 
             //Reception collection = new Reception;
+            Contact arne = new Contact("Tore", "Torvald", "Arne@gmail.com", "Norway", "Skogata 3", 90112040, 3424);
+            Console.WriteLine(arne.Address);
+
+            Package nypakk = new Package(23, 24, 24, 24, 24, true, 1, arne, arne);
+            Console.WriteLine(nypakk.Status);
         }
     }
 }
