@@ -41,11 +41,12 @@ namespace TechSupport.WARE
             }
 
             pakke1.ChangeStatus(StatusList.Delivery);
-            Dictionary<DateTime, StatusList> pakke1Historikk = pakke1.StatusLog;
 
-            foreach(var status in pakke1Historikk)
+            List<PackageLogEntry> pakke1Historikk = pakke1.GetPackageLog();
+
+            foreach(var entry in pakke1Historikk)
             {
-                Console.WriteLine($"{status.Key} Kjedde det en endring hvor statusen var {status.Value}");
+                Console.WriteLine(entry.ToString());
             }
 
             PackagesList packagesList = new PackagesList(1);

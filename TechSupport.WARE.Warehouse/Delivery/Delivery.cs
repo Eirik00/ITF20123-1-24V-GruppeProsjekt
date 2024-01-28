@@ -72,9 +72,9 @@ namespace TechSupport.WARE.Warehouse
             foreach (var package in DeliveryPackagesList)
             {
                 deliveryDetails.AppendLine($"{package} - Planlagt for levering {package.DeliveryTime} av {package.sender.firstName} {package.sender.surname}");
-                foreach (var statusChange in package.StatusLog)
+                foreach (var statusChange in package.GetPackageLog())
                 {
-                    deliveryDetails.AppendLine($"  Status endret til {statusChange.Value} på {statusChange.Key}");
+                    deliveryDetails.AppendLine($"  Status endret fra {statusChange.getPreviousStatus()} til {statusChange.getNewStatus()} på {statusChange.getDateTime()}");
                 }
             }
 

@@ -13,7 +13,7 @@ namespace TechSupport.WARE.Warehouse
     /// 1: Reception, 2: Storage, 3: In Progrress, 4: Delivery
     /// </example>
     /// </summary>
-    public enum StatusList { Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
+    public enum StatusList {Invalid = 0, Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
 
     public class Package : IPackage
     {
@@ -29,6 +29,7 @@ namespace TechSupport.WARE.Warehouse
         public Contact sender;
         public Contact receiver;
         public DateTime DeliveryTime { get; set; }
+        PackageLog packageLog = new PackageLog();
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, Contact sender, Contact receiver, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
@@ -44,33 +45,11 @@ namespace TechSupport.WARE.Warehouse
             this.receiver = receiver;
             this.DeliveryTime = deliveryTime;
 
-            statusLog = new Dictionary<DateTime, StatusList>();
-            statusLog.Add(DateTime.Now, status);
+            packageLog.logChange(StatusList.Invalid, StatusList.Reception, "Package Recieved");
         }
-
-
-        /// <summary>
-        /// Dictionary <c>StatusLog</c> is used to get the history of the package status changes.
-        /// <example>
-        /// <code>
-        ///     Package.StatusLog
-        /// </code>
-        ///     >>>returns the package status history
-        /// </example>
-        /// </summary>
-        /// 
-
 
         //LAG TOSTRING
         public int getPackageId => packageId;
-        public Dictionary<DateTime, StatusList> StatusLog
-        {
-            get
-            {
-                return statusLog;
-            }
-
-        }
 
         /// <summary>
         /// StatusList <c>Status</c> returns the current status of the package
@@ -92,11 +71,14 @@ namespace TechSupport.WARE.Warehouse
         {
             return (null, null, 0);
         }
-        public void ChangeStatus(StatusList newStatus)
+        public void ChangeStatus(StatusList newStatus, String description = "")
         {
-            statusLog.Add(DateTime.Now, status);
-            status = newStatus;
-            statusLog.Add(DateTime.Now, status);
+            packageLog.logChange(newStatus, status, description);
+            this.status = newStatus;
+        }
+        public List<PackageLogEntry> GetPackageLog()
+        {
+            return packageLog.getPackageEntries();
         }
 
     }

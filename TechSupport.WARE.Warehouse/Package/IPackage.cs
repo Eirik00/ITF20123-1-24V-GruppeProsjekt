@@ -14,8 +14,7 @@ namespace TechSupport.WARE.Warehouse
         //        Category category { get; }
         //        int Id { get; set; }
         StatusList Status { get; }
-        Dictionary<DateTime, StatusList> StatusLog { get; }
         (Isle isle, string category, int place) GetLocation();
-        void ChangeStatus(StatusList newStatus);
+        void ChangeStatus(StatusList newStatus, String description);
     }
 }
