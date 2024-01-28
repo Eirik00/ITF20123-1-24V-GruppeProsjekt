@@ -13,11 +13,14 @@ namespace TechSupport.WARE
         {
             Isle isle = new Isle(20, 20000, 8000, 1000, 500000, 1, 1);
             Contact tore = new Contact("rjkjkjkdfg", "vfhf", "tuisddfs", "dfssdfe", "sdajhksdh", 9281645, 2742);
+            Contact sender = new Contact("Ole", "Dole", "ole@hiof.no", "Halden", "123 Halden Veien", 1234567890, 12345);
+            Contact mottaker = new Contact("Per", "Person", "per@hiof.no", "Halden", "123 Halden Gate1", 987643210, 11111);
 
             Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0, tore, tore);
             Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0, tore, tore);
             Package pakke2 = new Package(2, 2000, 1000, 500, 20000, true, 0, tore, tore);
             Package pakke3 = new Package(3, 3000, 1000, 500, 20000, true, 0, tore, tore);
+            Package pakke4 = new Package(4, 4000, 2000, 550, 22000, true, 0, sender, mottaker);
 
 
 
@@ -57,6 +60,20 @@ namespace TechSupport.WARE
             packagesList.removePackage(pakke2);
 
             Console.WriteLine(packagesList.seePackagesInList());
+
+            //////////////////////////////////////// Delivery Simulation Start ///////////////////////////////////////////////////
+            Delivery delivery = new Delivery();
+
+            delivery.PackageDelivery(DateTime.Now.AddDays(1), new List<Package> { myGamingPc }, sender, mottaker);
+
+            delivery.RecurringDailyPackageDelivery(TimeSpan.FromHours(14), new List<Package> { pakke2 }, sender, mottaker);
+
+            DayOfWeek[] deliveryDays = { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday };
+            delivery.RecurringWeeklyPackageDelivery(deliveryDays, TimeSpan.FromHours(10), new List<Package> { pakke3 }, sender, mottaker);
+
+            //ToString utskrift
+            Console.WriteLine(delivery.ToString());
+            ///////////////////////////////////////////// Delivery Simulation End ///////////////////////////////////////////////////////////////////////
 
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //category storageSpecifications[], boolean isFragile
