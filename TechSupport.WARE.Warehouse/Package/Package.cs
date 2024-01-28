@@ -26,10 +26,11 @@ namespace TechSupport.WARE.Warehouse
         private int storageSpecification;
         private StatusList status;
         private Dictionary<DateTime, StatusList> statusLog;
-        private Contact sender;
-        private Contact receiver;
+        public Contact sender;
+        public Contact receiver;
+        public DateTime DeliveryTime { get; set; }
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, Contact sender, Contact receiver, StatusList status = StatusList.Reception)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, Contact sender, Contact receiver, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
             this.packageId = packageId;
             this.packageLenghtInMm = packageLenghtInMm;
@@ -41,6 +42,7 @@ namespace TechSupport.WARE.Warehouse
             this.status = status;
             this.sender = sender;
             this.receiver = receiver;
+            this.DeliveryTime = deliveryTime;
 
             statusLog = new Dictionary<DateTime, StatusList>();
             statusLog.Add(DateTime.Now, status);
