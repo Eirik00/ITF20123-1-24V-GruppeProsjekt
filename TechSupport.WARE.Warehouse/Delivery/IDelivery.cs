@@ -8,6 +8,7 @@ namespace TechSupport.WARE.Warehouse
 {
     public interface IDelivery
     {
+        List<Package> DeliveryPackageList { get; }
         void PackageDelivery(DateTime deliveryTime, List<Package> packages, Contact sender, Contact receiver);
 
         void RecurringDailyPackageDelivery(TimeSpan deliveryTime, List<Package> packages, Contact sender, Contact receiver);

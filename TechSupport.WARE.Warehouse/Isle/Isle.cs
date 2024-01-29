@@ -43,7 +43,7 @@ namespace TechSupport.WARE.Warehouse
 
         public void AddPackage(Package package, int placement)
         {
-            package.ChangeStatus(StatusList.Storage);
+            //package.ChangeStatus(StatusList.Storage);
 
             shelf[placement] = package;
 

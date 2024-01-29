@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 using TechSupport.WARE.Warehouse;
+using TechSupport.WARE.Warehouse.Pickup;
 
 namespace TechSupport.WARE
 {
@@ -16,11 +17,11 @@ namespace TechSupport.WARE
             Contact sender = new Contact("Ole", "Dole", "ole@hiof.no", "Halden", "123 Halden Veien", 1234567890, 12345);
             Contact mottaker = new Contact("Per", "Person", "per@hiof.no", "Halden", "123 Halden Gate1", 987643210, 11111);
 
-            Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0, tore, tore);
-            Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0, tore, tore);
-            Package pakke2 = new Package(2, 2000, 1000, 500, 20000, true, 0, tore, tore);
-            Package pakke3 = new Package(3, 3000, 1000, 500, 20000, true, 0, tore, tore);
-            Package pakke4 = new Package(4, 4000, 2000, 550, 22000, true, 0, sender, mottaker);
+            Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0);
+            Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0);
+            Package pakke2 = new Package(2, 2000, 1000, 500, 20000, true, 0);
+            Package pakke3 = new Package(3, 3000, 1000, 500, 20000, true, 0);
+            Package pakke4 = new Package(4, 4000, 2000, 550, 22000, true, 0);
 
 
 
@@ -40,14 +41,14 @@ namespace TechSupport.WARE
                 Console.WriteLine(i + ": " + isle.shelf[i]);
             }
 
-            pakke1.ChangeStatus(StatusList.Delivery);
+            //pakke1.ChangeStatus(StatusList.Delivery);
 
-            List<PackageLogEntry> pakke1Historikk = pakke1.GetPackageLog();
+            //List<PackageLogEntry> pakke1Historikk = pakke1.GetPackageLog();
 
-            foreach(var entry in pakke1Historikk)
-            {
-                Console.WriteLine(entry.ToString());
-            }
+            //foreach(var entry in pakke1Historikk)
+            //{
+            //    Console.WriteLine(entry.ToString());
+            //}
 
             PackagesList packagesList = new PackagesList(1);
 
@@ -74,6 +75,9 @@ namespace TechSupport.WARE
 
             //ToString utskrift
             Console.WriteLine(delivery.ToString());
+
+            Pickup fedEx = new Pickup(delivery);
+            Console.WriteLine(fedEx.ToString());
             ///////////////////////////////////////////// Delivery Simulation End ///////////////////////////////////////////////////////////////////////
 
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
