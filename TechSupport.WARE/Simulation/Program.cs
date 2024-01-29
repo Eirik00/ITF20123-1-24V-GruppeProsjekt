@@ -41,14 +41,14 @@ namespace TechSupport.WARE
                 Console.WriteLine(i + ": " + isle.shelf[i]);
             }
 
-            //pakke1.ChangeStatus(StatusList.Delivery);
+            pakke1.ChangeStatus(StatusList.Delivery);
 
-            //List<PackageLogEntry> pakke1Historikk = pakke1.GetPackageLog();
+            List<PackageLogEntry> pakke1Historikk = pakke1.GetPackageLog();
 
-            //foreach(var entry in pakke1Historikk)
-            //{
-            //    Console.WriteLine(entry.ToString());
-            //}
+            foreach(var entry in pakke1Historikk)
+            {
+                Console.WriteLine(entry.ToString());
+            }
 
             PackagesList packagesList = new PackagesList(1);
 

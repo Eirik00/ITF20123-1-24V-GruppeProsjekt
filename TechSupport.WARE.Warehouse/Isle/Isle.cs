@@ -11,6 +11,7 @@ namespace TechSupport.WARE.Warehouse
     public class Isle : IIsle
     {
         public Dictionary<int, Package> shelf;
+        private int isleId;
         private int numberOfSpaces;
         private int lengthOfSpaceInMm;
         private int heightOfSpaceInMm;
@@ -38,12 +39,12 @@ namespace TechSupport.WARE.Warehouse
             }
 
         }
-
-        public int isleId { get; set; }
+        //hvorfor er det en getter og en setter i objektet?
+        //public int isleId { get; set; }
 
         public void AddPackage(Package package, int placement)
         {
-            //package.ChangeStatus(StatusList.Storage);
+            package.ChangeStatus(StatusList.Storage);
 
             shelf[placement] = package;
 

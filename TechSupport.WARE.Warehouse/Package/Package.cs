@@ -25,11 +25,10 @@ namespace TechSupport.WARE.Warehouse
         private bool isFragile;
         private int storageSpecification;
         private StatusList status;
-        private Dictionary<DateTime, StatusList> statusLog;
         private Contact sender;
         private Contact receiver;
         public DateTime DeliveryTime { get; set; }
-        // PackageLog packageLog = new PackageLog();
+        PackageLog packageLog = new PackageLog();
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
@@ -45,7 +44,7 @@ namespace TechSupport.WARE.Warehouse
             this.receiver = new Contact("", "", "", "", "", 0, 0);
             this.DeliveryTime = deliveryTime;
 
-            //packageLog.logChange(StatusList.Invalid, StatusList.Reception, "Package Recieved");
+            packageLog.LogChange(this.GetLocation().isle, StatusList.Invalid, StatusList.Reception, "Package Recieved");
         }
 
         //LAG TOSTRING
@@ -77,15 +76,15 @@ namespace TechSupport.WARE.Warehouse
         {
             return (null, null, 0);
         }
-        //public void ChangeStatus(StatusList newStatus, String description = "")
-        //{
-        //    packageLog.logChange(newStatus, status, description);
-        //    this.status = newStatus;
-        //}
-        //public List<PackageLogEntry> GetPackageLog()
-        //{
-        //    return packageLog.getPackageEntries();
-        //}
+        public void ChangeStatus(StatusList newStatus, String description = "")
+        {
+            packageLog.LogChange(this.GetLocation().isle, newStatus, status, description);
+            this.status = newStatus;
+        }
+        public List<PackageLogEntry> GetPackageLog()
+        {
+            return packageLog.GetEntries();
+        }
 
     }
 }

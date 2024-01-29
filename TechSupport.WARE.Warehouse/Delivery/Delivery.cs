@@ -23,7 +23,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = deliveryTime;
-                //package.ChangeStatus(StatusList.Delivery);
+                package.ChangeStatus(StatusList.Delivery);
                 DeliveryPackagesList.Add(package);
             }
             Console.WriteLine($"Vare Levering registrert for {deliveryTime} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
@@ -36,7 +36,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.Add(deliveryTime);
-                //package.ChangeStatus(StatusList.Delivery);
+                package.ChangeStatus(StatusList.Delivery);
                 DeliveryPackagesList.Add(package);
             }
             Console.WriteLine($"Gjentagende Daglig Vare Levering registrert for {deliveryTime} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
@@ -52,7 +52,7 @@ namespace TechSupport.WARE.Warehouse
                     package.Sender = sender;
                     package.Receiver = receiver;
                     package.DeliveryTime = nextDeliveryDate;
-                    //package.ChangeStatus(StatusList.Delivery);
+                    package.ChangeStatus(StatusList.Delivery);
                     DeliveryPackagesList.Add(package);
                 }
                 Console.WriteLine($"Gjentagende Ukentlig Levering registrert for {deliveryDay} på {deliveryTime} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
@@ -73,10 +73,10 @@ namespace TechSupport.WARE.Warehouse
             foreach (var package in DeliveryPackagesList)
             {
                 //deliveryDetails.AppendLine($"{package} - Planlagt for levering {package.DeliveryTime} av {package.Sender.firstName} {package.Sender.surname}");
-                //foreach (var statusChange in package.GetPackageLog())
-                //{
-                //    deliveryDetails.AppendLine($"  Status endret fra {statusChange.getPreviousStatus()} til {statusChange.getNewStatus()} på {statusChange.getDateTime()}");
-                //}
+                foreach (var statusChange in package.GetPackageLog())
+                {
+                    deliveryDetails.AppendLine($"  Status endret fra {statusChange.getPreviousStatus()} til {statusChange.getNewStatus()} på {statusChange.getDateTime()}");
+                }
             }
 
             return deliveryDetails.ToString();

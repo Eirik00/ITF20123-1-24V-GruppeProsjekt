@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackagesList : IPackagesList
+    public class PackagesList //: IPackagesList
     {
         private int listId;
         private HashSet<Package> packages;
