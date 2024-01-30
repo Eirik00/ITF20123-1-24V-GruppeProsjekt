@@ -29,8 +29,9 @@ namespace TechSupport.WARE.Warehouse
         private Contact receiver;
         public DateTime DeliveryTime { get; set; }
         PackageLog packageLog = new PackageLog();
+        private Isle packageIsle;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
+        public Package(Isle isle, int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
             this.packageId = packageId;
             this.packageLenghtInMm = packageLenghtInMm;
@@ -43,8 +44,9 @@ namespace TechSupport.WARE.Warehouse
             this.sender = new Contact("", "", "", "", "", 0, 0);
             this.receiver = new Contact("", "", "", "", "", 0, 0);
             this.DeliveryTime = deliveryTime;
+            this.packageIsle = isle;
 
-            packageLog.LogChange(this.GetLocation().isle, StatusList.Invalid, StatusList.Reception, "Package Recieved");
+            packageLog.LogChange(isle, StatusList.Invalid, StatusList.Reception, "Package Recieved");
         }
 
         //LAG TOSTRING
@@ -72,9 +74,9 @@ namespace TechSupport.WARE.Warehouse
         /// <returns>Isle <c>isle</c>, String <c>category</c>, int <c>place</c></returns>
         /// 
 
-        public (Isle isle, string category, int place) GetLocation()
+        public (Isle isle, int storageSpecification, int place) GetLocation()
         {
-            return (null, null, 0);
+            return (this.packageIsle, this.storageSpecification, 0);
         }
         public void ChangeStatus(StatusList newStatus, String description = "")
         {

@@ -63,5 +63,18 @@ namespace TechSupport.WARE.Warehouse
             }
 
         }
+        public int GetIsleId() => this.isleId;
+
+        public int GetPackagePlacement(Package package)
+        {
+            foreach((int num, Package shelfPackage) in shelf)
+            {
+                if(shelfPackage == package)
+                {
+                    return num;
+                }
+            }
+            return -1;
+        }
     }
 }

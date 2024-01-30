@@ -17,11 +17,11 @@ namespace TechSupport.WARE
             Contact sender = new Contact("Ole", "Dole", "ole@hiof.no", "Halden", "123 Halden Veien", 1234567890, 12345);
             Contact mottaker = new Contact("Per", "Person", "per@hiof.no", "Halden", "123 Halden Gate1", 987643210, 11111);
 
-            Package myGamingPc = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke1 = new Package(1, 2000, 1000, 500, 20000, true, 0);
-            Package pakke2 = new Package(2, 2000, 1000, 500, 20000, true, 0);
-            Package pakke3 = new Package(3, 3000, 1000, 500, 20000, true, 0);
-            Package pakke4 = new Package(4, 4000, 2000, 550, 22000, true, 0);
+            Package myGamingPc = new Package(isle, 1, 2000, 1000, 500, 20000, true, 0);
+            Package pakke1 = new Package(isle, 1, 2000, 1000, 500, 20000, true, 0);
+            Package pakke2 = new Package(isle, 2, 2000, 1000, 500, 20000, true, 0);
+            Package pakke3 = new Package(isle, 3, 3000, 1000, 500, 20000, true, 0);
+            Package pakke4 = new Package(isle, 4, 4000, 2000, 550, 22000, true, 0);
 
 
 
