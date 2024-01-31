@@ -49,24 +49,20 @@ namespace TechSupport.WARE.Warehouse
         }
 
         //LAG TOSTRING
-        public int getPackageId => packageId;
-        public int PackageLengthInMm => packageLenghtInMm;
-        public int PackageHeightInMm => packageHeightInMm;
-        public int PackageDepthInMm => packageDepthInMm;
-        public int PackageWeightInGrams => packageWeighInGrams;
-        public Contact Sender { get; set; }
-        public Contact Receiver { get; set; }
+        public int GetPackageId { get; }
+        public int GetPackageLengthInMm { get; }
+        public int GetPackageHeightInMm { get; }
+        public int GetPackageDepthInMm { get; }
+        public int GetPackageWeightInGrams { get; }
+        public Contact GetSender { get; }
+        public Contact SetSender { set { this.sender = value; } }
+        public Contact GetReceiver { get; }
+        public Contact SetReceiver { set { this.receiver = value; } }
 
         /// <summary>
         /// StatusList <c>Status</c> returns the current status of the package
         /// </summary>
-        public StatusList Status
-        {
-            get
-            {
-                return status;
-            }
-        }
+        public StatusList GetStatus { get; }
         /// <summary>
         /// (Isle, String, int) <c>GetLocation</c> returns the current location and equivelent information of that package
         /// </summary>
