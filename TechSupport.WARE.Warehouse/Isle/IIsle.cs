@@ -11,5 +11,8 @@ namespace TechSupport.WARE.Warehouse
     {
         void AddPackage(Package package, int placement);
         void RemovePackage(Package package);
+        int GetIsleId { get; }
+        int GetPackagePlacement(Package package);
+
     }
 }
