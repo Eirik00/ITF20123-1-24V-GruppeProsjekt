@@ -7,34 +7,38 @@ using System.Threading.Tasks;
 namespace TechSupport.WARE.Warehouse
 {
     internal interface IPackageList
-
     {
         /// <summary>
-        /// void <c>addPackage</c> adds a given Package instance to the PackagesList.
+        /// void <c>AddPackage</c> adds a given Package instance to the PackageList.
         /// </summary>
-        /// <param name="package"></param>
-        void addPackage(Package package);
+        void AddPackage(Package package);
         /*Adds package to the list, since package has no uniqe identifier as an atribute, 
          * it takes the name of the package object as atribute.*/
 
-        void removePackage(Package package);
+        /// <summary>
+        /// void <c>RemovePackage</c> removes a given Package instance from the PackageList.
+        /// </summary>
+        void RemovePackage(Package package);
         //Removes package from the list.
 
-        string seePackagesInList();
+        /// <summary>
+        /// string <c>SeePackagesInList</c> returns a string displaying the IDs of Package instances in the PackageList
+        /// </summary>
+        string SeePackagesInList();
         /*Returns all packages that are currently in the list. As for now, showing packages in the list
          * based on certain filters (e.g. weight) is done in seperate methods, could possibly be done as a parameter 
          * for this method instead.*/
 
         
 
-        string showPackagesSortedByLenght();
-        string showPackagesSortedByHeight();
-        string showPackagesSortedByDepth();
-        string showPackagesSortedByWeight();
+        string ShowPackagesSortedByLenght();
+        string ShowPackagesSortedByHeight();
+        string ShowPackagesSortedByDepth();
+        string ShowPackagesSortedByWeight();
         /* Displays the packages in the list sorted by various atributes, should not change the actuall order of the packages in the list,
          * the order of the list should not matter. */
 
-        string showPackagesSortedByVolume();
+        string ShowPackagesSortedByVolume();
         /* Displays the packages sorted by the Volume of the packages, volume is not an inherent atribute of the Package class,
          * but should be easy to calculate based on lenght, height, and depth. */
     }

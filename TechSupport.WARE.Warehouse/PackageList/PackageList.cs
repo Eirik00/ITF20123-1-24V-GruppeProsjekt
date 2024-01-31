@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackageList //: IPackagesList
+    public class PackageList : IPackageList
     {
         private int listId;
         private HashSet<Package> packages;
@@ -18,22 +18,19 @@ namespace TechSupport.WARE.Warehouse
             packages = new HashSet<Package>();
 
         }
-        public void addPackage(Package package)
+        public void AddPackage(Package package)
         {
             packages.Add(package);
-
-
-
         }
 
-        public void removePackage(Package package)
+        public void RemovePackage(Package package)
         {
             packages.Remove(package);
         }
 
-        public string seePackagesInList()
+        public String SeePackagesInList()
         {
-            string temp = "The list contains packages with following Id: ";
+            String temp = "The list contains packages with following Id: ";
 
             foreach (Package package in packages)
             {
@@ -41,7 +38,33 @@ namespace TechSupport.WARE.Warehouse
             }
 
             return temp;
+        }
 
+        public String ShowPackagesSortedByLenght()
+        {
+            // To be implemented
+            return "";
+        }
+        public String ShowPackagesSortedByHeight()
+        {
+            // To be implemented
+            return "";
+        }
+        public String ShowPackagesSortedByDepth()
+        {
+            // To be implemented
+            return "";
+        }
+        public String ShowPackagesSortedByWeight()
+        {
+            // To be implemented
+            return "";
+        }
+
+        public String ShowPackagesSortedByVolume()
+        {
+            // To be implemented
+            return "";
         }
     }
 }
