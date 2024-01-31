@@ -20,8 +20,8 @@ namespace TechSupport.WARE.Warehouse
         {
             foreach (var package in packages)
             {
-                package.Sender = sender;
-                package.Receiver = receiver;
+                package.SetSender = sender;
+                package.SetReceiver = receiver;
                 package.DeliveryTime = deliveryTime;
                 package.ChangeStatus(StatusList.Delivery);
                 DeliveryPackagesList.Add(package);
@@ -33,8 +33,8 @@ namespace TechSupport.WARE.Warehouse
         {
             foreach (var package in packages)
             {
-                package.Sender = sender;
-                package.Receiver = receiver;
+                package.SetSender = sender;
+                package.SetReceiver = receiver;
                 package.DeliveryTime = DateTime.Today.Add(deliveryTime);
                 package.ChangeStatus(StatusList.Delivery);
                 DeliveryPackagesList.Add(package);
@@ -49,8 +49,8 @@ namespace TechSupport.WARE.Warehouse
                 var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).Add(deliveryTime);
                 foreach (var package in packages)
                 {
-                    package.Sender = sender;
-                    package.Receiver = receiver;
+                    package.SetSender = sender;
+                    package.SetReceiver = receiver;
                     package.DeliveryTime = nextDeliveryDate;
                     package.ChangeStatus(StatusList.Delivery);
                     DeliveryPackagesList.Add(package);
@@ -65,7 +65,7 @@ namespace TechSupport.WARE.Warehouse
             return start.AddDays(daysToAdd);
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder deliveryDetails = new StringBuilder();
             deliveryDetails.AppendLine("Planlagte Leveranser:");

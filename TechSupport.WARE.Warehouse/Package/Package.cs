@@ -15,7 +15,7 @@ namespace TechSupport.WARE.Warehouse
     /// </summary>
     public enum StatusList {Invalid = 0, Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
 
-    public class Package /*: IPackage*/
+    public class Package : IPackage
     {
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace TechSupport.WARE.Warehouse
         private StatusList status;
         private Contact sender;
         private Contact receiver;
-        public DateTime DeliveryTime { get; set; }
+        public DateTime DeliveryTime;
         PackageLog packageLog = new PackageLog();
         private Isle? packageIsle;
 
@@ -49,24 +49,20 @@ namespace TechSupport.WARE.Warehouse
         }
 
         //LAG TOSTRING
-        public int getPackageId => packageId;
-        public int PackageLengthInMm => packageLenghtInMm;
-        public int PackageHeightInMm => packageHeightInMm;
-        public int PackageDepthInMm => packageDepthInMm;
-        public int PackageWeightInGrams => packageWeighInGrams;
-        public Contact Sender { get; set; }
-        public Contact Receiver { get; set; }
+        public int GetPackageId => packageId;
+        public int GetPackageLengthInMm => packageLenghtInMm;
+        public int GetPackageHeightInMm => packageHeightInMm;
+        public int GetPackageDepthInMm => packageDepthInMm;
+        public int GetPackageWeightInGrams => packageWeighInGrams;
+        public Contact GetSender => sender;
+        public Contact SetSender { set { this.sender = value; } }
+        public Contact GetReceiver => receiver;
+        public Contact SetReceiver { set { this.receiver = value; } }
 
         /// <summary>
         /// StatusList <c>Status</c> returns the current status of the package
         /// </summary>
-        public StatusList Status
-        {
-            get
-            {
-                return status;
-            }
-        }
+        public StatusList GetStatus { get; }
         /// <summary>
         /// (Isle, String, int) <c>GetLocation</c> returns the current location and equivelent information of that package
         /// </summary>
@@ -89,6 +85,11 @@ namespace TechSupport.WARE.Warehouse
         public List<PackageLogEntry> GetPackageLog()
         {
             return packageLog.GetEntries();
+        }
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
         }
 
     }
