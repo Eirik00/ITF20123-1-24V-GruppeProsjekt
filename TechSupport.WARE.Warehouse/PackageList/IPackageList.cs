@@ -6,30 +6,35 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    internal interface IPackagesList
+    internal interface IPackageList
+
     {
-        public void addPackage(Package package);
+        /// <summary>
+        /// void <c>addPackage</c> adds a given Package instance to the PackagesList.
+        /// </summary>
+        /// <param name="package"></param>
+        void addPackage(Package package);
         /*Adds package to the list, since package has no uniqe identifier as an atribute, 
          * it takes the name of the package object as atribute.*/
 
-        public void removePackage(Package package);
+        void removePackage(Package package);
         //Removes package from the list.
 
-        public string seePackagesInList();
+        string seePackagesInList();
         /*Returns all packages that are currently in the list. As for now, showing packages in the list
          * based on certain filters (e.g. weight) is done in seperate methods, could possibly be done as a parameter 
          * for this method instead.*/
 
         
 
-        public string showPackagesSortedByLenght();
-        public string showPackagesSortedByHeight();
-        public string showPackagesSortedByDepth();
-        public string showPackagesSortedByWeight();
+        string showPackagesSortedByLenght();
+        string showPackagesSortedByHeight();
+        string showPackagesSortedByDepth();
+        string showPackagesSortedByWeight();
         /* Displays the packages in the list sorted by various atributes, should not change the actuall order of the packages in the list,
          * the order of the list should not matter. */
 
-        public string showPackagesSortedByVolume();
+        string showPackagesSortedByVolume();
         /* Displays the packages sorted by the Volume of the packages, volume is not an inherent atribute of the Package class,
          * but should be easy to calculate based on lenght, height, and depth. */
 

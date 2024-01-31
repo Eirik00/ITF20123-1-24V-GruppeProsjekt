@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackagesList //: IPackagesList
+    public class PackageList //: IPackagesList
     {
         private int listId;
         private HashSet<Package> packages;
 
-        public PackagesList(int listId)
+        public PackageList(int listId)
         {
             this.listId = listId;
             packages = new HashSet<Package>();
@@ -37,7 +37,7 @@ namespace TechSupport.WARE.Warehouse
 
             foreach (Package package in packages)
             {
-                temp += package.getPackageId + ", ";
+                temp += package.GetPackageId + ", ";
             }
 
             return temp;
