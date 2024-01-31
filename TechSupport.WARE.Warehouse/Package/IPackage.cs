@@ -13,29 +13,29 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Get the package id
         /// </summary>
-        int GetPackageId { get; }
+        int PackageId { get; }
         /// <summary>
         /// Gets the package length in millimeter
         /// </summary>
-        int GetPackageLengthInMm { get; }
+        int PackageLengthInMm { get; }
         /// <summary>
         /// Gets the packagge height in millimeter
         /// </summary>
-        int GetPackageHeightInMm { get; }
+        int PackageHeightInMm { get; }
         /// <summary>
         /// Gets the package depth in millimeter
         /// </summary>
-        int GetPackageDepthInMm { get; }
+        int PackageDepthInMm { get; }
         /// <summary>
         /// Gets the package weight in grams
         /// </summary>
-        int GetPackageWeightInGrams { get; }
+        int PackageWeightInGrams { get; }
         /// <summary>
         /// Get the package sender
         /// </summary>
         Contact Sender { get; set; }
         Contact Receiver { get; set; }
-        StatusList GetStatus { get; }
+        StatusList Status { get; }
         (Isle isle, int storageSpecification, int place) GetLocation();
         void ChangeStatus(StatusList newStatus, String description);
         List<PackageLogEntry> GetPackageLog();
