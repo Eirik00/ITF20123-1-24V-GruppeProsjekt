@@ -19,10 +19,9 @@ namespace TechSupport.WARE.Warehouse
         Contact SetSender { set; }
         Contact GetReceiver { get; }
         Contact SetReceiver { set; }
-        StatusList Status { get; }
-        (Isle, int, int) GetLocation();
+        StatusList GetStatus { get; }
+        (Isle isle, int storageSpecification, int place) GetLocation();
         void ChangeStatus(StatusList newStatus, String description);
-        void AddIsle();
         List<PackageLogEntry> GetPackageLog();
         string ToString();
     }
