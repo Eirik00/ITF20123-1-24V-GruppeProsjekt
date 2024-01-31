@@ -50,6 +50,7 @@ namespace TechSupport.WARE
                 Console.WriteLine(entry.ToString());
             }
 
+            /////////////// Testing Packages ////////////////////////////////////////////////////////////////////////////////////
             PackagesList packagesList = new PackagesList(1);
 
             packagesList.addPackage(pakke1);
@@ -62,6 +63,8 @@ namespace TechSupport.WARE
             packagesList.removePackage(pakke2);
 
             Console.WriteLine(packagesList.seePackagesInList());
+
+            packagesList.addPackage(pakke2);
 
             //////////////////////////////////////// Delivery Simulation Start ///////////////////////////////////////////////////
             Delivery delivery = new Delivery();
