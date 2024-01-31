@@ -20,9 +20,20 @@ namespace TechSupport.WARE.Warehouse
          * based on certain filters (e.g. weight) is done in seperate methods, could possibly be done as a parameter 
          * for this method instead.*/
 
+        
+
+        public string showPackagesSortedByLenght();
+        public string showPackagesSortedByHeight();
+        public string showPackagesSortedByDepth();
         public string showPackagesSortedByWeight();
-        /* Displays the packages in the list sorted by weight, should not change the actuall order of the packages in the list,
+        /* Displays the packages in the list sorted by various atributes, should not change the actuall order of the packages in the list,
          * the order of the list should not matter. */
+
+        public string showPackagesSortedByVolume();
+        /* Displays the packages sorted by the Volume of the packages, volume is not an inherent atribute of the Package class,
+         * but should be easy to calculate based on lenght, height, and depth. */
+
+
 
 
         /* Methods for removing packages based on certain criteria could also be added, as for example a method for removing
