@@ -65,7 +65,7 @@ namespace TechSupport.WARE.Warehouse
             return start.AddDays(daysToAdd);
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder deliveryDetails = new StringBuilder();
             deliveryDetails.AppendLine("Planlagte Leveranser:");
