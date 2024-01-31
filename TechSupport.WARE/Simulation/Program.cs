@@ -49,12 +49,13 @@ namespace TechSupport.WARE
             }
 
             /////////////// Testing Packages ////////////////////////////////////////////////////////////////////////////////////
-            PackagesList packagesList = new PackagesList(1);
+            PackageList packagesList = new PackageList(1);
 
             packagesList.addPackage(pakke1);
             packagesList.addPackage(pakke2);
             packagesList.addPackage(pakke3);
             packagesList.addPackage(pakke3);
+            packagesList.
 
             Console.WriteLine(packagesList.seePackagesInList());
 
@@ -78,7 +79,7 @@ namespace TechSupport.WARE
             Console.WriteLine(delivery.ToString());
 
             Pickup fedEx = new Pickup(delivery);
-            Console.WriteLine(fedEx.ToString());
+            Console.WriteLine(fedEx);
             ///////////////////////////////////////////// Delivery Simulation End ///////////////////////////////////////////////////////////////////////
 
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,

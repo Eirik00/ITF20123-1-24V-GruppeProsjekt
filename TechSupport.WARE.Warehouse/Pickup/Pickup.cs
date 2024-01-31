@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse.Pickup
 {
-    public class Pickup
+    public class Pickup : IPickup
     {
         private DateTime time;
         private List<List<int>> sizes = new List<List<int>>();
@@ -18,14 +18,14 @@ namespace TechSupport.WARE.Warehouse.Pickup
             foreach (Package i in delivery.DeliveryPackageList)
             {
                 List<int> temp = new List<int>();
-                temp.Add(i.GetPackageHeightInMm);
-                temp.Add(i.GetPackageLengthInMm);
-                temp.Add(i.GetPackageDepthInMm);
+                temp.Add(i.PackageHeightInMm);
+                temp.Add(i.PackageLengthInMm);
+                temp.Add(i.PackageDepthInMm);
                 this.sizes.Add(temp);
             }
             this.time = delivery.DeliveryPackageList[0].DeliveryTime;
         }
-        public List<List<int>> Sizes => sizes;
+        public List<List<int>> GetSizes => sizes;
         public Dictionary<List<int>, int> getSizeAndAmount()
         {
             Dictionary<List<int>, int> amountOfMeasures = new Dictionary<List<int>, int>();

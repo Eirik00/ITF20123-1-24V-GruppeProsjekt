@@ -10,6 +10,10 @@ namespace TechSupport.WARE.Warehouse
     internal interface IDelivery
     {
         List<Package> DeliveryPackageList { get; }
+
+        /// <summary>
+        /// Updates
+        /// </summary>
         void PackageDelivery(DateTime deliveryTime, List<Package> packages, Contact sender, Contact receiver);
 
         void RecurringDailyPackageDelivery(TimeSpan deliveryTime, List<Package> packages, Contact sender, Contact receiver);
