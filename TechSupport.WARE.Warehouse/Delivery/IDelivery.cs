@@ -19,3 +19,4 @@ namespace TechSupport.WARE.Warehouse
         String ToString();
     }
 }
+

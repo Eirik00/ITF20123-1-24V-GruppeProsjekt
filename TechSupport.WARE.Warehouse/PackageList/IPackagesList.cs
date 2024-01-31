@@ -32,21 +32,20 @@ namespace TechSupport.WARE.Warehouse
         public string showPackagesSortedByVolume();
         /* Displays the packages sorted by the Volume of the packages, volume is not an inherent atribute of the Package class,
          * but should be easy to calculate based on lenght, height, and depth. */
-
-
-
-
-        /* Methods for removing packages based on certain criteria could also be added, as for example a method for removing
-         * all packages above a certain weight limit, but it is unsure how usefull and neccesary such a method would be. */
-
-        /* As stated it is unclear wether or not functionality that could be implemented for this class really needs to be,
-         * since objects of this class is only meant to function as a uniform way of sending in a list of package objects to
-         * other functions that might require it. Functionality for displaying packages based on certain criteria could
-         * be delegated to for example the Isle class. */
-
-        /* In the case that objects of this class are to function as a way to store collections of packages without them 
-         * having to be placed in isles, it would of course be valuable to reveal information about the packages in a list,
-         * but again it could prove redundant if the purpouse of this class is only to be a temporarily used list for sending
-         * multiple packages to other functions. */
     }
 }
+
+
+
+/* Methods for removing packages based on certain criteria could also be added, as for example a method for removing
+ * all packages above a certain weight limit, but it is unsure how usefull and neccesary such a method would be. */
+
+/* As stated it is unclear wether or not functionality that could be implemented for this class really needs to be,
+ * since objects of this class is only meant to function as a uniform way of sending in a list of package objects to
+ * other functions that might require it. Functionality for displaying packages based on certain criteria could
+ * be delegated to for example the Isle class. */
+
+/* In the case that objects of this class are to function as a way to store collections of packages without them 
+ * having to be placed in isles, it would of course be valuable to reveal information about the packages in a list,
+ * but again it could prove redundant if the purpouse of this class is only to be a temporarily used list for sending
+ * multiple packages to other functions. */

@@ -64,7 +64,7 @@ namespace TechSupport.WARE.Warehouse
             }
 
         }
-        public int GetIsleId() => this.isleId;
+        public int GetIsleId => this.isleId;
 
         public int GetPackagePlacement(Package package)
         {

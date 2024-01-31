@@ -18,9 +18,9 @@ namespace TechSupport.WARE.Warehouse.Pickup
             foreach (Package i in delivery.DeliveryPackageList)
             {
                 List<int> temp = new List<int>();
-                temp.Add(i.PackageHeightInMm);
-                temp.Add(i.PackageLengthInMm);
-                temp.Add(i.PackageDepthInMm);
+                temp.Add(i.GetPackageHeightInMm);
+                temp.Add(i.GetPackageLengthInMm);
+                temp.Add(i.GetPackageDepthInMm);
                 this.sizes.Add(temp);
             }
             this.time = delivery.DeliveryPackageList[0].DeliveryTime;
@@ -45,7 +45,7 @@ namespace TechSupport.WARE.Warehouse.Pickup
             return amountOfMeasures;
         }
 
-        public override string ToString()
+        public override String ToString()
         {
             StringBuilder pickupDetails = new StringBuilder();
             pickupDetails.AppendLine("Pickup time: " + this.time.ToString());

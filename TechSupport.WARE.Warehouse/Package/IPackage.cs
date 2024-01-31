@@ -26,3 +26,4 @@ namespace TechSupport.WARE.Warehouse
         string ToString();
     }
 }
+
