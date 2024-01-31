@@ -9,9 +9,26 @@ namespace TechSupport.WARE.Warehouse
 {
     internal interface IIsle
     {
+        /// <summary>
+        /// void <c>AddPackage</c> adds a package to the isle thats being referenced
+        /// </summary>
+        /// <param name="package">The package object</param>
+        /// <param name="placement">Placement of the package in the isle</param>
         void AddPackage(Package package, int placement);
+        /// <summary>
+        /// void <c>RemovePackage</c> removes the package from the isle
+        /// </summary>
+        /// <param name="package">The package object to be removed</param>
         void RemovePackage(Package package);
+        /// <summary>
+        /// Gets the isle id
+        /// </summary>
         int GetIsleId { get; }
+        /// <summary>
+        /// int <c>GetPacakgePlacement</c> gets the placement of the package refrenced
+        /// </summary>
+        /// <param name="package">Package object</param>
+        /// <returns>Returns the placement as an int</returns>
         int GetPackagePlacement(Package package);
 
     }

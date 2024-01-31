@@ -10,14 +10,32 @@ namespace TechSupport.WARE.Warehouse
 {
     internal interface IPackage
     {
-        int PackageId { get; }
-        int PackageLengthInMm { get; }
-        int PackageHeightInMm { get; }
-        int PackageDepthInMm { get; }
-        int PackageWeightInGrams { get; }
+        /// <summary>
+        /// Get the package id
+        /// </summary>
+        int GetPackageId { get; }
+        /// <summary>
+        /// Gets the package length in millimeter
+        /// </summary>
+        int GetPackageLengthInMm { get; }
+        /// <summary>
+        /// Gets the packagge height in millimeter
+        /// </summary>
+        int GetPackageHeightInMm { get; }
+        /// <summary>
+        /// Gets the package depth in millimeter
+        /// </summary>
+        int GetPackageDepthInMm { get; }
+        /// <summary>
+        /// Gets the package weight in grams
+        /// </summary>
+        int GetPackageWeightInGrams { get; }
+        /// <summary>
+        /// Get the package sender
+        /// </summary>
         Contact Sender { get; set; }
         Contact Receiver { get; set; }
-        StatusList Status { get; }
+        StatusList GetStatus { get; }
         (Isle isle, int storageSpecification, int place) GetLocation();
         void ChangeStatus(StatusList newStatus, String description);
         List<PackageLogEntry> GetPackageLog();
