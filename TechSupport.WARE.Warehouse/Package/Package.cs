@@ -54,10 +54,14 @@ namespace TechSupport.WARE.Warehouse
         public int GetPackageHeightInMm => packageHeightInMm;
         public int GetPackageDepthInMm => packageDepthInMm;
         public int GetPackageWeightInGrams => packageWeighInGrams;
-        public Contact GetSender => sender;
-        public Contact SetSender { set { this.sender = value; } }
-        public Contact GetReceiver => receiver;
-        public Contact SetReceiver { set { this.receiver = value; } }
+        public Contact Sender { 
+            get { return sender; }
+            set { this.sender = value; } 
+        }
+        public Contact Receiver { 
+            get { return receiver; }
+            set { this.receiver = value; }
+        }
 
         /// <summary>
         /// StatusList <c>Status</c> returns the current status of the package
