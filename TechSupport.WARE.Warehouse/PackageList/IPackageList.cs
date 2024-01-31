@@ -9,35 +9,49 @@ namespace TechSupport.WARE.Warehouse
     internal interface IPackageList
     {
         /// <summary>
-        /// void <c>AddPackage</c> adds a given Package instance to the PackageList.
+        /// Adds a given Package instance to the PackageList.
         /// </summary>
         void AddPackage(Package package);
-        /*Adds package to the list, since package has no uniqe identifier as an atribute, 
-         * it takes the name of the package object as atribute.*/
 
         /// <summary>
-        /// void <c>RemovePackage</c> removes a given Package instance from the PackageList.
+        /// Removes a given Package instance from the PackageList.
         /// </summary>
         void RemovePackage(Package package);
-        //Removes package from the list.
 
         /// <summary>
-        /// string <c>SeePackagesInList</c> returns a string displaying the IDs of Package instances in the PackageList
+        /// Returns a string displaying the IDs of Package instances in the PackageList
         /// </summary>
-        string SeePackagesInList();
+        String SeePackagesInList();
         /*Returns all packages that are currently in the list. As for now, showing packages in the list
          * based on certain filters (e.g. weight) is done in seperate methods, could possibly be done as a parameter 
          * for this method instead.*/
 
-        
+        /// <summary>
+        /// Returns a string displaying Package instances in the PackageList sorted by the their lenght in mm
+        /// </summary>
+        String ShowPackagesSortedByLenght();
 
-        string ShowPackagesSortedByLenght();
-        string ShowPackagesSortedByHeight();
-        string ShowPackagesSortedByDepth();
-        string ShowPackagesSortedByWeight();
+        /// <summary>
+        /// Returns a string displaying Package instances in the PackageList sorted by the their height in mm
+        /// </summary>
+        String ShowPackagesSortedByHeight();
+
+        /// <summary>
+        /// Returns a string displaying Package instances in the PackageList sorted by the their depth in mm
+        /// </summary>
+        String ShowPackagesSortedByDepth();
+
+        /// <summary>
+        /// Returns a string displaying Package instances in the PackageList sorted by the their weight in grams
+        /// </summary>
+        String ShowPackagesSortedByWeight();
+
         /* Displays the packages in the list sorted by various atributes, should not change the actuall order of the packages in the list,
          * the order of the list should not matter. */
 
+        /// <summary>
+        /// Returns a string displaying Package instances in the PackageList sorted by the their volume
+        /// </summary>
         string ShowPackagesSortedByVolume();
         /* Displays the packages sorted by the Volume of the packages, volume is not an inherent atribute of the Package class,
          * but should be easy to calculate based on lenght, height, and depth. */
