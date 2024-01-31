@@ -44,6 +44,7 @@ namespace TechSupport.WARE.Warehouse
 
         public void AddPackage(Package package, int placement)
         {
+            package.AddIsle(this);
             package.ChangeStatus(StatusList.Storage);
 
             shelf[placement] = package;
