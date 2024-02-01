@@ -31,15 +31,39 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         int PackageWeightInGrams { get; }
         /// <summary>
-        /// Get the package sender
+        /// Get and set the package sender
         /// </summary>
         Contact Sender { get; set; }
+        /// <summary>
+        /// Get and set the package reciever
+        /// </summary>
         Contact Receiver { get; set; }
+        /// <summary>
+        /// Get the package status
+        /// </summary>
         StatusList Status { get; }
+        /// <summary>
+        /// (Isle, int, int) <c>GetLocation()</c> Gets the isle the package is located,
+        /// the storage spesification and the placement in the spesified isle.
+        /// </summary>
+        /// <returns>Isle <c>isle</c>, int <c>storageSpecification</c>, int <c>place</c></returns>
         (Isle isle, int storageSpecification, int place) GetLocation();
+        /// <summary>
+        /// void <c>ChangeStatus(StatusList, String)</c> changes the package status, it will also log it to the package log
+        /// </summary>
+        /// <param name="newStatus">The new status</param>
+        /// <param name="description">*optional* description if needed</param>
         void ChangeStatus(StatusList newStatus, String description);
+        /// <summary>
+        /// List <c>GetPackageLog()</c> gets the package log object
+        /// </summary>
+        /// <returns>PackageLog</returns>
         List<PackageLogEntry> GetPackageLog();
-        string ToString();
+        /// <summary>
+        /// String <c>ToString()</c> gives out the package description in string format
+        /// </summary>
+        /// <returns>String</returns>
+        String ToString();
     }
 }
 
