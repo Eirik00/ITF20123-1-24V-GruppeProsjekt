@@ -15,15 +15,18 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="package">The package object</param>
         /// <param name="placement">Placement of the package in the isle</param>
         void AddPackage(Package package, int placement);
+
         /// <summary>
         /// void <c>RemovePackage</c> removes the package from the isle
         /// </summary>
         /// <param name="package">The package object to be removed</param>
         void RemovePackage(Package package);
+
         /// <summary>
         /// Gets the isle id
         /// </summary>
         int GetIsleId { get; }
+
         /// <summary>
         /// int <c>GetPacakgePlacement</c> gets the placement of the package refrenced
         /// </summary>
