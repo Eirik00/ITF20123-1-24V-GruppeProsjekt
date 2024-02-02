@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    internal interface IDelivery
+    internal interface IImport
     {
         List<Package> DeliveryPackageList { get; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class Delivery : IDelivery
+    public class Export : IExport
     {
         private List<Package> DeliveryPackagesList;
 
