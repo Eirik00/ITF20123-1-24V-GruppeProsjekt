@@ -9,6 +9,8 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Export : IExport
     {
+        // The list to store packages planned for delivery
+        // Will possibly change to dictionary later
         private List<Package> DeliveryPackagesList;
 
         public Delivery()
