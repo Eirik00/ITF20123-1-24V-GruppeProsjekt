@@ -28,5 +28,11 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <returns>List <c>PackageLogEntry</c></returns>
         List<PackageLogEntry> GetEntries();
+
+        TimeSpan GetTimeSpanOnStatus(StatusList status);
+
+        TimeSpan GetTotalTimeInWarehouse();
+
+        StatusList GetStatusAtTimeStamp(DateTime date);
     }
 }

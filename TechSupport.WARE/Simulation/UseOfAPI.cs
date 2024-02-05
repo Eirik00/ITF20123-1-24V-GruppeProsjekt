@@ -5,15 +5,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TechSupport.WARE.Warehouse;
-using TechSupport.WARE.Warehouse.Pickup;
 
 namespace Simulation
 {
     internal class UseOfAPI
     {
-        static void Main(string[] args)
+        static void noMain(string[] args)
         {
-            Contact kjell = new Contact("Kjell", "Ware", "Kjell.Ware@warhouse.dk", "Danmark", "Warehouseveien 8", 80808080, 1890);
+            /*Contact kjell = new Contact("Kjell", "Ware", "Kjell.Ware@warhouse.dk", "Danmark", "Warehouseveien 8", 80808080, 1890);
             Company warehouse = new Company("Warehouse", "Support@warhouse.dk", "Danmark", "Warehouseveien 8"), 80909090, 1890);
             warehouse.AddContact(kjell);
 
@@ -55,7 +54,7 @@ namespace Simulation
             ringnesLevering.DailyPackageImport(14.00, cider, ringnes, warehouse);
             ringnesLevering.WeeklyPackageImport(DayOfWeek.Tuesday, 14.00, drikkevarer, ringnes, warehouse);
 
-            ol.GetPackageLog();
+            ol.GetPackageLog();*/
 
         }
     }

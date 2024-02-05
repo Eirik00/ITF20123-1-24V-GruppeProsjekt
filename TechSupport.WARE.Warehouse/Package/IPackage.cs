@@ -62,7 +62,7 @@ namespace TechSupport.WARE.Warehouse
         /// List <c>GetPackageLog()</c> gets the package log object
         /// </summary>
         /// <returns>PackageLog</returns>
-        List<PackageLogEntry> GetPackageLog();
+        PackageLog GetPackageLog();
         /// <summary>
         /// String <c>ToString()</c> gives out the package description in string format
         /// </summary>

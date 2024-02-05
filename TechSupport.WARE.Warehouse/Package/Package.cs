@@ -22,7 +22,7 @@ namespace TechSupport.WARE.Warehouse
     /// </summary>
     public enum StorageSpecification { Invalid = 0, ColdStorage = 1, DryStorage = 2, DangerousProducts = 3};
 
-    public class Package : IPackage
+    public class Package //: IPackage
     {
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace TechSupport.WARE.Warehouse
             this.packageIsle = isle;
         }
 
-        public (Isle isle, int storageSpecification, int place) GetLocation()
+        public (Isle isle, StorageSpecification storageSpecification, int place) GetLocation()
         {
-            return (this.packageIsle, this.storageSpecification, 0);
+            return (this.packageIsle, this.specification, 0);
         }
         public void ChangeStatus(StatusList newStatus, String description = "")
         {
@@ -104,9 +104,9 @@ namespace TechSupport.WARE.Warehouse
             this.status = newStatus;
         }
 
-        public List<PackageLogEntry> GetPackageLog()
+        public PackageLog GetPackageLog()
         {
-            return packageLog.GetEntries();
+            return packageLog;
         }
 
         //public override string ToString()

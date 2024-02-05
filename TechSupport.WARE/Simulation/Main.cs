@@ -7,7 +7,8 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-
+using TechSupport.WARE.Warehouse;
+/*
 namespace TechSupport.WARE
 {
     internal class main
@@ -24,38 +25,39 @@ namespace TechSupport.WARE
 
             //When a new package is registered it automatically gets put to Reception.
 
-            Package myPackage = new Package(123456, 400, 500, 200, 400000, 2, 0);
+           // Package myPackage = new Package(123456, 400, 500, 200, 400000, 2, 0);
 
             //Isle class has parameters: int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int capableWeightInGrams,
             //category storageSpecifications[]
 
-            Isle isle1 = new Isle(50, 400, 500, 1000, 100000, 2);
+            //Isle isle1 = new Isle(50, 400, 500, 1000, 100000, 2);
 
             //isle.addPackage takes the parameters: Package package, int space
             //(if no space parameter is given package is placed in lowest vailable space)
 
-            isle1.addPackage(myPackage, 1);
+           // isle1.addPackage(myPackage, 1);
 
             //locate returns isle, category and space
-            myPackage.getLocation();
+            //myPackage.getLocation();
 
             //return status, is it Reception, Storage, picking or delivery
-            myPackage.getStatus();
+           // myPackage.getStatus();
 
             //update status, 1:Reception, 2:Storage, 3:Picking, 4:Delivery
-            myPackage.updateStatus(2);
+            //myPackage.updateStatus(2);
 
             //Delivery class has parameters: datetime timeOfDelivery, arraylist packagesInDelivery
 
-            Delivery delivery_1 = new Delivery();
+            //Delivery delivery_1 = new Delivery();
 
-            ArrayList deliveryList_1 = new ArrayList();
-            deliveryList_1.Add(myPackage);
+            //ArrayList deliveryList_1 = new ArrayList();
+            //deliveryList_1.Add(myPackage);
 
             //addPackages(ArrayList/object of Packages)
-            delivery_1.addPackages(deliveryList_1, new DateTime(2024, 01, 17, 18, 30, 0));
+          //  delivery_1.addPackages(deliveryList_1, new DateTime(2024, 01, 17, 18, 30, 0));
 
-            Reception collection = new Reception;
+            //Reception collection = new Reception;
         }
     }
 }
+*/
