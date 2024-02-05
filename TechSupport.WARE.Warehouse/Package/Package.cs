@@ -30,7 +30,6 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         private static List<int> idCheck = new List<int>();
         private int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
-        private long packageVolumeInCubicMm;
         private bool isFragile;
         private StorageSpecification specification;
         private StatusList status;
@@ -53,7 +52,6 @@ namespace TechSupport.WARE.Warehouse
                 this.packageHeightInMm = packageHeightInMm;
                 this.packageDepthInMm = packageDepthInMm;
                 this.packageWeighInGrams = packageWeightInGrams;
-                this.packageVolumeInCubicMm = packageLenghtInMm * packageHeightInMm * packageDepthInMm;
                 this.isFragile = isFragile;
                 this.specification = specification;
                 this.status = status;
@@ -72,7 +70,6 @@ namespace TechSupport.WARE.Warehouse
         public int PackageHeightInMm => packageHeightInMm;
         public int PackageDepthInMm => packageDepthInMm;
         public int PackageWeightInGrams => packageWeighInGrams;
-        public long PackageVolumeInCubicMm => packageVolumeInCubicMm;
         public StorageSpecification Specification => specification;
         public Contact Sender { 
             get { return this.sender; }
