@@ -43,7 +43,7 @@ namespace TechSupport.WARE.Warehouse
         {
             if (idCheck.Contains(packageId))
             {
-                Console.WriteLine("This Id is not unique!");
+                throw new Exception("The id: " + this.packageId + " is not unique...");
             }
             else
             {
