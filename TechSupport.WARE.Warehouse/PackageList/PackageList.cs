@@ -72,5 +72,88 @@ namespace TechSupport.WARE.Warehouse
 
             return tempString;
         }
-    }
+        public String ShowPackagesSortedByHeight()
+        {
+            string tempString = "Packages in the list sorted by height descending: \n";
+
+            List<Package> tempList = packages;
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                for (int j = 0; j < tempList.Count; j++)
+                {
+
+                    if (tempList[i].PackageHeightInMm > tempList[j].PackageHeightInMm)
+                    {
+                        Package tempPackage = tempList[i];
+                        tempList[i] = tempList[j];
+                        tempList[j] = tempPackage;
+                    }
+                }
+            }
+
+            foreach (Package package in tempList)
+            {
+                tempString += "PackageId: " + package.PackageId + ", Height: " + package.PackageHeightInMm + "mm\n";
+            }
+
+            return tempString;
+        }
+
+        public String ShowPackagesSortedByDepth()
+        {
+            string tempString = "Packages in the list sorted by depth descending: \n";
+
+            List<Package> tempList = packages;
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                for (int j = 0; j < tempList.Count; j++)
+                {
+
+                    if (tempList[i].PackageDepthInMm > tempList[j].PackageDepthInMm)
+                    {
+                        Package tempPackage = tempList[i];
+                        tempList[i] = tempList[j];
+                        tempList[j] = tempPackage;
+                    }
+                }
+            }
+
+            foreach (Package package in tempList)
+            {
+                tempString += "PackageId: " + package.PackageId + ", Depth: " + package.PackageDepthInMm + "mm\n";
+            }
+
+            return tempString;
+        }
+
+        public String ShowPackagesSortedByWeight()
+        {
+            string tempString = "Packages in the list sorted by weight descending: \n";
+
+            List<Package> tempList = packages;
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                for (int j = 0; j < tempList.Count; j++)
+                {
+
+                    if (tempList[i].PackageWeightInGrams > tempList[j].PackageWeightInGrams)
+                    {
+                        Package tempPackage = tempList[i];
+                        tempList[i] = tempList[j];
+                        tempList[j] = tempPackage;
+                    }
+                }
+            }
+
+            foreach (Package package in tempList)
+            {
+                tempString += "PackageId: " + package.PackageId + ", Weight: " + package.PackageWeightInGrams + " grams\n";
+                tempString += "PackageId: " + package.PackageId + ", Lenght: " + package.PackageLengthInMm + "\n";
+            }
+
+            return tempString;
+        }
 }
