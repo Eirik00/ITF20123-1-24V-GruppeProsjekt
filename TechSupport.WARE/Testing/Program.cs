@@ -14,26 +14,23 @@ namespace TechSupport.WARE
         {
             Isle isle = new Isle(2, 200, 200, 200, 200000, 4, 1);
 
-            Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
+            Package testPackage = new Package(69, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
             isle.AddPackage(testPackage, 0);
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.InProgress);
-            Thread.Sleep(10000);
+            //Thread.Sleep(10000);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.Delivery);
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.Storage);
-            Thread.Sleep(4000);
+            //Thread.Sleep(4000);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.Delivery);
             Console.WriteLine(testPackage.GetPackageLog().GetTimeSpanOnStatus(StatusList.Delivery));
-            foreach (var entry in testPackage.GetPackageLog().GetEntries())
-            {
-                Console.WriteLine(entry.ToString());
-            }
-            Console.WriteLine(testPackage.GetPackageLog);
+            Console.WriteLine(testPackage.GetPackageLog());
+            Console.WriteLine("Package was in the system for a total time of: " + testPackage.GetPackageLog().GetTotalTimeInWarehouse());
 
             PackageList packagelist = new PackageList(1);
             Package pakke1 = new Package(1, 58, 19, 7, 2000, false, 0);
