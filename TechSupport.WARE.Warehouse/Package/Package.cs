@@ -39,11 +39,11 @@ namespace TechSupport.WARE.Warehouse
         PackageLog packageLog = new PackageLog();
         private Isle? packageIsle;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Invalid, DateTime deliveryTime = default)
         {
             if (idCheck.Contains(packageId))
             {
-                throw new Exception("The id: " + this.packageId + " is not unique...");
+                throw new Exception("The id: " + packageId + " is not unique...");
             }
             else
             {
@@ -59,7 +59,7 @@ namespace TechSupport.WARE.Warehouse
                 this.receiver = new Contact("", "", "", "", "", 0, 0);
                 this.DeliveryTime = deliveryTime;
 
-                packageLog.LogChange(null, StatusList.Invalid, StatusList.Reception, "Package Recieved");
+                packageLog.LogChange(null, StatusList.Invalid, status, "Package initialized");
                 idCheck.Add(packageId);
             }
         }
