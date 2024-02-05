@@ -38,7 +38,7 @@ namespace TechSupport.WARE
             Package pakke3 = new Package(3, 36, 64, 112, 2000, false, 0);
             Package pakke4 = new Package(4, 41, 55, 7612, 2000, false, 0);
             Package pakke5 = new Package(5, 1235, 54, 312, 2000, false, 0);
-            Package pakke6 = new Package(6, 2316, 33, 1352, 2000, false, 0);
+            Package pakke6 = new Package(7, 2316, 33, 1352, 2000, false, 0);
             Package pakke7 = new Package(7, 217, 3452, 8612, 2000, false, 0);
             Package pakke8 = new Package(8, 8423, 124, 4312, 2000, false, 0);
             packagelist.AddPackage(pakke1);
