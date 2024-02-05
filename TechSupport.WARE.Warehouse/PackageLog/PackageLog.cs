@@ -43,7 +43,7 @@ namespace TechSupport.WARE.Warehouse
         {
             return timeStamp;
         }
-        public String ToString() => "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: " + this.isle.GetIsleId();
+       // public String ToString() => "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: " + this.isle.GetIsleId();
     }
 
     public class PackageLog : IPackageLog
