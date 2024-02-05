@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\TechSupport.WARE.Warehouse\TechSupport.WARE.Warehouse.csproj" />
+  </ItemGroup>
+
 </Project>

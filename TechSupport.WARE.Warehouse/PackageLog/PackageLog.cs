@@ -92,11 +92,13 @@ namespace TechSupport.WARE.Warehouse
             }
             foreach(var entry in status1List)
             {
-                if (status2List[0] != null)
+                try
                 {
                     timeSpan += status2List[0].getDateTime() - entry.getDateTime();
+
+                    status2List.RemoveAt(status2List.Count - 1);
                 }
-                else
+                catch(Exception e)
                 {
                     timeSpan += DateTime.Now - entry.getDateTime();
                 }
