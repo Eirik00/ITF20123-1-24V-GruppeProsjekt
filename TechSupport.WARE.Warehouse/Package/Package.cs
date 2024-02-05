@@ -14,6 +14,13 @@ namespace TechSupport.WARE.Warehouse
     /// </example>
     /// </summary>
     public enum StatusList {Invalid = 0, Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
+    /// <summary>
+    /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
+    /// <example>
+    /// 1: ColdStorage, 2: DryStorage, 3: DangerousProducts
+    /// </example>
+    /// </summary>
+    public enum StorageSpecification { Invalid = 0, ColdStorage = 1, DryStorage = 2, DangerousProducts = 3};
 
     public class Package : IPackage
     {
@@ -23,7 +30,7 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         private int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
         private bool isFragile;
-        private int storageSpecification;
+        private StorageSpecification specification;
         private StatusList status;
         private Contact sender;
         private Contact receiver;
@@ -31,7 +38,7 @@ namespace TechSupport.WARE.Warehouse
         PackageLog packageLog = new PackageLog();
         private Isle? packageIsle;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
             this.packageId = packageId;
             this.packageLenghtInMm = packageLenghtInMm;
@@ -39,7 +46,7 @@ namespace TechSupport.WARE.Warehouse
             this.packageDepthInMm = packageDepthInMm;
             this.packageWeighInGrams = packageWeighInMm;
             this.isFragile = isFragile;
-            this.storageSpecification = storageSpecification;
+            this.specification = specification;
             this.status = status;
             this.sender = new Contact("", "", "", "", "", 0, 0);
             this.receiver = new Contact("", "", "", "", "", 0, 0);
@@ -54,6 +61,7 @@ namespace TechSupport.WARE.Warehouse
         public int PackageHeightInMm => packageHeightInMm;
         public int PackageDepthInMm => packageDepthInMm;
         public int PackageWeightInGrams => packageWeighInGrams;
+        public StorageSpecification Specification => specification;
         public Contact Sender { 
             get { return sender; }
             set { this.sender = value; } 
