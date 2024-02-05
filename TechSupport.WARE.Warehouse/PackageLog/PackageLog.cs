@@ -16,7 +16,7 @@ namespace TechSupport.WARE.Warehouse
         private String description;
         private Isle? isle;
 
-        public PackageLogEntry(Isle isle, StatusList newStatus, StatusList previousStatus, String description)
+        public PackageLogEntry(Isle? isle, StatusList newStatus, StatusList previousStatus, String description)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
@@ -24,7 +24,7 @@ namespace TechSupport.WARE.Warehouse
             this.description = description;
             this.isle = isle;
         }
-        public PackageLogEntry(Isle isle, StatusList previousStatus, StatusList newStatus)
+        public PackageLogEntry(Isle? isle, StatusList previousStatus, StatusList newStatus)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
@@ -45,7 +45,7 @@ namespace TechSupport.WARE.Warehouse
         {
             return timeStamp;
         }
-        public String ToString()
+        public override string ToString()
         {
             if(this.isle == null) 
                 return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: null";
@@ -60,7 +60,7 @@ namespace TechSupport.WARE.Warehouse
         private List<PackageLogEntry> packageHistory = new List<PackageLogEntry>();
         public int Entries => packageHistory.Count;
 
-        public void LogChange(Isle isle, StatusList currentStatus, StatusList previousStatus, String description = "")
+        public void LogChange(Isle? isle, StatusList currentStatus, StatusList previousStatus, String description = "")
         {
             if(description == "")
             {
@@ -98,7 +98,7 @@ namespace TechSupport.WARE.Warehouse
 
                     status2List.RemoveAt(status2List.Count - 1);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     timeSpan += DateTime.Now - entry.getDateTime();
                 }
