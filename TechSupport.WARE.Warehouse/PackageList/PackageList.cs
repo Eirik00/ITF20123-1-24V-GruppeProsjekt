@@ -7,20 +7,28 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackageList /*: IPackageList*/
+    public class PackageList : IPackageList
     {
         private int listId;
-        private HashSet<Package> packages;
+        private ArrayList packages;
 
         public PackageList(int listId)
         {
             this.listId = listId;
-            packages = new HashSet<Package>();
+            this.packages = new ArrayList();
 
         }
         public void addPackage(Package package)
         {
-            packages.Add(package);
+            if (packages.Contains(package))
+            {
+                Console.WriteLine("The package is allready in the list");
+            }
+            else
+            {
+                packages.Add(package);
+            }
+            
 
 
 
