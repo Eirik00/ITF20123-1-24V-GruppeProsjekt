@@ -14,6 +14,13 @@ namespace TechSupport.WARE.Warehouse
     /// </example>
     /// </summary>
     public enum StatusList {Invalid = 0, Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
+    /// <summary>
+    /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
+    /// <example>
+    /// 1: ColdStorage, 2: DryStorage, 3: DangerousProducts
+    /// </example>
+    /// </summary>
+    public enum StorageSpecification { Invalid = 0, ColdStorage = 1, DryStorage = 2, DangerousProducts = 3};
 
     public class Package : IPackage
     {
@@ -21,9 +28,10 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         ///     Package object.
         /// </summary>
+        private static List<int> idCheck = new List<int>();
         private int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
         private bool isFragile;
-        private int storageSpecification;
+        private StorageSpecification specification;
         private StatusList status;
         private Contact sender;
         private Contact receiver;
@@ -31,21 +39,29 @@ namespace TechSupport.WARE.Warehouse
         PackageLog packageLog = new PackageLog();
         private Isle? packageIsle;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, int storageSpecification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
-            this.packageId = packageId;
-            this.packageLenghtInMm = packageLenghtInMm;
-            this.packageHeightInMm = packageHeightInMm;
-            this.packageDepthInMm = packageDepthInMm;
-            this.packageWeighInGrams = packageWeighInMm;
-            this.isFragile = isFragile;
-            this.storageSpecification = storageSpecification;
-            this.status = status;
-            this.sender = new Contact("", "", "", "", "", 0, 0);
-            this.receiver = new Contact("", "", "", "", "", 0, 0);
-            this.DeliveryTime = deliveryTime;
+            if (idCheck.Contains(packageId))
+            {
+                Console.WriteLine("This Id is not unique!");
+            }
+            else
+            {
+                this.packageId = packageId;
+                this.packageLenghtInMm = packageLenghtInMm;
+                this.packageHeightInMm = packageHeightInMm;
+                this.packageDepthInMm = packageDepthInMm;
+                this.packageWeighInGrams = packageWeighInMm;
+                this.isFragile = isFragile;
+                this.specification = specification;
+                this.status = status;
+                this.sender = new Contact("", "", "", "", "", 0, 0);
+                this.receiver = new Contact("", "", "", "", "", 0, 0);
+                this.DeliveryTime = deliveryTime;
 
-            packageLog.LogChange(null, StatusList.Invalid, StatusList.Reception, "Package Recieved");
+                packageLog.LogChange(null, StatusList.Invalid, StatusList.Reception, "Package Recieved");
+                idCheck.Add(packageId);
+            }
         }
 
         //LAG TOSTRING
@@ -54,6 +70,7 @@ namespace TechSupport.WARE.Warehouse
         public int PackageHeightInMm => packageHeightInMm;
         public int PackageDepthInMm => packageDepthInMm;
         public int PackageWeightInGrams => packageWeighInGrams;
+        public StorageSpecification Specification => specification;
         public Contact Sender { 
             get { return sender; }
             set { this.sender = value; } 
@@ -86,15 +103,31 @@ namespace TechSupport.WARE.Warehouse
             packageLog.LogChange(this.GetLocation().isle, newStatus, status, description);
             this.status = newStatus;
         }
+
         public List<PackageLogEntry> GetPackageLog()
         {
             return packageLog.GetEntries();
         }
 
+        //public override string ToString()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
+       //Dette reflekteres i Export og import klassene
+       //Prøve å endre Package/import/export status
+       //Jeg har ikke fått til å teste dette da visual studio ikke klarer å bygge prosjektet for et eller annet grunn
+       //slettes dersom ikke funker
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"Package ID: {PackageId}\n" +
+                   $"  Status: {Status}\n" +
+                   $"  Delivery Time: {DeliveryTime}\n" +
+                   $"  Sender: {Sender.firstName} {Sender.surname}\n" +
+                   $"  Receiver: {Receiver.firstName} {Receiver.surname}\n";
         }
 
+ 
     }
 }

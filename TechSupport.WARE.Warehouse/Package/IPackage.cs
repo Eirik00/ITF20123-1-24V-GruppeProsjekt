@@ -31,6 +31,10 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         int PackageWeightInGrams { get; }
         /// <summary>
+        /// Gets the package specification
+        /// </summary>
+        StorageSpecification Specification { get; }
+        /// <summary>
         /// Get and set the package sender
         /// </summary>
         Contact Sender { get; set; }
