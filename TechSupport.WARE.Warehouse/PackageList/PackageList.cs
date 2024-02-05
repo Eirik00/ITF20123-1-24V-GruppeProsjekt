@@ -10,15 +10,14 @@ namespace TechSupport.WARE.Warehouse
     public class PackageList //: IPackageList
     {
         private int listId;
-        private ArrayList packages;
+        private List<Package> packages;
 
         public PackageList(int listId)
         {
             this.listId = listId;
-            this.packages = new ArrayList();
-
+            this.packages = new List<Package>();
         }
-        public void addPackage(Package package)
+        public void AddPackage(Package package)
         {
             if (packages.Contains(package))
             {
@@ -28,18 +27,14 @@ namespace TechSupport.WARE.Warehouse
             {
                 packages.Add(package);
             }
-            
-
-
-
         }
 
-        public void removePackage(Package package)
+        public void RemovePackage(Package package)
         {
             packages.Remove(package);
         }
 
-        public string seePackagesInList()
+        public string SeePackagesInList()
         {
             string temp = "The list contains packages with following Id: ";
 
@@ -49,7 +44,33 @@ namespace TechSupport.WARE.Warehouse
             }
 
             return temp;
+        }
 
+        public String ShowPackagesSortedByLenght()
+        {
+            string tempString = "Packages in the list sorted by weight descending: \n";
+
+            List<Package> tempList = packages;
+
+            for(int i = 0; i < tempList.Count; i++)
+            {
+                for (int j = 0; j < tempList.Count; j++) {
+
+                    if (tempList[i].PackageLengthInMm > tempList[j].PackageLengthInMm)
+                    {
+                        Package tempPackage = tempList[i];
+                        tempList[i] = tempList[j];
+                        tempList[j] = tempPackage;
+                    }
+                }
+            }
+
+            foreach(Package package in tempList)
+            {
+                tempString += "PackageId: " + package.PackageId + ", Lenght: " + package.PackageLengthInMm + "\n";
+            }
+
+            return tempString;
         }
     }
 }

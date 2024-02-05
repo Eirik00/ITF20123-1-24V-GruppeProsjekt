@@ -12,8 +12,9 @@ namespace Simulation
     {
         static void noMain(string[] args)
         {
-            /*Contact kjell = new Contact("Kjell", "Ware", "Kjell.Ware@warhouse.dk", "Danmark", "Warehouseveien 8", 80808080, 1890);
-            Company warehouse = new Company("Warehouse", "Support@warhouse.dk", "Danmark", "Warehouseveien 8"), 80909090, 1890);
+            /*
+            Contact kjell = new Contact("Kjell", "Ware", "Kjell.Ware@warhouse.dk", "Danmark", "Warehouseveien 8", 80808080, 1890);
+            Company warehouse = new Company("Warehouse", "Support@warhouse.dk", "Danmark", "Warehouseveien 8", 80909090, 1890);
             warehouse.AddContact(kjell);
 
             Contact svein = new Contact("Svein", "Bryggerson", "Svein.Bryggerson@ringnes.no", "Norge", "Ringnesveien 3", 90808020, 3270);

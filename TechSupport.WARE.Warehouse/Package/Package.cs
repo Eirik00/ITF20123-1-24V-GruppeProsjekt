@@ -39,11 +39,11 @@ namespace TechSupport.WARE.Warehouse
         PackageLog packageLog = new PackageLog();
         private Isle? packageIsle;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
             if (idCheck.Contains(packageId))
             {
-                Console.WriteLine("This Id is not unique!");
+                throw new Exception("The id: " + this.packageId + " is not unique...");
             }
             else
             {
@@ -51,7 +51,7 @@ namespace TechSupport.WARE.Warehouse
                 this.packageLenghtInMm = packageLenghtInMm;
                 this.packageHeightInMm = packageHeightInMm;
                 this.packageDepthInMm = packageDepthInMm;
-                this.packageWeighInGrams = packageWeighInMm;
+                this.packageWeighInGrams = packageWeightInGrams;
                 this.isFragile = isFragile;
                 this.specification = specification;
                 this.status = status;
@@ -72,11 +72,11 @@ namespace TechSupport.WARE.Warehouse
         public int PackageWeightInGrams => packageWeighInGrams;
         public StorageSpecification Specification => specification;
         public Contact Sender { 
-            get { return sender; }
+            get { return this.sender; }
             set { this.sender = value; } 
         }
         public Contact Receiver { 
-            get { return receiver; }
+            get { return this.receiver; }
             set { this.receiver = value; }
         }
 
@@ -95,6 +95,7 @@ namespace TechSupport.WARE.Warehouse
         }
 
         public (Isle isle, StorageSpecification storageSpecification, int place) GetLocation()
+
         {
             return (this.packageIsle, this.specification, 0);
         }
