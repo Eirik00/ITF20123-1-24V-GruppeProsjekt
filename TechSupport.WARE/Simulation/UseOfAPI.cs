@@ -29,9 +29,6 @@ namespace Simulation
             drikkevarer.addPackage(ol);
             drikkevarer.addPackage(cider);
 
-            Import ringnesLevering = new Import();
-            ringnesLevering.PackageImport(DateTime.Now.AddDays(1), drikkevarer, ringnes, warehouse);
-
             //plass, lengde, høyde, dybde, vekt, kategori for: kjølelager, tørrvare eller farlig gods og id.
             Isle hylle1 = new Isle(50, 5000, 20000, 10000, 20000, 2, 1);
             hylle1.AddPackage(ol, 2);
@@ -40,13 +37,26 @@ namespace Simulation
             Company rema1000 = new Company("Rema1000", "Support@rema1000.no", "Norge", "Remaveien 3", 90700020, 3250);
             Contact tore = new Contact("Svein", "Matvaresen", "Svein.Matvaresen@rema1000.no", "Norge", "Ringnesveien 3", 90008020, 3270);
 
+            //Sending av varer ut av varehuset
+            //Sendings tid gjort om fra int til double for å regne med tider som ikke er hele (14.25 for eksempel)
+            //Engangs og daglig sending av varer tar in double tid, pakke, sender og mottaker som parmetere.
+            //Gjentagende ukentlig tar inn DayOfWeek.DAG som parameter i tilleg for å spesifisere sendings dag.
             Export remaSending = new Export();
-            remaSending.PackageExport(DateTime.Now.AddDays(1), ol, warehouse, rema1000);
+            remaSending.PackageExport(16.00, ol, warehouse, rema1000);
+            remaSending.RecurringDailyExport(15.00, ol, warehouse, rema1000);
+            remaSending.RecurringWeeklyExport(DayOfWeek.Monday, 14.00, cider, warehouse, rema1000);
+
+            //Mottak av varer inn i varehuset
+            //mottak tid gjort om til double fra int
+            //Engangs mottak og daglig mottak av varer tar in double tid, pakke, sender og mottaker som parametere. Vi kan eventuelt fjerne mottaker parameteren vis det ikke er nødvendig
+            //Gjentagende ukentlig tar inn DayOfWeek.DAG som parameter i tilleg for å spesifisere mottak dag.
+            Import ringnesLevering = new Import();
+            ringnesLevering.PackageImport(16.00, drikkevarer, ringnes, warehouse);
+            ringnesLevering.DailyPackageImport(14.00, cider, ringnes, warehouse);
+            ringnesLevering.WeeklyPackageImport(DayOfWeek.Tuesday, 14.00, drikkevarer, ringnes, warehouse);
 
             ol.GetPackageLog();
 
-            ringnesLevering.RecurringDailyPackageImport(1400, drikkevarer, ringnes, warehouse);
-            ringnesLevering.RecurringWeeklyPackageImport(DayOfWeek.Tuesday, 1400, drikkevarer, ringnes, warehouse);
         }
     }
 }

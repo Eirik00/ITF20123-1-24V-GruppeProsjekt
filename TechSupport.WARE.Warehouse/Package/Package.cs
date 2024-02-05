@@ -98,7 +98,7 @@ namespace TechSupport.WARE.Warehouse
         //}
 
 
-       //Dette reflekteres i Export klassen
+       //Dette reflekteres i Export og import klassene
        //Prøve å endre Package/import/export status
        //Jeg har ikke fått til å teste dette da visual studio ikke klarer å bygge prosjektet for et eller annet grunn
        //slettes dersom ikke funker

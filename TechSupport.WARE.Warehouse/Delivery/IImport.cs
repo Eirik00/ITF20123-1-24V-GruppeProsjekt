@@ -14,17 +14,17 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// <c>PackageExport</c> sets the time for a delivery with a List of packages. It also sets the Contact sender and Contact reciever for the delivery.
         /// </summary>
-        void PackageImport(DateTime deliveryTime, List<Package> packages, Contact sender);
+        void PackageImport(double deliveryTime, List<Package> packages, Contact sender, Contact receiver);
 
         /// <summary>
         /// 
         /// </summary>
-        void DailyPackageImport(int deliveryHour, List<Package> packages, Contact sender);
+        void DailyPackageImport(double deliveryHour, List<Package> packages, Contact sender , Contact receiver);
 
         /// <summary>
         /// 
         /// </summary>
-        void WeeklyPackageImport(DayOfWeek deliveryDay, int deliveryHour, List<Package> packages, Contact sender);
+        void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour, List<Package> packages, Contact sender, Contact receiver);
 
         /// <summary>
         /// 

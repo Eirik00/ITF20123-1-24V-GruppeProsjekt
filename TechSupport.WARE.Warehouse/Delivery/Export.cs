@@ -18,17 +18,13 @@ namespace TechSupport.WARE.Warehouse
             exportPackagesList = new List<Package>();
         }
 
-        public void PackageExport(TimeSpan deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        public void PackageExport(double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
         {
             foreach (var package in packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
-
-                // Calculate the delivery time by combining today's date with the provided time of day
-                DateTime deliveryTime = DateTime.Today + deliveryHour;
-
-                package.DeliveryTime = deliveryTime;
+                package.DeliveryTime = DateTime.Today.AddHours(deliveryHour);
                 package.ChangeStatus(StatusList.Delivery);
                 ExportPackagesList.Add(package);
             }
@@ -49,7 +45,7 @@ namespace TechSupport.WARE.Warehouse
         //    Console.WriteLine($"Gjentagende Daglig Vare Levering registrert for {deliveryHour} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
         //}
 
-        public void RecurringDailyExport(int deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        public void RecurringDailyExport(double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
         {
             foreach (var package in packages)
             {
@@ -79,7 +75,7 @@ namespace TechSupport.WARE.Warehouse
         //    }
         //}
 
-        public void RecurringWeeklyExport(DayOfWeek deliveryDay, int deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        public void RecurringWeeklyExport(DayOfWeek deliveryDay, double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
         {
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
 
@@ -95,7 +91,7 @@ namespace TechSupport.WARE.Warehouse
         }
 
 
-
+        //GetNextWeekDay metoden brukes i ukentlig sending,denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres sending den dagen til neste uke.
         private DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {
             int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
