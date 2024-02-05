@@ -32,7 +32,5 @@ namespace TechSupport.WARE.Warehouse
         TimeSpan GetTimeSpanOnStatus(StatusList status);
 
         TimeSpan GetTotalTimeInWarehouse();
-
-        StatusList GetStatusAtTimeStamp(DateTime date);
     }
 }

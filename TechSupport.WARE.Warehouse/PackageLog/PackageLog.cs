@@ -16,7 +16,7 @@ namespace TechSupport.WARE.Warehouse
         private String description;
         private Isle? isle;
 
-        public PackageLogEntry(Isle isle, StatusList newStatus, StatusList previousStatus, String description)
+        public PackageLogEntry(Isle? isle, StatusList newStatus, StatusList previousStatus, String description)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
@@ -24,7 +24,7 @@ namespace TechSupport.WARE.Warehouse
             this.description = description;
             this.isle = isle;
         }
-        public PackageLogEntry(Isle isle, StatusList previousStatus, StatusList newStatus)
+        public PackageLogEntry(Isle? isle, StatusList previousStatus, StatusList newStatus)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
@@ -45,7 +45,7 @@ namespace TechSupport.WARE.Warehouse
         {
             return timeStamp;
         }
-        public String ToString()
+        public override string ToString()
         {
             if(this.isle == null) 
                 return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: null";
@@ -57,21 +57,21 @@ namespace TechSupport.WARE.Warehouse
 
     public class PackageLog : IPackageLog
     {
-        private List<PackageLogEntry> pacakgeHistory = new List<PackageLogEntry>();
-        public int Entries => pacakgeHistory.Count;
+        private List<PackageLogEntry> packageHistory = new List<PackageLogEntry>();
+        public int Entries => packageHistory.Count;
 
-        public void LogChange(Isle isle, StatusList currentStatus, StatusList previousStatus, String description = "")
+        public void LogChange(Isle? isle, StatusList currentStatus, StatusList previousStatus, String description = "")
         {
             if(description == "")
             {
-                pacakgeHistory.Add(new PackageLogEntry(isle, previousStatus, currentStatus));
+                packageHistory.Add(new PackageLogEntry(isle, previousStatus, currentStatus));
             }
             else
             {
-                pacakgeHistory.Add(new PackageLogEntry(isle, previousStatus, currentStatus, description));
+                packageHistory.Add(new PackageLogEntry(isle, previousStatus, currentStatus, description));
             }
         }
-        public List<PackageLogEntry> GetEntries() => pacakgeHistory;
+        public List<PackageLogEntry> GetEntries() => packageHistory;
 
         public TimeSpan GetTimeSpanOnStatus(StatusList status)
         {
@@ -79,7 +79,7 @@ namespace TechSupport.WARE.Warehouse
             List<PackageLogEntry> status2List = new List<PackageLogEntry>();
             TimeSpan timeSpan = TimeSpan.Zero;
 
-            foreach(var entry in pacakgeHistory)
+            foreach(var entry in packageHistory)
             {
                 if(entry.getNewStatus() == status)
                 {
@@ -98,7 +98,7 @@ namespace TechSupport.WARE.Warehouse
 
                     status2List.RemoveAt(status2List.Count - 1);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     timeSpan += DateTime.Now - entry.getDateTime();
                 }
@@ -108,12 +108,17 @@ namespace TechSupport.WARE.Warehouse
 
         public TimeSpan GetTotalTimeInWarehouse()
         {
-            throw new NotImplementedException();
+            return packageHistory[packageHistory.Count - 1].getDateTime() - packageHistory[0].getDateTime();
         }
 
-        public StatusList GetStatusAtTimeStamp(DateTime date)
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            String returnString = "";
+            foreach (var entry in packageHistory)
+            {
+                returnString += entry.ToString() + " \n";
+            }
+            return returnString;
         }
     }
 }
