@@ -16,16 +16,16 @@ namespace TechSupport.WARE
 
             Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
             isle.AddPackage(testPackage, 0);
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.InProgress);
-            Thread.Sleep(10000);
+            Thread.Sleep(100);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.Delivery);
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.Storage);
-            Thread.Sleep(4000);
+            Thread.Sleep(400);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.Delivery);
             Console.WriteLine(testPackage.GetPackageLog().GetTimeSpanOnStatus(StatusList.Delivery));
@@ -35,15 +35,19 @@ namespace TechSupport.WARE
             }
             Console.WriteLine(testPackage.GetPackageLog);
 
+            /////////////////// PackageList Testing ///////////////////////////////////////////////////////////////////////
+           
             PackageList packagelist = new PackageList(1);
-            Package pakke1 = new Package(1, 58, 19, 7, 2000, false, 0);
-            Package pakke2 = new Package(2, 42, 78, 212, 2000, false, 0);
+            
+            
             Package pakke3 = new Package(3, 36, 64, 112, 2000, false, 0);
             Package pakke4 = new Package(4, 41, 55, 7612, 2000, false, 0);
             Package pakke5 = new Package(5, 1235, 54, 312, 2000, false, 0);
             Package pakke6 = new Package(6, 2316, 33, 1352, 2000, false, 0);
             Package pakke7 = new Package(7, 217, 3452, 8612, 2000, false, 0);
             Package pakke8 = new Package(8, 8423, 124, 4312, 2000, false, 0);
+            Package pakke2 = new Package(9, 42, 78, 212, 2000, false, 0);
+            Package pakke1 = new Package(10, 58, 19, 7, 2000, false, 0);
             packagelist.AddPackage(pakke1);
             packagelist.AddPackage(pakke5);
             packagelist.AddPackage(pakke8);
@@ -52,6 +56,9 @@ namespace TechSupport.WARE
             packagelist.AddPackage(pakke2);
             packagelist.AddPackage(pakke6);
             packagelist.AddPackage(pakke3);
+
+            Console.WriteLine("\npakke volum: " + pakke8.PackageVolumeInCubicMm);
+
             Console.WriteLine(packagelist.SeePackagesInList());
             packagelist.AddPackage(pakke1);
             Console.WriteLine(packagelist.SeePackagesInList());
@@ -63,6 +70,8 @@ namespace TechSupport.WARE
             Console.WriteLine(packagelist.ShowPackagesSortedByHeight());
             Console.WriteLine(packagelist.ShowPackagesSortedByDepth());
             Console.WriteLine(packagelist.ShowPackagesSortedByWeight());
+            Console.WriteLine(packagelist.TotalWeightOfAllPackages());
+            Console.WriteLine(packagelist.ShowPackagesSortedByVolume());
         }
     }
 }

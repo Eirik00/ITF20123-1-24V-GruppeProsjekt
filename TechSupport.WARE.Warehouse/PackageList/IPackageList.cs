@@ -52,7 +52,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Returns a string displaying Package instances in the PackageList sorted by the their volume
         /// </summary>
-        string ShowPackagesSortedByVolume();
+        String ShowPackagesSortedByVolume();
         /* Displays the packages sorted by the Volume of the packages, volume is not an inherent atribute of the Package class,
          * but should be easy to calculate based on lenght, height, and depth. */
     }
