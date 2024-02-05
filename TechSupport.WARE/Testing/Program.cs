@@ -33,6 +33,7 @@ namespace TechSupport.WARE
             {
                 Console.WriteLine(entry.ToString());
             }
+            Console.WriteLine(testPackage.GetPackageLog);
         }
     }
 }
