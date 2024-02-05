@@ -11,55 +11,90 @@ namespace TechSupport.WARE.Warehouse
     {
         // The list to store packages planned for delivery
         // Will possibly change to dictionary later
-        private List<Package> DeliveryPackagesList;
+        private List<Package> exportPackagesList = new List<Package>();
 
-        public Delivery()
+        public Export()
         {
-            DeliveryPackagesList = new List<Package>();
+            exportPackagesList = new List<Package>();
         }
 
-        public void PackageDelivery(DateTime deliveryTime, List<Package> packages, Contact sender, Contact receiver)
+        public void PackageExport(TimeSpan deliveryHour, List<Package> packages, Contact sender, Contact receiver)
         {
             foreach (var package in packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
+
+                // Calculate the delivery time by combining today's date with the provided time of day
+                DateTime deliveryTime = DateTime.Today + deliveryHour;
+
                 package.DeliveryTime = deliveryTime;
                 package.ChangeStatus(StatusList.Delivery);
-                DeliveryPackagesList.Add(package);
+                ExportPackagesList.Add(package);
             }
-            Console.WriteLine($"Vare Levering registrert for {deliveryTime} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
+
+            Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
-        public void RecurringDailyPackageDelivery(TimeSpan deliveryTime, List<Package> packages, Contact sender, Contact receiver)
+        //public void RecurringDailyExport(TimeSpan deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        //{
+        //    foreach (var package in packages)
+        //    {
+        //        package.Sender = sender;
+        //        package.Receiver = receiver;
+        //        package.DeliveryTime = DateTime.Today.Add(deliveryHour);
+        //        package.ChangeStatus(StatusList.Delivery);
+        //        exportPackagesList.Add(package);
+        //    }
+        //    Console.WriteLine($"Gjentagende Daglig Vare Levering registrert for {deliveryHour} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
+        //}
+
+        public void RecurringDailyExport(int deliveryHour, List<Package> packages, Contact sender, Contact receiver)
         {
             foreach (var package in packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
-                package.DeliveryTime = DateTime.Today.Add(deliveryTime);
+                package.DeliveryTime = DateTime.Today.AddHours(deliveryHour);
                 package.ChangeStatus(StatusList.Delivery);
-                DeliveryPackagesList.Add(package);
+                ExportPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Daglig Vare Levering registrert for {deliveryTime} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
+            Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
-        public void RecurringWeeklyPackageDelivery(DayOfWeek[] deliveryDays, TimeSpan deliveryTime, List<Package> packages, Contact sender, Contact receiver)
+        //public void RecurringWeeklyExport(DayOfWeek[] deliveryDays, TimeSpan deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        //{
+        //    foreach (var deliveryDay in deliveryDays)
+        //    {
+        //        var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).Add(deliveryHour);
+        //        foreach (var package in packages)
+        //        {
+        //            package.Sender = sender;
+        //            package.Receiver = receiver;
+        //            package.DeliveryTime = nextDeliveryDate;
+        //            package.ChangeStatus(StatusList.Delivery);
+        //            exportPackagesList.Add(package);
+        //        }
+        ///        Console.WriteLine($"Gjentagende Ukentlig Levering registrert for {deliveryDay} på {deliveryTime} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
+        //    }
+        //}
+
+        public void RecurringWeeklyExport(DayOfWeek deliveryDay, int deliveryHour, List<Package> packages, Contact sender, Contact receiver)
         {
-            foreach (var deliveryDay in deliveryDays)
+            var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
+
+            foreach (var package in packages)
             {
-                var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).Add(deliveryTime);
-                foreach (var package in packages)
-                {
-                    package.Sender = sender;
-                    package.Receiver = receiver;
-                    package.DeliveryTime = nextDeliveryDate;
-                    package.ChangeStatus(StatusList.Delivery);
-                    DeliveryPackagesList.Add(package);
-                }
-                Console.WriteLine($"Gjentagende Ukentlig Levering registrert for {deliveryDay} på {deliveryTime} av Sender {sender.firstName + "\n" + sender.surname} til {receiver.firstName + "\n" + receiver.surname}.");
+                package.Sender = sender;
+                package.Receiver = receiver;
+                package.DeliveryTime = nextDeliveryDate;
+                package.ChangeStatus(StatusList.Delivery);
+                ExportPackagesList.Add(package);
             }
+            Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
+
+
 
         private DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {
@@ -67,23 +102,26 @@ namespace TechSupport.WARE.Warehouse
             return start.AddDays(daysToAdd);
         }
 
-        public override String ToString()
+        public override string ToString()
         {
-            StringBuilder deliveryDetails = new StringBuilder();
-            deliveryDetails.AppendLine("Planlagte Leveranser:");
+            StringBuilder exportDetails = new StringBuilder();
+            exportDetails.AppendLine("Leverse Varer:");
 
-            foreach (var package in DeliveryPackagesList)
+            foreach (var package in ExportPackagesList)
             {
-                //deliveryDetails.AppendLine($"{package} - Planlagt for levering {package.DeliveryTime} av {package.Sender.firstName} {package.Sender.surname}");
+                exportDetails.AppendLine(package.ToString());
+                exportDetails.AppendLine("Status Change Log:");
                 foreach (var statusChange in package.GetPackageLog())
                 {
-                    deliveryDetails.AppendLine($"  Status endret fra {statusChange.getPreviousStatus()} til {statusChange.getNewStatus()} på {statusChange.getDateTime()}");
+                    exportDetails.AppendLine($"  - Previous Status: {statusChange.getPreviousStatus()}, New Status: {statusChange.getNewStatus()}, Time: {statusChange.getDateTime()}");
                 }
+                exportDetails.AppendLine();
             }
 
-            return deliveryDetails.ToString();
+            return exportDetails.ToString();
         }
 
-        public List<Package> DeliveryPackageList => DeliveryPackagesList;
+
+        public List<Package> ExportPackagesList => exportPackagesList;
     }
 }

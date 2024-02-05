@@ -86,15 +86,31 @@ namespace TechSupport.WARE.Warehouse
             packageLog.LogChange(this.GetLocation().isle, newStatus, status, description);
             this.status = newStatus;
         }
+
         public List<PackageLogEntry> GetPackageLog()
         {
             return packageLog.GetEntries();
         }
 
+        //public override string ToString()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
+       //Dette reflekteres i Export klassen
+       //Prøve å endre Package/import/export status
+       //Jeg har ikke fått til å teste dette da visual studio ikke klarer å bygge prosjektet for et eller annet grunn
+       //slettes dersom ikke funker
         public override string ToString()
         {
-            throw new NotImplementedException();
+            return $"Package ID: {PackageId}\n" +
+                   $"  Status: {Status}\n" +
+                   $"  Delivery Time: {DeliveryTime}\n" +
+                   $"  Sender: {Sender.firstName} {Sender.surname}\n" +
+                   $"  Receiver: {Receiver.firstName} {Receiver.surname}\n";
         }
 
+ 
     }
 }

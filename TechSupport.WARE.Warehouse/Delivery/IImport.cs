@@ -9,22 +9,22 @@ namespace TechSupport.WARE.Warehouse
 {
     internal interface IImport
     {
-        List<Package> DeliveryPackageList { get; }
+        List<Package> ImportPackagesList { get; }
 
         /// <summary>
-        /// <c>PackageDelivery</c> sets the time for a delivery with a List of packages. It also sets the Contact sender and Contact reciever for the delivery.
+        /// <c>PackageExport</c> sets the time for a delivery with a List of packages. It also sets the Contact sender and Contact reciever for the delivery.
         /// </summary>
-        void PackageDelivery(DateTime deliveryTime, List<Package> packages, Contact sender, Contact receiver);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        void RecurringDailyPackageDelivery(TimeSpan deliveryTime, List<Package> packages, Contact sender, Contact receiver);
+        void PackageImport(DateTime deliveryTime, List<Package> packages, Contact sender);
 
         /// <summary>
         /// 
         /// </summary>
-        void RecurringWeeklyPackageDelivery(DayOfWeek[] deliveryDays, TimeSpan deliveryTime, List<Package> packages, Contact sender, Contact Receiver);
+        void DailyPackageImport(int deliveryHour, List<Package> packages, Contact sender);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        void WeeklyPackageImport(DayOfWeek deliveryDay, int deliveryHour, List<Package> packages, Contact sender);
 
         /// <summary>
         /// 
