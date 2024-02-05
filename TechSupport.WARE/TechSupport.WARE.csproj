@@ -17,4 +17,8 @@
     <None Remove="NewFile1.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TechSupport.WARE.Warehouse\TechSupport.WARE.Warehouse.csproj" />
+  </ItemGroup>
+
 </Project>

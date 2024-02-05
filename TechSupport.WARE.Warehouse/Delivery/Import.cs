@@ -75,7 +75,7 @@ namespace TechSupport.WARE.Warehouse
             {
                 importDetails.AppendLine(package.ToString());
                 importDetails.AppendLine("Status Change Log:");
-                foreach (var statusChange in package.GetPackageLog())
+                foreach (var statusChange in package.GetPackageLog().GetEntries())
                 {
                     importDetails.AppendLine($"  - Previous Status: {statusChange.getPreviousStatus()}, New Status: {statusChange.getNewStatus()}, Time: {statusChange.getDateTime()}");
                 }
