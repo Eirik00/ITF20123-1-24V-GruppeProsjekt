@@ -28,6 +28,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         ///     Package object.
         /// </summary>
+        private static List<int> idCheck = new List<int>();
         private int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
         private bool isFragile;
         private StorageSpecification specification;
@@ -40,19 +41,27 @@ namespace TechSupport.WARE.Warehouse
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeighInMm, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Reception, DateTime deliveryTime = default)
         {
-            this.packageId = packageId;
-            this.packageLenghtInMm = packageLenghtInMm;
-            this.packageHeightInMm = packageHeightInMm;
-            this.packageDepthInMm = packageDepthInMm;
-            this.packageWeighInGrams = packageWeighInMm;
-            this.isFragile = isFragile;
-            this.specification = specification;
-            this.status = status;
-            this.sender = new Contact("", "", "", "", "", 0, 0);
-            this.receiver = new Contact("", "", "", "", "", 0, 0);
-            this.DeliveryTime = deliveryTime;
+            if (idCheck.Contains(packageId))
+            {
+                Console.WriteLine("This Id is not unique!");
+            }
+            else
+            {
+                this.packageId = packageId;
+                this.packageLenghtInMm = packageLenghtInMm;
+                this.packageHeightInMm = packageHeightInMm;
+                this.packageDepthInMm = packageDepthInMm;
+                this.packageWeighInGrams = packageWeighInMm;
+                this.isFragile = isFragile;
+                this.specification = specification;
+                this.status = status;
+                this.sender = new Contact("", "", "", "", "", 0, 0);
+                this.receiver = new Contact("", "", "", "", "", 0, 0);
+                this.DeliveryTime = deliveryTime;
 
-            packageLog.LogChange(null, StatusList.Invalid, StatusList.Reception, "Package Recieved");
+                packageLog.LogChange(null, StatusList.Invalid, StatusList.Reception, "Package Recieved");
+                idCheck.Add(packageId);
+            }
         }
 
         //LAG TOSTRING
