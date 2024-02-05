@@ -15,7 +15,9 @@ namespace TechSupport.WARE
             Isle isle = new Isle(2, 200, 200, 200, 200000, 4, 1);
 
             Package testPackage = new Package(69, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
-            isle.AddPackage(testPackage, 0);
+            isle.AddPackage(testPackage, 1);
+            Package testPackage2 = new Package(60, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
+            isle.AddPackage(testPackage2, 2);
             //Thread.Sleep(1000);
             Console.WriteLine("1" + DateTime.Now);
             testPackage.ChangeStatus(StatusList.InProgress);
@@ -38,7 +40,7 @@ namespace TechSupport.WARE
             Package pakke3 = new Package(3, 36, 64, 112, 2000, false, 0);
             Package pakke4 = new Package(4, 41, 55, 7612, 2000, false, 0);
             Package pakke5 = new Package(5, 1235, 54, 312, 2000, false, 0);
-            Package pakke6 = new Package(7, 2316, 33, 1352, 2000, false, 0);
+            Package pakke6 = new Package(6, 2316, 33, 1352, 2000, false, 0);
             Package pakke7 = new Package(7, 217, 3452, 8612, 2000, false, 0);
             Package pakke8 = new Package(8, 8423, 124, 4312, 2000, false, 0);
             packagelist.AddPackage(pakke1);
@@ -60,6 +62,13 @@ namespace TechSupport.WARE
             Console.WriteLine(packagelist.ShowPackagesSortedByHeight());
             Console.WriteLine(packagelist.ShowPackagesSortedByDepth());
             Console.WriteLine(packagelist.ShowPackagesSortedByWeight());
+
+            List<int> avaialableSpaces = new List<int>(isle.GetAvailableSpaces());
+            for (int i = 0; i < avaialableSpaces.Count; i++)
+            {
+                Console.WriteLine("Free spot: " + avaialableSpaces[i]);
+            }
+
         }
     }
 }
