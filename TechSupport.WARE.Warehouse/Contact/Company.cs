@@ -9,21 +9,19 @@ namespace TechSupport.WARE.Warehouse
     public class Company
     {
         String companyName;
-        String companyCode;
+        int companyCode;
         String address;
-        String city;
         int postalCode;
         String country;
         Contact contactPerson;
 
-        public Company(String companyName, String companyCode, String address, String city, int postalCode, String country) 
+        public Company(String companyName, int companyCode, String address, int postalCode, String country) 
         { 
             this.companyName = companyName;
             this.companyCode = companyCode;
             this.address = address;
-            this.city = city;
-            this.postalCode = postalCode;
             this.country = country;
+            this.postalCode = postalCode;
             this.contactPerson = new Contact("", "", "", "", "", 0, 0);
         }
 
