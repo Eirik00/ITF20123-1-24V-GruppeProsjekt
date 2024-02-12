@@ -40,7 +40,7 @@ namespace TechSupport.WARE.Warehouse
 
             foreach (Package package in packages)
             {
-                temp += package.PackageId + ", ";
+                temp += package.PackageId + "   ";
             }
 
             return temp;
@@ -152,7 +152,6 @@ namespace TechSupport.WARE.Warehouse
             foreach (Package package in tempList)
             {
                 tempString += "PackageId: " + package.PackageId + ", Weight: " + package.PackageWeightInGrams + " grams\n";
-                tempString += "PackageId: " + package.PackageId + ", Lenght: " + package.PackageLengthInMm + "\n";
             }
 
             return tempString;
