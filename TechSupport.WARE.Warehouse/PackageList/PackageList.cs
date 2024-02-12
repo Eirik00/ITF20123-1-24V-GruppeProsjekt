@@ -34,6 +34,8 @@ namespace TechSupport.WARE.Warehouse
             packages.Remove(package);
         }
 
+        public List<Package> Packages => packages;
+
         public string SeePackagesInList()
         {
             string temp = "The list contains packages with following Id: ";

@@ -10,76 +10,81 @@ namespace TechSupport.WARE.Warehouse
     public class Export : IExport
     {
         //Pakker som skal exporteres blir lagt til i denne listen
-        private List<Package> exportPackagesList = new List<Package>();
+        private List<PackageList> exportPackagesList = new List<PackageList>();
 
         public Export()
         {
-            exportPackagesList = new List<Package>();
+            exportPackagesList = new List<PackageList>();
         }
 
-        public void PackageExport(double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        /// <summary>
+        /// Export packages with specified delivery information.
+        /// </summary>
+        /// <param name="deliveryHour">The time of the day the delivery is estimated to arrive to receiver</param>
+        /// <param name="packages">packages to export.</param>
+        /// <param name="sender">The sender's contact information.</param>
+        /// <param name="receiver">The receiver's contact information.</param>
+        public void PackageExport(double deliveryHour, PackageList packages, Contact sender, Contact receiver)
         {
-            foreach (var package in packages)
+            foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.AddHours(deliveryHour);
                 package.ChangeStatus(StatusList.Delivery);
-                ExportPackagesList.Add(package);
-
-                /*//Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
-                //Eneste negative er at vi må angi listen pakken var i manuelt
-                //Jeg fant ut at vi kan bare ligge til alle listene våre og kun listen som inneholder pakken blir forandret 
-                pakkeListeNavnHer.Remove(package);
-                pakkeListeNavnHer2.Remove(package);
-                pakkeListeNavnHer3.Remove(package);
-                pakkeListeNavnHer4.Remove(package);*/
+                ExportPackagesList.Add(packages);    
             }
-
+            //Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
+            packages.Packages.Clear();
             Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
-        public void RecurringDailyExport(double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        /// <summary>
+        /// Registers a recurring daily export of packages.
+        /// </summary>
+        /// <param name="deliveryHour">The time of the day the delivery is meant to arrive</param>
+        /// <param name="packages">The packages to export.</param>
+        /// <param name="sender">The contact information of the sender.</param>
+        /// <param name="receiver">The contact information of the receiver.</param>
+        public void RecurringDailyExport(double deliveryHour, PackageList packages, Contact sender, Contact receiver)
         {
-            foreach (var package in packages)
+            foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.AddHours(deliveryHour);
                 package.ChangeStatus(StatusList.Delivery);
-                ExportPackagesList.Add(package);
+                ExportPackagesList.Add(packages);
 
-                /*//Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
-                //Eneste negative er at vi må angi den listen pakkene var i manuelt
-                //Jeg fant ut at vi kan bare ligge til alle listene våre, på denne måten kun listen som inneholder pakken blir forandret 
-                pakkeListeNavnHer.Remove(package);
-                pakkeListeNavnHer2.Remove(package);
-                pakkeListeNavnHer3.Remove(package);
-                pakkeListeNavnHer4.Remove(package);*/
+                
             }
             Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            //Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
+            packages.Packages.Clear();
         }
 
-        public void RecurringWeeklyExport(DayOfWeek deliveryDay, double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        /// <summary>
+        /// Rehisters a recurring weekly export of packages.
+        /// </summary>
+        /// <param name="deliveryDay">The day of the week for the delivery.</param>
+        /// <param name="deliveryHour">The hour of delivery.</param>
+        /// <param name="packages">The packages to export.</param>
+        /// <param name="sender">The contact information of the sender.</param>
+        /// <param name="receiver">The contact information of the receiver.</param>
+        /// foreach (Package package in packages.Packages)
+        public void RecurringWeeklyExport(DayOfWeek deliveryDay, double deliveryHour, PackageList packages, Contact sender, Contact receiver)
         {
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
 
-            foreach (var package in packages)
+            foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = nextDeliveryDate;
                 package.ChangeStatus(StatusList.Delivery);
-                ExportPackagesList.Add(package);
-
-                /*//Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
-                //Eneste negative er at vi må angi listen pakken var i manuelt
-                //Jeg fant ut at vi kan bare ligge til alle listene våre og kun listen som inneholder pakken blir forandret 
-                pakkeListeNavnHer.Remove(package);
-                pakkeListeNavnHer2.Remove(package);
-                pakkeListeNavnHer3.Remove(package);
-                pakkeListeNavnHer4.Remove(package);*/
+                ExportPackagesList.Add(packages);
             }
+            packages.Packages.Clear();
             Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
@@ -91,26 +96,31 @@ namespace TechSupport.WARE.Warehouse
             return start.AddDays(daysToAdd);
         }
 
-        public override string ToString()
-        {
-            StringBuilder exportDetails = new StringBuilder();
-            exportDetails.AppendLine("Leverse Varer:");
+        //public override string ToString()
+        //{
+        //    StringBuilder exportDetails = new StringBuilder();
+        //    exportDetails.AppendLine("Leverse Varer:");
 
-            foreach (var package in ExportPackagesList)
-            {
-                exportDetails.AppendLine(package.ToString());
-                exportDetails.AppendLine("Status Change Log:");
-                foreach (var statusChange in package.GetPackageLog().GetEntries())
-                {
-                    exportDetails.AppendLine($"  - Previous Status: {statusChange.GetPreviousStatus()}, New Status: {statusChange.GetNewStatus()}, Time: {statusChange.GetDateTime()}");
-                }
-                exportDetails.AppendLine();
-            }
+        //    foreach (var packageList in ExportPackagesList)
+        //    {
+        //        foreach (var package in packageList.Packages)
+        //        {
+        //            exportDetails.AppendLine(package.ToString());
+        //            exportDetails.AppendLine("Status Change Log:");
+        //            foreach (var statusChange in package.GetPackageLog().GetEntries())
+        //            {
+        //                exportDetails.AppendLine($"  - Previous Status: {statusChange.getPreviousStatus()}, New Status: {statusChange.getNewStatus()}, Time: {statusChange.getDateTime()}");
+        //            }
+        //            exportDetails.AppendLine();
+        //        }
+        //    }
 
-            return exportDetails.ToString();
-        }
+        //    return exportDetails.ToString();
+        //}
 
 
-        public List<Package> ExportPackagesList => exportPackagesList;
+
+
+        public List<PackageList> ExportPackagesList => exportPackagesList;
     }
 }
