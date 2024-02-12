@@ -15,7 +15,7 @@ namespace TechSupport.WARE.Warehouse
         String country;
         Contact contactPerson;
 
-        public Company(String companyName, int companyCode, String address, int postalCode, String country) 
+        public Company(String companyName, int companyCode, String address, String country, int postalCode) 
         { 
             this.companyName = companyName;
             this.companyCode = companyCode;
@@ -25,7 +25,7 @@ namespace TechSupport.WARE.Warehouse
             this.contactPerson = new Contact("", "", "", "", "", 0, 0);
         }
 
-        Contact ContactPerson 
+        public Contact ContactPerson 
         {
             get { return this.contactPerson; }
             set { this.contactPerson = value; }

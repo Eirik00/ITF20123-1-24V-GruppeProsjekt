@@ -17,9 +17,9 @@ namespace TechSupport.WARE.Warehouse
         private int heightOfSpaceInMm;
         private int depthOfSpaceInMm;
         private int weightLimitInGrams;
-        private int category;
+        private StorageSpecification category;
 
-        public Isle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, int category, int isleId)
+        public Isle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification category, int isleId)
         {
             this.numberOfSpaces = numberOfSpaces;
             this.lengthOfSpaceInMm = lengthOfSpaceInMm;
