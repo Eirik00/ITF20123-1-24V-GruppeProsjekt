@@ -35,13 +35,8 @@ namespace TechSupport.WARE.Warehouse
                 ExportPackagesList.Add(packages);    
             }
             //This should delete the sent packet from the original list it was in, plain and simple
-<<<<<<< HEAD
             //packages.Packages.Clear();
             Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
-=======
-            packages.Packages.Clear();
-            Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
->>>>>>> 4dee81aa44bae1c33fbdc02598e72c00508bd9a2
         }
 
         /// <summary>
@@ -63,7 +58,7 @@ namespace TechSupport.WARE.Warehouse
 
                 
             }
-            Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
+            Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
         }
@@ -90,7 +85,7 @@ namespace TechSupport.WARE.Warehouse
             }
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
-            Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
+            Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
 
