@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackageList //: IPackageList
+    public class PackageList : IPackageList
     {
         private int listId;
         private List<Package> packages;
@@ -170,7 +170,7 @@ namespace TechSupport.WARE.Warehouse
             return "The total combined weight of all packages in the list is: " + tempweight + " grams.\n";
         }
 
-        public string ShowPackagesSortedByVolume()
+        /*public string ShowPackagesSortedByVolume()
         {
             string tempString = "Packages in the list sorted by volume descending: \n";
 
@@ -196,6 +196,6 @@ namespace TechSupport.WARE.Warehouse
             }
 
             return tempString;
-        }
+        }*/
     }
 }
