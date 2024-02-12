@@ -35,41 +35,51 @@ namespace TechSupport.WARE
             graphicCards.AddPackage(gtx970);
             graphicCards.AddPackage(gtx980);
 
-            today.PackageImport(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
-            Thread.Sleep(deliveryTimeKomplettInH);
-            Thread.Sleep(waitForPersonell);
-            foreach(Package package in graphicCards.Packages)
+            DateTime startTime = DateTime.Now;
+
+            while ((DateTime.Now - startTime).TotalSeconds < 60)
             {
-                package.ChangeStatus(StatusList.Reception);
+                today.PackageImport(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
+                Thread.Sleep(deliveryTimeKomplettInH);
+                Thread.Sleep(waitForPersonell);
+                foreach (Package package in graphicCards.Packages)
+                {
+                    package.ChangeStatus(StatusList.Reception);
+                }
+
+                Isle isle1 = new Isle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.DryStorage, 1);
+                int count = 1;
+                foreach (Package package in graphicCards.Packages)
+                {
+                    Thread.Sleep(mottakTilHylle);
+                    isle1.AddPackage(package, count);
+                    count++;
+                }
+
+                Thread.Sleep(waitForOrder);
+                Thread.Sleep(waitForPersonell);
+                foreach (Package package in graphicCards.Packages)
+                {
+                    package.PackageIsle.RemovePackage(package);
+                    package.ChangeStatus(StatusList.InProgress);
+                }
+
+                Thread.Sleep(packageTime);
+                Export toreGraphic = new Export();
+                Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
+                toreGraphic.PackageExport(06.00, graphicCards, warehouse.ContactPerson, toreTang);
+                Thread.Sleep(deliveryTimeStavanger);
+
+                foreach (Package packagesSent in graphicCards.Packages)
+                {
+                    Console.WriteLine(packagesSent.GetPackageLog().ToString());
+                }
+
+                if ((DateTime.Now - startTime).TotalSeconds >= 60)
+                    break;
             }
 
-            Isle isle1 = new Isle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.DryStorage, 1);
-            int count = 1;
-            foreach(Package package in graphicCards.Packages)
-            {
-                Thread.Sleep(mottakTilHylle);
-                isle1.AddPackage(package, count);
-                count++;
-            }
-
-            Thread.Sleep(waitForOrder);
-            Thread.Sleep(waitForPersonell);
-            foreach (Package package in graphicCards.Packages)
-            {
-                package.PackageIsle.RemovePackage(package);
-                package.ChangeStatus(StatusList.InProgress);
-            }
-
-            Thread.Sleep(packageTime);
-            Export toreGraphic = new Export();
-            Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
-            toreGraphic.PackageExport(06.00, graphicCards, warehouse.ContactPerson, toreTang);
-            Thread.Sleep(deliveryTimeStavanger);
-
-            foreach(Package packagesSent in graphicCards.Packages)
-            {
-                packagesSent.GetPackageLog().ToString();
-            }
+            Console.WriteLine("Simulasjon slutt");
         }
     }
 }
