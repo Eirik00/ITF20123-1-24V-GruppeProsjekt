@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackageList : IPackageList
+    public class PackageList(int listId) : IPackageList
     {
-        private int listId;
-        private List<Package> packages;
-
-        public PackageList(int listId)
-        {
-            this.listId = listId;
-            this.packages = new List<Package>();
-        }
+        private readonly int listId = listId;
+        private List<Package> packages = [];
+  
         public void AddPackage(Package package)
         {
             if (packages.Contains(package))
@@ -61,9 +56,7 @@ namespace TechSupport.WARE.Warehouse
 
                     if (tempList[i].PackageLengthInMm > tempList[j].PackageLengthInMm)
                     {
-                        Package tempPackage = tempList[i];
-                        tempList[i] = tempList[j];
-                        tempList[j] = tempPackage;
+                        (tempList[j], tempList[i]) = (tempList[i], tempList[j]);
                     }
                 }
             }
@@ -88,9 +81,7 @@ namespace TechSupport.WARE.Warehouse
 
                     if (tempList[i].PackageHeightInMm > tempList[j].PackageHeightInMm)
                     {
-                        Package tempPackage = tempList[i];
-                        tempList[i] = tempList[j];
-                        tempList[j] = tempPackage;
+                        (tempList[j], tempList[i]) = (tempList[i], tempList[j]);
                     }
                 }
             }
@@ -116,9 +107,7 @@ namespace TechSupport.WARE.Warehouse
 
                     if (tempList[i].PackageDepthInMm > tempList[j].PackageDepthInMm)
                     {
-                        Package tempPackage = tempList[i];
-                        tempList[i] = tempList[j];
-                        tempList[j] = tempPackage;
+                        (tempList[j], tempList[i]) = (tempList[i], tempList[j]);
                     }
                 }
             }
@@ -144,9 +133,7 @@ namespace TechSupport.WARE.Warehouse
 
                     if (tempList[i].PackageWeightInGrams > tempList[j].PackageWeightInGrams)
                     {
-                        Package tempPackage = tempList[i];
-                        tempList[i] = tempList[j];
-                        tempList[j] = tempPackage;
+                        (tempList[j], tempList[i]) = (tempList[i], tempList[j]);
                     }
                 }
             }

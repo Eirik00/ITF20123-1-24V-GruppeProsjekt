@@ -13,7 +13,7 @@ namespace TechSupport.WARE.Warehouse
 
         public Import()
         {
-            importPackagesList = new List<Package>();
+            importPackagesList = [];
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Ordered);
                 ImportPackagesList.Add(package);
             }
-            Console.WriteLine($"Vare Mottak registerert for Kl {deliveryTime} av sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
+            Console.WriteLine($"Vare Mottak registerert for Kl {deliveryTime} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Ordered);
                 ImportPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
+            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
         }
 
         /// <summary>
@@ -77,11 +77,11 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Ordered);
                 ImportPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
+            Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
         //Denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres mottal til neste forekomst av den dagen i neste uke.
-        private DateTime GetNextWeekday(DateTime start, DayOfWeek day)
+        private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {
             int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
             return start.AddDays(daysToAdd);
@@ -89,7 +89,7 @@ namespace TechSupport.WARE.Warehouse
 
         public override string ToString()
         {
-            StringBuilder importDetails = new StringBuilder();
+            StringBuilder importDetails = new();
             importDetails.AppendLine("Motatte Varer:");
 
             foreach (var package in ImportPackagesList)

@@ -10,9 +10,9 @@ namespace TechSupport.WARE
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Isle isle = new Isle(2, 200, 200, 200, 200000, 4, 1);
+            Isle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
             /*
             Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
             isle.AddPackage(testPackage, 0);
@@ -36,15 +36,15 @@ namespace TechSupport.WARE
             Console.WriteLine(testPackage.GetPackageLog);
             */
 
-            PackageList packagelist = new PackageList(1);
-            Package pakke1 = new Package(1, 58, 19, 7, 2000, false, 0);
-            Package pakke2 = new Package(2, 42, 78, 212, 2000, false, 0);
-            Package pakke3 = new Package(3, 36, 64, 112, 980, false, 0);
-            Package pakke4 = new Package(4, 41, 55, 7612, 2000, false, 0);
-            Package pakke5 = new Package(5, 1235, 54, 312, 2000, false, 0);
-            Package pakke6 = new Package(6, 2316, 33, 1352, 2030, false, 0);
-            Package pakke7 = new Package(7, 217, 3452, 8612, 2000, false, 0);
-            Package pakke8 = new Package(8, 8423, 124, 4312, 2000, false, 0);
+            PackageList packagelist = new(1);
+            Package pakke1 = new(1, 58, 19, 7, 2000, false, 0);
+            Package pakke2 = new(2, 42, 78, 212, 2000, false, 0);
+            Package pakke3 = new(3, 36, 64, 112, 980, false, 0);
+            Package pakke4 = new(4, 41, 55, 7612, 2000, false, 0);
+            Package pakke5 = new(5, 1235, 54, 312, 2000, false, 0);
+            Package pakke6 = new(6, 2316, 33, 1352, 2030, false, 0);
+            Package pakke7 = new(7, 217, 3452, 8612, 2000, false, 0);
+            Package pakke8 = new(8, 8423, 124, 4312, 2000, false, 0);
             packagelist.AddPackage(pakke1);
             packagelist.AddPackage(pakke5);
             packagelist.AddPackage(pakke8);
@@ -60,7 +60,7 @@ namespace TechSupport.WARE
             packagelist.AddPackage(pakke1);
             Console.WriteLine(packagelist.SeePackagesInList());
 
-            Export rema = new Export();
+            //Export rema = new();
 
             Console.WriteLine(packagelist.ShowPackagesSortedByLenght());
             Console.WriteLine(packagelist.ShowPackagesSortedByHeight());

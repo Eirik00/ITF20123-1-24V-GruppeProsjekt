@@ -8,12 +8,12 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Company
     {
-        String companyName;
-        int companyCode;
-        String address;
-        int postalCode;
-        String country;
-        Contact contactPerson;
+        private readonly String companyName;
+        private readonly int companyCode;
+        private readonly String address;
+        private readonly int postalCode;
+        private readonly String country;
+        private Contact contactPerson;
 
         public Company(String companyName, int companyCode, String address, String country, int postalCode) 
         { 

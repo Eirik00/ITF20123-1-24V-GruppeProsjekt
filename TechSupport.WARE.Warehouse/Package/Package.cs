@@ -28,15 +28,15 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         ///     Package object.
         /// </summary>
-        private static List<int> idCheck = new List<int>();
-        private int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
-        private bool isFragile;
-        private StorageSpecification specification;
+        private readonly static List<int> idCheck = [];
+        private readonly int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
+        private readonly bool isFragile;
+        private readonly StorageSpecification specification;
         private StatusList status;
         private Contact sender;
         private Contact receiver;
         public DateTime DeliveryTime;
-        PackageLog packageLog = new PackageLog();
+        readonly PackageLog packageLog = new();
         private Isle? packageIsle;
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
@@ -132,8 +132,8 @@ namespace TechSupport.WARE.Warehouse
             return $"Package ID: {PackageId}\n" +
                    $"  Status: {Status}\n" +
                    $"  Delivery Time: {DeliveryTime}\n" +
-                   $"  Sender: {Sender.firstName} {Sender.surname}\n" +
-                   $"  Receiver: {Receiver.firstName} {Receiver.surname}\n";
+                   $"  Sender: {Sender.FirstName} {Sender.Surname}\n" +
+                   $"  Receiver: {Receiver.FirstName} {Receiver.Surname}\n";
         }
 
  

@@ -10,17 +10,17 @@ namespace TechSupport.WARE.Warehouse
     public class Export : IExport
     {
         //Packages to be exported are added to this list
-        private List<PackageList> exportPackagesList = new List<PackageList>();
+        private List<PackageList> exportPackagesList;
 
         public Export()
         {
-            exportPackagesList = new List<PackageList>();
+            exportPackagesList = [];
         }
 
         /// <summary>
         /// Export packages with specified delivery information.
         /// </summary>
-        /// <param name="deliveryHour">The time of the day the delivery is estimated to arrive to receiver</param>
+        /// <param name="deliveryHour">The time of the day the delivery is estimated to arrive to receiver for example 14.00</param>
         /// <param name="packages">packages to export.</param>
         /// <param name="sender">The sender's contact information.</param>
         /// <param name="receiver">The receiver's contact information.</param>
@@ -35,8 +35,13 @@ namespace TechSupport.WARE.Warehouse
                 ExportPackagesList.Add(packages);    
             }
             //This should delete the sent packet from the original list it was in, plain and simple
+<<<<<<< HEAD
             //packages.Packages.Clear();
             Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+=======
+            packages.Packages.Clear();
+            Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
+>>>>>>> 4dee81aa44bae1c33fbdc02598e72c00508bd9a2
         }
 
         /// <summary>
@@ -58,7 +63,7 @@ namespace TechSupport.WARE.Warehouse
 
                 
             }
-            Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
         }
@@ -85,12 +90,12 @@ namespace TechSupport.WARE.Warehouse
             }
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
-            Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
         }
 
 
         //GetNextWeekDay metoden brukes i ukentlig sending,denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres sending den dagen til neste uke.
-        private DateTime GetNextWeekday(DateTime start, DayOfWeek day)
+        private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {
             int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
             return start.AddDays(daysToAdd);
@@ -98,7 +103,7 @@ namespace TechSupport.WARE.Warehouse
 
         public override string ToString()
         {
-            StringBuilder exportDetails = new StringBuilder();
+            StringBuilder exportDetails = new();
             exportDetails.AppendLine("Leverte Varer:");
 
             foreach (var packageList in ExportPackagesList)

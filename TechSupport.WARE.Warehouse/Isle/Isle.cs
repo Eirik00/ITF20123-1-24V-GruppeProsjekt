@@ -13,10 +13,10 @@ namespace TechSupport.WARE.Warehouse
         public Dictionary<int, Package?> shelf;
         private int isleId;
         private int numberOfSpaces;
-        private int lengthOfSpaceInMm;
-        private int heightOfSpaceInMm;
-        private int depthOfSpaceInMm;
-        private int weightLimitInGrams;
+        private readonly int lengthOfSpaceInMm;
+        private readonly int heightOfSpaceInMm;
+        private readonly int depthOfSpaceInMm;
+        private readonly int weightLimitInGrams;
         private StorageSpecification category;
 
         public Isle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification category, int isleId)
@@ -28,7 +28,7 @@ namespace TechSupport.WARE.Warehouse
             this.weightLimitInGrams = weightLimitInGrams;
             this.category = category;
             this.isleId = isleId;
-            shelf = new Dictionary<int, Package?>();
+            shelf = [];
             for (int i = 1; i <= numberOfSpaces; i++)
             {
                 shelf.Add(i, null);
@@ -50,7 +50,7 @@ namespace TechSupport.WARE.Warehouse
 
         public void AddPackage(Package package, int placement)
         {
-            List<int> available = new List<int>(this.GetAvailableSpaces());
+            List<int> available = new(this.GetAvailableSpaces());
             if(available.Contains(placement))
             {
             package.AddIsle(this);
@@ -69,7 +69,7 @@ namespace TechSupport.WARE.Warehouse
 
         public void RemovePackage(Package package)
         {
-            for (int i = 1; i <= numberOfSpaces; ++i)
+            for (int i = 1; i <= numberOfSpaces; i++)
             {
                 if (shelf[i] == package)
                 {
@@ -94,8 +94,8 @@ namespace TechSupport.WARE.Warehouse
 
         public List<int> GetAvailableSpaces()
         {
-            Dictionary<int, Package?> tempList = new Dictionary<int, Package?>(shelf);
-            List<int> freeSpaces = new List<int>();
+            Dictionary<int, Package?> tempList = new(shelf);
+            List<int> freeSpaces = [];
             foreach (KeyValuePair<int, Package?> check in tempList)
             {
                 if (check.Value == null)

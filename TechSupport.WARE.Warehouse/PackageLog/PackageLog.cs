@@ -10,11 +10,11 @@ namespace TechSupport.WARE.Warehouse
 {
     public class PackageLogEntry
     {
-        private DateTime timeStamp;
-        private StatusList previousStatus;
-        private StatusList newStatus;
-        private String description;
-        private Isle? isle;
+        private readonly DateTime timeStamp;
+        private readonly StatusList previousStatus;
+        private readonly StatusList newStatus;
+        private readonly String description;
+        private readonly Isle? isle;
         public PackageLogEntry(Isle? isle, StatusList newStatus, StatusList previousStatus, String description)
         {
             this.timeStamp = DateTime.Now;
@@ -67,7 +67,7 @@ namespace TechSupport.WARE.Warehouse
 
     public class PackageLog : IPackageLog
     {
-        private List<PackageLogEntry> packageHistory = new List<PackageLogEntry>();
+        private readonly List<PackageLogEntry> packageHistory = [];
         public int Entries => packageHistory.Count;
 
         public void LogChange(Isle? isle, StatusList currentStatus, StatusList previousStatus, String description = "")
@@ -85,8 +85,8 @@ namespace TechSupport.WARE.Warehouse
 
         public TimeSpan GetTimeSpanOnStatus(StatusList status)
         {
-            List<PackageLogEntry> status1List = new List<PackageLogEntry>();
-            List<PackageLogEntry> status2List = new List<PackageLogEntry>();
+            List<PackageLogEntry> status1List = [];
+            List<PackageLogEntry> status2List = [];
             TimeSpan timeSpan = TimeSpan.Zero;
 
             foreach(var entry in packageHistory)
@@ -118,7 +118,7 @@ namespace TechSupport.WARE.Warehouse
 
         public TimeSpan GetTotalTimeInWarehouse()
         {
-            return packageHistory[packageHistory.Count - 1].GetDateTime() - packageHistory[0].GetDateTime();
+            return packageHistory[^1].GetDateTime() - packageHistory[0].GetDateTime();
         }
 
         public override string ToString()
