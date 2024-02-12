@@ -44,6 +44,9 @@ namespace TechSupport.WARE.Warehouse
 
         public void AddPackage(Package package, int placement)
         {
+            List<int> available = new List<int>(this.GetAvailableSpaces());
+            if(available.Contains(placement))
+            {
             package.AddIsle(this);
             package.ChangeStatus(StatusList.Storage);
 
@@ -51,6 +54,11 @@ namespace TechSupport.WARE.Warehouse
 
             // for testing purposes later when simulating
             Console.WriteLine("Package Added");
+            }
+            else
+            {
+                throw new Exception("This shelf space does not exist or is already taken");
+            }
         }
 
         public void RemovePackage(Package package)
@@ -76,6 +84,20 @@ namespace TechSupport.WARE.Warehouse
                 }
             }
             return -1;
+        }
+
+        public List<int> GetAvailableSpaces()
+        {
+            Dictionary<int, Package> tempList = new Dictionary<int, Package>(shelf);
+            List<int> freeSpaces = new List<int>();
+            foreach (KeyValuePair<int, Package> check in tempList)
+            {
+                if (check.Value == null)
+                {
+                    freeSpaces.Add(check.Key);
+                }
+            }
+            return freeSpaces;
         }
     }
 }

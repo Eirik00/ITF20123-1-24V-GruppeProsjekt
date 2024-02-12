@@ -55,6 +55,10 @@ namespace Simulation
             ringnesLevering.DailyPackageImport(14.00, cider, ringnes, warehouse);
             ringnesLevering.WeeklyPackageImport(DayOfWeek.Tuesday, 14.00, drikkevarer, ringnes, warehouse);
 
+            //Import med typer
+            ringnesLevering.WeeklyPackageImport(DayOfWeek.Tuesday, 14.00, drikkevarer, ringnes, warehouse, "wet");
+            ringnesLevering.WeeklyPackageImport(DayOfWeek.Tuesday, 14.00, drikkevarer, ringnes, warehouse, "cold");
+
             ol.GetPackageLog();*/
 
         }
