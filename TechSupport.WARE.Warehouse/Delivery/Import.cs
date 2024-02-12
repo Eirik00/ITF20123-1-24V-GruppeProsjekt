@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
+    //Alternativ versjon av klassen lagt til i mappen
     public class Import : IImport
     {
         private List<Package> importPackagesList;
