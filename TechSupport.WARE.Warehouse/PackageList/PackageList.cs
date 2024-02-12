@@ -52,9 +52,10 @@ namespace TechSupport.WARE.Warehouse
 
             List<Package> tempList = packages;
 
-            for(int i = 0; i < tempList.Count; i++)
+            for (int i = 0; i < tempList.Count; i++)
             {
-                for (int j = 0; j < tempList.Count; j++) {
+                for (int j = 0; j < tempList.Count; j++)
+                {
 
                     if (tempList[i].PackageLengthInMm > tempList[j].PackageLengthInMm)
                     {
@@ -65,7 +66,7 @@ namespace TechSupport.WARE.Warehouse
                 }
             }
 
-            foreach(Package package in tempList)
+            foreach (Package package in tempList)
             {
                 tempString += "PackageId: " + package.PackageId + ", Lenght: " + package.PackageLengthInMm + "\n";
             }
@@ -156,4 +157,45 @@ namespace TechSupport.WARE.Warehouse
 
             return tempString;
         }
+
+        public string TotalWeightOfAllPackages()
+        {
+            int tempweight = 0;
+
+            foreach (Package package in packages)
+            {
+                tempweight += package.PackageWeightInGrams;
+            }
+
+            return "The total combined weight of all packages in the list is: " + tempweight + " grams.\n";
+        }
+
+        public string ShowPackagesSortedByVolume()
+        {
+            string tempString = "Packages in the list sorted by volume descending: \n";
+
+            List<Package> tempList = packages;
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                for (int j = 0; j < tempList.Count; j++)
+                {
+
+                    if (tempList[i].PackageVolumeInCubicMm > tempList[j].PackageVolumeInCubicMm)
+                    {
+                        Package tempPackage = tempList[i];
+                        tempList[i] = tempList[j];
+                        tempList[j] = tempPackage;
+                    }
+                }
+            }
+
+            foreach (Package package in tempList)
+            {
+                tempString += "PackageId: " + package.PackageId + ", Volume: " + package.PackageVolumeInCubicMm + "mm^3\n";
+            }
+
+            return tempString;
+        }
+    }
 }
