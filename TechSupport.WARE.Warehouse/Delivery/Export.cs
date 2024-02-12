@@ -27,13 +27,13 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Delivery);
                 ExportPackagesList.Add(package);
 
-                //Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
+                /*//Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
                 //Eneste negative er at vi må angi listen pakken var i manuelt
                 //Jeg fant ut at vi kan bare ligge til alle listene våre og kun listen som inneholder pakken blir forandret 
                 pakkeListeNavnHer.Remove(package);
                 pakkeListeNavnHer2.Remove(package);
                 pakkeListeNavnHer3.Remove(package);
-                pakkeListeNavnHer4.Remove(package);
+                pakkeListeNavnHer4.Remove(package);*/
             }
 
             Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
@@ -49,13 +49,13 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Delivery);
                 ExportPackagesList.Add(package);
 
-                //Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
+                /*//Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
                 //Eneste negative er at vi må angi den listen pakkene var i manuelt
                 //Jeg fant ut at vi kan bare ligge til alle listene våre, på denne måten kun listen som inneholder pakken blir forandret 
                 pakkeListeNavnHer.Remove(package);
                 pakkeListeNavnHer2.Remove(package);
                 pakkeListeNavnHer3.Remove(package);
-                pakkeListeNavnHer4.Remove(package);
+                pakkeListeNavnHer4.Remove(package);*/
             }
             Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
@@ -72,13 +72,13 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Delivery);
                 ExportPackagesList.Add(package);
 
-                //Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
+                /*//Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
                 //Eneste negative er at vi må angi listen pakken var i manuelt
                 //Jeg fant ut at vi kan bare ligge til alle listene våre og kun listen som inneholder pakken blir forandret 
                 pakkeListeNavnHer.Remove(package);
                 pakkeListeNavnHer2.Remove(package);
                 pakkeListeNavnHer3.Remove(package);
-                pakkeListeNavnHer4.Remove(package);
+                pakkeListeNavnHer4.Remove(package);*/
             }
             Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
@@ -102,7 +102,7 @@ namespace TechSupport.WARE.Warehouse
                 exportDetails.AppendLine("Status Change Log:");
                 foreach (var statusChange in package.GetPackageLog().GetEntries())
                 {
-                    exportDetails.AppendLine($"  - Previous Status: {statusChange.getPreviousStatus()}, New Status: {statusChange.getNewStatus()}, Time: {statusChange.getDateTime()}");
+                    exportDetails.AppendLine($"  - Previous Status: {statusChange.GetPreviousStatus()}, New Status: {statusChange.GetNewStatus()}, Time: {statusChange.GetDateTime()}");
                 }
                 exportDetails.AppendLine();
             }

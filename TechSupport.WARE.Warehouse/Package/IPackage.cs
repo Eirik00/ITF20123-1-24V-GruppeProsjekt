@@ -47,11 +47,11 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         StatusList Status { get; }
         /// <summary>
-        /// (Isle, int, int) <c>GetLocation()</c> Gets the isle the package is located,
+        /// (Isle, StorageSpesification, int) <c>GetLocation()</c> Gets the isle the package is located,
         /// the storage spesification and the placement in the spesified isle.
         /// </summary>
         /// <returns>Isle <c>isle</c>, int <c>storageSpecification</c>, int <c>place</c></returns>
-        (Isle isle, StorageSpecification specification, int place) GetLocation();
+        (Isle? isle, StorageSpecification specification, int place) GetLocation();
         /// <summary>
         /// void <c>ChangeStatus(StatusList, String)</c> changes the package status, it will also log it to the package log
         /// </summary>
