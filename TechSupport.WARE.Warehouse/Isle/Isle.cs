@@ -59,7 +59,7 @@ namespace TechSupport.WARE.Warehouse
 
         public void RemovePackage(Package package)
         {
-            for (int i = 1; i <= numberOfSpaces; ++i)
+            for (int i = 1; i <= numberOfSpaces; i++)
             {
                 if (shelf[i] == package)
                 {
