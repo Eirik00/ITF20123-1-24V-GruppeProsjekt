@@ -96,27 +96,27 @@ namespace TechSupport.WARE.Warehouse
             return start.AddDays(daysToAdd);
         }
 
-        //public override string ToString()
-        //{
-        //    StringBuilder exportDetails = new StringBuilder();
-        //    exportDetails.AppendLine("Leverse Varer:");
+        public override string ToString()
+        {
+            StringBuilder exportDetails = new StringBuilder();
+            exportDetails.AppendLine("Leverte Varer:");
 
-        //    foreach (var packageList in ExportPackagesList)
-        //    {
-        //        foreach (var package in packageList.Packages)
-        //        {
-        //            exportDetails.AppendLine(package.ToString());
-        //            exportDetails.AppendLine("Status Change Log:");
-        //            foreach (var statusChange in package.GetPackageLog().GetEntries())
-        //            {
-        //                exportDetails.AppendLine($"  - Previous Status: {statusChange.getPreviousStatus()}, New Status: {statusChange.getNewStatus()}, Time: {statusChange.getDateTime()}");
-        //            }
-        //            exportDetails.AppendLine();
-        //        }
-        //    }
+            foreach (var packageList in ExportPackagesList)
+            {
+                foreach (var package in packageList.Packages)
+                {
+                    exportDetails.AppendLine(package.ToString());
+                    exportDetails.AppendLine("Status Change Log:");
+                    foreach (var statusChange in package.GetPackageLog().GetEntries())
+                    {
+                        exportDetails.AppendLine($"  - Previous Status: {statusChange.GetPreviousStatus()}, New Status: {statusChange.GetNewStatus()}, Time: {statusChange.GetDateTime()}");
+                    }
+                    exportDetails.AppendLine();
+                }
+            }
 
-        //    return exportDetails.ToString();
-        //}
+            return exportDetails.ToString();
+        }
 
 
         public List<PackageList> ExportPackagesList => exportPackagesList;

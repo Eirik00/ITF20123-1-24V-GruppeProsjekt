@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    //Alternativ versjon av klassen lagt til i mappen
     public class Import : IImport
     {
         private List<Package> importPackagesList;
@@ -16,6 +15,14 @@ namespace TechSupport.WARE.Warehouse
         {
             importPackagesList = new List<Package>();
         }
+
+        /// <summary>
+        /// Imports packages with the specified delivery time, sender, and receiver information.
+        /// </summary>
+        /// <param name="deliveryTime">The time of delivery.</param>
+        /// <param name="packages">The list of packages to import.</param>
+        /// <param name="sender">The contact information of the sender.</param>
+        /// <param name="receiver">The contact information of the receiver.</param>
         public void PackageImport(double deliveryTime, PackageList packages, Contact sender, Contact receiver)
         {
             foreach (Package package in packages.Packages)
@@ -29,7 +36,13 @@ namespace TechSupport.WARE.Warehouse
             Console.WriteLine($"Vare Mottak registerert for Kl {deliveryTime} av sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
         }
 
-
+        /// <summary>
+        /// Imports packages with daily recurrence at the specified delivery hour, sender, and receiver information.
+        /// </summary>
+        /// <param name="deliveryHour">The hour of delivery.</param>
+        /// <param name="packages">The list of packages to import.</param>
+        /// <param name="sender">The contact information of the sender.</param>
+        /// <param name="receiver">The contact information of the receiver.</param>
         public void DailyPackageImport(double deliveryHour, PackageList packages, Contact sender, Contact receiver)
         {
             foreach (Package package in packages.Packages)
@@ -44,6 +57,14 @@ namespace TechSupport.WARE.Warehouse
             Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
         }
 
+        /// <summary>
+        /// Imports packages with weekly recurrence on the specified delivery day and hour, with sender and receiver information.
+        /// </summary>
+        /// <param name="deliveryDay">The day of the week for delivery.</param>
+        /// <param name="deliveryHour">The hour of delivery.</param>
+        /// <param name="packages">The list of packages to import.</param>
+        /// <param name="sender">The contact information of the sender.</param>
+        /// <param name="receiver">The contact information of the receiver.</param>
         public void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour,PackageList packages, Contact sender, Contact receiver)
         {
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
