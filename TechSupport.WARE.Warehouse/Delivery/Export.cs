@@ -20,7 +20,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Export packages with specified delivery information.
         /// </summary>
-        /// <param name="deliveryHour">The time of the day the delivery is estimated to arrive to receiver</param>
+        /// <param name="deliveryHour">The time of the day the delivery is estimated to arrive to receiver for example 14.00</param>
         /// <param name="packages">packages to export.</param>
         /// <param name="sender">The sender's contact information.</param>
         /// <param name="receiver">The receiver's contact information.</param>
@@ -36,7 +36,7 @@ namespace TechSupport.WARE.Warehouse
             }
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
-            Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace TechSupport.WARE.Warehouse
 
                 
             }
-            Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
         }
@@ -85,7 +85,7 @@ namespace TechSupport.WARE.Warehouse
             }
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
-            Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
         }
 
 

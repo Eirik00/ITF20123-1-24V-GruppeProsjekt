@@ -33,7 +33,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Delivery);
                 ImportPackagesList.Add(package);
             }
-            Console.WriteLine($"Vare Mottak registerert for Kl {deliveryTime} av sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
+            Console.WriteLine($"Vare Mottak registerert for Kl {deliveryTime} av sender {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}");
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Delivery);
                 ImportPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
+            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}");
         }
 
         /// <summary>
