@@ -15,7 +15,6 @@ namespace TechSupport.WARE.Warehouse
         private StatusList newStatus;
         private String description;
         private Isle? isle;
-
         public PackageLogEntry(Isle? isle, StatusList newStatus, StatusList previousStatus, String description)
         {
             this.timeStamp = DateTime.Now;
@@ -32,16 +31,27 @@ namespace TechSupport.WARE.Warehouse
             this.description = "No Reason Given";
             this.isle = isle;
         }
-
-        public StatusList getPreviousStatus()
+        /// <summary>
+        /// StatusList <c>GetPreviousStatus()</c> returns the previous status before status change
+        /// </summary>
+        /// <returns>StatusList</returns>
+        public StatusList GetPreviousStatus()
         {
             return previousStatus;
         }
-        public StatusList getNewStatus() 
+        /// <summary>
+        /// StatusList <c>GetNewStatus()</c> returns the status after the status change.
+        /// </summary>
+        /// <returns>StatusList</returns>
+        public StatusList GetNewStatus() 
         { 
             return newStatus;
         }
-        public DateTime getDateTime()
+        /// <summary>
+        /// DateTime <c>GetDateTime()</c> returns the datestamp on when the status change took place.
+        /// </summary>
+        /// <returns>DateTime</returns>
+        public DateTime GetDateTime()
         {
             return timeStamp;
         }
@@ -81,11 +91,11 @@ namespace TechSupport.WARE.Warehouse
 
             foreach(var entry in packageHistory)
             {
-                if(entry.getNewStatus() == status)
+                if(entry.GetNewStatus() == status)
                 {
                     status1List.Add(entry);
                 }
-                if(entry.getPreviousStatus() == status)
+                if(entry.GetPreviousStatus() == status)
                 {
                     status2List.Add(entry);
                 }
@@ -94,13 +104,13 @@ namespace TechSupport.WARE.Warehouse
             {
                 try
                 {
-                    timeSpan += status2List[0].getDateTime() - entry.getDateTime();
+                    timeSpan += status2List[0].GetDateTime() - entry.GetDateTime();
 
                     status2List.RemoveAt(status2List.Count - 1);
                 }
                 catch(Exception)
                 {
-                    timeSpan += DateTime.Now - entry.getDateTime();
+                    timeSpan += DateTime.Now - entry.GetDateTime();
                 }
             }
             return timeSpan;
@@ -108,7 +118,7 @@ namespace TechSupport.WARE.Warehouse
 
         public TimeSpan GetTotalTimeInWarehouse()
         {
-            return packageHistory[packageHistory.Count - 1].getDateTime() - packageHistory[0].getDateTime();
+            return packageHistory[packageHistory.Count - 1].GetDateTime() - packageHistory[0].GetDateTime();
         }
 
         public override string ToString()

@@ -28,9 +28,16 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <returns>List <c>PackageLogEntry</c></returns>
         List<PackageLogEntry> GetEntries();
-
+        /// <summary>
+        /// TimeSpan <c>GetTimeSpanOnStatus( StatusList status )</c> will return the time span when the package had a spesific status.
+        /// </summary>
+        /// <param name="status">The status of the package to search for</param>
+        /// <returns>TimeSpan</returns>
         TimeSpan GetTimeSpanOnStatus(StatusList status);
-
+        /// <summary>
+        /// TimeSpan <c>GetTotalTimeInWarehouse()</c> will return the total time of the package within the warehouse.
+        /// </summary>
+        /// <returns>TimeSpan</returns>
         TimeSpan GetTotalTimeInWarehouse();
     }
 }
