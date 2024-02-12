@@ -9,7 +9,7 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Export : IExport
     {
-        //Pakker som skal exporteres blir lagt til i denne listen
+        //Packages to be exported are added to this list
         private List<PackageList> exportPackagesList = new List<PackageList>();
 
         public Export()
@@ -34,7 +34,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Delivery);
                 ExportPackagesList.Add(packages);    
             }
-            //Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
+            //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
             Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
@@ -59,7 +59,7 @@ namespace TechSupport.WARE.Warehouse
                 
             }
             Console.WriteLine($"Gjentagende Daglig Export Registrert for Kl. {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
-            //Dette skal slette det sendte pakken fra den originale listen den var i, enkelt og greit
+            //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
         }
 
@@ -71,7 +71,6 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The packages to export.</param>
         /// <param name="sender">The contact information of the sender.</param>
         /// <param name="receiver">The contact information of the receiver.</param>
-        /// foreach (Package package in packages.Packages)
         public void RecurringWeeklyExport(DayOfWeek deliveryDay, double deliveryHour, PackageList packages, Contact sender, Contact receiver)
         {
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
@@ -84,6 +83,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Delivery);
                 ExportPackagesList.Add(packages);
             }
+            //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
             Console.WriteLine($"Gjentagende Ukentlig Vare Export Registrert for {deliveryDay} Kl {deliveryHour}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
@@ -117,8 +117,6 @@ namespace TechSupport.WARE.Warehouse
 
         //    return exportDetails.ToString();
         //}
-
-
 
 
         public List<PackageList> ExportPackagesList => exportPackagesList;

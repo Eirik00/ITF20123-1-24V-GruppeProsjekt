@@ -16,10 +16,9 @@ namespace TechSupport.WARE.Warehouse
         {
             importPackagesList = new List<Package>();
         }
-
-        public void PackageImport(double deliveryTime, List<Package> packages, Contact sender, Contact receiver)
+        public void PackageImport(double deliveryTime, PackageList packages, Contact sender, Contact receiver)
         {
-            foreach (var package in packages)
+            foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
@@ -31,9 +30,9 @@ namespace TechSupport.WARE.Warehouse
         }
 
 
-        public void DailyPackageImport(double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        public void DailyPackageImport(double deliveryHour, PackageList packages, Contact sender, Contact receiver)
         {
-            foreach (var package in packages)
+            foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
@@ -45,11 +44,11 @@ namespace TechSupport.WARE.Warehouse
             Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
         }
 
-        public void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour, List<Package> packages, Contact sender, Contact receiver)
+        public void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour,PackageList packages, Contact sender, Contact receiver)
         {
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
 
-            foreach (var package in packages)
+            foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;

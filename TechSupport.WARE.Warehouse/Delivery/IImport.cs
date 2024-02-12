@@ -18,7 +18,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The list of packages to be imported.</param>
         /// <param name="sender">The sender of the packages.</param>
         /// <param name="receiver">The receiver of the packages.</param>
-        void PackageImport(double deliveryTime, List<Package> packages, Contact sender, Contact receiver);
+        void PackageImport(double deliveryTime, PackageList packages, Contact sender, Contact receiver);
 
         /// <summary>
         /// Sets up daily recurring import for a list of packages.It takes a delivery hour, sender, and receiver, and schedules deliveries for each day based on the current date.
@@ -27,7 +27,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The list packages to be imported.</param>
         /// <param name="sender">The sender of the packages.</param>
         /// <param name="receiver">The receiver of the packages.</param>
-        void DailyPackageImport(double deliveryHour, List<Package> packages, Contact sender , Contact receiver);
+        void DailyPackageImport(double deliveryHour, PackageList packages, Contact sender , Contact receiver);
 
         /// <summary>
         /// Sets up weekly recurring imports for a list of packages.
@@ -38,7 +38,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The list of packages to arrive.</param>
         /// <param name="sender">The sender of the packages.</param>
         /// <param name="receiver">The receiver of the packages.</param>
-        void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour, List<Package> packages, Contact sender, Contact receiver);
+        void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour, PackageList packages, Contact sender, Contact receiver);
 
         /// <summary>
         /// 
