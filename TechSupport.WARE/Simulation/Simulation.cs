@@ -23,11 +23,11 @@ namespace TechSupport.WARE
             Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Norway", "Stuegata 2", 90808080, 5055);
             Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
             warehouse.ContactPerson = us;
-            int deliveryTimeKomplettInH = 12000;
+            int deliveryTimeKomplettInH = 4000;
             int mottakTilHylle = 1000;
             int waitForPersonell = 1000;
-            int waitForOrder = 24000;
-            int deliveryTimeStavanger = 10000;
+            int waitForOrder = 5000;
+            int deliveryTimeStavanger = 3000;
             int packageTime = 1000;
 
             Import today = new Import();
@@ -56,6 +56,7 @@ namespace TechSupport.WARE
             Thread.Sleep(waitForPersonell);
             foreach (Package package in graphicCards.Packages)
             {
+                package.PackageIsle.RemovePackage(package);
                 package.ChangeStatus(StatusList.InProgress);
             }
 

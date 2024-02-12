@@ -63,11 +63,12 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <returns>PackageLog</returns>
         PackageLog GetPackageLog();
+        int? GetShelf();
+        Isle? PackageIsle {  get; }
         /// <summary>
         /// String <c>ToString()</c> gives out the package description in string format
         /// </summary>
         /// <returns>String</returns>
-        int? GetShelf();
         String ToString();
     }
 }

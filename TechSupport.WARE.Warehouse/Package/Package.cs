@@ -71,6 +71,7 @@ namespace TechSupport.WARE.Warehouse
         public int PackageDepthInMm => packageDepthInMm;
         public int PackageWeightInGrams => packageWeighInGrams;
         public StorageSpecification Specification => specification;
+        public Isle? PackageIsle => packageIsle;
         public Contact Sender { 
             get { return this.sender; }
             set { this.sender = value; } 
