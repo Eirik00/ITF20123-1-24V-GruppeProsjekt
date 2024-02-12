@@ -33,7 +33,7 @@ namespace TechSupport.WARE
                 GraphicCards.AddPackage(gtx970);
                 GraphicCards.AddPackage(gtx980);
 
-                today.PackageImport(08.00, GraphicCards, komplett, komplett.ContactPerson, warehouse.ContactPerson);
+                today.PackageImport(08.00, GraphicCards, komplett.ContactPerson, warehouse.ContactPerson);
                 Thread.Sleep(deliveryTimeKomplettInH);
 
                 Thread.Sleep(waitForPersonell);

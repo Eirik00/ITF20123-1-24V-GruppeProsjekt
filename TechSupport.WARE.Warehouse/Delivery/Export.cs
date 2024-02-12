@@ -10,11 +10,11 @@ namespace TechSupport.WARE.Warehouse
     public class Export : IExport
     {
         //Packages to be exported are added to this list
-        private List<PackageList> exportPackagesList = new List<PackageList>();
+        private List<PackageList> exportPackagesList;
 
         public Export()
         {
-            exportPackagesList = new List<PackageList>();
+            exportPackagesList = [];
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace TechSupport.WARE.Warehouse
 
 
         //GetNextWeekDay metoden brukes i ukentlig sending,denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres sending den dagen til neste uke.
-        private DateTime GetNextWeekday(DateTime start, DayOfWeek day)
+        private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {
             int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
             return start.AddDays(daysToAdd);
@@ -98,7 +98,7 @@ namespace TechSupport.WARE.Warehouse
 
         public override string ToString()
         {
-            StringBuilder exportDetails = new StringBuilder();
+            StringBuilder exportDetails = new();
             exportDetails.AppendLine("Leverte Varer:");
 
             foreach (var packageList in ExportPackagesList)
