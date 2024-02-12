@@ -10,7 +10,7 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Isle : IIsle
     {
-        public Dictionary<int, Package> shelf;
+        public Dictionary<int, Package?> shelf;
         private int isleId;
         private int numberOfSpaces;
         private int lengthOfSpaceInMm;
@@ -18,10 +18,6 @@ namespace TechSupport.WARE.Warehouse
         private int depthOfSpaceInMm;
         private int weightLimitInGrams;
         private int category;
-
-        private string testingString = "string";
-
-        private Package test = null;
 
         public Isle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, int category, int isleId)
         {
@@ -32,7 +28,7 @@ namespace TechSupport.WARE.Warehouse
             this.weightLimitInGrams = weightLimitInGrams;
             this.category = category;
             this.isleId = isleId;
-            shelf = new Dictionary<int, Package>();
+            shelf = new Dictionary<int, Package?>();
             for (int i = 1; i <= numberOfSpaces; i++)
             {
                 shelf.Add(i, null);
@@ -76,7 +72,7 @@ namespace TechSupport.WARE.Warehouse
 
         public int GetPackagePlacement(Package package)
         {
-            foreach((int num, Package shelfPackage) in shelf)
+            foreach((int num, Package? shelfPackage) in shelf)
             {
                 if(shelfPackage == package)
                 {
@@ -88,9 +84,9 @@ namespace TechSupport.WARE.Warehouse
 
         public List<int> GetAvailableSpaces()
         {
-            Dictionary<int, Package> tempList = new Dictionary<int, Package>(shelf);
+            Dictionary<int, Package?> tempList = new Dictionary<int, Package?>(shelf);
             List<int> freeSpaces = new List<int>();
-            foreach (KeyValuePair<int, Package> check in tempList)
+            foreach (KeyValuePair<int, Package?> check in tempList)
             {
                 if (check.Value == null)
                 {

@@ -22,7 +22,7 @@ namespace TechSupport.WARE.Warehouse
     /// </summary>
     public enum StorageSpecification { Invalid = 0, ColdStorage = 1, DryStorage = 2, DangerousProducts = 3};
 
-    public class Package //: IPackage
+    public class Package : IPackage
     {
 
         /// <summary>
@@ -94,8 +94,7 @@ namespace TechSupport.WARE.Warehouse
             this.packageIsle = isle;
         }
 
-        public (Isle isle, StorageSpecification storageSpecification, int place) GetLocation()
-
+        public (Isle? isle, StorageSpecification specification, int place) GetLocation()
         {
             return (this.packageIsle, this.specification, 0);
         }

@@ -33,7 +33,7 @@ namespace TechSupport.WARE
             {
                 Console.WriteLine(entry.ToString());
             }
-            Console.WriteLine(testPackage.GetPackageLog);
+            Console.WriteLine(testPackage.GetPackageLog());
 
             PackageList packagelist = new PackageList(1);
             Package pakke1 = new Package(1, 58, 19, 7, 2000, false, 0);
