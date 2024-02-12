@@ -23,34 +23,56 @@ namespace TechSupport.WARE
             Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Norway", "Stuegata 2", 90808080, 5055);
             Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
             warehouse.ContactPerson = us;
-            int deliveryTimeKomplettInH = 12;
-            int mottakTilHylle = 1;
-            int waitForPersonell = 1;
+            int deliveryTimeKomplettInH = 12000;
+            int mottakTilHylle = 1000;
+            int waitForPersonell = 1000;
+            int waitForOrder = 24000;
+            int deliveryTimeStavanger = 10000;
+            int packageTime = 1000;
 
-            while (true) {
-                Import today = new Import();
-                PackageList GraphicCards = new PackageList(1);
-                GraphicCards.AddPackage(gtx970);
-                GraphicCards.AddPackage(gtx980);
+            Import today = new Import();
+            PackageList graphicCards = new PackageList(1);
+            graphicCards.AddPackage(gtx970);
+            graphicCards.AddPackage(gtx980);
 
-                today.PackageImport(08.00, GraphicCards, komplett, komplett.ContactPerson, warehouse.ContactPerson);
-                Thread.Sleep(deliveryTimeKomplettInH);
-
-                Thread.Sleep(waitForPersonell);
-
-                Isle isle1 = new Isle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.DryStorage, 1);
-                int count = 1;
-                foreach(Package package in GraphicCards.Packages)
-                {
-                    Thread.Sleep(mottakTilHylle);
-                    isle1.AddPackage(package, count);
-                    count++;
-                }
-
-
-
+            today.PackageImport(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
+            Thread.Sleep(deliveryTimeKomplettInH);
+            Thread.Sleep(waitForPersonell);
+            foreach(Package package in graphicCards.Packages)
+            {
+                package.ChangeStatus(StatusList.Reception);
             }
 
+            Isle isle1 = new Isle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.DryStorage, 1);
+            int count = 1;
+            foreach(Package package in graphicCards.Packages)
+            {
+                Thread.Sleep(mottakTilHylle);
+                isle1.AddPackage(package, count);
+                count++;
+            }
+
+            Thread.Sleep(waitForOrder);
+            Thread.Sleep(waitForPersonell);
+            foreach (Package package in graphicCards.Packages)
+            {
+                package.ChangeStatus(StatusList.InProgress);
+            }
+
+            Thread.Sleep(packageTime);
+            Export toreGraphic = new Export();
+            Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
+            toreGraphic.PackageExport(06.00, graphicCards, warehouse.ContactPerson, toreTang);
+            Thread.Sleep(deliveryTimeStavanger);
+
+            foreach(Package packagesSent in graphicCards.Packages)
+            {
+                foreach(PackageLogEntry entries in packagesSent.GetPackageLog().GetEntries())
+                {
+                    Console.WriteLine(entries);
+                    Console.WriteLine("Package at shelf: " + packagesSent.GetShelf());
+                }
+            }
         }
     }
 }

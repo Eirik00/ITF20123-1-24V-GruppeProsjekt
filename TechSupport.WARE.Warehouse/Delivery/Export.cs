@@ -35,7 +35,7 @@ namespace TechSupport.WARE.Warehouse
                 ExportPackagesList.Add(packages);    
             }
             //This should delete the sent packet from the original list it was in, plain and simple
-            packages.Packages.Clear();
+            //packages.Packages.Clear();
             Console.WriteLine($"Vare Levering registrert for Kl. {deliveryHour} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 

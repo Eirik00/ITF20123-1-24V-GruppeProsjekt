@@ -13,7 +13,7 @@ namespace TechSupport.WARE.Warehouse
     /// 1: Reception, 2: Storage, 3: In Progrress, 4: Delivery
     /// </example>
     /// </summary>
-    public enum StatusList {Invalid = 0, Reception = 1, Storage = 2, InProgress = 3, Delivery = 4 };
+    public enum StatusList {Invalid = 0, Initialized = 1, Ordered = 2, Reception = 3, Storage = 4, InProgress = 5, Delivery = 6 };
     /// <summary>
     /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
     /// <example>
@@ -39,7 +39,7 @@ namespace TechSupport.WARE.Warehouse
         PackageLog packageLog = new PackageLog();
         private Isle? packageIsle;
 
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification, StatusList status = StatusList.Invalid, DateTime deliveryTime = default)
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
         {
             if (idCheck.Contains(packageId))
             {
@@ -54,10 +54,10 @@ namespace TechSupport.WARE.Warehouse
                 this.packageWeighInGrams = packageWeightInGrams;
                 this.isFragile = isFragile;
                 this.specification = specification;
-                this.status = status;
+                this.status = StatusList.Initialized;
                 this.sender = new Contact("", "", "", "", "", 0, 0);
                 this.receiver = new Contact("", "", "", "", "", 0, 0);
-                this.DeliveryTime = deliveryTime;
+                this.DeliveryTime = default;
 
                 packageLog.LogChange(null, StatusList.Invalid, status, "Package initialized");
                 idCheck.Add(packageId);
@@ -94,6 +94,14 @@ namespace TechSupport.WARE.Warehouse
             this.packageIsle = isle;
         }
 
+        public int? GetShelf()
+        {
+            if (this.packageIsle == null)
+            {
+                return null;
+            }
+            return this.packageIsle.GetShelf(this);
+        }
         public (Isle? isle, StorageSpecification specification, int place) GetLocation()
         {
             return (this.packageIsle, this.specification, 0);

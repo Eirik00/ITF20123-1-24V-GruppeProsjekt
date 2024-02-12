@@ -67,6 +67,7 @@ namespace TechSupport.WARE.Warehouse
         /// String <c>ToString()</c> gives out the package description in string format
         /// </summary>
         /// <returns>String</returns>
+        int? GetShelf();
         String ToString();
     }
 }

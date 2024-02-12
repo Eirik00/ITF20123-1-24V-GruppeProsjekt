@@ -27,6 +27,8 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         int GetIsleId { get; }
 
+        int GetShelf(Package package);
+
         /// <summary>
         /// int <c>GetPacakgePlacement</c> gets the placement of the package refrenced
         /// </summary>

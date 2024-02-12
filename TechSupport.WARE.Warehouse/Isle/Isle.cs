@@ -35,6 +35,16 @@ namespace TechSupport.WARE.Warehouse
             }
 
         }
+
+        public int GetShelf(Package package) { 
+            foreach(KeyValuePair<int, Package> entry in this.shelf)
+            {
+                if (entry.Value == package) {
+                    return entry.Key;
+                }
+            }
+            return 0;
+        }
         //hvorfor er det en getter og en setter i objektet?
         //public int isleId { get; set; }
 

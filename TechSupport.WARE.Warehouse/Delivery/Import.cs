@@ -30,7 +30,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.AddHours(deliveryTime);
-                package.ChangeStatus(StatusList.Delivery);
+                package.ChangeStatus(StatusList.Ordered);
                 ImportPackagesList.Add(package);
             }
             Console.WriteLine($"Vare Mottak registerert for Kl {deliveryTime} av sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
@@ -51,7 +51,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Receiver = receiver;
                 DateTime deliveryTime = DateTime.Today.AddHours(deliveryHour);
                 package.DeliveryTime = deliveryTime;
-                package.ChangeStatus(StatusList.Delivery);
+                package.ChangeStatus(StatusList.Ordered);
                 ImportPackagesList.Add(package);
             }
             Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.firstName} {receiver.surname}");
@@ -74,7 +74,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = nextDeliveryDate;
-                package.ChangeStatus(StatusList.Delivery);
+                package.ChangeStatus(StatusList.Ordered);
                 ImportPackagesList.Add(package);
             }
             Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.firstName} {sender.surname} til {receiver.firstName} {receiver.surname}.");
