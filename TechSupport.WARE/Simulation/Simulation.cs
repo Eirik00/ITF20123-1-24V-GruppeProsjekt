@@ -68,11 +68,7 @@ namespace TechSupport.WARE
 
             foreach(Package packagesSent in graphicCards.Packages)
             {
-                foreach(PackageLogEntry entries in packagesSent.GetPackageLog().GetEntries())
-                {
-                    Console.WriteLine(entries);
-                    Console.WriteLine("Package at shelf: " + packagesSent.GetShelf());
-                }
+                packagesSent.GetPackageLog().ToString();
             }
         }
     }
