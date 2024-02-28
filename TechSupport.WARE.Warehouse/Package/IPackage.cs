@@ -47,11 +47,11 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         StatusList Status { get; }
         /// <summary>
-        /// (Isle, StorageSpesification, int) <c>GetLocation()</c> Gets the isle the package is located,
-        /// the storage spesification and the placement in the spesified isle.
+        /// (Aisle, StorageSpesification, int) <c>GetLocation()</c> Gets the aisle the package is located,
+        /// the storage spesification and the placement in the spesified aisle.
         /// </summary>
-        /// <returns>Isle <c>isle</c>, int <c>storageSpecification</c>, int <c>place</c></returns>
-        (Isle? isle, StorageSpecification specification, int place) GetLocation();
+        /// <returns>Aisle <c>aisle</c>, int <c>storageSpecification</c>, int <c>place</c></returns>
+        (Aisle? aisle, StorageSpecification specification, int place) GetLocation();
         /// <summary>
         /// void <c>ChangeStatus(StatusList, String)</c> changes the status of the package to where it is in the process
         /// </summary>
@@ -64,7 +64,7 @@ namespace TechSupport.WARE.Warehouse
         /// <returns>PackageLog</returns>
         PackageLog GetPackageLog();
         int? GetShelf();
-        Isle? PackageIsle {  get; }
+        Aisle? PackageAisle {  get; }
         /// <summary>
         /// String <c>ToString()</c> gives out the package description in string format
         /// </summary>

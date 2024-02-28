@@ -7,7 +7,7 @@ using TechSupport.WARE.Warehouse;
 
 namespace TechSupport.WARE.Warehouse
 {
-    internal interface IIsle
+    internal interface IAisle
     {
         /// <summary>
         /// void <c>AddPackage</c> adds a package to the isle thats being referenced
@@ -25,7 +25,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Gets the isle id
         /// </summary>
-        int GetIsleId { get; }
+        int GetAisleId { get; }
 
         int GetShelf(Package package);
 

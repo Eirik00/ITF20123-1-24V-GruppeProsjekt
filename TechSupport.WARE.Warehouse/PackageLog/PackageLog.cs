@@ -14,22 +14,22 @@ namespace TechSupport.WARE.Warehouse
         private readonly StatusList previousStatus;
         private readonly StatusList newStatus;
         private readonly String description;
-        private readonly Isle? isle;
-        public PackageLogEntry(Isle? isle, StatusList newStatus, StatusList previousStatus, String description)
+        private readonly Aisle? aisle;
+        public PackageLogEntry(Aisle? aisle, StatusList newStatus, StatusList previousStatus, String description)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
             this.newStatus = newStatus;
             this.description = description;
-            this.isle = isle;
+            this.aisle = aisle;
         }
-        public PackageLogEntry(Isle? isle, StatusList previousStatus, StatusList newStatus)
+        public PackageLogEntry(Aisle? aisle, StatusList previousStatus, StatusList newStatus)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
             this.newStatus = newStatus ;
             this.description = "No Reason Given";
-            this.isle = isle;
+            this.aisle = aisle;
         }
         /// <summary>
         /// StatusList <c>GetPreviousStatus()</c> returns the previous status before status change
@@ -57,10 +57,10 @@ namespace TechSupport.WARE.Warehouse
         }
         public override string ToString()
         {
-            if(this.isle == null) 
+            if(this.aisle == null) 
                 return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: null";
             else 
-                return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: " + this.isle.GetIsleId;
+                return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: " + this.aisle.GetAisleId;
 
         }    
     }
@@ -70,7 +70,7 @@ namespace TechSupport.WARE.Warehouse
         private readonly List<PackageLogEntry> packageHistory = [];
         public int Entries => packageHistory.Count;
 
-        public void LogChange(Isle? isle, StatusList currentStatus, StatusList previousStatus, String description = "")
+        public void LogChange(Aisle? isle, StatusList currentStatus, StatusList previousStatus, String description = "")
         {
             if(description == "")
             {
