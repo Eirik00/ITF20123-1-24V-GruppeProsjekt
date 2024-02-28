@@ -10,9 +10,9 @@ namespace TechSupport.WARE
 {
     internal class Program
     {
-        static void Main()
+        static void sMain()
         {
-            Isle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
+            Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
             /*
             Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
             isle.AddPackage(testPackage, 0);

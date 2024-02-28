@@ -8,10 +8,10 @@ using TechSupport.WARE.Warehouse;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class Isle : IIsle
+    public class Aisle : IAisle
     {
         public Dictionary<int, Package?> shelf;
-        private int isleId;
+        private int aisleId;
         private int numberOfSpaces;
         private readonly int lengthOfSpaceInMm;
         private readonly int heightOfSpaceInMm;
@@ -19,7 +19,7 @@ namespace TechSupport.WARE.Warehouse
         private readonly int weightLimitInGrams;
         private StorageSpecification category;
 
-        public Isle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification category, int isleId)
+        public Aisle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification category, int aisleId)
         {
             this.numberOfSpaces = numberOfSpaces;
             this.lengthOfSpaceInMm = lengthOfSpaceInMm;
@@ -27,7 +27,7 @@ namespace TechSupport.WARE.Warehouse
             this.depthOfSpaceInMm = depthOfSpaceInMm;
             this.weightLimitInGrams = weightLimitInGrams;
             this.category = category;
-            this.isleId = isleId;
+            this.aisleId = aisleId;
             shelf = [];
             for (int i = 1; i <= numberOfSpaces; i++)
             {
@@ -37,7 +37,7 @@ namespace TechSupport.WARE.Warehouse
         }
 
         public int GetShelf(Package package) { 
-            foreach(KeyValuePair<int, Package> entry in this.shelf)
+            foreach(KeyValuePair<int, Package?> entry in this.shelf)
             {
                 if (entry.Value == package) {
                     return entry.Key;
@@ -45,15 +45,13 @@ namespace TechSupport.WARE.Warehouse
             }
             return 0;
         }
-        //hvorfor er det en getter og en setter i objektet?
-        //public int isleId { get; set; }
 
         public void AddPackage(Package package, int placement)
         {
             List<int> available = new(this.GetAvailableSpaces());
             if(available.Contains(placement))
             {
-            package.AddIsle(this);
+            package.AddAisle(this);
             package.ChangeStatus(StatusList.Storage);
 
             shelf[placement] = package;
@@ -78,7 +76,7 @@ namespace TechSupport.WARE.Warehouse
             }
 
         }
-        public int GetIsleId => this.isleId;
+        public int GetAisleId => this.aisleId;
 
         public int GetPackagePlacement(Package package)
         {

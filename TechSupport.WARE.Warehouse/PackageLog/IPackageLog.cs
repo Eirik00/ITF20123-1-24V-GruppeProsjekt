@@ -21,7 +21,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="currentStatus">The package current status/ its new status</param>
         /// <param name="previousStatus">The packages previous status before the status change</param>
         /// <param name="description">*Optional* Description/reasoning for the status change</param>
-        void LogChange(Isle isle, StatusList currentStatus, StatusList previousStatus, String description);
+        void LogChange(Aisle isle, StatusList currentStatus, StatusList previousStatus, String description);
 
         /// <summary>
         /// List <c>PackageLogEntry</c> GetEntries() will return the <c>PackageLogEntry</c> objects in a list that are linked to the package.

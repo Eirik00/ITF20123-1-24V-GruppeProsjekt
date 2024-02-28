@@ -37,7 +37,7 @@ namespace TechSupport.WARE.Warehouse
         private Contact receiver;
         public DateTime DeliveryTime;
         readonly PackageLog packageLog = new();
-        private Isle? packageIsle;
+        private Aisle? packageAisle;
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
         {
@@ -71,7 +71,7 @@ namespace TechSupport.WARE.Warehouse
         public int PackageDepthInMm => packageDepthInMm;
         public int PackageWeightInGrams => packageWeighInGrams;
         public StorageSpecification Specification => specification;
-        public Isle? PackageIsle => packageIsle;
+        public Aisle? PackageAisle => packageAisle;
         public Contact Sender { 
             get { return this.sender; }
             set { this.sender = value; } 
@@ -86,30 +86,30 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         public StatusList Status => status;
         /// <summary>
-        /// (Isle, String, int) <c>GetLocation</c> returns the current location and equivelent information of that package
+        /// (Aisle, String, int) <c>GetLocation</c> returns the current location and equivelent information of that package
         /// </summary>
-        /// <returns>Isle <c>isle</c>, String <c>category</c>, int <c>place</c></returns>
+        /// <returns>Aisle <c>aisle</c>, String <c>category</c>, int <c>place</c></returns>
         /// 
-        internal void AddIsle(Isle isle)
+        internal void AddAisle(Aisle aisle)
         {
-            this.packageIsle = isle;
+            this.packageAisle = aisle;
         }
 
         public int? GetShelf()
         {
-            if (this.packageIsle == null)
+            if (this.packageAisle == null)
             {
                 return null;
             }
-            return this.packageIsle.GetShelf(this);
+            return this.packageAisle.GetShelf(this);
         }
-        public (Isle? isle, StorageSpecification specification, int place) GetLocation()
+        public (Aisle? aisle, StorageSpecification specification, int place) GetLocation()
         {
-            return (this.packageIsle, this.specification, 0);
+            return (this.packageAisle, this.specification, 0);
         }
         public void ChangeStatus(StatusList newStatus, String description = "")
         {
-            packageLog.LogChange(this.GetLocation().isle, newStatus, status, description);
+            packageLog.LogChange(this.GetLocation().aisle, newStatus, status, description);
             this.status = newStatus;
         }
 

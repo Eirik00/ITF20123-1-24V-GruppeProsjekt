@@ -47,7 +47,7 @@ namespace TechSupport.WARE
                     package.ChangeStatus(StatusList.Reception);
                 }
 
-                Isle isle1 = new Isle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.DryStorage, 1);
+                Aisle isle1 = new Aisle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.DryStorage, 1);
                 int count = 1;
                 foreach (Package package in graphicCards.Packages)
                 {
@@ -60,7 +60,7 @@ namespace TechSupport.WARE
                 Thread.Sleep(waitForPersonell);
                 foreach (Package package in graphicCards.Packages)
                 {
-                    package.PackageIsle.RemovePackage(package);
+                    package.PackageAisle.RemovePackage(package);
                     package.ChangeStatus(StatusList.InProgress);
                 }
 
