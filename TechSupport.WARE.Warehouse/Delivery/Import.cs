@@ -57,6 +57,18 @@ namespace TechSupport.WARE.Warehouse
             Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
         }
 
+        public void DailyPackageImport(double deliveryHour, Package package, Contact sender, Contact receiver)
+        {
+                package.Sender = sender;
+                package.Receiver = receiver;
+                DateTime deliveryTime = DateTime.Today.AddHours(deliveryHour);
+                package.DeliveryTime = deliveryTime;
+                package.ChangeStatus(StatusList.Ordered);
+                ImportPackagesList.Add(package);
+            
+            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
+        }
+
         /// <summary>
         /// Imports packages with weekly recurrence on the specified delivery day and hour, with sender and receiver information.
         /// </summary>
@@ -77,6 +89,19 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Ordered);
                 ImportPackagesList.Add(package);
             }
+            Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+        }
+
+        public void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour, Package package, Contact sender, Contact receiver)
+        {
+            var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
+
+                package.Sender = sender;
+                package.Receiver = receiver;
+                package.DeliveryTime = nextDeliveryDate;
+                package.ChangeStatus(StatusList.Ordered);
+                ImportPackagesList.Add(package);
+            
             Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
