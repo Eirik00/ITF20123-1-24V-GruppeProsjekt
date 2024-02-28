@@ -12,7 +12,7 @@ namespace TechSupport.WARE.Warehouse
         private string firstName, surname, email, country, address;
         private int phonesNumber, postalCode;
 
-        public Contact(string firstName, string surName, string email, string country, string address, int phoneNumber, int postalCode)
+        public Contact(string firstName, string surName, string email, string address, string country, int phoneNumber, int postalCode)
         {
             this.firstName = firstName;
             this.surname = surName;

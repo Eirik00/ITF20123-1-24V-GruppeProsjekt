@@ -10,14 +10,14 @@ namespace TechSupport.WARE.Warehouse
     /// <summary>
     /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
     /// <example>
-    /// 1: Reception, 2: Storage, 3: In Progrress, 4: Delivery
+    /// 0: Invalid 1: Initialized, 2: Ordered, 3: Reception, 4: Storage, 5: In Progress, 6: Delivery
     /// </example>
     /// </summary>
     public enum StatusList {Invalid = 0, Initialized = 1, Ordered = 2, Reception = 3, Storage = 4, InProgress = 5, Delivery = 6 };
     /// <summary>
     /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
     /// <example>
-    /// 1: ColdStorage, 2: DryStorage, 3: DangerousProducts
+    /// 0: Invalid 1: ColdStorage, 2: DryStorage, 3: DangerousProducts
     /// </example>
     /// </summary>
     public enum StorageSpecification { Invalid = 0, ColdStorage = 1, DryStorage = 2, DangerousProducts = 3};

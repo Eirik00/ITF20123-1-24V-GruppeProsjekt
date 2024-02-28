@@ -53,7 +53,7 @@ namespace TechSupport.WARE.Warehouse
         /// <returns>Isle <c>isle</c>, int <c>storageSpecification</c>, int <c>place</c></returns>
         (Isle? isle, StorageSpecification specification, int place) GetLocation();
         /// <summary>
-        /// void <c>ChangeStatus(StatusList, String)</c> changes the package status, it will also log it to the package log
+        /// void <c>ChangeStatus(StatusList, String)</c> changes the status of the package to where it is in the process
         /// </summary>
         /// <param name="newStatus">The new status</param>
         /// <param name="description">*optional* description if needed</param>
