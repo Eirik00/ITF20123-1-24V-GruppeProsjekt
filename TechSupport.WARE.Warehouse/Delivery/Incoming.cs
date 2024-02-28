@@ -7,54 +7,54 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class Import : IImport
+    public class Incoming : IIncoming
     {
-        private List<Package> importPackagesList;
+        private List<Package> incomingPackagesList;
 
-        public Import()
+        public Incoming()
         {
-            importPackagesList = [];
+            incomingPackagesList = [];
         }
 
         /// <summary>
-        /// Imports packages with the specified delivery time, sender, and receiver information.
+        /// Receives packages with the specified delivery time, sender, and receiver information.
         /// </summary>
-        /// <param name="deliveryTime">The time of delivery.</param>
-        /// <param name="packages">The list of packages to import.</param>
+        /// <param name="deliveryHourAndMinute">The time of delivery in double eks: 16.33</param>
+        /// <param name="packages">The list of packages to be received.</param>
         /// <param name="sender">The contact information of the sender.</param>
         /// <param name="receiver">The contact information of the receiver.</param>
-        public void PackageImport(double deliveryTime, PackageList packages, Contact sender, Contact receiver)
+        public void IncomingPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
-                package.DeliveryTime = DateTime.Today.AddHours(deliveryTime);
+                package.DeliveryTime = DateTime.Today.AddHours(deliveryHourAndMinute);
                 package.ChangeStatus(StatusList.Ordered);
-                ImportPackagesList.Add(package);
+                IncomingPackagesList.Add(package);
             }
-            Console.WriteLine($"Vare Mottak registerert for Kl {deliveryTime} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
+            Console.WriteLine($"Vare Mottak registerert for Kl {deliveryHourAndMinute} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
         }
 
         /// <summary>
-        /// Imports packages with daily recurrence at the specified delivery hour, sender, and receiver information.
+        /// Receives packages with daily recurrence at the specified delivery hour, sender, and receiver information.
         /// </summary>
-        /// <param name="deliveryHour">The hour of delivery.</param>
-        /// <param name="packages">The list of packages to import.</param>
+        /// <param name="deliveryHourAndMinute">The hour of delivery in double eks: 13.45</param>
+        /// <param name="packages">The list of packages to receive.</param>
         /// <param name="sender">The contact information of the sender.</param>
         /// <param name="receiver">The contact information of the receiver.</param>
-        public void DailyPackageImport(double deliveryHour, PackageList packages, Contact sender, Contact receiver)
+        public void IncomingDailyPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
                 package.Receiver = receiver;
-                DateTime deliveryTime = DateTime.Today.AddHours(deliveryHour);
+                DateTime deliveryTime = DateTime.Today.AddHours(deliveryHourAndMinute);
                 package.DeliveryTime = deliveryTime;
                 package.ChangeStatus(StatusList.Ordered);
-                ImportPackagesList.Add(package);
+                IncomingPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
+            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHourAndMinute} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
         }
 
         public void DailyPackageImport(double deliveryHour, Package package, Contact sender, Contact receiver)
@@ -70,16 +70,16 @@ namespace TechSupport.WARE.Warehouse
         }
 
         /// <summary>
-        /// Imports packages with weekly recurrence on the specified delivery day and hour, with sender and receiver information.
+        /// Receives packages with weekly recurrence on the specified delivery day and hour, with sender and receiver information.
         /// </summary>
-        /// <param name="deliveryDay">The day of the week for delivery.</param>
-        /// <param name="deliveryHour">The hour of delivery.</param>
+        /// <param name="deliveryDay">The day of the week for delivery </param>
+        /// <param name="deliveryHourAndMinute">The hour of delivery.</param>
         /// <param name="packages">The list of packages to import.</param>
         /// <param name="sender">The contact information of the sender.</param>
         /// <param name="receiver">The contact information of the receiver.</param>
-        public void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour,PackageList packages, Contact sender, Contact receiver)
+        public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute,PackageList packages, Contact sender, Contact receiver)
         {
-            var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
+            var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHourAndMinute);
 
             foreach (Package package in packages.Packages)
             {
@@ -87,9 +87,9 @@ namespace TechSupport.WARE.Warehouse
                 package.Receiver = receiver;
                 package.DeliveryTime = nextDeliveryDate;
                 package.ChangeStatus(StatusList.Ordered);
-                ImportPackagesList.Add(package);
+                IncomingPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHourAndMinute} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
         public void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour, Package package, Contact sender, Contact receiver)
@@ -114,24 +114,24 @@ namespace TechSupport.WARE.Warehouse
 
         public override string ToString()
         {
-            StringBuilder importDetails = new();
-            importDetails.AppendLine("Motatte Varer:");
+            StringBuilder receivingDetails = new();
+            receivingDetails.AppendLine("Motatte Varer:");
 
-            foreach (var package in ImportPackagesList)
+            foreach (var package in IncomingPackagesList)
             {
-                importDetails.AppendLine(package.ToString());
-                importDetails.AppendLine("Status Change Log:");
+                receivingDetails.AppendLine(package.ToString());
+                receivingDetails.AppendLine("Status Change Log:");
                 foreach (var statusChange in package.GetPackageLog().GetEntries())
                 {
-                    importDetails.AppendLine($"  - Previous Status: {statusChange.GetPreviousStatus()}, New Status: {statusChange.GetNewStatus()}, Time: {statusChange.GetDateTime()}");
+                    receivingDetails.AppendLine($"  - Previous Status: {statusChange.GetPreviousStatus()}, New Status: {statusChange.GetNewStatus()}, Time: {statusChange.GetDateTime()}");
                 }
-                importDetails.AppendLine();
+                receivingDetails.AppendLine();
             }
 
-            return importDetails.ToString();
+            return receivingDetails.ToString();
         }
 
 
-        public List<Package> ImportPackagesList => importPackagesList;
+        public List<Package> IncomingPackagesList => incomingPackagesList;
     }
 }

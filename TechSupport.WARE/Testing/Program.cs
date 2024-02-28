@@ -60,7 +60,7 @@ namespace TechSupport.WARE
             packagelist.AddPackage(pakke1);
             Console.WriteLine(packagelist.SeePackagesInList());
 
-            //Export rema = new();
+            //Outgoing rema = new();
 
             Console.WriteLine(packagelist.ShowPackagesSortedByLenght());
             Console.WriteLine(packagelist.ShowPackagesSortedByHeight());

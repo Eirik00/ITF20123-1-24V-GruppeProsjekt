@@ -30,7 +30,7 @@ namespace TechSupport.WARE
             int deliveryTimeStavanger = 3000;
             int packageTime = 1000;
 
-            Import today = new Import();
+            Incoming today = new Incoming();
             PackageList graphicCards = new PackageList(1);
             graphicCards.AddPackage(gtx970);
             graphicCards.AddPackage(gtx980);
@@ -39,7 +39,7 @@ namespace TechSupport.WARE
 
             while ((DateTime.Now - startTime).TotalSeconds < 60)
             {
-                today.PackageImport(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
+                today.IncomingPackage(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
                 Thread.Sleep(deliveryTimeKomplettInH);
                 Thread.Sleep(waitForPersonell);
                 foreach (Package package in graphicCards.Packages)
@@ -65,10 +65,11 @@ namespace TechSupport.WARE
                 }
 
                 Thread.Sleep(packageTime);
-                Export toreGraphic = new Export();
+                Outgoing toreGraphic = new Outgoing();
                 Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
-                toreGraphic.PackageExport(06.00, graphicCards, warehouse.ContactPerson, toreTang);
+                toreGraphic.OutgoingPackage(06.00, graphicCards, warehouse.ContactPerson, toreTang);
                 Thread.Sleep(deliveryTimeStavanger);
+
 
                 foreach (Package packagesSent in graphicCards.Packages)
                 {
