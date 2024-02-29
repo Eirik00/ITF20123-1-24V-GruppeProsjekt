@@ -64,7 +64,7 @@ namespace TechSupport.WARE.Warehouse
                 DateTime deliveryTime = DateTime.Today.AddHours(deliveryHour);
                 package.DeliveryTime = deliveryTime;
                 package.ChangeStatus(StatusList.Ordered);
-                ImportPackagesList.Add(package);
+                IncomingPackagesList.Add(package);
             
             Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
         }
@@ -100,7 +100,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Receiver = receiver;
                 package.DeliveryTime = nextDeliveryDate;
                 package.ChangeStatus(StatusList.Ordered);
-                ImportPackagesList.Add(package);
+                IncomingPackagesList.Add(package);
             
             Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
