@@ -15,7 +15,7 @@ namespace TechSupport.WARE.Warehouse
         private readonly StatusList newStatus;
         private readonly String description;
         private readonly Aisle? aisle;
-        public PackageLogEntry(Aisle? aisle, StatusList newStatus, StatusList previousStatus, String description)
+        internal PackageLogEntry(Aisle? aisle, StatusList newStatus, StatusList previousStatus, String description)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
@@ -23,7 +23,7 @@ namespace TechSupport.WARE.Warehouse
             this.description = description;
             this.aisle = aisle;
         }
-        public PackageLogEntry(Aisle? aisle, StatusList previousStatus, StatusList newStatus)
+        internal PackageLogEntry(Aisle? aisle, StatusList previousStatus, StatusList newStatus)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;
@@ -67,6 +67,7 @@ namespace TechSupport.WARE.Warehouse
 
     public class PackageLog : IPackageLog
     {
+        internal PackageLog() { } // For å ungå at brukeren kan lage packagelog
         private readonly List<PackageLogEntry> packageHistory = [];
         public int Entries => packageHistory.Count;
 

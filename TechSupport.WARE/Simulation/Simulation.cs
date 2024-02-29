@@ -37,6 +37,12 @@ namespace TechSupport.WARE
 
             DateTime startTime = DateTime.Now;
 
+            Console.WriteLine("True/False");
+
+            gtx970.GetPackageLog();
+
+            Console.WriteLine(StorageSpecification.DryStorage == StorageSpecification.ColdStorage);
+
             while ((DateTime.Now - startTime).TotalSeconds < 60)
             {
                 today.IncomingPackage(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
@@ -47,7 +53,7 @@ namespace TechSupport.WARE
                     package.ChangeStatus(StatusList.Reception);
                 }
 
-                Aisle isle1 = new Aisle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.DryStorage, 1);
+                Aisle isle1 = new Aisle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.ColdStorage, 1);
                 int count = 1;
                 foreach (Package package in graphicCards.Packages)
                 {
@@ -75,9 +81,6 @@ namespace TechSupport.WARE
                 {
                     Console.WriteLine(packagesSent.GetPackageLog().ToString());
                 }
-
-                if ((DateTime.Now - startTime).TotalSeconds >= 60)
-                    break;
             }
 
             Console.WriteLine("Simulasjon slutt");

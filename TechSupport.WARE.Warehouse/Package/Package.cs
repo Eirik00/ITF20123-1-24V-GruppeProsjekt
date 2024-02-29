@@ -88,7 +88,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// (Aisle, String, int) <c>GetLocation</c> returns the current location and equivelent information of that package
         /// </summary>
-        /// <returns>Aisle <c>aisle</c>, String <c>category</c>, int <c>place</c></returns>
+        /// <returns>Aisle <c>aisle</c>, String <c>spesification</c>, int <c>place</c></returns>
         /// 
         internal void AddAisle(Aisle aisle)
         {
