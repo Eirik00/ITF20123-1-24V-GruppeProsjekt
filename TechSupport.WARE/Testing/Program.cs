@@ -10,7 +10,7 @@ namespace TechSupport.WARE
 {
     internal class Program
     {
-        static void sMain()
+        static void Main(string[] args)
         {
             Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
             /*
@@ -36,6 +36,13 @@ namespace TechSupport.WARE
             Console.WriteLine(testPackage.GetPackageLog);
             */
 
+                        Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Norway", "Stavernveien 2", 90202011, 3550);
+            Company komplett = new Company("Komplett", 9849249, "Stavernveien 2", "Norway", 3550);
+            komplett.ContactPerson = kjell;
+            Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Norway", "Stuegata 2", 90808080, 5055);
+            Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
+            warehouse.ContactPerson = us;
+
             PackageList packagelist = new(1);
             Package pakke1 = new(1, 58, 19, 7, 2000, false, 0);
             Package pakke2 = new(2, 42, 78, 212, 2000, false, 0);
@@ -59,6 +66,12 @@ namespace TechSupport.WARE
             packagelist.RemovePackage(pakke1);
             packagelist.AddPackage(pakke1);
             Console.WriteLine(packagelist.SeePackagesInList());
+            Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            PackageList graphicCards = new PackageList(1);
+            graphicCards.AddPackage(gtx970);
+            graphicCards.AddPackage(gtx980);
+
 
             //Outgoing rema = new();
 
@@ -66,6 +79,10 @@ namespace TechSupport.WARE
             Console.WriteLine(packagelist.ShowPackagesSortedByHeight());
             Console.WriteLine(packagelist.ShowPackagesSortedByDepth());
             Console.WriteLine(packagelist.ShowPackagesSortedByWeight());
+
+            Outgoing toreGraphic = new Outgoing();
+            Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
+            toreGraphic.OutgoingPackage(0600, graphicCards, warehouse.ContactPerson, toreTang);
 
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //spesification storageSpecifications[], boolean isFragile
