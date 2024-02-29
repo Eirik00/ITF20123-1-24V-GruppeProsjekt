@@ -43,7 +43,7 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         Contact Receiver { get; set; }
         /// <summary>
-        /// Get the package status
+        /// Get the status of where the package is in the shipping process
         /// </summary>
         StatusList Status { get; }
         /// <summary>
@@ -53,7 +53,7 @@ namespace TechSupport.WARE.Warehouse
         /// <returns>Aisle <c>aisle</c>, int <c>storageSpecification</c>, int <c>place</c></returns>
         (Aisle? aisle, StorageSpecification specification, int place) GetLocation();
         /// <summary>
-        /// void <c>ChangeStatus(StatusList, String)</c> changes the status of the package to where it is in the process
+        /// void <c>ChangeStatus(StatusList, String)</c> changes the status of the package to where it is in the shipping process
         /// </summary>
         /// <param name="newStatus">The new status</param>
         /// <param name="description">*optional* description if needed</param>
