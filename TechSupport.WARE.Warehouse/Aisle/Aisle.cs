@@ -17,6 +17,7 @@ namespace TechSupport.WARE.Warehouse
         private readonly int heightOfSpaceInMm;
         private readonly int depthOfSpaceInMm;
         private readonly int weightLimitInGrams;
+        private int totalWeight;
         private StorageSpecification spesification;
 
         public Aisle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification spesification, int aisleId)
@@ -48,24 +49,23 @@ namespace TechSupport.WARE.Warehouse
 
         public void AddPackage(Package package, int placement)
         {
-
+            List<int> available = new(this.GetAvailableSpaces());
             if (this.spesification != package.Specification)
                 throw new InvalidOperationException($"Current package spesification, StorageSpesification.{package.Specification}, is not compatible with Aisle storage spesification, StorageSpesification.{this.spesification}");
-            List<int> available = new(this.GetAvailableSpaces());
-            if(available.Contains(placement))
-            {
-                package.AddAisle(this);
-                package.ChangeStatus(StatusList.Storage);
-
-                shelf[placement] = package;
-
-                // for testing purposes later when simulating
-                Console.WriteLine("Package Added");
-            }
-            else
-            {
+            if (this.depthOfSpaceInMm < package.PackageDepthInMm)
+                throw new NotEnoughSpaceException($"Package depth({package.PackageDepthInMm}mm) is too big for Aisle({this.depthOfSpaceInMm}mm)");
+            if (this.totalWeight + package.PackageWeightInGrams > this.weightLimitInGrams)
+                throw new WeightLimitException($"Package({package.PackageWeightInGrams}g) is too heavy for the Aisle({this.totalWeight}/{this.weightLimitInGrams}g)");
+            if(!available.Contains(placement))
                 throw new Exception("This shelf space does not exist or is already taken");
-            }
+            this.totalWeight += package.PackageWeightInGrams;
+            package.AddAisle(this);
+            package.ChangeStatus(StatusList.Storage);
+
+            shelf[placement] = package;
+
+            // for testing purposes later when simulating
+            Console.WriteLine("Package Added");
         }
 
         public void RemovePackage(Package package)

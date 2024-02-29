@@ -53,7 +53,7 @@ namespace TechSupport.WARE
                     package.ChangeStatus(StatusList.Reception);
                 }
 
-                Aisle isle1 = new Aisle(50, 20000000, 50000, 100000, 2000000, StorageSpecification.ColdStorage, 1);
+                Aisle isle1 = new Aisle(50, 20000000, 50000, 100000, 3000, StorageSpecification.DryStorage, 1);
                 int count = 1;
                 foreach (Package package in graphicCards.Packages)
                 {
