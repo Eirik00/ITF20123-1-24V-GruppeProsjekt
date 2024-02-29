@@ -10,37 +10,39 @@ namespace TechSupport.WARE.Warehouse
     {
         /// <summary>
         /// Get the first name of Contact.
+        /// No Set available
         /// </summary>
         string FirstName { get; }
 
         /// <summary>
         /// Get the surname of Contact.
+        /// No Set avaialable
         /// </summary>
         string Surname { get; }
 
         /// <summary>
-        /// Get the Contact's email.
+        /// Get or Set the Contact's email.
         /// </summary>
-        string Email { get; }
+        string Email { get; set; }
 
         /// <summary>
-        /// Get the Contact's country.
+        /// Get or Set the Contact's country.
         /// </summary>
-        string Country { get; }
+        string Country { get; set; }
 
         /// <summary>
-        /// Get the phone number of the Contact.
+        /// Get or Set the phone number of the Contact.
         /// </summary>
-        int PhoneNumber { get; }
+        int PhoneNumber { get; set; }
 
         /// <summary>
-        /// Get the Contact's address.
+        /// Get or Set the Contact's address.
         /// </summary>
-        string Address { get; }
+        string Address { get; set; }
 
         /// <summary>
-        /// Get the Contact's postal code.
+        /// Get or Set the Contact's postal code.
         /// </summary>
-        int PostalCode { get; }
+        int PostalCode { get; set; }
     }
 }
