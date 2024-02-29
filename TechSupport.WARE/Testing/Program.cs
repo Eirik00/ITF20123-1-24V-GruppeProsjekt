@@ -68,10 +68,10 @@ namespace TechSupport.WARE
             Console.WriteLine(packagelist.ShowPackagesSortedByWeight());
 
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
-            //category storageSpecifications[], boolean isFragile
+            //spesification storageSpecifications[], boolean isFragile
 
             //productId is not uniqe, represents the type of product the package is. (e.g. productId 16327 represents televisions)
-            //If no productId is given it defaults NULL. For instance if the package is a personal item that does not belong in any category.
+            //If no productId is given it defaults NULL. For instance if the package is a personal item that does not belong in any spesification.
             //The parameter is meant for systems belonging to stores and such, not post offices.
 
             //When a new package is registered it automatically gets put to Reception.
@@ -79,7 +79,7 @@ namespace TechSupport.WARE
             // Package myPackage = new Package(123456, 400, 500, 200, 400000, 2, 0);
 
             //Isle class has parameters: int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int capableWeightInGrams,
-            //category storageSpecifications[]
+            //spesification storageSpecifications[]
 
             //Isle isle1 = new Isle(50, 400, 500, 1000, 100000, 2);
 
@@ -88,7 +88,7 @@ namespace TechSupport.WARE
 
             // isle1.addPackage(myPackage, 1);
 
-            //locate returns isle, category and space
+            //locate returns isle, spesification and space
             //myPackage.getLocation();
 
             //return status, is it Reception, Storage, picking or delivery

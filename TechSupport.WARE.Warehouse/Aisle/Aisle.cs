@@ -17,16 +17,16 @@ namespace TechSupport.WARE.Warehouse
         private readonly int heightOfSpaceInMm;
         private readonly int depthOfSpaceInMm;
         private readonly int weightLimitInGrams;
-        private StorageSpecification category;
+        private StorageSpecification spesification;
 
-        public Aisle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification category, int aisleId)
+        public Aisle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification spesification, int aisleId)
         {
             this.numberOfSpaces = numberOfSpaces;
             this.lengthOfSpaceInMm = lengthOfSpaceInMm;
             this.heightOfSpaceInMm = heightOfSpaceInMm;
             this.depthOfSpaceInMm = depthOfSpaceInMm;
             this.weightLimitInGrams = weightLimitInGrams;
-            this.category = category;
+            this.spesification = spesification;
             this.aisleId = aisleId;
             shelf = [];
             for (int i = 1; i <= numberOfSpaces; i++)
@@ -48,16 +48,19 @@ namespace TechSupport.WARE.Warehouse
 
         public void AddPackage(Package package, int placement)
         {
+
+            if (this.spesification != package.Specification)
+                throw new InvalidOperationException($"Current package spesification, StorageSpesification.{package.Specification}, is not compatible with Aisle storage spesification, StorageSpesification.{this.spesification}");
             List<int> available = new(this.GetAvailableSpaces());
             if(available.Contains(placement))
             {
-            package.AddAisle(this);
-            package.ChangeStatus(StatusList.Storage);
+                package.AddAisle(this);
+                package.ChangeStatus(StatusList.Storage);
 
-            shelf[placement] = package;
+                shelf[placement] = package;
 
-            // for testing purposes later when simulating
-            Console.WriteLine("Package Added");
+                // for testing purposes later when simulating
+                Console.WriteLine("Package Added");
             }
             else
             {
@@ -77,6 +80,7 @@ namespace TechSupport.WARE.Warehouse
 
         }
         public int GetAisleId => this.aisleId;
+        public StorageSpecification GetStorageSpecification => this.spesification;
 
         public int GetPackagePlacement(Package package)
         {
