@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TechSupport.WARE.Warehouse.Exceptions;
 
 namespace TechSupport.WARE.Warehouse
 {
@@ -13,10 +14,18 @@ namespace TechSupport.WARE.Warehouse
         private string email, country, address;
         private int phoneNumber, postalCode;
 
-        public Contact(string firstName, string surName, string email, string address, string country, int phoneNumber, int postalCode)
+        public Contact(string firstName, string surname, string email, string address, string country, int phoneNumber, int postalCode)
         {
+            if (firstName.Any(Char.IsDigit))
+                throw new IntInStringException($"First name: {firstName} is not allowed to contain an Integer...");
+            if (surname.Any(Char.IsDigit))
+                throw new IntInStringException($"Surname: {surname} is not allowed to contain an Integer...");
+            if (!email.Contains("@"))
+                throw new InvalidEmailException($"Email: {email} does not contain the symbol @...");
+            if (country.Any(Char.IsDigit))
+                throw new IntInStringException($"Country: {country} is not allowed to contain an Integer...");
             this.firstName = firstName;
-            this.surname = surName;
+            this.surname = surname;
             this.email = email;
             this.country = country;
             this.address = address;
@@ -31,13 +40,23 @@ namespace TechSupport.WARE.Warehouse
         public string Email
         {
             get => this.email;
-            set => this.email = value;
+            set 
+            {
+                if (!value.Contains("@"))
+                    throw new InvalidEmailException($"Email: {value} does not contain the symbol @...");
+                this.email = value; 
+            }
         }
 
         public string Country
         {
             get => this.country;
-            set => this.country = value;
+            set
+            {
+                if (value.Any(Char.IsDigit))
+                    throw new IntInStringException($"Country: {value} is not allowed to contain an Integer...");
+                this.country = value;
+            }
         }
 
         public int PhoneNumber

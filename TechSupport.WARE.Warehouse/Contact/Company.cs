@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechSupport.WARE.Warehouse.Exceptions;
 
 namespace TechSupport.WARE.Warehouse
 {
@@ -16,7 +17,11 @@ namespace TechSupport.WARE.Warehouse
         private Contact contactPerson;
 
         public Company(string companyName, int companyCode, string address, string country, int postalCode) 
-        { 
+        {
+            if (companyName.Any(Char.IsDigit))
+                throw new IntInStringException($"Company name: {companyName} is not allowed to contain an Integer...");
+            if (country.Any(Char.IsDigit))
+                throw new IntInStringException($"Country: {country} is not allowed to contain an Integer...");
             this.companyName = companyName;
             this.companyCode = companyCode;
             this.address = address;
@@ -27,6 +32,10 @@ namespace TechSupport.WARE.Warehouse
 
         public Company(string companyName, int companyCode, string address, string country, int postalCode, Contact contactPerson)
         {
+            if (companyName.Any(Char.IsDigit))
+                throw new IntInStringException($"Company name: {companyName} is not allowed to contain an Integer...");
+            if (country.Any(Char.IsDigit))
+                throw new IntInStringException($"Country: {country} is not allowed to contain an Integer...");
             this.companyName = companyName;
             this.companyCode = companyCode;
             this.address = address;
@@ -38,7 +47,12 @@ namespace TechSupport.WARE.Warehouse
         public string CompanyName
         {
             get => companyName;
-            set => companyName = value;
+            set
+            {
+                if (value.Any(Char.IsDigit))
+                    throw new IntInStringException($"Company name: {value} is not allowed to contain an Integer...");
+                companyName = value;
+            }
         }
 
         public int CompanyCode => companyCode;
@@ -58,7 +72,12 @@ namespace TechSupport.WARE.Warehouse
         public string Country
         {
             get => country;
-            set => country = value;
+            set 
+            {
+                if (value.Any(Char.IsDigit))
+                    throw new IntInStringException($"Country: {value} is not allowed to contain an Integer...");
+                country = value; 
+            }
         }
 
         public Contact ContactPerson 
