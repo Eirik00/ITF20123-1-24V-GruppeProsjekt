@@ -43,8 +43,8 @@ namespace Simulation
             //Gjentagende ukentlig tar inn DayOfWeek.DAG som parameter i tilleg for å spesifisere sendings dag.
             Outgoing remaSending = new Outgoing();
             remaSending.OutgoingPackage(16.00, ol, warehouse, rema1000);
-            remaSending.RecurringDailyOutgoing(15.00, ol, warehouse, rema1000);
-            remaSending.RecurringWeeklyOutgoing(DayOfWeek.Monday, 14.00, cider, warehouse, rema1000);
+            remaSending.OutgoingDailyPackage(15.00, ol, warehouse, rema1000);
+            remaSending.OutgoingWeeklyPackage(DayOfWeek.Monday, 14.00, cider, warehouse, rema1000);
 
             //Mottak av varer inn i varehuset
             //mottak tid gjort om til double fra int

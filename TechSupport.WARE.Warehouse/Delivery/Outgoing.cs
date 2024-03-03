@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using TechSupport.WARE.Warehouse.Exceptions;
 
 namespace TechSupport.WARE.Warehouse
 {
@@ -26,6 +27,19 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="receiver">The receiver's contact information.</param>
         public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
+            if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
+                throw new InvalidDeliveryTimeException("Delivery hour and minute must be a valid double.");
+
+            if (sendingHourAndMinute.ToString().Length > 4)
+                throw new InvalidDeliveryTimeException("Sending hour and minute cannot exceed 4 digits.");
+
+            if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
+                string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
+                throw new InvalidContactCompanyInfoException("Sender's or receiver's information is incomplete or invalid.");
+
+            if (packages == null || !packages.Packages.Any())
+                throw new InvalidPackageListException("Invalid or empty package list.");
+
             foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
@@ -38,6 +52,22 @@ namespace TechSupport.WARE.Warehouse
             //packages.Packages.Clear();
             Console.WriteLine($"Vare Levering registrert for Kl. {sendingHourAndMinute} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
+        // Overload for sending of 1 single package
+        public void OutgoingPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
+        {
+            PackageList singlePackageList = new PackageList(0);
+            singlePackageList.AddPackage(package);
+            OutgoingPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
+        }
+
+        // Overload to be able to use Company object as a sender or receiver
+        public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        {
+            Contact sender = senderCompany.ContactPerson;
+            Contact receiver = receiverCompany.ContactPerson;
+
+            OutgoingPackage(sendingHourAndMinute, packages, sender, receiver);
+        }
 
         /// <summary>
         /// Registers a recurring daily sending of packages.
@@ -46,8 +76,21 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The packages to send</param>
         /// <param name="sender">The contact information of the sender.</param>
         /// <param name="receiver">The contact information of the receiver.</param>
-        public void RecurringDailyOutgoing(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
+        public void OutgoingDailyPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
+            if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
+                throw new InvalidDeliveryTimeException("Delivery hour and minute must be a valid double.");
+
+            if (sendingHourAndMinute.ToString().Length > 4)
+                throw new InvalidDeliveryTimeException("Sending hour and minute cannot exceed 4 digits.");
+
+            if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
+                string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
+                throw new InvalidContactCompanyInfoException("Sender's or receiver's information is incomplete or invalid.");
+
+            if (packages == null || !packages.Packages.Any())
+                throw new InvalidPackageListException("Invalid or empty package list.");
+
             foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
@@ -62,6 +105,21 @@ namespace TechSupport.WARE.Warehouse
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
         }
+        // Overload for sending of 1 single package
+        public void OutgoingDailyPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
+        {
+            PackageList singlePackageList = new PackageList(0);
+            singlePackageList.AddPackage(package);
+            OutgoingDailyPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
+        }
+        // Overload to be able to use Company object as a sender or receiver
+        public void OutgoingDailyPackage(double sendingHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        {
+            Contact sender = senderCompany.ContactPerson;
+            Contact receiver = receiverCompany.ContactPerson;
+
+            OutgoingDailyPackage(sendingHourAndMinute, packages, sender, receiver);
+        }
 
         /// <summary>
         /// Registers a recurring weekly sending of packages.
@@ -71,8 +129,21 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The packages to send.</param>
         /// <param name="sender">The contact information of the sender.</param>
         /// <param name="receiver">The contact information of the receiver.</param>
-        public void RecurringWeeklyOutgoing(DayOfWeek deliveryDay, double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
+        public void OutgoingWeeklyPackage(DayOfWeek deliveryDay, double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
+            if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
+                throw new InvalidDeliveryTimeException("Delivery hour and minute must be a valid double.");
+
+            if (sendingHourAndMinute.ToString().Length > 4)
+                throw new InvalidDeliveryTimeException("Sending hour and minute cannot exceed 4 digits.");
+
+            if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
+                string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
+                throw new InvalidContactCompanyInfoException("Sender's or receiver's information is incomplete or invalid.");
+
+            if (packages == null || !packages.Packages.Any())
+                throw new InvalidPackageListException("Invalid or empty package list.");
+
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(sendingHourAndMinute);
 
             foreach (Package package in packages.Packages)
@@ -86,6 +157,22 @@ namespace TechSupport.WARE.Warehouse
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
             Console.WriteLine($"Gjentagende Ukentlig Vare Outgoing Registrert for {deliveryDay} Kl {sendingHourAndMinute}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+        }
+        // Overload for sending of 1 single package
+        public void OutgoingWeeklyPackage(DayOfWeek deliveryDay,double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
+        {
+            PackageList singlePackageList = new PackageList(0);
+            singlePackageList.AddPackage(package);
+            OutgoingWeeklyPackage(deliveryDay,sendingHourAndMinute, singlePackageList, sender, receiver);
+        }
+
+        // Overload to be able to use Company object as a sender or receiver
+        public void OutgoingWeeklyPackage(DayOfWeek deliveryDay, double sendingHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        {
+            Contact sender = senderCompany.ContactPerson;
+            Contact receiver = receiverCompany.ContactPerson;
+
+            OutgoingWeeklyPackage(deliveryDay, sendingHourAndMinute, packages, sender, receiver);
         }
 
 
