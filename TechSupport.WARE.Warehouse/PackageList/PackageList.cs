@@ -12,6 +12,9 @@ namespace TechSupport.WARE.Warehouse
         private readonly int listId = listId;
         private List<Package> packages = [];
   
+        /// <summary>
+        /// Adds a package to the packagelist
+        /// </summary>
         public void AddPackage(Package package)
         {
             if (packages.Contains(package))
@@ -24,6 +27,9 @@ namespace TechSupport.WARE.Warehouse
             }
         }
 
+        /// <summary>
+        /// Removes a package from the list
+        /// </summary>
         public void RemovePackage(Package package)
         {
             packages.Remove(package);
@@ -31,6 +37,9 @@ namespace TechSupport.WARE.Warehouse
 
         public List<Package> Packages => packages;
 
+        /// <summary>
+        /// Returns a formatted string of the IDs of all packages in the packagelist
+        /// </summary>
         public string SeePackagesInList()
         {
             if (packages.Count == 0)
@@ -53,9 +62,13 @@ namespace TechSupport.WARE.Warehouse
             }
             }
 
-            public String ShowPackagesSortedByLenght()
+
+        /// <summary>
+        /// Returns a formatted string of all packages in the packagelist sorted by their lenght in descending order
+        /// </summary>
+        public String ShowPackagesSortedByLenght()
         {
-            string tempString = "Packages in the list sorted by weight descending: \n";
+            string tempString = "Packages in the list sorted by lenght descending: \n";
 
             List<Package> tempList = packages;
 
@@ -78,6 +91,10 @@ namespace TechSupport.WARE.Warehouse
 
             return tempString;
         }
+
+        /// <summary>
+        /// Returns a formatted string of all packages in the packagelist sorted by their height in descending order
+        /// </summary>
         public String ShowPackagesSortedByHeight()
         {
             string tempString = "Packages in the list sorted by height descending: \n";
@@ -104,6 +121,9 @@ namespace TechSupport.WARE.Warehouse
             return tempString;
         }
 
+        /// <summary>
+        /// Returns a formatted string of all packages in the packagelist sorted by their depth in descending order
+        /// </summary>
         public String ShowPackagesSortedByDepth()
         {
             string tempString = "Packages in the list sorted by depth descending: \n";
@@ -130,6 +150,9 @@ namespace TechSupport.WARE.Warehouse
             return tempString;
         }
 
+        /// <summary>
+        /// Returns a formatted string of all packages in the packagelist sorted by their weight in descending order
+        /// </summary>
         public String ShowPackagesSortedByWeight()
         {
             string tempString = "Packages in the list sorted by weight descending: \n";
@@ -156,6 +179,9 @@ namespace TechSupport.WARE.Warehouse
             return tempString;
         }
 
+        /// <summary>
+        /// Returns a formatted string of the total weight of all packages in the packagelist
+        /// </summary>
         public string TotalWeightOfAllPackages()
         {
             int tempweight = 0;
@@ -167,6 +193,7 @@ namespace TechSupport.WARE.Warehouse
 
             return "The total combined weight of all packages in the list is: " + tempweight + " grams.\n";
         }
+
 
         /*public string ShowPackagesSortedByVolume()
         {
