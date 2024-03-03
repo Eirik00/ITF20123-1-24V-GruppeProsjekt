@@ -38,8 +38,8 @@ namespace TechSupport.WARE.Warehouse
         public DateTime DeliveryTime;
         readonly PackageLog packageLog = new();
         private Aisle? packageAisle;
-        public int ShipmentNumber { get; set; }
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification, int ShipmentNumber)
+
+        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
         {
             if (idCheck.Contains(packageId))
             {
@@ -58,7 +58,6 @@ namespace TechSupport.WARE.Warehouse
                 this.sender = new Contact("", "", "", "", "", 0, 0);
                 this.receiver = new Contact("", "", "", "", "", 0, 0);
                 this.DeliveryTime = default;
-                this.ShipmentNumber = default;
 
                 packageLog.LogChange(null, StatusList.Invalid, status, "Package initialized");
                 idCheck.Add(packageId);

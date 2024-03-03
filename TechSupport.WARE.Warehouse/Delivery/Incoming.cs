@@ -11,17 +11,10 @@ namespace TechSupport.WARE.Warehouse
     public class Incoming : IIncoming
     {
         private List<Package> incomingPackagesList;
-        private int nextIncomingShipmentNumber = 1;
-
 
         public Incoming()
         {
             incomingPackagesList = [];
-        }
-
-        private int NextIncomingShipmentNumber
-        {
-            get { return nextIncomingShipmentNumber++; }
         }
 
         /// <summary>
@@ -51,7 +44,6 @@ namespace TechSupport.WARE.Warehouse
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.AddHours(deliveryHourAndMinute);
-                package.ShipmentNumber = NextIncomingShipmentNumber;
                 package.ChangeStatus(StatusList.Ordered);
                 IncomingPackagesList.Add(package);
             }
