@@ -55,15 +55,36 @@ namespace TechSupport.WARE.Warehouse
                     $" StorageSpesification.{package.Specification}," +
                     " is not compatible with Aisle storage spesification," +
                     $" StorageSpesification.{this.spesification}");
-            if (this.depthOfSpaceInMm < package.PackageDepthInMm)
-                throw new NotEnoughSpaceException($"Package depth({package.PackageDepthInMm}mm)" +
-                    $" is too big for Aisle({this.depthOfSpaceInMm}mm)");
             if (this.totalWeight + package.PackageWeightInGrams > this.weightLimitInGrams)
                 throw new WeightLimitException($"Package({package.PackageWeightInGrams}g)" +
                     " is too heavy for the " +
                     $"Aisle({this.totalWeight}/{this.weightLimitInGrams}g)");
             if(!available.Contains(placement))
                 throw new Exception("This shelf space does not exist or is already taken");
+
+            int[] dimensions = {this.depthOfSpaceInMm, this.heightOfSpaceInMm, this.lengthOfSpaceInMm};
+
+            for(int i = 0; i < 3; i++)
+            {
+                if (package.PackageDepthInMm > dimensions[i])
+                {
+                    throw new Exception("Package depth of: " + package.PackageDepthInMm + " is too large for this shelf");
+                }
+                else dimensions[i] = 0;
+
+                if (package.PackageHeightInMm > dimensions[i])
+                {
+                    throw new Exception("Package height of: " + package.PackageHeightInMm + " is too large for this shelf");
+                }
+                else dimensions[i] = 0;
+
+                if (package.PackageLengthInMm > dimensions[i])
+                {
+                    throw new Exception("Package lenght of: " + package.PackageLengthInMm + " is too large for this shelf");
+                }
+                else dimensions[i] = 0;
+            }
+
             this.totalWeight += package.PackageWeightInGrams;
             package.AddAisle(this);
             package.ChangeStatus(StatusList.Storage);
