@@ -16,7 +16,7 @@ namespace TechSupport.WARE.Warehouse
         {
             if (packages.Contains(package))
             {
-                Console.WriteLine("The package is allready in the list");
+                throw new Exception("The package is allready in the list");
             }
             else
             {
@@ -33,17 +33,27 @@ namespace TechSupport.WARE.Warehouse
 
         public string SeePackagesInList()
         {
-            string temp = "The list contains packages with following Id: ";
-
-            foreach (Package package in packages)
+            if (packages.Count == 0)
             {
-                temp += package.PackageId + "   ";
+                return "The list does not contain any packages";
             }
 
-            return temp;
-        }
+            else
+            {
 
-        public String ShowPackagesSortedByLenght()
+                string temp = "The list contains packages with following Id: ";
+
+                foreach (Package package in packages)
+                {
+                    temp += package.PackageId + "   ";
+                }
+
+                return temp;
+
+            }
+            }
+
+            public String ShowPackagesSortedByLenght()
         {
             string tempString = "Packages in the list sorted by weight descending: \n";
 
