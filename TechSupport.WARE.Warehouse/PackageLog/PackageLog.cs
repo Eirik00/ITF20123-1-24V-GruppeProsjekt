@@ -62,11 +62,21 @@ namespace TechSupport.WARE.Warehouse
             else 
                 return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: " + this.aisle.GetAisleId;
 
-        }    
+        }
     }
-
+    /// <summary>
+    /// A class that contains a list of PackageLogEntries
+    /// <para>
+    /// and has the following methods:
+    /// <item>    - <description>LogChange</description></item> 
+    /// <item>    - <description>GetEntries</description></item> 
+    /// <item>    - <description>GetTimeSpanOnStatus</description></item> 
+    /// <item>    - <description>GetTotalTimeInWarehouse</description></item> 
+    /// </para>
+    /// </summary>
     public class PackageLog : IPackageLog
     {
+        
         internal PackageLog() { } // For å ungå at brukeren kan lage packagelog
         private readonly List<PackageLogEntry> packageHistory = [];
         public int Entries => packageHistory.Count;

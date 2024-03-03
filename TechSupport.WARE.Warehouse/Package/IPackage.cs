@@ -59,7 +59,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="description">*optional* description if needed</param>
         void ChangeStatus(StatusList newStatus, String description);
         /// <summary>
-        /// List <c>GetPackageLog()</c> gets the package log object
+        /// PackageLog <c>GetPackageLog()</c> returns a PackageLog object corresponding to the package
         /// </summary>
         /// <returns>PackageLog</returns>
         PackageLog GetPackageLog();

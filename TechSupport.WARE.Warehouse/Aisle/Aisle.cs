@@ -51,11 +51,17 @@ namespace TechSupport.WARE.Warehouse
         {
             List<int> available = new(this.GetAvailableSpaces());
             if (this.spesification != package.Specification)
-                throw new InvalidOperationException($"Current package spesification, StorageSpesification.{package.Specification}, is not compatible with Aisle storage spesification, StorageSpesification.{this.spesification}");
+                throw new InvalidOperationException("Current package spesification," +
+                    $" StorageSpesification.{package.Specification}," +
+                    " is not compatible with Aisle storage spesification," +
+                    $" StorageSpesification.{this.spesification}");
             if (this.depthOfSpaceInMm < package.PackageDepthInMm)
-                throw new NotEnoughSpaceException($"Package depth({package.PackageDepthInMm}mm) is too big for Aisle({this.depthOfSpaceInMm}mm)");
+                throw new NotEnoughSpaceException($"Package depth({package.PackageDepthInMm}mm)" +
+                    $" is too big for Aisle({this.depthOfSpaceInMm}mm)");
             if (this.totalWeight + package.PackageWeightInGrams > this.weightLimitInGrams)
-                throw new WeightLimitException($"Package({package.PackageWeightInGrams}g) is too heavy for the Aisle({this.totalWeight}/{this.weightLimitInGrams}g)");
+                throw new WeightLimitException($"Package({package.PackageWeightInGrams}g)" +
+                    " is too heavy for the " +
+                    $"Aisle({this.totalWeight}/{this.weightLimitInGrams}g)");
             if(!available.Contains(placement))
                 throw new Exception("This shelf space does not exist or is already taken");
             this.totalWeight += package.PackageWeightInGrams;

@@ -9,7 +9,9 @@ namespace TechSupport.WARE.Warehouse
     public class NotEnoughSpaceException : Exception
     {
         public NotEnoughSpaceException() :base() {}
-        public NotEnoughSpaceException(string message) : base(message) { }
-        public NotEnoughSpaceException(string message, Exception innerException) : base(message, innerException) { }
+        public NotEnoughSpaceException(string message) 
+            : base(message) { }
+        public NotEnoughSpaceException(string message, Exception innerException) 
+            : base(message, innerException) { }
     }
 }

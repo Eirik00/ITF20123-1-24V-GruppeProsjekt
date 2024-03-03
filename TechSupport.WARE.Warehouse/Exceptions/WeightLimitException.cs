@@ -9,7 +9,9 @@ namespace TechSupport.WARE.Warehouse
     public class WeightLimitException : Exception
     {
         public WeightLimitException() : base(){ }
-        public WeightLimitException(string message) : base(message) { }
-        public WeightLimitException(string message, Exception innerException) : base(message, innerException) { }
+        public WeightLimitException(string message) 
+            : base(message) { }
+        public WeightLimitException(string message, Exception innerException) 
+            : base(message, innerException) { }
     }
 }
