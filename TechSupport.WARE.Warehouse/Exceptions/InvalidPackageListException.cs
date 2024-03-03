@@ -9,9 +9,7 @@ namespace TechSupport.WARE.Warehouse.Exceptions
     public class InvalidPackageListException : Exception
     {
         public InvalidPackageListException() { }
-
         public InvalidPackageListException(string message) : base(message) { }
-
         public InvalidPackageListException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

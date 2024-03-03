@@ -11,19 +11,26 @@ namespace TechSupport.WARE.Warehouse
     public class Incoming : IIncoming
     {
         private List<Package> incomingPackagesList;
+        private int nextIncomingShipmentNumber = 1;
+
 
         public Incoming()
         {
             incomingPackagesList = [];
         }
 
+        private int NextIncomingShipmentNumber
+        {
+            get { return nextIncomingShipmentNumber++; }
+        }
+
         /// <summary>
         /// Receives packages with the specified delivery time, sender, and receiver information.
         /// </summary>
         /// <param name="deliveryHourAndMinute">The time of delivery in double eks: 16.33</param>
-        /// <param name="packages">The list of packages to be received.</param>
-        /// <param name="sender">The contact information of the sender.</param>
-        /// <param name="receiver">The contact information of the receiver.</param>
+        /// <param name="packages">The list of packages to be received.The instances of the package class that you have created.</param>
+        /// <param name="sender">The contact information of the sender. The object of the Contact or Company classes.</param>
+        /// <param name="receiver">The contact information of the receiver.The object of the Contact or Company classes</param>
         public void IncomingPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
@@ -44,6 +51,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.AddHours(deliveryHourAndMinute);
+                package.ShipmentNumber = NextIncomingShipmentNumber;
                 package.ChangeStatus(StatusList.Ordered);
                 IncomingPackagesList.Add(package);
             }
@@ -70,9 +78,9 @@ namespace TechSupport.WARE.Warehouse
         /// Receives packages with daily recurrence at the specified delivery hour, sender, and receiver information.
         /// </summary>
         /// <param name="deliveryHourAndMinute">The hour of delivery in double eks: 13.45</param>
-        /// <param name="packages">The list of packages to receive.</param>
-        /// <param name="sender">The contact information of the sender.</param>
-        /// <param name="receiver">The contact information of the receiver.</param>
+        /// <param name="packages">The list of packages to receive. The instance of the package class</param>
+        /// <param name="sender">The contact information of the sender.The object of the Contact or Company classes</param>
+        /// <param name="receiver">The contact information of the receiver.The object of the Contact or Company classes</param>
         public void IncomingDailyPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
@@ -120,10 +128,10 @@ namespace TechSupport.WARE.Warehouse
         /// Receives packages with weekly recurrence on the specified delivery day and hour, with sender and receiver information.
         /// </summary>
         /// <param name="deliveryDay">The day of the week for delivery </param>
-        /// <param name="deliveryHourAndMinute">The hour of delivery.</param>
-        /// <param name="packages">The list of packages to import.</param>
-        /// <param name="sender">The contact information of the sender.</param>
-        /// <param name="receiver">The contact information of the receiver.</param>
+        /// <param name="deliveryHourAndMinute">The hour of delivery. For eks: 14.33</param>
+        /// <param name="packages">The list of packages to receive. The instance of the package class</param>
+        /// <param name="sender">The contact information of the sender. The object of the Contact or Company classes</param>
+        /// <param name="receiver">The contact information of the receiver. The object of the Contact or Company classes</param>
         public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute,PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))

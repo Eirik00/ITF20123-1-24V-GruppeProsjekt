@@ -20,10 +20,10 @@ namespace TechSupport.WARE.Warehouse
                 throw new IntInStringException($"First name: {firstName} is not allowed to contain an Integer...");
             if (surname.Any(Char.IsDigit))
                 throw new IntInStringException($"Surname: {surname} is not allowed to contain an Integer...");
-            if (!email.Contains("@"))
-                throw new InvalidEmailException($"Email: {email} does not contain the symbol @...");
-            if (country.Any(Char.IsDigit))
-                throw new IntInStringException($"Country: {country} is not allowed to contain an Integer...");
+            //if (!email.Contains("@"))
+            //    throw new InvalidEmailException($"Email: {email} does not contain the symbol @...");
+            //if (country.Any(Char.IsDigit))
+            //    throw new IntInStringException($"Country: {country} is not allowed to contain an Integer...");
             this.firstName = firstName;
             this.surname = surname;
             this.email = email;

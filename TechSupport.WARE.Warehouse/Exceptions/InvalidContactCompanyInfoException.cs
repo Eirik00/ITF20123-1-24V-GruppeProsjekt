@@ -9,9 +9,7 @@ namespace TechSupport.WARE.Warehouse.Exceptions
     public class InvalidContactCompanyInfoException : Exception
     {
         public InvalidContactCompanyInfoException() { }
-
         public InvalidContactCompanyInfoException(string message) : base(message) { }
-
         public InvalidContactCompanyInfoException(string message, Exception innerException) : base(message, innerException) { }
     }
 }

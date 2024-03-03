@@ -10,21 +10,26 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Outgoing : IOutgoing
     {
-        //Packages to be sent are added to this list
         private List<PackageList> outgoingPackagesList;
+        private int nextOutgoingShipmentNumber = 1;
 
         public Outgoing()
         {
             outgoingPackagesList = [];
         }
 
+        private int NextOutgoingShipmentNumber
+        {
+            get { return nextOutgoingShipmentNumber++; }
+        }
+
         /// <summary>
         /// Outgoing packages with specified delivery information.
         /// </summary>
         /// <param name="sendingHourAndMinute">The time of the day the delivery is estimated to arrive to receiver in double hours&Minutes Eks: 14.33</param>
-        /// <param name="packages">packages to send.</param>
-        /// <param name="sender">The sender's contact information.</param>
-        /// <param name="receiver">The receiver's contact information.</param>
+        /// <param name="packages">packages to send. The instance of the package class</param>
+        /// <param name="sender">The sender's contact information. The object of the Contact or Company classes</param>
+        /// <param name="receiver">The receiver's contact information. The object of the Contact or Company classes</param>
         public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
@@ -45,6 +50,7 @@ namespace TechSupport.WARE.Warehouse
                 package.Sender = sender;
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.AddHours(sendingHourAndMinute);
+                package.ShipmentNumber = NextOutgoingShipmentNumber;
                 package.ChangeStatus(StatusList.Delivery);
                 OutgoingPackagesList.Add(packages);    
             }
@@ -73,9 +79,9 @@ namespace TechSupport.WARE.Warehouse
         /// Registers a recurring daily sending of packages.
         /// </summary>
         /// <param name="sendingHourAndMinute">The time of the day the delivery is meant to arrive in hours&minute eks 13.44</param>
-        /// <param name="packages">The packages to send</param>
-        /// <param name="sender">The contact information of the sender.</param>
-        /// <param name="receiver">The contact information of the receiver.</param>
+        /// <param name="packages">The packages to send. The Instance of the package class</param>
+        /// <param name="sender">The contact information of the sender. The object of the Contact or Company classes</param>
+        /// <param name="receiver">The contact information of the receiver. The object of the Contact or Company classes</param>
         public void OutgoingDailyPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
@@ -126,9 +132,9 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <param name="deliveryDay">The day of the week for the delivery Eks: DayOfWeek.Wednesday </param>
         /// <param name="sendingHourAndMinute">The hour of delivery in double eks 14.35</param>
-        /// <param name="packages">The packages to send.</param>
-        /// <param name="sender">The contact information of the sender.</param>
-        /// <param name="receiver">The contact information of the receiver.</param>
+        /// <param name="packages">The packages to send. The Instance of the package class</param>
+        /// <param name="sender">The contact information of the sender. The object of the Contact or Company classes</param>
+        /// <param name="receiver">The contact information of the receiver. The object of the Contact or Company classes</param>
         public void OutgoingWeeklyPackage(DayOfWeek deliveryDay, double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))

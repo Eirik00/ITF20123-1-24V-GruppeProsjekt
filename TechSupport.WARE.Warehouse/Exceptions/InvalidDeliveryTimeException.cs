@@ -9,9 +9,7 @@ namespace TechSupport.WARE.Warehouse.Exceptions
     public class InvalidDeliveryTimeException : Exception
     {
         public InvalidDeliveryTimeException() { }
-
         public InvalidDeliveryTimeException(string message) : base(message) { }
-
         public InvalidDeliveryTimeException(string message, Exception innerException) : base(message, innerException) { }
     }
 }
