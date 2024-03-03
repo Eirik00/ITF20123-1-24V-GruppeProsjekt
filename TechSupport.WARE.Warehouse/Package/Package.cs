@@ -39,6 +39,18 @@ namespace TechSupport.WARE.Warehouse
         readonly PackageLog packageLog = new();
         private Aisle? packageAisle;
 
+        //shipment number feature ''attempts''
+        //Skal prøve å gi hver pakke instanse av Package som er oprettet en random forsendelse nummer.
+        //forsendel nummeret er generert i konstrøktøren
+        private static readonly Random random = new Random();
+        private int shipmentNumber;
+
+        public int ShipmentNumber
+        {
+            get { return shipmentNumber; }
+            private set { shipmentNumber = value; }
+        }
+
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
         {
             if (idCheck.Contains(packageId))
@@ -58,6 +70,7 @@ namespace TechSupport.WARE.Warehouse
                 this.sender = new Contact("", "", "", "", "", 0, 0);
                 this.receiver = new Contact("", "", "", "", "", 0, 0);
                 this.DeliveryTime = default;
+                ShipmentNumber = random.Next(10, 601);
 
                 packageLog.LogChange(null, StatusList.Invalid, status, "Package initialized");
                 idCheck.Add(packageId);

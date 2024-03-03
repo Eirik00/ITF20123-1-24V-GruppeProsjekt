@@ -84,6 +84,17 @@ namespace TechSupport.WARE
             }
 
             Console.WriteLine("Simulasjon slutt");
+
+            ////shipmentnumber testing:
+            //// Create package objects
+            //Package package1 = new Package(1, 100, 50, 30, 2000, false, StorageSpecification.DryStorage);
+            //Package package2 = new Package(2, 150, 70, 40, 3000, true, StorageSpecification.ColdStorage);
+            //Package package3 = new Package(3, 120, 60, 35, 2500, false, StorageSpecification.DryStorage);
+
+            //// Output shipment numbers
+            //Console.WriteLine($"Package 1 Shipment Number: {package1.ShipmentNumber}");
+            //Console.WriteLine($"Package 2 Shipment Number: {package2.ShipmentNumber}");
+            //Console.WriteLine($"Package 3 Shipment Number: {package3.ShipmentNumber}");
         }
     }
 }
