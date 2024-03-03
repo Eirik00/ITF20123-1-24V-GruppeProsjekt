@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using TechSupport.WARE.Warehouse.Exceptions;
 
 namespace TechSupport.WARE.Warehouse
 {
@@ -25,6 +26,19 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="receiver">The contact information of the receiver.</param>
         public void IncomingPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
+            if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
+                throw new InvalidDeliveryTimeException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
+
+            if (deliveryHourAndMinute.ToString().Length > 4)
+                throw new InvalidDeliveryTimeException("Delivery hour and minute cannot exceed 4 digits.");
+
+            if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
+                string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
+                throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
+
+            if (packages == null || !packages.Packages.Any())
+                throw new InvalidPackageListException("Invalid or empty package list.");
+
             foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
@@ -34,6 +48,22 @@ namespace TechSupport.WARE.Warehouse
                 IncomingPackagesList.Add(package);
             }
             Console.WriteLine($"Vare Mottak registerert for Kl {deliveryHourAndMinute} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
+        }
+        // Overload for receiving of 1 single package
+        public void IncomingPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
+        {
+            PackageList singlePackageList = new PackageList(0);
+            singlePackageList.AddPackage(package);
+            IncomingPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
+        }
+
+        // Overload to be able to use Company object as a sender or receiver
+        public void IncomingPackage(double deliveryHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        {
+            Contact sender = senderCompany.ContactPerson;
+            Contact receiver = receiverCompany.ContactPerson;
+
+            IncomingPackage(deliveryHourAndMinute, packages, sender, receiver);
         }
 
         /// <summary>
@@ -45,6 +75,19 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="receiver">The contact information of the receiver.</param>
         public void IncomingDailyPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
+            if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
+                throw new InvalidDeliveryTimeException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
+
+            if (deliveryHourAndMinute.ToString().Length > 4)
+                throw new InvalidDeliveryTimeException("Delivery hour and minute cannot exceed 4 digits.");
+
+            if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
+                string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
+                throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
+
+            if (packages == null || !packages.Packages.Any())
+                throw new InvalidPackageListException("Invalid or empty package list.");
+
             foreach (Package package in packages.Packages)
             {
                 package.Sender = sender;
@@ -56,17 +99,21 @@ namespace TechSupport.WARE.Warehouse
             }
             Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHourAndMinute} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
         }
-
-        public void DailyPackageImport(double deliveryHour, Package package, Contact sender, Contact receiver)
+        // Overload for receiving of 1 single package
+        public void IncomingDailyPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-                package.Sender = sender;
-                package.Receiver = receiver;
-                DateTime deliveryTime = DateTime.Today.AddHours(deliveryHour);
-                package.DeliveryTime = deliveryTime;
-                package.ChangeStatus(StatusList.Ordered);
-                IncomingPackagesList.Add(package);
-            
-            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHour} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
+            PackageList singlePackageList = new PackageList(0);
+            singlePackageList.AddPackage(package);
+            IncomingDailyPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
+        }
+
+        // Overload to be able to use Company object as a sender or receiver
+        public void IncomingDailyPackage(double deliveryHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        {
+            Contact sender = senderCompany.ContactPerson;
+            Contact receiver = receiverCompany.ContactPerson;
+
+            IncomingDailyPackage(deliveryHourAndMinute, packages, sender, receiver);
         }
 
         /// <summary>
@@ -79,6 +126,19 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="receiver">The contact information of the receiver.</param>
         public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute,PackageList packages, Contact sender, Contact receiver)
         {
+            if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
+                throw new InvalidDeliveryTimeException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
+
+            if (deliveryHourAndMinute.ToString().Length > 4)
+                throw new InvalidDeliveryTimeException("Delivery hour and minute cannot exceed 4 digits.");
+
+            if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
+                string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
+                throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
+
+            if (packages == null || !packages.Packages.Any())
+                throw new InvalidPackageListException("Invalid or empty package list.");
+
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHourAndMinute);
 
             foreach (Package package in packages.Packages)
@@ -92,17 +152,21 @@ namespace TechSupport.WARE.Warehouse
             Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHourAndMinute} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
         }
 
-        public void WeeklyPackageImport(DayOfWeek deliveryDay, double deliveryHour, Package package, Contact sender, Contact receiver)
+        // Overload for receiving of 1 single package
+        public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHour);
+            PackageList singlePackageList = new PackageList(0);
+            singlePackageList.AddPackage(package);
+            IncomingWeeklyPackage(deliveryDay, deliveryHourAndMinute, singlePackageList, sender, receiver);
+        }
 
-                package.Sender = sender;
-                package.Receiver = receiver;
-                package.DeliveryTime = nextDeliveryDate;
-                package.ChangeStatus(StatusList.Ordered);
-                IncomingPackagesList.Add(package);
-            
-            Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHour} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+        // Overload to be able to use Company object as a sender or receiver
+        public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        {
+            Contact sender = senderCompany.ContactPerson;
+            Contact receiver = receiverCompany.ContactPerson;
+
+            IncomingWeeklyPackage(deliveryDay, deliveryHourAndMinute, packages, sender, receiver);
         }
 
         //Denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres mottal til neste forekomst av den dagen i neste uke.

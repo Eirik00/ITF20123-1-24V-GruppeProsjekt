@@ -30,18 +30,18 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The list packages to be delivered.</param>
         /// <param name="sender">The sender of the packages.</param>
         /// <param name="receiver">The receiver of the packages.</param>
-        void RecurringDailyOutgoing(double deliveryHour,PackageList packages, Contact sender, Contact receiver);
+        void OutgoingDailyPackage(double deliveryHour,PackageList packages, Contact sender, Contact receiver);
 
         /// <summary>
         /// Sets up weekly recurring delivery for a list of packages.
-        /// Functions same as RecurringDailyOutgoing,but on a weekly basis,It allows users to specify which day of the week deliveries are to occur.
+        /// Functions same as OutgoingDailyPackage,but on a weekly basis,It allows users to specify which day of the week deliveries are to occur.
         /// </summary>
         /// <param name="deliveryDay">The days of the week for delivery Eks: DayOfWeek.Monday</param>
         /// <param name="deliveryTime">The time of the day for delivery in double Eks: 13.44</param>
         /// <param name="packages">The list of packages to be delivered.</param>
         /// <param name="sender">The sender of the packages.</param>
         /// <param name="receiver">The receiver of the packages.</param>
-        void RecurringWeeklyOutgoing(DayOfWeek deliveryDay, double deliveryTime, PackageList packages, Contact sender, Contact receiver);
+        void OutgoingWeeklyPackage(DayOfWeek deliveryDay, double deliveryTime, PackageList packages, Contact sender, Contact receiver);
 
         /// <summary>
         /// Is ment to convert the delivery information into more easly readlable string format, but might actually do the opposite due to reasons
