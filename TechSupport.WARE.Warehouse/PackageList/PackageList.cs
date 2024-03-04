@@ -9,17 +9,11 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackageList<Package>() : IList<Package>
+    public class PackageList : IList<Package>
     {
-        private readonly int listId;
         private List<Package> packages = [];
 
-        /// <summary>
-        /// Removes a package from the list
-        /// </summary>
-
         public List<Package> Packages => packages;
-
         public int Count => packages.Count;
 
         public bool IsReadOnly => false;
@@ -49,7 +43,7 @@ namespace TechSupport.WARE.Warehouse
                 return temp;
 
             }
-            }
+        }
 
 
         /// <summary>
@@ -185,17 +179,17 @@ namespace TechSupport.WARE.Warehouse
 
         public int IndexOf(Package item)
         {
-            throw new NotImplementedException();
+            return packages.IndexOf(item);
         }
 
         public void Insert(int index, Package item)
         {
-            throw new NotImplementedException();
+            packages.Insert(index, item);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            packages.RemoveAt(index);
         }
 
         public void Add(Package item)
@@ -212,17 +206,17 @@ namespace TechSupport.WARE.Warehouse
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            packages.Clear();
         }
 
         public bool Contains(Package item)
         {
-            throw new NotImplementedException();
+            return packages.Contains(item);
         }
 
         public void CopyTo(Package[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            packages.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(Package item)
@@ -232,12 +226,12 @@ namespace TechSupport.WARE.Warehouse
 
         public IEnumerator<Package> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return packages.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
 

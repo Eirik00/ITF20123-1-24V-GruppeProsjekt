@@ -42,7 +42,7 @@ namespace TechSupport.WARE.Warehouse
         //shipment number feature ''attempts''
         //Skal prøve å gi hver pakke instanse av Package som er oprettet en random forsendelse nummer.
         //forsendel nummeret er generert i konstrøktøren
-        private static readonly Random random = new Random();
+        private static readonly Random random = new();
         private int shipmentNumber;
 
         public int ShipmentNumber

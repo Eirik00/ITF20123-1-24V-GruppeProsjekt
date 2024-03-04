@@ -36,7 +36,7 @@ namespace TechSupport.WARE.Warehouse
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
                 throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
 
-            if (packages == null || !packages.Packages.Any())
+            if (packages == null || packages.Count == 0)
                 throw new InvalidPackageListException("Invalid or empty package list.");
 
             foreach (Package package in packages.Packages)
@@ -52,8 +52,7 @@ namespace TechSupport.WARE.Warehouse
         // Overload for receiving of 1 single package
         public void IncomingPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = new PackageList(0);
-            singlePackageList.AddPackage(package);
+            PackageList singlePackageList = [package];
             IncomingPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
         }
 
@@ -85,7 +84,7 @@ namespace TechSupport.WARE.Warehouse
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
                 throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
 
-            if (packages == null || !packages.Packages.Any())
+            if (packages == null || packages.Count == 0)
                 throw new InvalidPackageListException("Invalid or empty package list.");
 
             foreach (Package package in packages.Packages)
@@ -102,13 +101,12 @@ namespace TechSupport.WARE.Warehouse
         // Overload for receiving of 1 single package
         public void IncomingDailyPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = new PackageList(0);
-            singlePackageList.AddPackage(package);
+            PackageList singlePackageList = [package];
             IncomingDailyPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
         }
 
         // Overload to be able to use Company object as a sender or receiver
-        public void IncomingDailyPackage(double deliveryHourAndMinute, List<Package> packages, Company senderCompany, Company receiverCompany)
+        public void IncomingDailyPackage(double deliveryHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
@@ -136,7 +134,7 @@ namespace TechSupport.WARE.Warehouse
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
                 throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
 
-            if (packages == null || !packages.Packages.Any())
+            if (packages == null || packages.Count == 0)
                 throw new InvalidPackageListException("Invalid or empty package list.");
 
             var nextDeliveryDate = GetNextWeekday(DateTime.Today, deliveryDay).AddHours(deliveryHourAndMinute);
@@ -155,8 +153,7 @@ namespace TechSupport.WARE.Warehouse
         // Overload for receiving of 1 single package
         public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = new PackageList(0);
-            singlePackageList.AddPackage(package);
+            PackageList singlePackageList = [package];
             IncomingWeeklyPackage(deliveryDay, deliveryHourAndMinute, singlePackageList, sender, receiver);
         }
 
