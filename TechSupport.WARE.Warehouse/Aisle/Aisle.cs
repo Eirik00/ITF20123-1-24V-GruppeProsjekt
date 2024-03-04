@@ -83,11 +83,11 @@ namespace TechSupport.WARE.Warehouse
             }
             else if (package.PackageLengthInMm <= dimensions[1])
             {
-                dimensions[0] = 0;
+                dimensions[1] = 0;
             }
             else if (package.PackageLengthInMm <= dimensions[2])
             {
-                dimensions[0] = 0;
+                dimensions[2] = 0;
             }
             else throw new NotEnoughSpaceException("Package is too large for this shelf");
 
@@ -97,11 +97,11 @@ namespace TechSupport.WARE.Warehouse
             }
             else if (package.PackageHeightInMm <= dimensions[1])
             {
-                dimensions[0] = 0;
+                dimensions[1] = 0;
             }
             else if (package.PackageHeightInMm <= dimensions[2])
             {
-                dimensions[0] = 0;
+                dimensions[2] = 0;
             }
             else throw new NotEnoughSpaceException("Package is too large for this shelf");
 
@@ -111,11 +111,11 @@ namespace TechSupport.WARE.Warehouse
             }
             else if (package.PackageDepthInMm <= dimensions[1])
             {
-                dimensions[0] = 0;
+                dimensions[1] = 0;
             }
             else if (package.PackageDepthInMm <= dimensions[2])
             {
-                dimensions[0] = 0;
+                dimensions[2] = 0;
             }
             else throw new NotEnoughSpaceException("Package is too large for this shelf");*/
 
