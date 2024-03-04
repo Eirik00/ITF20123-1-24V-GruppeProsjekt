@@ -60,7 +60,7 @@ namespace TechSupport.WARE.Warehouse
                     " is too heavy for the " +
                     $"Aisle({this.totalWeight}/{this.weightLimitInGrams}g)");
             if(!available.Contains(placement))
-                throw new Exception("This shelf space does not exist or is already taken");
+                throw new InvalidOperationException("This shelf space does not exist or is already taken");
 
             int[] dimensions = {this.depthOfSpaceInMm, this.heightOfSpaceInMm, this.lengthOfSpaceInMm};
 
