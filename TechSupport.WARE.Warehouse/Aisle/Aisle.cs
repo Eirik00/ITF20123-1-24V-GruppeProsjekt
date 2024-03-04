@@ -62,11 +62,14 @@ namespace TechSupport.WARE.Warehouse
             if(!available.Contains(placement))
                 throw new InvalidOperationException("This shelf space does not exist or is already taken");
 
-            int[] dimensions = {this.depthOfSpaceInMm, this.heightOfSpaceInMm, this.lengthOfSpaceInMm};
+            List<int> aisleDimensions = new List<int>{this.depthOfSpaceInMm, this.heightOfSpaceInMm, this.lengthOfSpaceInMm};
+            List<int> packageDimensions = new List<int> { package.PackageDepthInMm, package.PackageHeightInMm, package.PackageLengthInMm };
+            for(int i = 0; i < aisleDimensions.Count; i++)
+            {
+                if (aisleDimensions[0] <= packageDimensions[0] && aisleDimensions[1] <= packageDimensions[1] && aisleDimensions[2] <= packageDimensions[2])
 
-            Array.Sort(dimensions);
-
-            if (package.PackageLengthInMm <= dimensions[0])
+            }
+            /*if (package.PackageLengthInMm <= dimensions[0])
             {
                 dimensions[0] = 0;
             }
@@ -106,7 +109,7 @@ namespace TechSupport.WARE.Warehouse
             {
                 dimensions[0] = 0;
             }
-            else throw new NotEnoughSpaceException("Package is too large for this shelf");
+            else throw new NotEnoughSpaceException("Package is too large for this shelf");*/
 
             this.totalWeight += package.PackageWeightInGrams;
             package.AddAisle(this);
