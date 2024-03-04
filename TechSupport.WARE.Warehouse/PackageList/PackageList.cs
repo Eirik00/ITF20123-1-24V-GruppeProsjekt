@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackageList(int listId) : IPackageList
+    public class PackageList(int listId) : IPackageList, IList<Package>
     {
         private readonly int listId = listId;
         private List<Package> packages = [];
@@ -36,6 +36,12 @@ namespace TechSupport.WARE.Warehouse
         }
 
         public List<Package> Packages => packages;
+
+        public int Count => throw new NotImplementedException();
+
+        public bool IsReadOnly => throw new NotImplementedException();
+
+        public Package this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         /// <summary>
         /// Returns a formatted string of the IDs of all packages in the packagelist
@@ -192,6 +198,56 @@ namespace TechSupport.WARE.Warehouse
             }
 
             return "The total combined weight of all packages in the list is: " + tempweight + " grams.\n";
+        }
+
+        public int IndexOf(Package item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(int index, Package item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Add(Package item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(Package item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(Package[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(Package item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<Package> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
 
 
