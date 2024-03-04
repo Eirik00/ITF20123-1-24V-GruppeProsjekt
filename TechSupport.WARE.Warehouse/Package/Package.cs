@@ -8,11 +8,6 @@ using TechSupport.WARE.Warehouse.EventHandling;
 
 namespace TechSupport.WARE.Warehouse
 {
-
-    public class PackageInfoEventArgs: EventArgs
-    {
-        public PackageInfoEventArgs(Package package) => package = Package;
-    }
     /// <summary>
     /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
     /// <example>
@@ -50,7 +45,6 @@ namespace TechSupport.WARE.Warehouse
         //forsendel nummeret er generert i konstrøktøren
         private static readonly Random random = new();
         private int shipmentNumber;
-        private Events _eventHandler = new Events();
 
         public int ShipmentNumber
         {
@@ -79,7 +73,6 @@ namespace TechSupport.WARE.Warehouse
 
                 packageLog.LogChange(null, StatusList.Invalid, status, "Package initialized");
                 idCheck.Add(packageId);
-                _eventHandler.OnNewPackageAdded(EventArgs.Empty);
             }
         }
 
