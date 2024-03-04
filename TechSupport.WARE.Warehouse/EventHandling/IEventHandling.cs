@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse;
-
-public class Events
+namespace TechSupport.WARE.Warehouse
 {
-    
+    internal interface IEventHandling
+    {
+    }
 }

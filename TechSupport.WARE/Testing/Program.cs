@@ -5,14 +5,19 @@ using System.Text;
 using System.Collections;
 using System.Threading;
 using TechSupport.WARE.Warehouse;
+using System.Diagnostics.Tracing;
 
 namespace TechSupport.WARE
 {
     internal class Program
     {
-        static void sssMain(string[] args)
+        static void Main(string[] args)
         {
-            Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
+            EventHandling handling = new EventHandling();
+            Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
+            pakke.NewPackageAdded += handling.NewPackageAdded;
+            pakke.ChangeStatus(StatusList.Invalid);
+            //Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
             /*
             Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
             isle.AddPackage(testPackage, 0);
@@ -36,53 +41,53 @@ namespace TechSupport.WARE
             Console.WriteLine(testPackage.GetPackageLog);
             */
 
-                        Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Norway", "Stavernveien 2", 90202011, 3550);
-            Company komplett = new Company("Komplett", 9849249, "Stavernveien 2", "Norway", 3550);
-            komplett.ContactPerson = kjell;
-            Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Norway", "Stuegata 2", 90808080, 5055);
-            Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
-            warehouse.ContactPerson = us;
+            //            Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Norway", "Stavernveien 2", 90202011, 3550);
+            //Company komplett = new Company("Komplett", 9849249, "Stavernveien 2", "Norway", 3550);
+            //komplett.ContactPerson = kjell;
+            //Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Norway", "Stuegata 2", 90808080, 5055);
+            //Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
+            //warehouse.ContactPerson = us;
 
-            PackageList packagelist = new();
-            Package pakke1 = new(1, 58, 19, 7, 2000, false, 0);
-            Package pakke2 = new(2, 42, 78, 212, 2000, false, 0);
-            Package pakke3 = new(3, 36, 64, 112, 980, false, 0);
-            Package pakke4 = new(4, 41, 55, 7612, 2000, false, 0);
-            Package pakke5 = new(5, 1235, 54, 312, 2000, false, 0);
-            Package pakke6 = new(6, 2316, 33, 1352, 2030, false, 0);
-            Package pakke7 = new(7, 217, 3452, 8612, 2000, false, 0);
-            Package pakke8 = new(8, 8423, 124, 4312, 2000, false, 0);
-            packagelist.Add(pakke1);
-            packagelist.Add(pakke5);
-            packagelist.Add(pakke8);
-            packagelist.Add(pakke7);
-            packagelist.Add(pakke4);
-            packagelist.Add(pakke2);
-            packagelist.Add(pakke6);
-            packagelist.Add(pakke3);
-            Console.WriteLine(packagelist.SeePackagesInList());
-            packagelist.Add(pakke1);
-            Console.WriteLine(packagelist.SeePackagesInList());
-            packagelist.Remove(pakke1);
-            packagelist.Add(pakke1);
-            Console.WriteLine(packagelist.SeePackagesInList());
-            Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            PackageList graphicCards = new PackageList();
-            graphicCards.Add(gtx970);
-            graphicCards.Add(gtx980);
+            //PackageList packagelist = new();
+            //Package pakke1 = new(1, 58, 19, 7, 2000, false, 0);
+            //Package pakke2 = new(2, 42, 78, 212, 2000, false, 0);
+            //Package pakke3 = new(3, 36, 64, 112, 980, false, 0);
+            //Package pakke4 = new(4, 41, 55, 7612, 2000, false, 0);
+            //Package pakke5 = new(5, 1235, 54, 312, 2000, false, 0);
+            //Package pakke6 = new(6, 2316, 33, 1352, 2030, false, 0);
+            //Package pakke7 = new(7, 217, 3452, 8612, 2000, false, 0);
+            //Package pakke8 = new(8, 8423, 124, 4312, 2000, false, 0);
+            //packagelist.Add(pakke1);
+            //packagelist.Add(pakke5);
+            //packagelist.Add(pakke8);
+            //packagelist.Add(pakke7);
+            //packagelist.Add(pakke4);
+            //packagelist.Add(pakke2);
+            //packagelist.Add(pakke6);
+            //packagelist.Add(pakke3);
+            //Console.WriteLine(packagelist.SeePackagesInList());
+            //packagelist.Add(pakke1);
+            //Console.WriteLine(packagelist.SeePackagesInList());
+            //packagelist.Remove(pakke1);
+            //packagelist.Add(pakke1);
+            //Console.WriteLine(packagelist.SeePackagesInList());
+            //Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            //Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            //PackageList graphicCards = new PackageList();
+            //graphicCards.Add(gtx970);
+            //graphicCards.Add(gtx980);
 
 
-            //Outgoing rema = new();
+            ////Outgoing rema = new();
 
-            Console.WriteLine(packagelist.ShowPackagesSortedByLenght());
-            Console.WriteLine(packagelist.ShowPackagesSortedByHeight());
-            Console.WriteLine(packagelist.ShowPackagesSortedByDepth());
-            Console.WriteLine(packagelist.ShowPackagesSortedByWeight());
+            //Console.WriteLine(packagelist.ShowPackagesSortedByLenght());
+            //Console.WriteLine(packagelist.ShowPackagesSortedByHeight());
+            //Console.WriteLine(packagelist.ShowPackagesSortedByDepth());
+            //Console.WriteLine(packagelist.ShowPackagesSortedByWeight());
 
-            Outgoing toreGraphic = new Outgoing();
-            Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
-            toreGraphic.OutgoingPackage(0600, graphicCards, warehouse.ContactPerson, toreTang);
+            //Outgoing toreGraphic = new Outgoing();
+            //Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
+            //toreGraphic.OutgoingPackage(0600, graphicCards, warehouse.ContactPerson, toreTang);
 
             //Package class has atributes: int productId, int packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeightInGrams,
             //spesification storageSpecifications[], boolean isFragile
