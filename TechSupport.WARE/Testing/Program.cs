@@ -15,8 +15,19 @@ namespace TechSupport.WARE
         {
             EventHandling handling = new EventHandling();
             Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
-            pakke.NewPackageAdded += handling.NewPackageAdded;
+            pakke.StatusChange += handling.StatusChange;
             pakke.ChangeStatus(StatusList.Invalid);
+            Aisle hylle = new Aisle(3, 3, 3, 3, 3, StorageSpecification.Invalid, 3);
+            hylle.NewPackageAddedToShelf += handling.NewPackageAddedToShelf;
+            hylle.AddPackage(pakke, 1);
+            Incoming incoming = new();
+            incoming.NewPackageOrdered += handling.NewPackageOrdered;
+            PackageList packages = new PackageList();
+            packages.Add(pakke);
+            incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
+            Outgoing outgoing = new Outgoing();
+            outgoing.NewPackageSent += handling.NewPackageSent;
+            outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
             //Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
             /*
             Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
