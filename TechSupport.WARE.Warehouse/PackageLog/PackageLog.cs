@@ -68,10 +68,10 @@ namespace TechSupport.WARE.Warehouse
     /// A class that contains a list of PackageLogEntries
     /// <para>
     /// and has the following methods:
-    /// <item>    - <description>LogChange</description></item> 
-    /// <item>    - <description>GetEntries</description></item> 
-    /// <item>    - <description>GetTimeSpanOnStatus</description></item> 
-    /// <item>    - <description>GetTotalTimeInWarehouse</description></item> 
+    /// <br><item>    - <description>LogChange</description></item></br>
+    /// <br><item>    - <description>GetEntries</description></item></br>
+    /// <br><item>    - <description>GetTimeSpanOnStatus</description></item></br>
+    /// <br><item>    - <description>GetTotalTimeInWarehouse</description></item></br>
     /// </para>
     /// </summary>
     public class PackageLog : IPackageLog
