@@ -10,7 +10,7 @@ namespace TechSupport.WARE
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void sssMain(string[] args)
         {
             Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
             /*
@@ -43,7 +43,7 @@ namespace TechSupport.WARE
             Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
             warehouse.ContactPerson = us;
 
-            PackageList packagelist = new(1);
+            PackageList packagelist = new();
             Package pakke1 = new(1, 58, 19, 7, 2000, false, 0);
             Package pakke2 = new(2, 42, 78, 212, 2000, false, 0);
             Package pakke3 = new(3, 36, 64, 112, 980, false, 0);
@@ -52,25 +52,25 @@ namespace TechSupport.WARE
             Package pakke6 = new(6, 2316, 33, 1352, 2030, false, 0);
             Package pakke7 = new(7, 217, 3452, 8612, 2000, false, 0);
             Package pakke8 = new(8, 8423, 124, 4312, 2000, false, 0);
-            packagelist.AddPackage(pakke1);
-            packagelist.AddPackage(pakke5);
-            packagelist.AddPackage(pakke8);
-            packagelist.AddPackage(pakke7);
-            packagelist.AddPackage(pakke4);
-            packagelist.AddPackage(pakke2);
-            packagelist.AddPackage(pakke6);
-            packagelist.AddPackage(pakke3);
+            packagelist.Add(pakke1);
+            packagelist.Add(pakke5);
+            packagelist.Add(pakke8);
+            packagelist.Add(pakke7);
+            packagelist.Add(pakke4);
+            packagelist.Add(pakke2);
+            packagelist.Add(pakke6);
+            packagelist.Add(pakke3);
             Console.WriteLine(packagelist.SeePackagesInList());
-            packagelist.AddPackage(pakke1);
+            packagelist.Add(pakke1);
             Console.WriteLine(packagelist.SeePackagesInList());
-            packagelist.RemovePackage(pakke1);
-            packagelist.AddPackage(pakke1);
+            packagelist.Remove(pakke1);
+            packagelist.Add(pakke1);
             Console.WriteLine(packagelist.SeePackagesInList());
             Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
             Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            PackageList graphicCards = new PackageList(1);
-            graphicCards.AddPackage(gtx970);
-            graphicCards.AddPackage(gtx980);
+            PackageList graphicCards = new PackageList();
+            graphicCards.Add(gtx970);
+            graphicCards.Add(gtx980);
 
 
             //Outgoing rema = new();

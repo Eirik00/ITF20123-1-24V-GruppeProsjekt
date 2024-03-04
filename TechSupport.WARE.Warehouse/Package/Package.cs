@@ -8,6 +8,11 @@ using TechSupport.WARE.Warehouse.EventHandling;
 
 namespace TechSupport.WARE.Warehouse
 {
+
+    public class PackageInfoEventArgs: EventArgs
+    {
+        public PackageInfoEventArgs(Package package) => package = Package;
+    }
     /// <summary>
     /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
     /// <example>
@@ -69,8 +74,6 @@ namespace TechSupport.WARE.Warehouse
                 this.isFragile = isFragile;
                 this.specification = specification;
                 this.status = StatusList.Initialized;
-                this.sender = new Contact("", "", "", "", "", 0, 0);
-                this.receiver = new Contact("", "", "", "", "", 0, 0);
                 this.DeliveryTime = default;
                 ShipmentNumber = random.Next(10, 601);
 
