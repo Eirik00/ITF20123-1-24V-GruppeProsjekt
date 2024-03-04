@@ -27,6 +27,7 @@ namespace TechSupport.WARE.Warehouse
             this.address = address;
             this.country = country;
             this.postalCode = postalCode;
+            this.contactPerson = new Contact("", "", "", "", "", 0, 0);
         }
 
         public Company(string companyName, int companyCode, string address, string country, int postalCode, Contact contactPerson)

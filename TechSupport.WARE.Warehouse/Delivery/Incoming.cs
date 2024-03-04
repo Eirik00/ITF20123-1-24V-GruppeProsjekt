@@ -53,7 +53,6 @@ namespace TechSupport.WARE.Warehouse
         public void IncomingPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
             PackageList singlePackageList = [package];
-            singlePackageList.Add(package);
             IncomingPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
         }
 
@@ -103,7 +102,6 @@ namespace TechSupport.WARE.Warehouse
         public void IncomingDailyPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
             PackageList singlePackageList = [package];
-            singlePackageList.Add(package);
             IncomingDailyPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
         }
 
@@ -156,7 +154,6 @@ namespace TechSupport.WARE.Warehouse
         public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
             PackageList singlePackageList = [package];
-            singlePackageList.Add(package);
             IncomingWeeklyPackage(deliveryDay, deliveryHourAndMinute, singlePackageList, sender, receiver);
         }
 
