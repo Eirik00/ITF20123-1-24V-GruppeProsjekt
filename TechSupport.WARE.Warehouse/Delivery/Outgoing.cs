@@ -11,6 +11,13 @@ namespace TechSupport.WARE.Warehouse
     public class Outgoing : IOutgoing
     {
         private List<PackageList> outgoingPackagesList;
+        //Event
+        public delegate void PackageHandler(object sender, EventArgs e);
+        public event EventHandler<PackageList> NewPackageSent;
+        public virtual void OnPackageSent(PackageList e)
+        {
+            NewPackageSent?.Invoke(this, e);
+        }
 
         public Outgoing()
         {
@@ -49,7 +56,8 @@ namespace TechSupport.WARE.Warehouse
             }
             //This should delete the sent packet from the original list it was in, plain and simple
             //packages.Packages.Clear();
-            Console.WriteLine($"Vare Levering registrert for Kl. {sendingHourAndMinute} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            //Console.WriteLine($"Vare Levering registrert for Kl. {sendingHourAndMinute} av Sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            OnPackageSent(packages);
         }
         // Overload for sending of 1 single package
         public void OutgoingPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)

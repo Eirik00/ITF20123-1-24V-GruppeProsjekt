@@ -20,6 +20,14 @@ namespace TechSupport.WARE.Warehouse
         private int totalWeight;
         private StorageSpecification spesification;
 
+        //Events
+        public delegate void PackageHandler(object sender, EventArgs e);
+        public event EventHandler<Package> NewPackageAddedToShelf;
+        public virtual void OnNewPackageAdded(Package e)
+        {
+            NewPackageAddedToShelf?.Invoke(this, e);
+        }
+
         public Aisle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification spesification, int aisleId)
         {
             this.numberOfSpaces = numberOfSpaces;
@@ -67,7 +75,7 @@ namespace TechSupport.WARE.Warehouse
             List<int> packageDimensions = new List<int> { package.PackageDepthInMm, package.PackageHeightInMm, package.PackageLengthInMm };
             for(int i = 0; i < aisleDimensions.Count; i++)
             {
-                if (aisleDimensions[0] <= packageDimensions[0] && aisleDimensions[1] <= packageDimensions[1] && aisleDimensions[2] <= packageDimensions[2])
+                if (aisleDimensions[0] <= packageDimensions[0] && aisleDimensions[1] <= packageDimensions[1] && aisleDimensions[2] <= packageDimensions[2]) ;
 
             }*/
 
@@ -125,7 +133,7 @@ namespace TechSupport.WARE.Warehouse
             shelf[placement] = package;
 
             // for testing purposes later when simulating
-            Console.WriteLine("Package Added");
+            OnNewPackageAdded(package);
         }
 
         public void RemovePackage(Package package)

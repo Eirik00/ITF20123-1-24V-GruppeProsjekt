@@ -46,11 +46,12 @@ namespace TechSupport.WARE.Warehouse
         private static readonly Random random = new();
         private int shipmentNumber;
 
+        //Events
         public delegate void PackageHandler(object sender, EventArgs e);
-        public event PackageHandler NewPackageAdded;
-        public virtual void OnNewPackageAdded(EventArgs e)
+        public event PackageHandler StatusChange;
+        public virtual void OnStatusChange(EventArgs e)
         {
-            NewPackageAdded?.Invoke(this, e);
+            StatusChange?.Invoke(this, e);
         }
 
         public int ShipmentNumber
@@ -130,7 +131,7 @@ namespace TechSupport.WARE.Warehouse
         {
             packageLog.LogChange(this.GetLocation().aisle, newStatus, status, description);
             this.status = newStatus;
-            OnNewPackageAdded(EventArgs.Empty);
+            OnStatusChange(EventArgs.Empty);
         }
 
         public PackageLog GetPackageLog()
