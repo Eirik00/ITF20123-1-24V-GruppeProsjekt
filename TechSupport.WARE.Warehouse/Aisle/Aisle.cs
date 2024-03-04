@@ -68,19 +68,19 @@ namespace TechSupport.WARE.Warehouse
             {
                 if (package.PackageDepthInMm > dimensions[i])
                 {
-                    throw new NotEnoughSpaceException("Package depth of: " + package.PackageDepthInMm + " is too large for this shelf");
+                    throw new NotEnoughSpaceException($"Package depth of: {package.PackageDepthInMm} is too large for this shelf: {dimensions[i]}");
                 }
                 else dimensions[i] = 0;
 
                 if (package.PackageHeightInMm > dimensions[i])
                 {
-                    throw new NotEnoughSpaceException("Package height of: " + package.PackageHeightInMm + " is too large for this shelf");
+                    throw new NotEnoughSpaceException($"Package height of: {package.PackageHeightInMm} is too large for this shelf: {dimensions[i]}");
                 }
                 else dimensions[i] = 0;
 
                 if (package.PackageLengthInMm > dimensions[i])
                 {
-                    throw new NotEnoughSpaceException("Package lenght of: " + package.PackageLengthInMm + " is too large for this shelf");
+                    throw new NotEnoughSpaceException($"Package lenght of: {package.PackageLengthInMm} is too large for this shelf: {dimensions[i]}");
                 }
                 else dimensions[i] = 0;
             }

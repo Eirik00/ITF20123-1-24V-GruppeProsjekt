@@ -17,10 +17,10 @@ namespace TechSupport.WARE
         {
             Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
             Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Norway", "Stavernveien 2", 90202011, 3550);
+            Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Stavernveien 2", "Norway", 90202011, 3550);
             Company komplett = new Company("Komplett", 9849249, "Stavernveien 2", "Norway", 3550);
             komplett.ContactPerson = kjell;
-            Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Norway", "Stuegata 2", 90808080, 5055);
+            Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Stuegata 2", "Norway", 90808080, 5055);
             Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
             warehouse.ContactPerson = us;
             int deliveryTimeKomplettInH = 4000;
@@ -31,9 +31,9 @@ namespace TechSupport.WARE
             int packageTime = 1000;
 
             Incoming today = new Incoming();
-            PackageList graphicCards = new PackageList(1);
-            graphicCards.AddPackage(gtx970);
-            graphicCards.AddPackage(gtx980);
+            PackageList graphicCards = new PackageList();
+            graphicCards.Add(gtx970);
+            graphicCards.Add(gtx980);
 
             DateTime startTime = DateTime.Now;
 
@@ -53,7 +53,7 @@ namespace TechSupport.WARE
                     package.ChangeStatus(StatusList.Reception);
                 }
 
-                Aisle isle1 = new Aisle(50, 20000000, 50000, 100000, 3000, StorageSpecification.DryStorage, 1);
+                Aisle isle1 = new Aisle(50000, 20000000, 50000, 100000, 3000000, StorageSpecification.DryStorage, 1);
                 int count = 1;
                 foreach (Package package in graphicCards.Packages)
                 {

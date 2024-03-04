@@ -54,8 +54,8 @@ namespace TechSupport.WARE.Warehouse
         // Overload for sending of 1 single package
         public void OutgoingPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = new PackageList(0);
-            singlePackageList.AddPackage(package);
+            PackageList singlePackageList = new PackageList();
+            singlePackageList.Add(package);
             OutgoingPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
         }
 
@@ -107,8 +107,8 @@ namespace TechSupport.WARE.Warehouse
         // Overload for sending of 1 single package
         public void OutgoingDailyPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = new PackageList(0);
-            singlePackageList.AddPackage(package);
+            PackageList singlePackageList = new PackageList();
+            singlePackageList.Add(package);
             OutgoingDailyPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
         }
         // Overload to be able to use Company object as a sender or receiver
@@ -160,8 +160,8 @@ namespace TechSupport.WARE.Warehouse
         // Overload for sending of 1 single package
         public void OutgoingWeeklyPackage(DayOfWeek deliveryDay,double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = new PackageList(0);
-            singlePackageList.AddPackage(package);
+            PackageList singlePackageList = new PackageList();
+            singlePackageList.Add(package);
             OutgoingWeeklyPackage(deliveryDay,sendingHourAndMinute, singlePackageList, sender, receiver);
         }
 
