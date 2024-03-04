@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechSupport.WARE.Warehouse.EventHandling;
 
 namespace TechSupport.WARE.Warehouse
 {
@@ -44,6 +45,7 @@ namespace TechSupport.WARE.Warehouse
         //forsendel nummeret er generert i konstrøktøren
         private static readonly Random random = new();
         private int shipmentNumber;
+        private Events _eventHandler = new Events();
 
         public int ShipmentNumber
         {
@@ -74,6 +76,7 @@ namespace TechSupport.WARE.Warehouse
 
                 packageLog.LogChange(null, StatusList.Invalid, status, "Package initialized");
                 idCheck.Add(packageId);
+                _eventHandler.OnNewPackageAdded(EventArgs.Empty);
             }
         }
 
