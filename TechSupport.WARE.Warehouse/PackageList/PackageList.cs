@@ -196,7 +196,7 @@ namespace TechSupport.WARE.Warehouse
         {
             if (packages.Contains(item))
             {
-                throw new Exception("The package is allready in the list");
+                throw new ArgumentException("The package is allready in the list");
             }
             else
             {
