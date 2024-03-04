@@ -72,7 +72,7 @@ namespace TechSupport.WARE
 
                 Thread.Sleep(packageTime);
                 Outgoing toreGraphic = new Outgoing();
-                Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Norway", "Stavangerveien 2", 90807060, 4020);
+                Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Stavangerveien 2", "Norway", 90807060, 4020);
                 toreGraphic.OutgoingPackage(06.00, graphicCards, warehouse.ContactPerson, toreTang);
                 Thread.Sleep(deliveryTimeStavanger);
 
