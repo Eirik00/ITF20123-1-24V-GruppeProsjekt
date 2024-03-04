@@ -1,47 +1,30 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
-    public class PackageList(int listId) : IPackageList, IList<Package>
+    public class PackageList<Package>() : IList<Package>
     {
-        private readonly int listId = listId;
+        private readonly int listId;
         private List<Package> packages = [];
-  
-        /// <summary>
-        /// Adds a package to the packagelist
-        /// </summary>
-        public void AddPackage(Package package)
-        {
-            if (packages.Contains(package))
-            {
-                throw new Exception("The package is allready in the list");
-            }
-            else
-            {
-                packages.Add(package);
-            }
-        }
 
         /// <summary>
         /// Removes a package from the list
         /// </summary>
-        public void RemovePackage(Package package)
-        {
-            packages.Remove(package);
-        }
 
         public List<Package> Packages => packages;
 
-        public int Count => throw new NotImplementedException();
+        public int Count => packages.Count;
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly => false;
 
-        public Package this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Package this[int index] { get => packages[index]; set => packages[index] = value; }
 
         /// <summary>
         /// Returns a formatted string of the IDs of all packages in the packagelist
@@ -217,7 +200,14 @@ namespace TechSupport.WARE.Warehouse
 
         public void Add(Package item)
         {
-            throw new NotImplementedException();
+            if (packages.Contains(item))
+            {
+                throw new Exception("The package is allready in the list");
+            }
+            else
+            {
+                packages.Add(item);
+            }
         }
 
         public void Clear()
@@ -237,7 +227,7 @@ namespace TechSupport.WARE.Warehouse
 
         public bool Remove(Package item)
         {
-            throw new NotImplementedException();
+            return packages.Remove(item);
         }
 
         public IEnumerator<Package> GetEnumerator()

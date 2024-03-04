@@ -108,7 +108,7 @@ namespace TechSupport.WARE.Warehouse
         }
 
         // Overload to be able to use Company object as a sender or receiver
-        public void IncomingDailyPackage(double deliveryHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        public void IncomingDailyPackage(double deliveryHourAndMinute, List<Package> packages, Company senderCompany, Company receiverCompany)
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
