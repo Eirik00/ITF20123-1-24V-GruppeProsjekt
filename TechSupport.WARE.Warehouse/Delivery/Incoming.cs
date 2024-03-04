@@ -27,10 +27,10 @@ namespace TechSupport.WARE.Warehouse
         public void IncomingPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
-                throw new InvalidDeliveryTimeException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
+                throw new ArgumentException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
 
             if (deliveryHourAndMinute.ToString().Length > 4)
-                throw new InvalidDeliveryTimeException("Delivery hour and minute cannot exceed 4 digits.");
+                throw new ArgumentException("Delivery hour and minute cannot exceed 4 digits.");
 
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
@@ -76,10 +76,10 @@ namespace TechSupport.WARE.Warehouse
         public void IncomingDailyPackage(double deliveryHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
-                throw new InvalidDeliveryTimeException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
+                throw new ArgumentException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
 
             if (deliveryHourAndMinute.ToString().Length > 4)
-                throw new InvalidDeliveryTimeException("Delivery hour and minute cannot exceed 4 digits.");
+                throw new ArgumentException("Delivery hour and minute cannot exceed 4 digits.");
 
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
@@ -127,10 +127,10 @@ namespace TechSupport.WARE.Warehouse
         public void IncomingWeeklyPackage(DayOfWeek deliveryDay, double deliveryHourAndMinute,PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(deliveryHourAndMinute.ToString(), out double _))
-                throw new InvalidDeliveryTimeException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
+                throw new ArgumentException("Delivery Time for packages must be in hour and minutes and must be a valid double with a .(period).");
 
             if (deliveryHourAndMinute.ToString().Length > 4)
-                throw new InvalidDeliveryTimeException("Delivery hour and minute cannot exceed 4 digits.");
+                throw new ArgumentException("Delivery hour and minute cannot exceed 4 digits.");
 
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))

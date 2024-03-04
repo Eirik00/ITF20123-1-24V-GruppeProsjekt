@@ -27,10 +27,10 @@ namespace TechSupport.WARE.Warehouse
         public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
-                throw new InvalidDeliveryTimeException("Delivery hour and minute must be a valid double.");
+                throw new ArgumentException("Delivery hour and minute must be a valid double.");
 
             if (sendingHourAndMinute.ToString().Length > 4)
-                throw new InvalidDeliveryTimeException("Sending hour and minute cannot exceed 4 digits.");
+                throw new ArgumentException("Sending hour and minute cannot exceed 4 digits.");
 
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
@@ -78,10 +78,10 @@ namespace TechSupport.WARE.Warehouse
         public void OutgoingDailyPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
-                throw new InvalidDeliveryTimeException("Delivery hour and minute must be a valid double.");
+                throw new ArgumentException("Delivery hour and minute must be a valid double.");
 
             if (sendingHourAndMinute.ToString().Length > 4)
-                throw new InvalidDeliveryTimeException("Sending hour and minute cannot exceed 4 digits.");
+                throw new ArgumentException("Sending hour and minute cannot exceed 4 digits.");
 
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
@@ -131,10 +131,10 @@ namespace TechSupport.WARE.Warehouse
         public void OutgoingWeeklyPackage(DayOfWeek deliveryDay, double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
         {
             if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
-                throw new InvalidDeliveryTimeException("Delivery hour and minute must be a valid double.");
+                throw new ArgumentException("Delivery hour and minute must be a valid double.");
 
             if (sendingHourAndMinute.ToString().Length > 4)
-                throw new InvalidDeliveryTimeException("Sending hour and minute cannot exceed 4 digits.");
+                throw new ArgumentException("Sending hour and minute cannot exceed 4 digits.");
 
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
