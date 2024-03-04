@@ -19,9 +19,9 @@ namespace TechSupport.WARE.Warehouse
         public Company(string companyName, int companyCode, string address, string country, int postalCode) 
         {
             if (companyName.Any(Char.IsDigit))
-                throw new IntInStringException($"Company name: {companyName} is not allowed to contain an Integer...");
+                throw new FormatException($"Company name: {companyName} is not allowed to contain an Integer...");
             if (country.Any(Char.IsDigit))
-                throw new IntInStringException($"Country: {country} is not allowed to contain an Integer...");
+                throw new FormatException($"Country: {country} is not allowed to contain an Integer...");
             this.companyName = companyName;
             this.companyCode = companyCode;
             this.address = address;
@@ -33,9 +33,9 @@ namespace TechSupport.WARE.Warehouse
         public Company(string companyName, int companyCode, string address, string country, int postalCode, Contact contactPerson)
         {
             if (companyName.Any(Char.IsDigit))
-                throw new IntInStringException($"Company name: {companyName} is not allowed to contain an Integer...");
+                throw new FormatException($"Company name: {companyName} is not allowed to contain an Integer...");
             if (country.Any(Char.IsDigit))
-                throw new IntInStringException($"Country: {country} is not allowed to contain an Integer...");
+                throw new FormatException($"Country: {country} is not allowed to contain an Integer...");
             this.companyName = companyName;
             this.companyCode = companyCode;
             this.address = address;
@@ -50,7 +50,7 @@ namespace TechSupport.WARE.Warehouse
             set
             {
                 if (value.Any(Char.IsDigit))
-                    throw new IntInStringException($"Company name: {value} is not allowed to contain an Integer...");
+                    throw new FormatException($"Company name: {value} is not allowed to contain an Integer...");
                 companyName = value;
             }
         }
@@ -75,7 +75,7 @@ namespace TechSupport.WARE.Warehouse
             set 
             {
                 if (value.Any(Char.IsDigit))
-                    throw new IntInStringException($"Country: {value} is not allowed to contain an Integer...");
+                    throw new FormatException($"Country: {value} is not allowed to contain an Integer...");
                 country = value; 
             }
         }
