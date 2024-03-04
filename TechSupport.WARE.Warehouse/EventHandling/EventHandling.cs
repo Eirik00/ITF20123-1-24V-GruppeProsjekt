@@ -18,10 +18,10 @@ public class EventHandling : IEventHandling
     }
     public void NewPackageOrdered(object sender, PackageList packages)
     {
-        Console.WriteLine(packages.Count + " Packages is being imported.");
+        Console.WriteLine(packages.Count + " Packages is being delivered to the warehouse.");
     }
     public void NewPackageSent(object sender, PackageList packages)
     {
-        Console.WriteLine(packages.Count + " Packages is being sent.");
+        Console.WriteLine(packages.Count + " Packages is being sent out of warehouse.");
     }
 }

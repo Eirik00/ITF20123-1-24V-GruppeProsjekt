@@ -63,6 +63,7 @@ namespace TechSupport.WARE.Warehouse
         public void OutgoingPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
         {
             PackageList singlePackageList = [package];
+            singlePackageList.Add(package);
             OutgoingPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
         }
 
@@ -115,6 +116,7 @@ namespace TechSupport.WARE.Warehouse
         public void OutgoingDailyPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
         {
             PackageList singlePackageList = [package];
+            singlePackageList.Add(package);
             OutgoingDailyPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
         }
         // Overload to be able to use Company object as a sender or receiver
@@ -167,6 +169,7 @@ namespace TechSupport.WARE.Warehouse
         public void OutgoingWeeklyPackage(DayOfWeek deliveryDay,double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
         {
             PackageList singlePackageList = [package];
+            singlePackageList.Add(package);
             OutgoingWeeklyPackage(deliveryDay,sendingHourAndMinute, singlePackageList, sender, receiver);
         }
 

@@ -15,86 +15,91 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
-            Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Stavernveien 2", "Norway", 90202011, 3550);
-            Company komplett = new Company("Komplett", 9849249, "Stavernveien 2", "Norway", 3550);
-            komplett.ContactPerson = kjell;
-            Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Stuegata 2", "Norway", 90808080, 5055);
-            Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
-            warehouse.ContactPerson = us;
-            int deliveryTimeKomplettInH = 4000;
-            int mottakTilHylle = 1000;
-            int waitForPersonell = 1000;
-            int waitForOrder = 5000;
-            int deliveryTimeStavanger = 3000;
-            int packageTime = 1000;
+            EventHandling handling = new EventHandling();
+            Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
+            pakke.StatusChange += handling.StatusChange;
+            pakke.ChangeStatus(StatusList.Invalid);
+            Aisle hylle = new Aisle(3, 3, 3, 3, 3, StorageSpecification.Invalid, 3);
+            hylle.NewPackageAddedToShelf += handling.NewPackageAddedToShelf;
+            hylle.AddPackage(pakke, 1);
+            Incoming incoming = new();
+            incoming.NewPackageOrdered += handling.NewPackageOrdered;
+            PackageList packages = new PackageList();
+            packages.Add(pakke);
+            incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
+            Outgoing outgoing = new Outgoing();
+            outgoing.NewPackageSent += handling.NewPackageSent;
+            outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
 
-            Incoming today = new Incoming();
-            PackageList graphicCards = new PackageList();
-            graphicCards.Add(gtx970);
-            graphicCards.Add(gtx980);
+            //Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            //Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            //Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Stavernveien 2", "Norway", 90202011, 3550);
+            //Company komplett = new Company("Komplett", 9849249, "Stavernveien 2", "Norway", 3550);
+            //komplett.ContactPerson = kjell;
+            //Contact us = new Contact("Tore", "Tang", "Tore@warehouse.no", "Stuegata 2", "Norway", 90808080, 5055);
+            //Company warehouse = new Company("Warehouse", 90808080, "Stuegata 2", "Norway", 5035);
+            //warehouse.ContactPerson = us;
+            //int deliveryTimeKomplettInH = 4000;
+            //int mottakTilHylle = 1000;
+            //int waitForPersonell = 1000;
+            //int waitForOrder = 5000;
+            //int deliveryTimeStavanger = 3000;
+            //int packageTime = 1000;
 
-            DateTime startTime = DateTime.Now;
+            //Incoming today = new Incoming();
+            //PackageList graphicCards = new PackageList();
+            //graphicCards.Add(gtx970);
+            //graphicCards.Add(gtx980);
 
-            Console.WriteLine("True/False");
+            //DateTime startTime = DateTime.Now;
 
-            gtx970.GetPackageLog();
+            //Console.WriteLine("True/False");
 
-            Console.WriteLine(StorageSpecification.DryStorage == StorageSpecification.ColdStorage);
+            //gtx970.GetPackageLog();
 
-            while ((DateTime.Now - startTime).TotalSeconds < 60)
-            {
-                today.IncomingPackage(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
-                Thread.Sleep(deliveryTimeKomplettInH);
-                Thread.Sleep(waitForPersonell);
-                foreach (Package package in graphicCards.Packages)
-                {
-                    package.ChangeStatus(StatusList.Reception);
-                }
+            //Console.WriteLine(StorageSpecification.DryStorage == StorageSpecification.ColdStorage);
 
-                Aisle isle1 = new Aisle(50000, 20000000, 50000, 100000, 3000000, StorageSpecification.DryStorage, 1);
-                int count = 1;
-                foreach (Package package in graphicCards.Packages)
-                {
-                    Thread.Sleep(mottakTilHylle);
-                    isle1.AddPackage(package, count);
-                    count++;
-                }
+            //while ((DateTime.Now - startTime).TotalSeconds < 60)
+            //{
+            //    today.IncomingPackage(08.00, graphicCards, komplett.ContactPerson, warehouse.ContactPerson);
+            //    Thread.Sleep(deliveryTimeKomplettInH);
+            //    Thread.Sleep(waitForPersonell);
+            //    foreach (Package package in graphicCards.Packages)
+            //    {
+            //        package.ChangeStatus(StatusList.Reception);
+            //    }
 
-                Thread.Sleep(waitForOrder);
-                Thread.Sleep(waitForPersonell);
-                foreach (Package package in graphicCards.Packages)
-                {
-                    package.PackageAisle.RemovePackage(package);
-                    package.ChangeStatus(StatusList.InProgress);
-                }
+            //    Aisle isle1 = new Aisle(50000, 20000000, 50000, 100000, 3000000, StorageSpecification.DryStorage, 1);
+            //    int count = 1;
+            //    foreach (Package package in graphicCards.Packages)
+            //    {
+            //        Thread.Sleep(mottakTilHylle);
+            //        isle1.AddPackage(package, count);
+            //        count++;
+            //    }
 
-                Thread.Sleep(packageTime);
-                Outgoing toreGraphic = new Outgoing();
-                Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Stavangerveien 2", "Norway", 90807060, 4020);
-                toreGraphic.OutgoingPackage(06.00, graphicCards, warehouse.ContactPerson, toreTang);
-                Thread.Sleep(deliveryTimeStavanger);
+            //    Thread.Sleep(waitForOrder);
+            //    Thread.Sleep(waitForPersonell);
+            //    foreach (Package package in graphicCards.Packages)
+            //    {
+            //        package.PackageAisle.RemovePackage(package);
+            //        package.ChangeStatus(StatusList.InProgress);
+            //    }
+
+            //    Thread.Sleep(packageTime);
+            //    Outgoing toreGraphic = new Outgoing();
+            //    Contact toreTang = new Contact("Tore", "Tang", "toreTang@hotmail.com", "Stavangerveien 2", "Norway", 90807060, 4020);
+            //    toreGraphic.OutgoingPackage(06.00, graphicCards, warehouse.ContactPerson, toreTang);
+            //    Thread.Sleep(deliveryTimeStavanger);
 
 
-                foreach (Package packagesSent in graphicCards.Packages)
-                {
-                    Console.WriteLine(packagesSent.GetPackageLog().ToString());
-                }
-            }
+            //    foreach (Package packagesSent in graphicCards.Packages)
+            //    {
+            //        Console.WriteLine(packagesSent.GetPackageLog().ToString());
+            //    }
+            //}
 
-            Console.WriteLine("Simulasjon slutt");
-
-            ////shipmentnumber testing:
-            //// Create package objects
-            //Package package1 = new Package(1, 100, 50, 30, 2000, false, StorageSpecification.DryStorage);
-            //Package package2 = new Package(2, 150, 70, 40, 3000, true, StorageSpecification.ColdStorage);
-            //Package package3 = new Package(3, 120, 60, 35, 2500, false, StorageSpecification.DryStorage);
-
-            //// Output shipment numbers
-            //Console.WriteLine($"Package 1 Shipment Number: {package1.ShipmentNumber}");
-            //Console.WriteLine($"Package 2 Shipment Number: {package2.ShipmentNumber}");
-            //Console.WriteLine($"Package 3 Shipment Number: {package3.ShipmentNumber}");
+            //Console.WriteLine("Simulasjon slutt");
         }
     }
 }
