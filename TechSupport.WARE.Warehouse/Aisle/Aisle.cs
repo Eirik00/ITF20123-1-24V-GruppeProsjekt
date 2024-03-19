@@ -17,7 +17,6 @@ namespace TechSupport.WARE.Warehouse
         private bool _accessToBothSides;
 
 
-
         //Events
         public delegate void PackageHandler(object sender, EventArgs e);
         public event EventHandler<Package> NewPackageAddedToShelf;
@@ -58,6 +57,42 @@ namespace TechSupport.WARE.Warehouse
                 }
             }
             return (0, 0);
+        }
+
+        public void ChangeAmountOfShelves(int shelves)
+        {
+            if (GetAvailableSpaces().Count != _numberOfSpaces * _sections) 
+            {
+                throw new NotEmptyException($"Aisle: {GetAisleId} is not empty!");
+            }
+            else
+            {
+                _sections = shelves;
+                shelf = [];
+                for (int i = 1; i <= _sections; i++)
+                {
+                    for (int j = 1; j <= _numberOfSpaces; j++)
+                        shelf.Add((i, j), null);
+                }
+            }
+        }
+
+        public void ChangeTotalAmountOfSpacesPerShelf(int amountOfSpaces)
+        {
+            if (GetAvailableSpaces().Count != _numberOfSpaces * _sections)
+            {
+                throw new NotEmptyException($"Aisle: {GetAisleId} is not empty!");
+            }
+            else
+            {
+                _numberOfSpaces = amountOfSpaces;
+                shelf = [];
+                for (int i = 1; i <= _sections; i++)
+                {
+                    for (int j = 1; j <= _numberOfSpaces; j++)
+                        shelf.Add((i, j), null);
+                }
+            }
         }
 
         public void AddPackage(Package package, (int, int) placement)
