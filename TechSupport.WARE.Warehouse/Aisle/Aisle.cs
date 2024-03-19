@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechSupport.WARE.Warehouse;
-using TechSupport.WARE.Warehouse.Zone;
 
 namespace TechSupport.WARE.Warehouse
 {
@@ -60,9 +59,13 @@ namespace TechSupport.WARE.Warehouse
             return (0, 0);
         }
 
-        public void AddPackage(Package package, (int, int) placement)
+        public void AddPackage(Package package, (int, int) placement, Employee mover)
         {
             List<(int, int)> available = new(this.GetAvailableSpaces());
+            if (mover.accessLevel < currentStorageZone.DoorAccessLevel)
+            {
+                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.DoorAccessLevel);
+            }
             if (currentStorageZone.StorageSpecification != package.Specification)
                 throw new InvalidOperationException("Current package spesification," +
                     $" StorageSpesification.{package.Specification}," +

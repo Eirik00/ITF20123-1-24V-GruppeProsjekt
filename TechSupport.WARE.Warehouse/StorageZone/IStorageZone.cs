@@ -4,19 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse.Zone
+namespace TechSupport.WARE.Warehouse
 {
     internal interface IStorageZone
     {
-        /// <summary>
-        /// Sets the door to be locked.
-        /// </summary>
-        public void lockDoor();
-
-        /// <summary>
-        /// Sets the door to be unlocked.
-        /// </summary>
-        public void unlockDoor();
 
         /// <summary>
         /// Adds aisle to the zone.

@@ -7,7 +7,7 @@ using TechSupport.WARE.Warehouse.Exceptions;
 
 namespace TechSupport.WARE.Warehouse.Employee
 {
-    internal class Employee : Contact
+    public class Employee : Contact
     {
 
         public Employee(int employeeID, int accessLevel, string firstName, string surname, string email, string address, string country, int phoneNumber, int postalCode) : base(firstName, surname, email, address, country, phoneNumber, postalCode)

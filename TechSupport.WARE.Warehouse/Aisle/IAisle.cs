@@ -14,7 +14,7 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <param name="package">The package object</param>
         /// <param name="placement">Placement of the package in the isle</param>
-        void AddPackage(Package package, (int,int) placement);
+        void AddPackage(Package package, (int,int) placement, Employee mover);
 
         /// <summary>
         /// void <c>RemovePackage</c> removes the package from the isle
