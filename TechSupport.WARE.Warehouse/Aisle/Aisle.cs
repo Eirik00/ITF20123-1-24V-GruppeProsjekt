@@ -33,7 +33,6 @@ namespace TechSupport.WARE.Warehouse
             _lengthOfSpaceInMm = lengthOfAisleInMm;
             _heightOfSpaceInMm = heightOfAisleInMm;
             _weightLimitInGrams = totalWeightLimitInGrams;
-            _spesification = spesification;
             _aisleId = aisleId;
             shelf = [];
             for (int i = 1; i <= amountOfShelves; i++)
@@ -157,7 +156,6 @@ namespace TechSupport.WARE.Warehouse
 
         }
         public int GetAisleId => this._aisleId;
-        public StorageSpecification GetStorageSpecification => this._spesification;
 
         public (int, int) GetPackagePlacement(Package package)
         {
