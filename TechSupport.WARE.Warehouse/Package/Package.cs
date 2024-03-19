@@ -112,6 +112,10 @@ namespace TechSupport.WARE.Warehouse
         /// 
         internal void AddAisle(Aisle aisle)
         {
+            if(this.Specification != aisle.currentStorageZone.StorageSpecification)
+            {
+                throw new Exception("Packages storage specification: " + this.specification + ", does not match the storage specification of the aisle: " + aisle.currentStorageZone.StorageSpecification);
+            }
             this.packageAisle = aisle;
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse.Zone
 {
-    internal interface IZone
+    internal interface IStorageZone
     {
         /// <summary>
         /// Sets the door to be locked.

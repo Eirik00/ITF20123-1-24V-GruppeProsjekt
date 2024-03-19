@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse.Zone
 {
-    internal class Zone : IZone
+    public class StorageZone : IStorageZone
     {
         private bool doorIsLocked;
         private List<Aisle> aislesInZone;
         private StorageSpecification storageSpecification;
 
-        public Zone(StorageSpecification storageSpecification)
+        public StorageZone(StorageSpecification storageSpecification)
         {
             this.doorIsLocked = false;
             this.aislesInZone = new List<Aisle>();
             this.storageSpecification = storageSpecification;
         }
+
+        public StorageSpecification StorageSpecification => this.storageSpecification;
 
         public void lockDoor()
         {
@@ -32,6 +34,7 @@ namespace TechSupport.WARE.Warehouse.Zone
         public void addAisleToZone(Aisle aisle)
         {
             aislesInZone.Add(aisle);
+            aisle.currentStorageZone = this;
         }
     }
 }
