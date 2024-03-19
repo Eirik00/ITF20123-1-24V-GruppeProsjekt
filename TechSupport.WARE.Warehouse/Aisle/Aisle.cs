@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -180,8 +180,12 @@ namespace TechSupport.WARE.Warehouse
             OnPackageAddedToAisle(new AisleAndPackageEventArgs(this, package));
         }
 
-        public void RemovePackage(Package package)
+        public void RemovePackage(Package package, Employee mover)
         {
+            if (mover.accessLevel < currentStorageZone.StorageZoneAccessLevel)
+            {
+                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.StorageZoneAccessLevel);
+            }
             for (int i = 1; i <= _sections; i++)
             {
                 for (int j = 1; j <= _numberOfSpaces; j++)

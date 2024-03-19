@@ -20,7 +20,7 @@ namespace TechSupport.WARE.Warehouse
         /// void <c>RemovePackage</c> removes the package from the isle
         /// </summary>
         /// <param name="package">The package object to be removed</param>
-        void RemovePackage(Package package);
+        void RemovePackage(Package package, Employee mover);
 
         /// <summary>
         /// Gets the isle id
