@@ -179,8 +179,12 @@ namespace TechSupport.WARE.Warehouse
             OnNewPackageAdded(package);
         }
 
-        public void RemovePackage(Package package)
+        public void RemovePackage(Package package, Employee mover)
         {
+            if (mover.accessLevel < currentStorageZone.DoorAccessLevel)
+            {
+                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.DoorAccessLevel);
+            }
             for (int i = 1; i <= _sections; i++)
             {
                 for (int j = 1; j <= _numberOfSpaces; j++)
