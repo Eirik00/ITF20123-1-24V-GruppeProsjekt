@@ -115,7 +115,7 @@ namespace TechSupport.WARE.Warehouse
             this.packageAisle = aisle;
         }
 
-        public int? GetShelf()
+        public (int,int)? GetShelf()
         {
             if (this.packageAisle == null)
             {
@@ -123,7 +123,7 @@ namespace TechSupport.WARE.Warehouse
             }
             return this.packageAisle.GetShelf(this);
         }
-        public (Aisle? aisle, StorageSpecification specification, int place) GetLocation()
+        public (Aisle? aisle, StorageSpecification specification, double place) GetLocation()
         {
             return (this.packageAisle, this.specification, 0);
         }

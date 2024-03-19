@@ -10,7 +10,7 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Aisle : IAisle
     {
-        public Dictionary<int, Package?> shelf;
+        public Dictionary<(int,int), Package?> shelf;
         private int _numberOfSpaces, _totalWeight, _aisleId, _sections;
         private readonly int _lengthOfSpaceInMm, _heightOfSpaceInMm, _depthOfSpaceInMm, _weightLimitInGrams;
         private bool _accessToBothSides;
@@ -37,7 +37,7 @@ namespace TechSupport.WARE.Warehouse
             for (int i = 1; i <= amountOfSections; i++)
             {
                 for (int j = 1; j <= totalAmountOfSpacesPerSection ; j++)
-                shelf.Add(i, null);
+                    shelf.Add((i,j), null);
             }
             if (_accessToBothSides)
             {
@@ -47,19 +47,19 @@ namespace TechSupport.WARE.Warehouse
                 _depthOfSpaceInMm = depthOfSpaceInMm;
         }
 
-        public int GetShelf(Package package) { 
-            foreach(KeyValuePair<int, Package?> entry in this.shelf)
+        public (int,int) GetShelf(Package package) { 
+            foreach(KeyValuePair<(int,int), Package?> entry in this.shelf)
             {
                 if (entry.Value == package) {
                     return entry.Key;
                 }
             }
-            return 0;
+            return (0,0);
         }
 
-        public void AddPackage(Package package, int placement)
+        public void AddPackage(Package package, (int,int) placement)
         {
-            List<int> available = new(this.GetAvailableSpaces());
+            List<(int,int)> available = new(this.GetAvailableSpaces());
             if (this._spesification != package.Specification)
                 throw new InvalidOperationException("Current package spesification," +
                     $" StorageSpesification.{package.Specification}," +
@@ -140,11 +140,14 @@ namespace TechSupport.WARE.Warehouse
 
         public void RemovePackage(Package package)
         {
-            for (int i = 1; i <= _numberOfSpaces; i++)
+            for (int i = 1; i <= _sections; i++)
             {
-                if (shelf[i] == package)
+                for (int j = 1; j <= _numberOfSpaces; j++)
                 {
-                    shelf[i] = null;
+                    if (shelf[(i, j)] == package)
+                    {
+                        shelf[(i, j)] = null;
+                    }
                 }
             }
 
@@ -152,23 +155,23 @@ namespace TechSupport.WARE.Warehouse
         public int GetAisleId => this._aisleId;
         public StorageSpecification GetStorageSpecification => this._spesification;
 
-        public int GetPackagePlacement(Package package)
+        public (int,int) GetPackagePlacement(Package package)
         {
-            foreach((int num, Package? shelfPackage) in shelf)
+            foreach(((int,int) num, Package? shelfPackage) in shelf)
             {
                 if(shelfPackage == package)
                 {
                     return num;
                 }
             }
-            return -1;
+            return (-1,-1);
         }
 
-        public List<int> GetAvailableSpaces()
+        public List<(int,int)> GetAvailableSpaces()
         {
-            Dictionary<int, Package?> tempList = new(shelf);
-            List<int> freeSpaces = [];
-            foreach (KeyValuePair<int, Package?> check in tempList)
+            Dictionary<(int,int), Package?> tempList = new(shelf);
+            List<(int,int)> freeSpaces = [];
+            foreach (KeyValuePair<(int,int), Package?> check in tempList)
             {
                 if (check.Value == null)
                 {
