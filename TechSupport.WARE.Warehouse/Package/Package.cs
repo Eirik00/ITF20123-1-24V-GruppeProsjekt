@@ -18,10 +18,10 @@ namespace TechSupport.WARE.Warehouse
     /// <summary>
     /// enum <c>StatusList</c> is a set of enumerators which wil declare the status of the package.
     /// <example>
-    /// 0: Invalid 1: ColdStorage, 2: DryStorage, 3: DangerousProducts
+    /// 0: Invalid 1: ClimateControlled, 2: SmallItems, 3: HighValue
     /// </example>
     /// </summary>
-    public enum StorageSpecification { Invalid = 0, ColdStorage = 1, DryStorage = 2, DangerousProducts = 3};
+    public enum StorageSpecification { Invalid = 0, ClimateControlled = 1, SmallItems = 2, HighValue = 3};
 
     public class Package : IPackage
     {

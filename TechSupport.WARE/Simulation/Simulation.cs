@@ -31,8 +31,8 @@ namespace TechSupport.WARE
             outgoing.NewPackageSent += handling.NewPackageSentEvent;
             outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
 
-            //Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            //Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            //Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.SmallItems);
+            //Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.SmallItems);
             //Contact kjell = new Contact("Kjell", "Datamann", "kjell@komplett.no", "Stavernveien 2", "Norway", 90202011, 3550);
             //Company komplett = new Company("Komplett", 9849249, "Stavernveien 2", "Norway", 3550);
             //komplett.ContactPerson = kjell;
@@ -57,7 +57,7 @@ namespace TechSupport.WARE
 
             //gtx970.GetPackageLog();
 
-            //Console.WriteLine(StorageSpecification.DryStorage == StorageSpecification.ColdStorage);
+            //Console.WriteLine(StorageSpecification.SmallItems == StorageSpecification.ClimateControlled);
 
             //while ((DateTime.Now - startTime).TotalSeconds < 60)
             //{
@@ -69,7 +69,7 @@ namespace TechSupport.WARE
             //        package.ChangeStatus(StatusList.Reception);
             //    }
 
-            //    Aisle isle1 = new Aisle(50000, 20000000, 50000, 100000, 3000000, StorageSpecification.DryStorage, 1);
+            //    Aisle isle1 = new Aisle(50000, 20000000, 50000, 100000, 3000000, StorageSpecification.SmallItems, 1);
             //    int count = 1;
             //    foreach (Package package in graphicCards.Packages)
             //    {

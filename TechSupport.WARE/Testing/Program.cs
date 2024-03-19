@@ -28,9 +28,9 @@ namespace TechSupport.WARE
             Outgoing outgoing = new Outgoing();
             outgoing.NewPackageSent += handling.NewPackageSentEvent;
             outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
-            //Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ColdStorage, 1);
+            //Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ClimateControlled, 1);
             /*
-            Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ColdStorage, StatusList.Invalid);
+            Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ClimateControlled, StatusList.Invalid);
             isle.AddPackage(testPackage, 0);
             Thread.Sleep(1000);
             Console.WriteLine("1" + DateTime.Now);
@@ -82,8 +82,8 @@ namespace TechSupport.WARE
             //packagelist.Remove(pakke1);
             //packagelist.Add(pakke1);
             //Console.WriteLine(packagelist.SeePackagesInList());
-            //Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
-            //Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.DryStorage);
+            //Package gtx970 = new Package(1, 2500, 500, 1000, 2000, true, StorageSpecification.SmallItems);
+            //Package gtx980 = new Package(2, 2500, 500, 1000, 2000, true, StorageSpecification.SmallItems);
             //PackageList graphicCards = new PackageList();
             //graphicCards.Add(gtx970);
             //graphicCards.Add(gtx980);
