@@ -9,6 +9,8 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Employee : Contact
     {
+        private int _employeeId;
+        private int _accessLevel;
 
         public Employee(int employeeID, int accessLevel, string firstName, string surname, string email, string address, string country, int phoneNumber, int postalCode) : base(firstName, surname, email, address, country, phoneNumber, postalCode)
         {
@@ -16,28 +18,28 @@ namespace TechSupport.WARE.Warehouse
                 throw new FormatException($"Eployee ID: {employeeID} cannot be a negative integer.");
             if (accessLevel < 0)
                 throw new FormatException($"Access Level: {accessLevel} cannot be a negative integer.");
-            this.employeeID = employeeID;
-            this.accessLevel = accessLevel;
+            this._employeeId = employeeID;
+            this._accessLevel = accessLevel;
         }
 
-        public int employeeID
+        public int EmployeeID
         {
-            get => this.employeeID;
+            get => this._employeeId;
             set
             {
-                if (employeeID < 0)
-                    throw new FormatException($"Eployee ID: {employeeID} cannot be a negative integer.");
-                this.employeeID = value;
+                if (_employeeId < 0)
+                    throw new FormatException($"Eployee ID: {_employeeId} cannot be a negative integer.");
+                this._employeeId = value;
             }
         }
-        public int accessLevel
+        public int AccessLevel
         {
-            get => this.accessLevel;
+            get => this._accessLevel;
             set
             {
-                if (accessLevel < 0)
-                    throw new FormatException($"Access Level: {accessLevel} cannot be a negative integer.");
-                this.accessLevel = value;
+                if (_accessLevel < 0)
+                    throw new FormatException($"Access Level: {_accessLevel} cannot be a negative integer.");
+                this._accessLevel = value;
             }
         }
     }

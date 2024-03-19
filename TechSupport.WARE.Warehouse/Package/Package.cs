@@ -47,17 +47,10 @@ namespace TechSupport.WARE.Warehouse
         private int shipmentNumber;
 
         //Events
-        public delegate void PackageHandler(object sender, EventArgs e);
-        public event PackageHandler StatusChange;
-        public virtual void OnStatusChange(EventArgs e)
+        internal event EventHandler<PackageStatusChangedEventArgs> PackageStatusChanged;
+        internal virtual void OnPackageStatusChanged(PackageStatusChangedEventArgs e)
         {
-            StatusChange?.Invoke(this, e);
-        }
-
-        public int ShipmentNumber
-        {
-            get { return shipmentNumber; }
-            private set { shipmentNumber = value; }
+            PackageStatusChanged?.Invoke(this, e);
         }
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
@@ -78,7 +71,6 @@ namespace TechSupport.WARE.Warehouse
                 this.status = StatusList.Initialized;
                 this.DeliveryTime = default;
                 ShipmentNumber = random.Next(10, 601);
-
                 packageLog.LogChange(null, StatusList.Invalid, status, "Package initialized");
                 idCheck.Add(packageId);
             }
@@ -99,6 +91,11 @@ namespace TechSupport.WARE.Warehouse
         public Contact Receiver { 
             get { return this.receiver; }
             set { this.receiver = value; }
+        }
+        public int ShipmentNumber
+        {
+            get { return shipmentNumber; }
+            private set { shipmentNumber = value; }
         }
 
         /// <summary>
@@ -131,7 +128,7 @@ namespace TechSupport.WARE.Warehouse
         {
             packageLog.LogChange(this.GetLocation().aisle, newStatus, status, description);
             this.status = newStatus;
-            OnStatusChange(EventArgs.Empty);
+            OnPackageStatusChanged(new PackageStatusChangedEventArgs(this));
         }
 
         public PackageLog GetPackageLog()

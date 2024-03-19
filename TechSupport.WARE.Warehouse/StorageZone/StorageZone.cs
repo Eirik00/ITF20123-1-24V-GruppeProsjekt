@@ -34,7 +34,7 @@ namespace TechSupport.WARE.Warehouse
         public void addAisleToZone(Aisle aisle)
         {
             aislesInZone.Add(aisle);
-            aisle.currentStorageZone = this;
+            aisle.CurrentStorageZone = this;
         }
     }
 }

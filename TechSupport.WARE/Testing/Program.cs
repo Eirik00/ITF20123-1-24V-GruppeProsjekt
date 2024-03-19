@@ -13,22 +13,22 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
-            EventHandling handling = new EventHandling();
             Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
-            pakke.StatusChange += handling.StatusChangeEvent;
+            PackageHandler packageHandler = new PackageHandler(pakke);
             pakke.ChangeStatus(StatusList.Invalid);
-            Aisle hylle = new Aisle(4,10,3000,5000,5000,2000000,StorageSpecification.Invalid,1);
-            hylle.NewPackageAddedToShelf += handling.NewPackageAddedToShelfEvent;
-            hylle.AddPackage(pakke, (1,1));
-            Incoming incoming = new();
-            incoming.NewPackageOrdered += handling.NewPackageOrderedEvent;
-            PackageList packages = new PackageList();
-            packages.Add(pakke);
-            incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
-            Outgoing outgoing = new Outgoing();
-            outgoing.NewPackageSent += handling.NewPackageSentEvent;
-            outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
-            //Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ClimateControlled, 1);
+            Aisle hylle = new Aisle(4, 10, 3000, 5000, 5000, 2000000, StorageSpecification.Invalid, 1);
+            AisleHandler aisleHandler = new AisleHandler(hylle);
+            Employee arne = new Employee(1, 2, "Arne", "Tang", "ole@email.com", "tollvei12", "Norway", 992229929, 3232);
+            hylle.AddPackage(pakke, (1,1), arne);
+            //Incoming incoming = new();
+            //incoming.NewPackageOrdered += handling.NewPackageOrderedEvent;
+            //PackageList packages = new PackageList();
+            //packages.Add(pakke);
+            //incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
+            //Outgoing outgoing = new Outgoing();
+            //outgoing.NewPackageSent += handling.NewPackageSentEvent;
+            //outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
+            ////Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ClimateControlled, 1);
             /*
             Package testPackage = new Package(2, 2, 2, 2, 2, false, StorageSpecification.ClimateControlled, StatusList.Invalid);
             isle.AddPackage(testPackage, 0);

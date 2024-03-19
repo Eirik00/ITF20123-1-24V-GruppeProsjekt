@@ -14,14 +14,14 @@ namespace TechSupport.WARE.Warehouse
         private int _numberOfSpaces, _totalWeight, _aisleId, _sections;
         private readonly int _lengthOfSpaceInMm, _heightOfSpaceInMm, _depthOfSpaceInMm, _weightLimitInGrams;
         private bool _accessToBothSides;
+        private StorageZone _currentStorageZone;
 
 
         //Events
-        public delegate void PackageHandler(object sender, EventArgs e);
-        public event EventHandler<Package> NewPackageAddedToShelf;
-        public virtual void OnNewPackageAdded(Package e)
+        internal event EventHandler<AisleAndPackageEventArgs> PackageAddedToAisle;
+        internal virtual void OnPackageAddedToAisle(AisleAndPackageEventArgs e)
         {
-            NewPackageAddedToShelf?.Invoke(this, e);
+            PackageAddedToAisle?.Invoke(this, e);
         }
 
         public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInMm, int heightOfAisleInMm, int depthOfAisleInMm, int totalWeightLimitInGrams, StorageSpecification spesification, int aisleId)
@@ -33,6 +33,7 @@ namespace TechSupport.WARE.Warehouse
             _weightLimitInGrams = totalWeightLimitInGrams;
             _aisleId = aisleId;
             shelf = [];
+            _currentStorageZone = new StorageZone(StorageSpecification.Invalid);
             for (int i = 1; i <= amountOfShelves; i++)
             {
                 for (int j = 1; j <= totalAmountOfSpacesPerShelf ; j++)
@@ -97,15 +98,15 @@ namespace TechSupport.WARE.Warehouse
         public void AddPackage(Package package, (int, int) placement, Employee mover)
         {
             List<(int, int)> available = new(this.GetAvailableSpaces());
-            if (mover.accessLevel < currentStorageZone.DoorAccessLevel)
+            if (mover.AccessLevel < _currentStorageZone.DoorAccessLevel)
             {
-                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.DoorAccessLevel);
+                throw new Exception("Movers access level: " + mover.AccessLevel + ", is not high enough for the storage zone: " + _currentStorageZone.DoorAccessLevel);
             }
-            if (currentStorageZone.StorageSpecification != package.Specification)
+            if (_currentStorageZone.StorageSpecification != package.Specification)
                 throw new InvalidOperationException("Current package spesification," +
                     $" StorageSpesification.{package.Specification}," +
                     " is not compatible with Aisle storage spesification," +
-                    $" StorageSpesification.{currentStorageZone.StorageSpecification}");
+                    $" StorageSpesification.{_currentStorageZone.StorageSpecification}");
             if (this._totalWeight + package.PackageWeightInGrams > this._weightLimitInGrams)
                 throw new WeightLimitException($"Package({package.PackageWeightInGrams}g)" +
                     " is too heavy for the " +
@@ -176,7 +177,7 @@ namespace TechSupport.WARE.Warehouse
             shelf[placement] = package;
 
             // for testing purposes later when simulating
-            OnNewPackageAdded(package);
+            OnPackageAddedToAisle(new AisleAndPackageEventArgs(this, package));
         }
 
         public void RemovePackage(Package package)
@@ -221,10 +222,10 @@ namespace TechSupport.WARE.Warehouse
             return freeSpaces;
         }
 
-        public StorageZone currentStorageZone
+        public StorageZone CurrentStorageZone
         {
-            get => this.currentStorageZone;
-            set => this.currentStorageZone = value;
+            get => this._currentStorageZone;
+            set => this._currentStorageZone = value;
 
         }
     }
