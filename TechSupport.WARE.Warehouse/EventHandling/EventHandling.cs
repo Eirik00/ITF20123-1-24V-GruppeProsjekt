@@ -8,20 +8,24 @@ namespace TechSupport.WARE.Warehouse;
 
 public class EventHandling : IEventHandling
 {
-    public void StatusChange(object sender, EventArgs e)
+    //Package
+    public void StatusChangeEvent(object sender, EventArgs e)
     {
         Console.WriteLine("The status was changed");
     }
-    public void NewPackageAddedToShelf(object sender, Package package)
+    //Aisle
+    public void NewPackageAddedToShelfEvent(object sender, Package package)
     {
-        Console.WriteLine("New package added to shelf, with shipment number: " + package.ShipmentNumber );
+        Console.WriteLine("New package added to shelf, with shipment number: " + package.ShipmentNumber);
     }
-    public void NewPackageOrdered(object sender, PackageList packages)
+    //Delivery
+    public void NewPackageOrderedEvent(object sender, PackageList packages)
     {
         Console.WriteLine(packages.Count + " Packages is being delivered to the warehouse.");
     }
-    public void NewPackageSent(object sender, PackageList packages)
+    public void NewPackageSentEvent(object sender, PackageList packages)
     {
         Console.WriteLine(packages.Count + " Packages is being sent out of warehouse.");
     }
+    //Simulation
 }

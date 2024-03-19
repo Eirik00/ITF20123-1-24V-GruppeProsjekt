@@ -11,14 +11,10 @@ namespace TechSupport.WARE.Warehouse
     public class Aisle : IAisle
     {
         public Dictionary<int, Package?> shelf;
-        private int aisleId;
-        private int numberOfSpaces;
-        private readonly int lengthOfSpaceInMm;
-        private readonly int heightOfSpaceInMm;
-        private readonly int depthOfSpaceInMm;
-        private readonly int weightLimitInGrams;
-        private int totalWeight;
-        private StorageSpecification spesification;
+        private int _numberOfSpaces, _totalWeight, _aisleId, _sections;
+        private readonly int _lengthOfSpaceInMm, _heightOfSpaceInMm, _depthOfSpaceInMm, _weightLimitInGrams;
+        private bool _accessToBothSides;
+        private StorageSpecification _spesification;
 
         //Events
         public delegate void PackageHandler(object sender, EventArgs e);
@@ -28,21 +24,27 @@ namespace TechSupport.WARE.Warehouse
             NewPackageAddedToShelf?.Invoke(this, e);
         }
 
-        public Aisle(int numberOfSpaces, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification spesification, int aisleId)
+        public Aisle(int amountOfSections, int totalAmountOfSpacesPerSection, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification spesification, int aisleId)
         {
-            this.numberOfSpaces = numberOfSpaces;
-            this.lengthOfSpaceInMm = lengthOfSpaceInMm;
-            this.heightOfSpaceInMm = heightOfSpaceInMm;
-            this.depthOfSpaceInMm = depthOfSpaceInMm;
-            this.weightLimitInGrams = weightLimitInGrams;
-            this.spesification = spesification;
-            this.aisleId = aisleId;
+            _sections = amountOfSections;
+            _numberOfSpaces = totalAmountOfSpacesPerSection * amountOfSections;
+            _lengthOfSpaceInMm = lengthOfSpaceInMm;
+            _heightOfSpaceInMm = heightOfSpaceInMm;
+            _weightLimitInGrams = weightLimitInGrams;
+            _spesification = spesification;
+            _aisleId = aisleId;
             shelf = [];
-            for (int i = 1; i <= numberOfSpaces; i++)
+            for (int i = 1; i <= amountOfSections; i++)
             {
+                for (int j = 1; j <= totalAmountOfSpacesPerSection ; j++)
                 shelf.Add(i, null);
             }
-
+            if (_accessToBothSides)
+            {
+                _depthOfSpaceInMm = depthOfSpaceInMm/2;
+            }
+            else
+                _depthOfSpaceInMm = depthOfSpaceInMm;
         }
 
         public int GetShelf(Package package) { 
@@ -58,15 +60,15 @@ namespace TechSupport.WARE.Warehouse
         public void AddPackage(Package package, int placement)
         {
             List<int> available = new(this.GetAvailableSpaces());
-            if (this.spesification != package.Specification)
+            if (this._spesification != package.Specification)
                 throw new InvalidOperationException("Current package spesification," +
                     $" StorageSpesification.{package.Specification}," +
                     " is not compatible with Aisle storage spesification," +
-                    $" StorageSpesification.{this.spesification}");
-            if (this.totalWeight + package.PackageWeightInGrams > this.weightLimitInGrams)
+                    $" StorageSpesification.{this._spesification}");
+            if (this._totalWeight + package.PackageWeightInGrams > this._weightLimitInGrams)
                 throw new WeightLimitException($"Package({package.PackageWeightInGrams}g)" +
                     " is too heavy for the " +
-                    $"Aisle({this.totalWeight}/{this.weightLimitInGrams}g)");
+                    $"Aisle({this._totalWeight}/{this._weightLimitInGrams}g)");
             if(!available.Contains(placement))
                 throw new InvalidOperationException("This shelf space does not exist or is already taken");
 
@@ -79,7 +81,7 @@ namespace TechSupport.WARE.Warehouse
 
             }*/
 
-            int[] dimensions = { this.depthOfSpaceInMm, this.heightOfSpaceInMm, this.lengthOfSpaceInMm };
+            int[] dimensions = { this._depthOfSpaceInMm, this._heightOfSpaceInMm, this._lengthOfSpaceInMm };
 
             Array.Sort(dimensions);
 
@@ -126,7 +128,7 @@ namespace TechSupport.WARE.Warehouse
             }
             else throw new NotEnoughSpaceException("Package is too large for this shelf");
 
-            this.totalWeight += package.PackageWeightInGrams;
+            this._totalWeight += package.PackageWeightInGrams;
             package.AddAisle(this);
             package.ChangeStatus(StatusList.Storage);
 
@@ -138,7 +140,7 @@ namespace TechSupport.WARE.Warehouse
 
         public void RemovePackage(Package package)
         {
-            for (int i = 1; i <= numberOfSpaces; i++)
+            for (int i = 1; i <= _numberOfSpaces; i++)
             {
                 if (shelf[i] == package)
                 {
@@ -147,8 +149,8 @@ namespace TechSupport.WARE.Warehouse
             }
 
         }
-        public int GetAisleId => this.aisleId;
-        public StorageSpecification GetStorageSpecification => this.spesification;
+        public int GetAisleId => this._aisleId;
+        public StorageSpecification GetStorageSpecification => this._spesification;
 
         public int GetPackagePlacement(Package package)
         {
