@@ -64,11 +64,11 @@ namespace TechSupport.WARE.Warehouse
         public void AddPackage(Package package, (int, int) placement)
         {
             List<(int, int)> available = new(this.GetAvailableSpaces());
-            if (this._spesification != package.Specification)
+            if (currentStorageZone.StorageSpecification != package.Specification)
                 throw new InvalidOperationException("Current package spesification," +
                     $" StorageSpesification.{package.Specification}," +
                     " is not compatible with Aisle storage spesification," +
-                    $" StorageSpesification.{this._spesification}");
+                    $" StorageSpesification.{currentStorageZone.StorageSpecification}");
             if (this._totalWeight + package.PackageWeightInGrams > this._weightLimitInGrams)
                 throw new WeightLimitException($"Package({package.PackageWeightInGrams}g)" +
                     " is too heavy for the " +
