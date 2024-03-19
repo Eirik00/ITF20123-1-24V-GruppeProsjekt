@@ -14,7 +14,7 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <param name="package">The package object</param>
         /// <param name="placement">Placement of the package in the isle</param>
-        void AddPackage(Package package, int placement);
+        void AddPackage(Package package, (int,int) placement);
 
         /// <summary>
         /// void <c>RemovePackage</c> removes the package from the isle
@@ -28,14 +28,14 @@ namespace TechSupport.WARE.Warehouse
         int GetAisleId { get; }
         StorageSpecification GetStorageSpecification { get; } 
 
-        int GetShelf(Package package);
+        (int,int) GetShelf(Package package);
 
         /// <summary>
         /// int <c>GetPacakgePlacement</c> gets the placement of the package refrenced
         /// </summary>
         /// <param name="package">Package object</param>
         /// <returns>Returns the placement as an int</returns>
-        int GetPackagePlacement(Package package);
+        (int,int) GetPackagePlacement(Package package);
 
     }
 }

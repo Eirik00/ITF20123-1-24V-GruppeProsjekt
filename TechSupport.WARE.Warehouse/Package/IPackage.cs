@@ -51,7 +51,7 @@ namespace TechSupport.WARE.Warehouse
         /// the storage spesification and the placement in the spesified aisle.
         /// </summary>
         /// <returns>Aisle <c>aisle</c>, int <c>storageSpecification</c>, int <c>place</c></returns>
-        (Aisle? aisle, StorageSpecification specification, int place) GetLocation();
+        (Aisle? aisle, StorageSpecification specification, double place) GetLocation();
         /// <summary>
         /// void <c>ChangeStatus(StatusList, String)</c> changes the status of the package to where it is in the shipping process
         /// </summary>
@@ -63,7 +63,7 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <returns>PackageLog</returns>
         PackageLog GetPackageLog();
-        int? GetShelf();
+        (int,int)? GetShelf();
         Aisle? PackageAisle {  get; }
         /// <summary>
         /// String <c>ToString()</c> gives out the package description in string format
