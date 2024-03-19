@@ -26,27 +26,27 @@ namespace TechSupport.WARE.Warehouse
             NewPackageAddedToShelf?.Invoke(this, e);
         }
 
-        public Aisle(int amountOfSections, int totalAmountOfSpacesPerSection, int lengthOfSpaceInMm, int heightOfSpaceInMm, int depthOfSpaceInMm, int weightLimitInGrams, StorageSpecification spesification, int aisleId)
+        public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInMm, int heightOfAisleInMm, int depthOfAisleInMm, int totalWeightLimitInGrams, StorageSpecification spesification, int aisleId)
         {
-            _sections = amountOfSections;
-            _numberOfSpaces = totalAmountOfSpacesPerSection * amountOfSections;
-            _lengthOfSpaceInMm = lengthOfSpaceInMm;
-            _heightOfSpaceInMm = heightOfSpaceInMm;
-            _weightLimitInGrams = weightLimitInGrams;
+            _sections = amountOfShelves;
+            _numberOfSpaces = totalAmountOfSpacesPerShelf * amountOfShelves;
+            _lengthOfSpaceInMm = lengthOfAisleInMm;
+            _heightOfSpaceInMm = heightOfAisleInMm;
+            _weightLimitInGrams = totalWeightLimitInGrams;
             _spesification = spesification;
             _aisleId = aisleId;
             shelf = [];
-            for (int i = 1; i <= amountOfSections; i++)
+            for (int i = 1; i <= amountOfShelves; i++)
             {
-                for (int j = 1; j <= totalAmountOfSpacesPerSection; j++)
-                    shelf.Add((i, j), null);
+                for (int j = 1; j <= totalAmountOfSpacesPerShelf ; j++)
+                    shelf.Add((i,j), null);
             }
             if (_accessToBothSides)
             {
-                _depthOfSpaceInMm = depthOfSpaceInMm / 2;
+                _depthOfSpaceInMm = depthOfAisleInMm/2;
             }
             else
-                _depthOfSpaceInMm = depthOfSpaceInMm;
+                _depthOfSpaceInMm = depthOfAisleInMm;
         }
 
         public (int, int) GetShelf(Package package)
