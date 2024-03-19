@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechSupport.WARE.Warehouse.Exceptions;
 
-namespace TechSupport.WARE.Warehouse.Employee
+namespace TechSupport.WARE.Warehouse
 {
     public class Employee : Contact
     {
