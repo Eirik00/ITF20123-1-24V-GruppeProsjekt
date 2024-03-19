@@ -17,9 +17,9 @@ namespace TechSupport.WARE
             Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
             pakke.StatusChange += handling.StatusChangeEvent;
             pakke.ChangeStatus(StatusList.Invalid);
-            Aisle hylle = new Aisle(3, 3, 3, 3, 3, StorageSpecification.Invalid, 3);
+            Aisle hylle = new Aisle(4,10,3000,5000,5000,2000000,StorageSpecification.Invalid,1);
             hylle.NewPackageAddedToShelf += handling.NewPackageAddedToShelfEvent;
-            hylle.AddPackage(pakke, 1);
+            hylle.AddPackage(pakke, (1,1));
             Incoming incoming = new();
             incoming.NewPackageOrdered += handling.NewPackageOrderedEvent;
             PackageList packages = new PackageList();
