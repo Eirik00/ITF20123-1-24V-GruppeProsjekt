@@ -8,7 +8,7 @@ namespace TechSupport.WARE.Warehouse
 {
     public class StorageZone : IStorageZone
     {
-        private int doorAccessLevel;
+        private int storageZoneAccessLevel;
         private List<Aisle> aislesInZone;
         private StorageSpecification storageSpecification;
 
@@ -20,14 +20,14 @@ namespace TechSupport.WARE.Warehouse
 
         public StorageSpecification StorageSpecification => this.storageSpecification;
 
-        public int DoorAccessLevel
+        public int StorageZoneAccessLevel
         {
-            get => doorAccessLevel;
+            get => storageZoneAccessLevel;
             set
             {
-                if (doorAccessLevel < 0)
-                    throw new FormatException($"Door access level: {doorAccessLevel}, cannot be a negative integer.");
-                this.doorAccessLevel = value;
+                if (storageZoneAccessLevel < 0)
+                    throw new FormatException($"Door access level: {storageZoneAccessLevel}, cannot be a negative integer.");
+                this.storageZoneAccessLevel = value;
             }
         }
 

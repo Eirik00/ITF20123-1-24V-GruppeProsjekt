@@ -97,9 +97,9 @@ namespace TechSupport.WARE.Warehouse
         public void AddPackage(Package package, (int, int) placement, Employee mover)
         {
             List<(int, int)> available = new(this.GetAvailableSpaces());
-            if (mover.accessLevel < currentStorageZone.DoorAccessLevel)
+            if (mover.accessLevel < currentStorageZone.StorageZoneAccessLevel)
             {
-                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.DoorAccessLevel);
+                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.StorageZoneAccessLevel);
             }
             if (currentStorageZone.StorageSpecification != package.Specification)
                 throw new InvalidOperationException("Current package spesification," +
@@ -181,9 +181,9 @@ namespace TechSupport.WARE.Warehouse
 
         public void RemovePackage(Package package, Employee mover)
         {
-            if (mover.accessLevel < currentStorageZone.DoorAccessLevel)
+            if (mover.accessLevel < currentStorageZone.StorageZoneAccessLevel)
             {
-                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.DoorAccessLevel);
+                throw new Exception("Movers access level: " + mover.accessLevel + ", is not high enough for the storage zone: " + currentStorageZone.StorageZoneAccessLevel);
             }
             for (int i = 1; i <= _sections; i++)
             {
