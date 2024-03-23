@@ -10,12 +10,16 @@ namespace TechSupport.WARE.Warehouse
     {
         public PackageHandler(Package package)
         {
-            package.PackageStatusChanged += HandlePackageStatusChanged;
+            package.PackageStatusChangedEvent += HandlePackageStatusChanged;
+            HandlePackage(this, new PackageStatusChangedEventArgs(package));
         }
-
+        internal void HandlePackage(object sender, PackageStatusChangedEventArgs e)
+        {
+            Console.WriteLine($"Package with ID {e.PackageId} added to the handler.");
+        }
         internal void HandlePackageStatusChanged(object sender, PackageStatusChangedEventArgs e)
         {
-            Console.WriteLine($"Package: {e.PackageId}'s status has changed to: {e.Status}");
+            Console.WriteLine($"Package with ID {e.PackageId} had its status changed to: {e.Status}");
         }
     }
 

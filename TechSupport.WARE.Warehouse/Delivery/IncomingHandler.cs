@@ -17,19 +17,19 @@ namespace TechSupport.WARE.Warehouse
 
         internal void HandleIncomingPackage(object sender, IncomingPackageEventArgs e)
         {
-            Console.WriteLine($"Package: {e.PackageIds} ordered for goods receipt. Registered for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
-            Console.WriteLine($"Updated list of ordered items: {e.UpdatedIncomingList}");
+            Console.WriteLine($"Package with ID {e.PackageIds} ordered to goods receipt. Registered for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
+            Console.WriteLine($"Updated incoming list: Package with ID {e.UpdatedIncomingList}");
         }
         internal void HandleIncomingDailyPackage(object sender, IncomingPackageEventArgs e)
         {
-            Console.WriteLine($"Package: {e.PackageIds} ordered for daily goods receipt. Registered daily for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
-            Console.WriteLine($"Updated outgoing list: {e.UpdatedIncomingList}");
+            Console.WriteLine($"Package with ID {e.PackageIds} ordered daily to goods receipt. Registered daily for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
+            Console.WriteLine($"Updated incoming list: Package with ID {e.UpdatedIncomingList}");
         }
 
         internal void HandleIncomingWeeklyPackage(object sender, IncomingPackageEventArgs e)
         {
-            Console.WriteLine($"Package: {e.PackageIds} ordered for weekly goods receipt. Registered weekly for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
-            Console.WriteLine($"Updated outgoing list: {e.UpdatedIncomingList}");
+            Console.WriteLine($"Package with ID {e.PackageIds} ordered weekly to goods receipt. Registered weekly for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
+            Console.WriteLine($"Updated incoming list: Package with ID {e.UpdatedIncomingList}");
         }
     }
 

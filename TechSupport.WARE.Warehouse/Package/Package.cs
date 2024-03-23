@@ -47,10 +47,10 @@ namespace TechSupport.WARE.Warehouse
         private int shipmentNumber;
 
         //Events
-        internal event EventHandler<PackageStatusChangedEventArgs> PackageStatusChanged;
+        internal event EventHandler<PackageStatusChangedEventArgs> PackageStatusChangedEvent;
         internal virtual void OnPackageStatusChanged(PackageStatusChangedEventArgs e)
         {
-            PackageStatusChanged?.Invoke(this, e);
+            PackageStatusChangedEvent?.Invoke(this, e);
         }
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)

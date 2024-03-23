@@ -11,25 +11,33 @@ namespace TechSupport.WARE.Warehouse
         public AisleHandler(Aisle aisle)
         {
             aisle.PackageAddedToAisle += HandlePackageAddedToAisle;
+            HandleAisle(this, new AisleAndPackageEventArgs(aisle));
         }
 
+        internal void HandleAisle(object sender, AisleAndPackageEventArgs e)
+        {
+            Console.WriteLine($"Aisle with ID {e.AisleId} added to the handler.");
+        }
         internal void HandlePackageAddedToAisle(object sender, AisleAndPackageEventArgs e)
         {
-            Console.WriteLine($"Package: {e._packageId} was added to Aisle: {e._aisleId}, shelf: {e._shelf}");
+            Console.WriteLine($"Package with ID {e.PackageId} was added to Aisle with ID {e.AisleId} on shelf {e.Shelf}");
         }
     }
-
     internal class AisleAndPackageEventArgs : EventArgs
     {
-        internal int _aisleId { get; }
-        internal int _packageId { get; }
-        internal (int, int) _shelf { get; }
+        internal int AisleId { get; }
+        internal int PackageId { get; }
+        internal (int, int) Shelf { get; }
 
         internal AisleAndPackageEventArgs(Aisle aisle, Package package)
         {
-            _aisleId = aisle.GetAisleId;
-            _packageId = package.PackageId;
-            _shelf = aisle.GetShelf(package);
+            AisleId = aisle.GetAisleId;
+            PackageId = package.PackageId;
+            Shelf = aisle.GetShelf(package);
+        }
+        internal AisleAndPackageEventArgs(Aisle aisle)
+        {
+            AisleId = aisle.GetAisleId;
         }
     }
 }
