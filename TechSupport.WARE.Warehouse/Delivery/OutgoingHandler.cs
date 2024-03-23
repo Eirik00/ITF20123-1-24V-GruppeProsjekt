@@ -18,19 +18,19 @@ namespace TechSupport.WARE.Warehouse
         internal void HandleOutgoingPackage(object sender, OutgoingPackageEventArgs e)
         {
             Console.WriteLine($"Package: {e.PackageIds} has been assigned pickup. Pickup registered for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
-            Console.WriteLine($"Updated outgoing list: {e.UpdatedOutgoingList}");
+            Console.WriteLine($"Updated list of outgoing packages: {e.UpdatedOutgoingList}");
         }
 
         internal void HandleOutgoingDailyPackage(object sender, OutgoingPackageEventArgs e)
         {
             Console.WriteLine($"Package: {e.PackageIds} has been assigned daily pickup. Registered daily pickup for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
-            Console.WriteLine($"Updated outgoing list: {e.UpdatedOutgoingList}");
+            Console.WriteLine($"Updated list of outgoing packages: {e.UpdatedOutgoingList}");
         }
 
         internal void HandleOutgoingWeeklyPackage(object sender, OutgoingPackageEventArgs e)
         {
             Console.WriteLine($"Package: {e.PackageIds} has been assigned weekly pickup. Registered weekly pickup for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
-            Console.WriteLine($"Updated outgoing list: {e.UpdatedOutgoingList}");
+            Console.WriteLine($"Updated list of outgoing packages: {e.UpdatedOutgoingList}");
         }
 
     }
