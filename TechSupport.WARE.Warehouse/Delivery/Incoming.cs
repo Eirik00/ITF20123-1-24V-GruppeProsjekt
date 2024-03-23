@@ -11,7 +11,6 @@ namespace TechSupport.WARE.Warehouse
     public class Incoming : IIncoming
     {
         private List<Package> incomingPackagesList;
-        //Event
         //Events
         internal event EventHandler<IncomingPackageEventArgs> IncomingPackageEvent;
         internal virtual void OnIncomingPackage(IncomingPackageEventArgs e)
