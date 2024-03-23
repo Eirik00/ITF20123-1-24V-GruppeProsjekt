@@ -15,7 +15,7 @@ namespace TechSupport.WARE.Warehouse
 
         internal void HandleIncomingPackage(object sender, IncomingPackageEventArgs e)
         {
-            Console.WriteLine($"Package: {e.PackageIds} ordered for goods receipt. Registered for {e.DeliveryHourAndMinute} by sender {e.Sender} to {e.Reciever}");
+            Console.WriteLine($"Package: {e.PackageIds} ordered for goods receipt. Registered for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
             Console.WriteLine($"Updated list of ordered items: {e.UpdatedIncomingList}");
         }
     }

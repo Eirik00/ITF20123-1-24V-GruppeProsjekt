@@ -13,9 +13,19 @@ namespace TechSupport.WARE.Warehouse
         private List<PackageList> outgoingPackagesList;
         //Events
         internal event EventHandler<OutgoingPackageEventArgs> OutgoingPackageEvent;
+        internal event EventHandler<OutgoingPackageEventArgs> OutgoingDailyPackageEvent;
+        internal event EventHandler<OutgoingPackageEventArgs> OutgoingWeeklyPackageEvent;
         internal virtual void OnOutgoingPackage(OutgoingPackageEventArgs e)
         {
             OutgoingPackageEvent?.Invoke(this, e);
+        }
+        internal virtual void OnOutgoingDailyPackage(OutgoingPackageEventArgs e)
+        {
+            OutgoingDailyPackageEvent?.Invoke(this, e);
+        }
+        internal virtual void OnOutgoingWeeklyPackage(OutgoingPackageEventArgs e)
+        {
+            OutgoingWeeklyPackageEvent?.Invoke(this, e);
         }
 
         public Outgoing()
@@ -64,6 +74,7 @@ namespace TechSupport.WARE.Warehouse
             PackageList singlePackageList = [package];
             singlePackageList.Add(package);
             OutgoingPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
+            OnOutgoingPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, package));
         }
 
         // Overload to be able to use Company object as a sender or receiver
@@ -73,6 +84,7 @@ namespace TechSupport.WARE.Warehouse
             Contact receiver = receiverCompany.ContactPerson;
 
             OutgoingPackage(sendingHourAndMinute, packages, sender, receiver);
+            OnOutgoingPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
 
         /// <summary>
@@ -104,12 +116,10 @@ namespace TechSupport.WARE.Warehouse
                 package.DeliveryTime = DateTime.Today.AddHours(sendingHourAndMinute);
                 package.ChangeStatus(StatusList.Delivery);
                 OutgoingPackagesList.Add(packages);
-
-                
             }
-            Console.WriteLine($"Gjentagende Daglig Outgoing Registrert for Kl. {sendingHourAndMinute}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
+            OnOutgoingDailyPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
         // Overload for sending of 1 single package
         public void OutgoingDailyPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
@@ -117,14 +127,15 @@ namespace TechSupport.WARE.Warehouse
             PackageList singlePackageList = [package];
             singlePackageList.Add(package);
             OutgoingDailyPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
+            OnOutgoingDailyPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, package));
         }
         // Overload to be able to use Company object as a sender or receiver
         public void OutgoingDailyPackage(double sendingHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
-
             OutgoingDailyPackage(sendingHourAndMinute, packages, sender, receiver);
+            OnOutgoingDailyPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
 
         /// <summary>
@@ -163,6 +174,7 @@ namespace TechSupport.WARE.Warehouse
             //This should delete the sent packet from the original list it was in, plain and simple
             packages.Packages.Clear();
             Console.WriteLine($"Gjentagende Ukentlig Vare Outgoing Registrert for {deliveryDay} Kl {sendingHourAndMinute}:00 av {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            OnOutgoingWeeklyPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
         // Overload for sending of 1 single package
         public void OutgoingWeeklyPackage(DayOfWeek deliveryDay,double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
@@ -170,6 +182,7 @@ namespace TechSupport.WARE.Warehouse
             PackageList singlePackageList = [package];
             singlePackageList.Add(package);
             OutgoingWeeklyPackage(deliveryDay,sendingHourAndMinute, singlePackageList, sender, receiver);
+            OnOutgoingWeeklyPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, package));
         }
 
         // Overload to be able to use Company object as a sender or receiver
@@ -177,8 +190,8 @@ namespace TechSupport.WARE.Warehouse
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
-
             OutgoingWeeklyPackage(deliveryDay, sendingHourAndMinute, packages, sender, receiver);
+            OnOutgoingWeeklyPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
 
 
