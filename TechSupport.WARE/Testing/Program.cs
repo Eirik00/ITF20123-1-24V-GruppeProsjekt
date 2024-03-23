@@ -20,11 +20,11 @@ namespace TechSupport.WARE
             AisleHandler aisleHandler = new AisleHandler(hylle);
             Employee arne = new Employee(1, 2, "Arne", "Tang", "ole@email.com", "tollvei12", "Norway", 992229929, 3232);
             hylle.AddPackage(pakke, (1,1), arne);
-            //Incoming incoming = new();
-            //incoming.NewPackageOrdered += handling.NewPackageOrderedEvent;
-            //PackageList packages = new PackageList();
-            //packages.Add(pakke);
-            //incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
+            Incoming incoming = new();
+            IncomingHandler incomingHandler = new IncomingHandler(incoming);
+            PackageList packages = new PackageList();
+            packages.Add(pakke);
+            incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
             //Outgoing outgoing = new Outgoing();
             //outgoing.NewPackageSent += handling.NewPackageSentEvent;
             //outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));

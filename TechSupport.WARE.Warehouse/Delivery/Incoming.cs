@@ -12,11 +12,11 @@ namespace TechSupport.WARE.Warehouse
     {
         private List<Package> incomingPackagesList;
         //Event
-        public delegate void PackageHandler(object sender, EventArgs e);
-        public event EventHandler<PackageList> NewPackageOrdered;
-        public virtual void OnPackageOrdered(PackageList e)
+        //Events
+        internal event EventHandler<IncomingPackageEventArgs> IncomingPackageEvent;
+        internal virtual void OnIncomingPackage(IncomingPackageEventArgs e)
         {
-           NewPackageOrdered?.Invoke(this, e);
+            IncomingPackageEvent?.Invoke(this, e);
         }
 
         public Incoming()
@@ -55,7 +55,7 @@ namespace TechSupport.WARE.Warehouse
                 IncomingPackagesList.Add(package);
             }
             //Console.WriteLine($"Vare Mottak registerert for Kl {deliveryHourAndMinute} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
-            OnPackageOrdered(packages);
+            OnIncomingPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, packages));
         }
         // Overload for receiving of 1 single package
         public void IncomingPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
