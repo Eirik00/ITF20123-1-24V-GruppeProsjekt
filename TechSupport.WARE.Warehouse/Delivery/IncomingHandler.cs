@@ -11,12 +11,25 @@ namespace TechSupport.WARE.Warehouse
         public IncomingHandler(Incoming incoming)
         {
             incoming.IncomingPackageEvent += HandleIncomingPackage;
+            incoming.IncomingDailyPackageEvent += HandleIncomingDailyPackage;
+            incoming.IncomingWeeklyPackageEvent += HandleIncomingWeeklyPackage;
         }
 
         internal void HandleIncomingPackage(object sender, IncomingPackageEventArgs e)
         {
             Console.WriteLine($"Package: {e.PackageIds} ordered for goods receipt. Registered for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
             Console.WriteLine($"Updated list of ordered items: {e.UpdatedIncomingList}");
+        }
+        internal void HandleIncomingDailyPackage(object sender, IncomingPackageEventArgs e)
+        {
+            Console.WriteLine($"Package: {e.PackageIds} ordered for daily goods receipt. Registered daily for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
+            Console.WriteLine($"Updated outgoing list: {e.UpdatedIncomingList}");
+        }
+
+        internal void HandleIncomingWeeklyPackage(object sender, IncomingPackageEventArgs e)
+        {
+            Console.WriteLine($"Package: {e.PackageIds} ordered for weekly goods receipt. Registered weekly for {e.DeliveryHourAndMinute} from sender {e.Sender} to {e.Reciever}.");
+            Console.WriteLine($"Updated outgoing list: {e.UpdatedIncomingList}");
         }
     }
 
@@ -34,6 +47,14 @@ namespace TechSupport.WARE.Warehouse
             Reciever = $"{reciever.FirstName} {reciever.Surname}";
             DeliveryHourAndMinute = deliveryTime;
             PackageIds = PackageList(packages);
+            UpdatedIncomingList = ListPackages(incoming.IncomingPackagesList);
+        }
+        internal IncomingPackageEventArgs(Incoming incoming, Contact sender, Contact reciever, double deliveryTime, Package package)
+        {
+            Sender = $"{sender.FirstName} {sender.Surname}";
+            Reciever = $"{reciever.FirstName} {reciever.Surname}";
+            DeliveryHourAndMinute = deliveryTime;
+            PackageIds = $"{package.PackageId}";
             UpdatedIncomingList = ListPackages(incoming.IncomingPackagesList);
         }
         internal string PackageList(PackageList packages)

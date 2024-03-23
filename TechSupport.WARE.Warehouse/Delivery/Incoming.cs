@@ -13,9 +13,19 @@ namespace TechSupport.WARE.Warehouse
         private List<Package> incomingPackagesList;
         //Events
         internal event EventHandler<IncomingPackageEventArgs> IncomingPackageEvent;
+        internal event EventHandler<IncomingPackageEventArgs> IncomingDailyPackageEvent;
+        internal event EventHandler<IncomingPackageEventArgs> IncomingWeeklyPackageEvent;
         internal virtual void OnIncomingPackage(IncomingPackageEventArgs e)
         {
             IncomingPackageEvent?.Invoke(this, e);
+        }
+        internal virtual void OnIncomingDailyPackage(IncomingPackageEventArgs e)
+        {
+            IncomingDailyPackageEvent?.Invoke(this, e);
+        }
+        internal virtual void OnIncomingWeeklyPackage(IncomingPackageEventArgs e)
+        {
+            IncomingWeeklyPackageEvent?.Invoke(this, e);
         }
 
         public Incoming()
@@ -62,6 +72,7 @@ namespace TechSupport.WARE.Warehouse
             PackageList singlePackageList = [package];
             singlePackageList.Add(package);
             IncomingPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
+            OnIncomingPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, package));
         }
 
         // Overload to be able to use Company object as a sender or receiver
@@ -69,8 +80,8 @@ namespace TechSupport.WARE.Warehouse
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
-
             IncomingPackage(deliveryHourAndMinute, packages, sender, receiver);
+            OnIncomingPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, packages));
         }
 
         /// <summary>
@@ -104,7 +115,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Ordered);
                 IncomingPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Daglig Vare Mottak Registrert for Kl {deliveryHourAndMinute} fra sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}");
+            OnIncomingDailyPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, packages));
         }
         // Overload for receiving of 1 single package
         public void IncomingDailyPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
@@ -112,6 +123,7 @@ namespace TechSupport.WARE.Warehouse
             PackageList singlePackageList = [package];
             singlePackageList.Add(package);
             IncomingDailyPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
+            OnIncomingDailyPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, package));
         }
 
         // Overload to be able to use Company object as a sender or receiver
@@ -119,8 +131,8 @@ namespace TechSupport.WARE.Warehouse
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
-
             IncomingDailyPackage(deliveryHourAndMinute, packages, sender, receiver);
+            OnIncomingDailyPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, packages));
         }
 
         /// <summary>
@@ -156,7 +168,7 @@ namespace TechSupport.WARE.Warehouse
                 package.ChangeStatus(StatusList.Ordered);
                 IncomingPackagesList.Add(package);
             }
-            Console.WriteLine($"Gjentagende Ukentlig Vare Mottak Registrert for {deliveryDay} Kl. {deliveryHourAndMinute} av sender {sender.FirstName} {sender.Surname} til {receiver.FirstName} {receiver.Surname}.");
+            OnIncomingWeeklyPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, packages));
         }
 
         // Overload for receiving of 1 single package
@@ -165,6 +177,7 @@ namespace TechSupport.WARE.Warehouse
             PackageList singlePackageList = [package];
             singlePackageList.Add(package);
             IncomingWeeklyPackage(deliveryDay, deliveryHourAndMinute, singlePackageList, sender, receiver);
+            OnIncomingWeeklyPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, package));
         }
 
         // Overload to be able to use Company object as a sender or receiver
@@ -172,8 +185,8 @@ namespace TechSupport.WARE.Warehouse
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
-
             IncomingWeeklyPackage(deliveryDay, deliveryHourAndMinute, packages, sender, receiver);
+            OnIncomingWeeklyPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, packages));
         }
 
         //Denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres mottal til neste forekomst av den dagen i neste uke.
