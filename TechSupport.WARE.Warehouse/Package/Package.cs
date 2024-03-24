@@ -48,9 +48,19 @@ namespace TechSupport.WARE.Warehouse
 
         //Events
         internal event EventHandler<PackageStatusChangedEventArgs> PackageStatusChangedEvent;
+        internal event EventHandler<PackageStatusChangedEventArgs> PackageSenderChangedEvent;
+        internal event EventHandler<PackageStatusChangedEventArgs> PackageReceiverChangedEvent;
         internal virtual void OnPackageStatusChanged(PackageStatusChangedEventArgs e)
         {
             PackageStatusChangedEvent?.Invoke(this, e);
+        }
+        internal virtual void OnPackageSenderChanged(PackageStatusChangedEventArgs e)
+        {
+            PackageSenderChangedEvent?.Invoke(this, e);
+        }
+        internal virtual void OnPackageReceiverChanged(PackageStatusChangedEventArgs e)
+        {
+            PackageReceiverChangedEvent?.Invoke(this, e);
         }
 
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
@@ -86,11 +96,21 @@ namespace TechSupport.WARE.Warehouse
         public Aisle? PackageAisle => packageAisle;
         public Contact Sender { 
             get { return this.sender; }
-            set { this.sender = value; } 
+            set 
+            {
+                Contact oldValue = this.receiver;
+                this.sender = value;
+                OnPackageSenderChanged(new PackageStatusChangedEventArgs(this, oldValue));
+            } 
         }
         public Contact Receiver { 
             get { return this.receiver; }
-            set { this.receiver = value; }
+            set 
+            {
+                Contact oldValue = this.receiver;
+                this.receiver = value;
+                OnPackageReceiverChanged(new PackageStatusChangedEventArgs(this, oldValue));    
+            }
         }
         public int ShipmentNumber
         {

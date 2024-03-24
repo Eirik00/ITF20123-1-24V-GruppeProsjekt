@@ -25,7 +25,7 @@ namespace TechSupport.WARE
             PackageList packages = new PackageList();
             packages.Add(pakke);
             incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
-            Outgoing outgoing = new Outgoing();
+            Outgoing outgoing = new();
             OutgoingHandler outgoingHandler = new OutgoingHandler(outgoing);
             outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
             ////Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ClimateControlled, 1);
