@@ -6,6 +6,7 @@ using System.Collections;
 using System.Threading;
 using TechSupport.WARE.Warehouse;
 using System.Diagnostics.Tracing;
+using TechSupport.WARE.Warehouse.PalletManagement;
 
 namespace TechSupport.WARE
 {
@@ -13,6 +14,7 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
+            TruckManager truckManager = new TruckManager();
             Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
             PackageHandler packageHandler = new PackageHandler(pakke);
             pakke.ChangeStatus(StatusList.Invalid);
@@ -25,7 +27,7 @@ namespace TechSupport.WARE
             PackageList packages = new PackageList();
             packages.Add(pakke);
             incoming.IncomingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
-            Outgoing outgoing = new();
+            Outgoing outgoing = new(truckManager);
             OutgoingHandler outgoingHandler = new OutgoingHandler(outgoing);
             outgoing.OutgoingPackage(14.30, packages, new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322), new Contact("tt", "lala", "toer@.com", "gaggvei", "Norge", 90909090, 2322));
             ////Aisle isle = new(2, 200, 200, 200, 200000, StorageSpecification.ClimateControlled, 1);

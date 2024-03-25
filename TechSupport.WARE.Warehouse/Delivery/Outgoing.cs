@@ -5,12 +5,18 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using TechSupport.WARE.Warehouse.Exceptions;
+using TechSupport.WARE.Warehouse.PalletManagement;
 
 namespace TechSupport.WARE.Warehouse
 {
     public class Outgoing : IOutgoing
     {
         private List<PackageList> outgoingPackagesList;
+        private List<Pallet> readyForShipmentPallets = new List<Pallet>();
+        private TruckManager truckManager;
+        private int nextPalletId = 1;
+        private Pallet currentPallet;
+
         //Events
         internal event EventHandler<OutgoingPackageEventArgs> OutgoingPackageEvent;
         internal event EventHandler<OutgoingPackageEventArgs> OutgoingDailyPackageEvent;
@@ -28,9 +34,14 @@ namespace TechSupport.WARE.Warehouse
             OutgoingWeeklyPackageEvent?.Invoke(this, e);
         }
 
-        public Outgoing()
+        public Outgoing(TruckManager truckManager)
         {
             outgoingPackagesList = [];
+            readyForShipmentPallets = new List<Pallet>();
+            this.truckManager = truckManager;
+            this.nextPalletId = 1;
+            this.currentPallet = new Pallet(GetNextPalletId());
+
         }
 
         /// <summary>
@@ -194,6 +205,69 @@ namespace TechSupport.WARE.Warehouse
             OnOutgoingWeeklyPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
 
+        //---------------Pallets----------------
+        public void PreparePalletsForShipment(PackageList packages, Contact sender, Contact receiver)
+        {
+            foreach (var package in packages.Packages)
+            {
+                if (currentPallet == null || currentPallet.PackageCount >= 30)
+                {
+                    if (currentPallet != null && currentPallet.PackageCount > 0)
+                    {
+                        readyForShipmentPallets.Add(currentPallet);
+                    }
+                    currentPallet = new Pallet(GetNextPalletId());
+                }
+            }
+            if (currentPallet != null && currentPallet.PackageCount > 0)
+            {
+                readyForShipmentPallets.Add(currentPallet);
+            }
+            currentPallet = null;
+        }
+        private bool TryAddPackageToPallet(Package package)
+        {
+            return currentPallet.AddPackage(package);
+        }
+
+        private void CreateNewPallet()
+        {
+            currentPallet = new Pallet(GetNextPalletId());
+        }
+
+        private void FinalizeCurrentPallet(Contact sender, Contact receiver)
+        {
+            foreach (var package in currentPallet.Packages)
+            {
+                package.Sender = sender;
+                package.Receiver = receiver;
+            }
+
+            readyForShipmentPallets.Add(currentPallet);
+        }
+
+        public void ShipOutPallets(Contact sender, Contact receiver)
+        {
+            foreach (var pallet in readyForShipmentPallets.ToList())
+            {
+                if (!truckManager.UseTruck()) break;
+
+                Console.WriteLine($"Shipping out a pallet ID: {pallet.PalletId}, from {sender.FirstName} {sender.Surname} to {receiver.FirstName} {receiver.Surname}.");
+
+                readyForShipmentPallets.Remove(pallet);
+                truckManager.ReturnTruck();
+            }
+        }
+        private int GetNextPalletId()
+        {
+            return nextPalletId++;
+        }
+
+        public int ReadyForShipmentPalletsCount => readyForShipmentPallets.Count;
+
+
+        //---------------Pallets----------------
+
 
         //GetNextWeekDay metoden brukes i ukentlig sending,denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres sending den dagen til neste uke.
         private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
@@ -226,5 +300,6 @@ namespace TechSupport.WARE.Warehouse
 
 
         public List<PackageList> OutgoingPackagesList => outgoingPackagesList;
+        public List<Pallet> ReadyForShipmentPallets => readyForShipmentPallets;
     }
 }

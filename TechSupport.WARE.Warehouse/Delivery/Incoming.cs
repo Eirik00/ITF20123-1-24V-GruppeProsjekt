@@ -189,6 +189,13 @@ namespace TechSupport.WARE.Warehouse
             OnIncomingWeeklyPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, packages));
         }
 
+        //------------Pallets Start-------------------
+
+
+        //------NoYetImplemented--------
+
+        //------------Pallets end-------------------
+
         //Denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres mottal til neste forekomst av den dagen i neste uke.
         private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {

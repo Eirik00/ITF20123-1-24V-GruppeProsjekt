@@ -47,7 +47,11 @@ namespace TechSupport.WARE.Warehouse
         /// Is ment to convert the delivery information into more easly readlable string format, but might actually do the opposite due to reasons
         /// </summary>
         /// <returns>A string representation of the planned deliveries.</returns>
-        //String ToString();
+        String ToString();
+
+        void PreparePalletsForShipment(PackageList packages, Contact sender, Contact receiver);
+        void ShipOutPallets(Contact sender, Contact receiver);
+        int ReadyForShipmentPalletsCount { get; }
     }
 }
 
