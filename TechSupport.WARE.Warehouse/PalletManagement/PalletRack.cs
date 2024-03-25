@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse.PalletManagement
 {
+    //klasse for pall reoler
     public class PalletRack : IPalletRack
     {
         private const int NumberOfRacks = 3;
@@ -13,7 +14,7 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         private const int PositionsPerFloor = 11;
         private Dictionary<int, List<Pallet>>[] racks;
         private TruckManager truckManager;
-        //klasse for pall reoler
+        
         public PalletRack(TruckManager truckManager)
         {
             this.truckManager = truckManager;
