@@ -21,6 +21,9 @@ namespace TechSupport.WARE.Warehouse
         internal event EventHandler<OutgoingPackageEventArgs> OutgoingPackageEvent;
         internal event EventHandler<OutgoingPackageEventArgs> OutgoingDailyPackageEvent;
         internal event EventHandler<OutgoingPackageEventArgs> OutgoingWeeklyPackageEvent;
+
+        internal event EventHandler<PalletEventArgs> PalletPreparedForShipment;
+        internal event EventHandler<PalletEventArgs> PalletShipped;
         internal virtual void OnOutgoingPackage(OutgoingPackageEventArgs e)
         {
             OutgoingPackageEvent?.Invoke(this, e);
@@ -223,6 +226,7 @@ namespace TechSupport.WARE.Warehouse
             {
                 readyForShipmentPallets.Add(currentPallet);
             }
+            PalletPreparedForShipment?.Invoke(this, new PalletEventArgs { Message = "Pallets prepared for shipment." });
             currentPallet = null;
         }
         private bool TryAddPackageToPallet(Package package)
@@ -253,6 +257,8 @@ namespace TechSupport.WARE.Warehouse
                 if (!truckManager.UseTruck()) break;
 
                 Console.WriteLine($"Shipping out a pallet ID: {pallet.PalletId}, from {sender.FirstName} {sender.Surname} to {receiver.FirstName} {receiver.Surname}.");
+
+                PalletShipped?.Invoke(this, new PalletEventArgs { Message = $"Pallet ID: {pallet.PalletId} shipped." });
 
                 readyForShipmentPallets.Remove(pallet);
                 truckManager.ReturnTruck();

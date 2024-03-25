@@ -13,6 +13,8 @@ namespace TechSupport.WARE.Warehouse
             outgoing.OutgoingPackageEvent += HandleOutgoingPackage;
             outgoing.OutgoingDailyPackageEvent += HandleOutgoingDailyPackage;
             outgoing.OutgoingWeeklyPackageEvent += HandleOutgoingWeeklyPackage;
+            outgoing.PalletPreparedForShipment += HandlePalletPreparedForShipment;
+            outgoing.PalletShipped += HandlePalletShipped;
         }
 
         internal void HandleOutgoingPackage(object sender, OutgoingPackageEventArgs e)
@@ -33,6 +35,22 @@ namespace TechSupport.WARE.Warehouse
             Console.WriteLine($"Updated list of outgoing packages: {e.UpdatedOutgoingList}");
         }
 
+        private void HandlePalletPreparedForShipment(object sender, PalletEventArgs e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        private void HandlePalletShipped(object sender, PalletEventArgs e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+    }
+
+    internal class PalletEventArgs : EventArgs
+    {
+        public string Message { get; set; }
+        public string Action { get; internal set; }
     }
 
     internal class OutgoingPackageEventArgs : EventArgs

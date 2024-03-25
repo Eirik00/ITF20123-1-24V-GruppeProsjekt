@@ -14,7 +14,17 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         private const int PositionsPerFloor = 11;
         private Dictionary<int, List<Pallet>>[] racks;
         private TruckManager truckManager;
-        
+
+        //ewvents
+        public event EventHandler<PalletRackEventArgs> RackUpdated;
+
+        protected virtual void OnRackUpdated(PalletRackEventArgs e)
+        {
+            RackUpdated?.Invoke(this, e);
+        }
+
+        //events end
+
         public PalletRack(TruckManager truckManager)
         {
             this.truckManager = truckManager;
@@ -38,6 +48,8 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         {
             if (!IsRackPositionValid(rackNumber, floor)) return false;
 
+            OnRackUpdated(new PalletRackEventArgs { RackNumber = rackNumber, Floor = floor, Action = "Pallet Added", PalletId = pallet.PalletId });
+            
             if (truckManager.UseTruck())
             {
                 racks[rackNumber - 1][floor].Add((Pallet)pallet);
@@ -58,6 +70,7 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             if (pallet != null)
             {
                 racks[rackNumber - 1][floor].Remove(pallet);
+                OnRackUpdated(new PalletRackEventArgs { RackNumber = rackNumber, Floor = floor, Action = "Pallet Removed", PalletId = palletId });
                 return true;
             }
             return false;
@@ -110,5 +123,15 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
 
         public static int NextPalletId { get; private set; } = 1;
         public static int GetNextPalletId() => NextPalletId++;
+
+        public int ReadyForShipmentPalletsCount => TotalPallets();
     }
+}
+
+public class PalletRackEventArgs : EventArgs
+{
+    public int RackNumber { get; set; }
+    public int Floor { get; set; }
+    public string Action { get; set; }
+    public int PalletId { get; set; }
 }
