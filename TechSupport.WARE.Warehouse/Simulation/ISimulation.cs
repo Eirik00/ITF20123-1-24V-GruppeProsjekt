@@ -8,5 +8,6 @@ namespace TechSupport.WARE.Warehouse.Simulation
 {
     internal interface ISimulation
     {
+
     }
 }

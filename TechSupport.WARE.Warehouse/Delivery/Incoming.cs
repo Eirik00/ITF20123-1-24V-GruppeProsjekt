@@ -69,7 +69,7 @@ namespace TechSupport.WARE.Warehouse
         // Overload for receiving of 1 single package
         public void IncomingPackage(double deliveryHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = [package];
+            PackageList singlePackageList = [];
             singlePackageList.Add(package);
             IncomingPackage(deliveryHourAndMinute, singlePackageList, sender, receiver);
             OnIncomingPackage(new IncomingPackageEventArgs(this, sender, receiver, deliveryHourAndMinute, package));

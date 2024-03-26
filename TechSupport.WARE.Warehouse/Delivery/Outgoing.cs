@@ -85,7 +85,7 @@ namespace TechSupport.WARE.Warehouse
         // Overload for sending of 1 single package
         public void OutgoingPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
         {
-            PackageList singlePackageList = [package];
+            PackageList singlePackageList = [];
             singlePackageList.Add(package);
             OutgoingPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
             OnOutgoingPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, package));
