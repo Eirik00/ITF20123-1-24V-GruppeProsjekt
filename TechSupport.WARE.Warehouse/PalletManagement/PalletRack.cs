@@ -28,10 +28,10 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         public PalletRack(TruckManager truckManager)
         {
             this.truckManager = truckManager;
-            InitializeRacks();
+            RacksSetUp();
         }
         //Setter opp reol strukturen basert på den forhåndsdefinerte konfigurasjonen(konfigs i WARE_ Nye krav delinnlevering 3) PDFen.
-        private void InitializeRacks()
+        private void RacksSetUp()
         {
             racks = new Dictionary<int, List<Pallet>>[NumberOfRacks];
             for (int i = 0; i < NumberOfRacks; i++)
