@@ -4,6 +4,15 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>Warehouse-SimAPITest</Title>
+    <PackageId>WarehouseSimuAPI1</PackageId>
+    <Authors>Krister Wallin Hognestad, Eirik Rasmussen, Mustafa Sahin, Martin Malo Treseng</Authors>
+    <Company>TechSupport</Company>
+    <Product>WarehouseAPI</Product>
+    <Description>Warehouse Simulation API</Description>
+    <RepositoryUrl>https://github.com/Eirik00/ITF20123-1-24V-GruppeProsjekt</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Api, test</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
