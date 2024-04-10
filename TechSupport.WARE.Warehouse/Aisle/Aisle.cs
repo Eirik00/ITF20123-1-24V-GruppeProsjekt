@@ -114,15 +114,6 @@ namespace TechSupport.WARE.Warehouse
             if (!available.Contains(placement))
                 throw new InvalidOperationException("This shelf space does not exist or is already taken");
 
-            /*
-            List<int> aisleDimensions = new List<int>{this.depthOfSpaceInMm, this.heightOfSpaceInMm, this.lengthOfSpaceInMm};
-            List<int> packageDimensions = new List<int> { package.PackageDepthInMm, package.PackageHeightInMm, package.PackageLengthInMm };
-            for(int i = 0; i < aisleDimensions.Count; i++)
-            {
-                if (aisleDimensions[0] <= packageDimensions[0] && aisleDimensions[1] <= packageDimensions[1] && aisleDimensions[2] <= packageDimensions[2]) ;
-
-            }*/
-
             int[] dimensions = { this._depthOfSpaceInMm, this._heightOfSpaceInMm, this._lengthOfSpaceInMm };
 
             Array.Sort(dimensions);

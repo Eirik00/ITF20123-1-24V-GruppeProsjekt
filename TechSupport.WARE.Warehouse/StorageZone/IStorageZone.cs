@@ -8,7 +8,6 @@ namespace TechSupport.WARE.Warehouse
 {
     internal interface IStorageZone
     {
-
         /// <summary>
         /// Adds aisle to the zone.
         /// </summary>

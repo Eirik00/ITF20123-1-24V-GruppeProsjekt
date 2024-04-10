@@ -43,7 +43,6 @@ namespace TechSupport.WARE.Warehouse.Simulation
         {
             try
             {
-
                 PackageList packageList = new PackageList();
                 for (int i = 0; i < 5; i++)
                 {
