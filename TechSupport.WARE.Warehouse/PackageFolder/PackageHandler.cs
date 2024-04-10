@@ -8,8 +8,17 @@ namespace TechSupport.WARE.Warehouse
 {
     public class PackageHandler
     {
+        private Simulation _simulation;
         public PackageHandler(Package package)
         {
+            package.PackageStatusChangedEvent += HandlePackageStatusChanged;
+            package.PackageSenderChangedEvent += HandlePackageSenderChanged;
+            package.PackageReceiverChangedEvent += HandlePackageReceiverChanged;
+            HandlePackage(this, new PackageStatusChangedEventArgs(package));
+        }
+        public PackageHandler(Package package, Simulation sim)
+        {
+            _simulation = sim;
             package.PackageStatusChangedEvent += HandlePackageStatusChanged;
             package.PackageSenderChangedEvent += HandlePackageSenderChanged;
             package.PackageReceiverChangedEvent += HandlePackageReceiverChanged;
@@ -22,6 +31,35 @@ namespace TechSupport.WARE.Warehouse
         internal void HandlePackageStatusChanged(object sender, PackageStatusChangedEventArgs e)
         {
             Console.WriteLine($"Package with ID {e.PackageId} had its status changed to: {e.Status}");
+            if ( _simulation.GetSimulateBool ) 
+            {
+                if (e.Status == StatusList.Delivery)
+                {
+                    if(e.Aisle != null)
+                    {
+                        if (e.StorageSpecification == StorageSpecification.HighValue)
+                        {
+                            int timeEstimate = 210;
+                            _simulation.AddToTotalSimulationTime(timeEstimate);
+                        }
+                        if (e.StorageSpecification == StorageSpecification.ClimateControlled)
+                        {
+                            int timeEstimate = 210;
+                            _simulation.AddToTotalSimulationTime(timeEstimate);
+                        }
+                        if (e.StorageSpecification == StorageSpecification.SmallItems)
+                        {
+                            int timeEstimate = 110;
+                            _simulation.AddToTotalSimulationTime(timeEstimate);
+                        }
+                    }
+                    else
+                    {
+                        int timeEstimate = 55;
+                        _simulation.AddToTotalSimulationTime(timeEstimate);
+                    }
+                }
+            }
         }
         internal void HandlePackageSenderChanged(object sender, PackageStatusChangedEventArgs e)
         {
@@ -54,6 +92,8 @@ namespace TechSupport.WARE.Warehouse
         internal Contact? NewSender { get; }
         internal Contact? NewReceiver { get; }
         internal Contact OldContact { get; }
+        internal StorageSpecification StorageSpecification { get; }
+        internal Aisle Aisle { get; }
         internal PackageStatusChangedEventArgs(Package package)
         {
             PackageId = package.PackageId;
@@ -68,6 +108,8 @@ namespace TechSupport.WARE.Warehouse
             OldContact = oldContact;
             NewSender = package.Sender;
             NewReceiver = package.Receiver;
+            StorageSpecification = package.PackageAisle.CurrentStorageZone.StorageSpecification;
+            Aisle = package.PackageAisle;
         }
     }
 }

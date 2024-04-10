@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse.Simulation
+namespace TechSupport.WARE.Warehouse.SimulationFolder.Simulation
 {
     internal interface ISimulation
     {

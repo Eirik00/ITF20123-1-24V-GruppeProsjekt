@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechSupport.WARE.Warehouse", "..\TechSupport.WARE.Warehouse\TechSupport.WARE.Warehouse.csproj", "{E43A0CE2-2A28-41A4-B3AD-2A84BB8DE016}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simulation", "Simulation\Simulation.csproj", "{438121C7-8178-4241-8318-5EFE72D6B7B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simulations", "Simulation\Simulations.csproj", "{438121C7-8178-4241-8318-5EFE72D6B7B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{CDE0E45D-29F9-4A5A-AFEE-9CE2B9B8F153}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.csproj", "{CDE0E45D-29F9-4A5A-AFEE-9CE2B9B8F153}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

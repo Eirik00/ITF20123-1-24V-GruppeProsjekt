@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="PackageLog\IPackageLog.cs~RF1f8248.TMP" />
+    <None Remove="PackageLogFolder\IPackageLog.cs~RF1f8248.TMP" />
   </ItemGroup>
 
 </Project>

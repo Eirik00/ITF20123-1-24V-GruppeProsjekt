@@ -7,7 +7,7 @@ using System.Threading;
 using TechSupport.WARE.Warehouse;
 using System.Diagnostics.Tracing;
 using TechSupport.WARE.Warehouse.PalletManagement;
-using TechSupport.WARE.Warehouse.Simulation;
+using TechSupport.WARE.Warehouse.SimulationFolder.Simulation;
 
 namespace TechSupport.WARE
 {
@@ -15,9 +15,12 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
-
-            Simulation simulation = new Simulation();
-            simulation.simulateSinglePackageMovement();
+            Aisle aisle1 = new(2, 2, 2, 2, 2, 2, StorageSpecification.Invalid, 2);
+            Simulation sim1 = new();
+            AisleHandler aisleHandler = new(aisle1, sim1);
+            Console.WriteLine(sim1.GetTotalSimulationTime);
+            /*Simulation simulation = new Simulation();
+            simulation.simulateSinglePackageMovement();*/
             /*TruckManager truckManager = new TruckManager();
             Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
             PackageHandler packageHandler = new PackageHandler(pakke);

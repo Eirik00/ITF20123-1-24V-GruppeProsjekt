@@ -11,7 +11,7 @@ using TechSupport.WARE.Warehouse;
 
 namespace TechSupport.WARE
 {
-    internal class Simulation
+    internal class Simulations
     {
         static void Main(string[] args)
         {
