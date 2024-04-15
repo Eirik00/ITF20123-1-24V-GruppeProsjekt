@@ -63,6 +63,16 @@ namespace TechSupport.WARE.Warehouse
             PackageReceiverChangedEvent?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Package"/> class.
+        /// </summary>
+        /// <param name="packageId">The package identifier.</param>
+        /// <param name="packageLenghtInMm">The package length in millimeters.</param>
+        /// <param name="packageHeightInMm">The package height in millimeters.</param>
+        /// <param name="packageDepthInMm">The package depth in millimeters.</param>
+        /// <param name="packageWeightInGrams">The package weight in grams.</param>
+        /// <param name="isFragile">if set to <c>true</c> [is fragile].</param>
+        /// <param name="specification">The package specification.</param>
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
         {
             if (idCheck.Contains(packageId))
@@ -156,16 +166,6 @@ namespace TechSupport.WARE.Warehouse
             return packageLog;
         }
 
-        //public override string ToString()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-       //Dette reflekteres i Outgoing og import klassene
-       //Prøve å endre Package/import/export status
-       //Jeg har ikke fått til å teste dette da visual studio ikke klarer å bygge prosjektet for et eller annet grunn
-       //slettes dersom ikke funker
         public override string ToString()
         {
             return $"Package ID: {PackageId}\n" +

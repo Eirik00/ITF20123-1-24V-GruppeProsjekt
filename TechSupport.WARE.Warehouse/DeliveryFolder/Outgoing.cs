@@ -209,6 +209,13 @@ namespace TechSupport.WARE.Warehouse
         }
 
         //---------------Pallets----------------
+
+        /// <summary>
+        /// Prepares pallets for shipment with the provided packages, sender, and receiver information.
+        /// </summary>
+        /// <param name="packages">The list of packages to prepare for shipment.</param>
+        /// <param name="sender">The sender's contact information.</param>
+        /// <param name="receiver">The receiver's contact information.</param>
         public void PreparePalletsForShipment(PackageList packages, Contact sender, Contact receiver)
         {
             foreach (var package in packages.Packages)
@@ -229,6 +236,12 @@ namespace TechSupport.WARE.Warehouse
             PalletPreparedForShipment?.Invoke(this, new PalletEventArgs { Message = "Pallets prepared for shipment." });
             currentPallet = null;
         }
+
+        /// <summary>
+        /// Tries to add a package to the current pallet.
+        /// </summary>
+        /// <param name="package">The package to add to the pallet.</param>
+        /// <returns>True if the package was successfully added; otherwise, false.</returns>
         private bool TryAddPackageToPallet(Package package)
         {
             return currentPallet.AddPackage(package);
@@ -239,6 +252,11 @@ namespace TechSupport.WARE.Warehouse
             currentPallet = new Pallet(GetNextPalletId());
         }
 
+        /// <summary>
+        /// Finalizes the current pallet by setting sender and receiver information.
+        /// </summary>
+        /// <param name="sender">The sender's contact information.</param>
+        /// <param name="receiver">The receiver's contact information.</param>
         private void FinalizeCurrentPallet(Contact sender, Contact receiver)
         {
             foreach (var package in currentPallet.Packages)
@@ -250,6 +268,11 @@ namespace TechSupport.WARE.Warehouse
             readyForShipmentPallets.Add(currentPallet);
         }
 
+        /// <summary>
+        /// Ships out the prepared pallets from the sender to the receiver.
+        /// </summary>
+        /// <param name="sender">The sender's contact information.</param>
+        /// <param name="receiver">The receiver's contact information.</param>
         public void ShipOutPallets(Contact sender, Contact receiver)
         {
             foreach (var pallet in readyForShipmentPallets.ToList())

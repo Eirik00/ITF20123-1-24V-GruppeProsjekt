@@ -7,6 +7,9 @@ using TechSupport.WARE.Warehouse.Exceptions;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Represents a company entity with basic information.
+    /// </summary>
     public class Company : ICompany
     {
         private string companyName;
@@ -16,6 +19,15 @@ namespace TechSupport.WARE.Warehouse
         private string country;
         private Contact contactPerson;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Company"/> class with specified parameters.
+        /// </summary>
+        /// <param name="companyName">The name of the company.</param>
+        /// <param name="companyCode">The code of the company.</param>
+        /// <param name="address">The address of the company.</param>
+        /// <param name="country">The country where the company is located.</param>
+        /// <param name="postalCode">The postal code of the company.</param>
+        /// <exception cref="FormatException">Thrown when company name or country contains digits.</exception>
         public Company(string companyName, int companyCode, string address, string country, int postalCode) 
         {
             if (companyName.Any(Char.IsDigit))

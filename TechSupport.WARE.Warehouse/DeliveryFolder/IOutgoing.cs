@@ -44,13 +44,25 @@ namespace TechSupport.WARE.Warehouse
         void OutgoingWeeklyPackage(DayOfWeek deliveryDay, double deliveryTime, PackageList packages, Contact sender, Contact receiver);
 
         /// <summary>
+        /// Prepares pallets for shipment with the provided packages, sender, and receiver information.
+        /// </summary>
+        /// <param name="packages">The list of packages to prepare for shipment.</param>
+        /// <param name="sender">The sender's contact information.</param>
+        /// <param name="receiver">The receiver's contact information.</param>
+        void PreparePalletsForShipment(PackageList packages, Contact sender, Contact receiver);
+
+        /// <summary>
+        /// Ships out the prepared pallets from the sender to the receiver.
+        /// </summary>
+        /// <param name="sender">The sender's contact information.</param>
+        /// <param name="receiver">The receiver's contact information.</param>
+        void ShipOutPallets(Contact sender, Contact receiver);
+
+        /// <summary>
         /// Is ment to convert the delivery information into more easly readlable string format, but might actually do the opposite due to reasons
         /// </summary>
         /// <returns>A string representation of the planned deliveries.</returns>
         String ToString();
-
-        void PreparePalletsForShipment(PackageList packages, Contact sender, Contact receiver);
-        void ShipOutPallets(Contact sender, Contact receiver);
         int ReadyForShipmentPalletsCount { get; }
     }
 }

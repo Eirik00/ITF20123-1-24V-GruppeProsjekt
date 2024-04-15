@@ -7,9 +7,18 @@ using TechSupport.WARE.Warehouse.SimulationFolder;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Manages aisle operations and handles events related to package management within an aisle.
+    /// </summary>
     public class AisleHandler
     {
         private Simulation _simulation;
+
+        /// <summary>
+        /// Initializes a new instance of the AisleHandler class and attaches event handlers to the specified aisle.
+        /// </summary>
+        /// <param name="aisle">The aisle to manage.</param>
+        /// <param name="sim">Simulation context for handling events.</param>
         public AisleHandler(Aisle aisle, Simulation sim)
         {
             aisle.PackageAddedToAisle += HandlePackageAddedToAisle;

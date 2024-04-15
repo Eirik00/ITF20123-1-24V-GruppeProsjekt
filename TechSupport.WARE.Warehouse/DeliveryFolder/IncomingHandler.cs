@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Represents a handler for incoming packages.
+    /// </summary>
     public class IncomingHandler
     {
         public IncomingHandler(Incoming incoming)

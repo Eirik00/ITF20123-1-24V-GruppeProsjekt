@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse.PalletManagement
 {
-    // Styrer tilgjengeligheten og planleggingen av trucker for flytting av paller.
+    /// <summary>
+    /// Manages the availability and scheduling of trucks for pallet movement.
+    /// </summary>
     public class TruckManager : ITruckManager
     {
         private int totalTrucks = 2;
@@ -20,13 +22,20 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         {
             TruckUpdated?.Invoke(this, e);
         }
-
         //events end
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TruckManager"/> class.
+        /// </summary>
         public TruckManager()
         {
             availableTrucks = totalTrucks;
         }
-        
+
+        /// <summary>
+        /// Attempts to use a truck for pallet movement.
+        /// </summary>
+        /// <returns>True if a truck is available and used; otherwise, false.</returns>
         public bool UseTruck()
         {
             if (availableTrucks > 0)
@@ -38,6 +47,9 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             return false;
         }
 
+        /// <summary>
+        /// Returns a truck after pallet movement is completed.
+        /// </summary>
         public void ReturnTruck()
         {
             availableTrucks = Math.Min(totalTrucks, availableTrucks + 1);
@@ -45,6 +57,11 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         }
         public int AvailableTrucks => availableTrucks;
 
+        /// <summary>
+        /// Schedules a truck for a specific time.
+        /// </summary>
+        /// <param name="scheduleTime">The time to schedule the truck.</param>
+        /// <returns>True if the truck is successfully scheduled; otherwise, false.</returns>
         public bool ScheduleTruck(DateTime scheduleTime)
         {
             if (availableTrucks <= 0) return false;
@@ -56,6 +73,10 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             return true;
         }
 
+        /// <summary>
+        /// Checks for scheduled trucks and returns them if their scheduled time has passed.
+        /// </summary>
+        /// <param name="currentTime">The current time to check against scheduled trucks.</param>
         public void CheckScheduledTrucksAndReturn(DateTime currentTime)
         {
             if (!scheduledTrucks.ContainsKey(currentTime.Date)) return;
@@ -66,7 +87,7 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
     }
 }
 
-// Define TruckEventArgs to pass event data
+//TruckEventArgs to pass event data
 public class TruckEventArgs : EventArgs
 {
     public string Action { get; set; }

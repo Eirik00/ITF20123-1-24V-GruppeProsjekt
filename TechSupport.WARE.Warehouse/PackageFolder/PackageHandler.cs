@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Represents a handler for package-related events and actions.
+    /// </summary>
     public class PackageHandler
     {
         private Simulation _simulation;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PackageHandler"/> class.
+        /// </summary>
+        /// <param name="package">The package to be handled.</param>
         public PackageHandler(Package package)
         {
             package.PackageStatusChangedEvent += HandlePackageStatusChanged;
@@ -16,6 +24,12 @@ namespace TechSupport.WARE.Warehouse
             package.PackageReceiverChangedEvent += HandlePackageReceiverChanged;
             HandlePackage(this, new PackageStatusChangedEventArgs(package));
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PackageHandler"/> class.
+        /// </summary>
+        /// <param name="package">The package to be handled.</param>
+        /// <param name="sim">The simulation instance.</param>
         public PackageHandler(Package package, Simulation sim)
         {
             _simulation = sim;

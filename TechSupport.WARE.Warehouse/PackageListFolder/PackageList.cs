@@ -23,6 +23,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Returns a formatted string of the IDs of all packages in the packagelist
         /// </summary>
+        /// <returns>A formatted string of package IDs.</returns>
         public string SeePackagesInList()
         {
             if (packages.Count == 0)
@@ -224,11 +225,19 @@ namespace TechSupport.WARE.Warehouse
             return packages.Remove(item);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the package list.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the package list.</returns>
         public IEnumerator<Package> GetEnumerator()
         {
             return packages.GetEnumerator();
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the package list.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the package list.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse.PalletManagement
 {
-    //klasse for pall reoler
+    /// <summary>
+    /// Represents a pallet rack in the warehouse.
+    /// </summary>
     public class PalletRack : IPalletRack
     {
         private const int NumberOfRacks = 3;
@@ -15,7 +17,7 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         private Dictionary<int, List<Pallet>>[] racks;
         private TruckManager truckManager;
 
-        //ewvents
+        //events
         public event EventHandler<PalletRackEventArgs> RackUpdated;
 
         protected virtual void OnRackUpdated(PalletRackEventArgs e)
@@ -25,12 +27,19 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
 
         //events end
 
+        /// <summary>
+        /// Initializes a new instance of the PalletRack class.
+        /// </summary>
+        /// <param name="truckManager">The truck manager.</param>
         public PalletRack(TruckManager truckManager)
         {
             this.truckManager = truckManager;
             RacksSetUp();
         }
-        //Setter opp reol strukturen basert på den forhåndsdefinerte konfigurasjonen(konfigs i WARE_ Nye krav delinnlevering 3) PDFen.
+
+        /// <summary>
+        /// Sets up the rack structure based on the predefined configuration.
+        /// </summary>
         private void RacksSetUp()
         {
             racks = new Dictionary<int, List<Pallet>>[NumberOfRacks];
@@ -43,7 +52,14 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
                 }
             }
         }
-        // Legger til en pall til et spesifisert reol og etasje.
+
+        /// <summary>
+        /// Adds a pallet to the specified rack and floor.
+        /// </summary>
+        /// <param name="rackNumber">The number of the rack.</param>
+        /// <param name="floor">The floor number.</param>
+        /// <param name="pallet">The pallet to add.</param>
+        /// <returns>True if the pallet was successfully added; otherwise, false.</returns>
         public bool AddPalletToRack(int rackNumber, int floor, IPallet pallet)
         {
             if (!IsRackPositionValid(rackNumber, floor)) return false;
@@ -62,7 +78,14 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             }
             return false;
         }
-        // Fjerner en pall basert på dens ID fra et spesifisert reol og etasje.
+
+        /// <summary>
+        /// Removes a pallet based on its ID from a specified rack and floor.
+        /// </summary>
+        /// <param name="rackNumber">The number of the rack.</param>
+        /// <param name="floor">The floor number.</param>
+        /// <param name="palletId">The ID of the pallet to remove.</param>
+        /// <returns>True if the pallet was successfully removed; otherwise, false.</returns>
         public bool RemovePallet(int rackNumber, int floor, int palletId)
         {
             if (!IsRackPositionValid(rackNumber, floor)) return false;
@@ -75,7 +98,11 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             }
             return false;
         }
-        // teller totalt antall paller over alle reoler og etasjer.
+
+        /// <summary>
+        /// Gets the total count of pallets across all racks and floors.
+        /// </summary>
+        /// <returns>The total count of pallets.</returns>
         public int TotalPallets()
         {
             int total = 0;
@@ -88,26 +115,47 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             }
             return total;
         }
-        // Henter antall paller i en spesifikk reol og etasje.
+
+        /// <summary>
+        /// Gets the count of pallets in a specific rack and floor.
+        /// </summary>
+        /// <param name="rackNumber">The rack number.</param>
+        /// <param name="floor">The floor number.</param>
+        /// <returns>The count of pallets in the specified rack and floor.</returns>.
         public int PalletsInShelf(int rackNumber, int floor)
         {
             if (!IsRackPositionValid(rackNumber, floor)) return 0;
             return racks[rackNumber - 1][floor].Count;
         }
 
-        // Sjekker om et spesifisert reolnummer og etasje er innenfor gyldige områder.
+        /// <summary>
+        /// Checks if a specified rack number and floor number are within valid ranges.
+        /// </summary>
+        /// <param name="rackNumber">The rack number.</param>
+        /// <param name="floor">The floor number.</param>
+        /// <returns>True if the rack position is valid; otherwise, false.</returns>
         private bool IsRackPositionValid(int rackNumber, int floor)
         {
             return rackNumber >= 1 && rackNumber <= NumberOfRacks && floor >= 1 && floor <= Floors &&
                    racks[rackNumber - 1][floor].Count < PositionsPerFloor;
         }
-        // Beregner tiden det tar å flytte en pall basert på etasjen den er på. Tidene er beskrevet i WARE_Ny krav pdfen
+
+        /// <summary>
+        /// Calculates the time it takes to move a pallet based on the floor it is on.
+        /// </summary>
+        /// <param name="floor">The floor number.</param>
+        /// <returns>The time in seconds to move the pallet.</returns>
         private int CalculateTimeForFloor(int floor)
         {
             int baseTimeInSeconds = 240;
             return baseTimeInSeconds + (floor - 1) * 30;
         }
-        // Finner en pall basert på dens ID over alle reoler og etasjer.
+
+        /// <summary>
+        /// Finds a pallet by its ID across all racks and floors.
+        /// </summary>
+        /// <param name="id">The ID of the pallet to find.</param>
+        /// <returns>The found pallet; otherwise, null.</returns>
         public IPallet FindPallet(int palletid)
         {
             foreach (var rack in racks)

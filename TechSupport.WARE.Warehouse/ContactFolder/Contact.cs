@@ -8,12 +8,27 @@ using TechSupport.WARE.Warehouse.Exceptions;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Represents a contact entity with basic information.
+    /// </summary>
     public class Contact : IContact
     {
         private readonly string firstName, surname;
         private string email, country, address;
         private int phoneNumber, postalCode;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Contact"/> class with specified parameters.
+        /// </summary>
+        /// <param name="firstName">The first name of the contact.</param>
+        /// <param name="surname">The surname of the contact.</param>
+        /// <param name="email">The email address of the contact.</param>
+        /// <param name="address">The address of the contact.</param>
+        /// <param name="country">The country where the contact is located.</param>
+        /// <param name="phoneNumber">The phone number of the contact.</param>
+        /// <param name="postalCode">The postal code of the contact.</param>
+        /// <exception cref="FormatException">Thrown when first name or surname contains digits, or country contains digits.</exception>
+        /// <exception cref="InvalidEmailException">Thrown when the email address does not contain the symbol '@'.</exception>
         public Contact(string firstName, string surname, string email, string address, string country, int phoneNumber, int postalCode)
         {
             if (firstName.Any(Char.IsDigit))

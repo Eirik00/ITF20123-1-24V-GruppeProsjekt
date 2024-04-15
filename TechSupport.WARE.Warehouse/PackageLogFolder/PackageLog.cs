@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Represents an entry in the package log.
+    /// </summary>
     public class PackageLogEntry
     {
         private readonly DateTime timeStamp;
@@ -81,6 +84,13 @@ namespace TechSupport.WARE.Warehouse
         private readonly List<PackageLogEntry> packageHistory = [];
         public int Entries => packageHistory.Count;
 
+        /// <summary>
+        /// Logs a change in package status.
+        /// </summary>
+        /// <param name="isle">The aisle where the package is located.</param>
+        /// <param name="currentStatus">The current status of the package.</param>
+        /// <param name="previousStatus">The previous status of the package.</param>
+        /// <param name="description">An optional description of the change.</param>
         public void LogChange(Aisle? isle, StatusList currentStatus, StatusList previousStatus, String description = "")
         {
             if(description == "")
@@ -94,6 +104,11 @@ namespace TechSupport.WARE.Warehouse
         }
         public List<PackageLogEntry> GetEntries() => packageHistory;
 
+        /// <summary>
+        /// Gets the time span during which the package was in a specific status.
+        /// </summary>
+        /// <param name="status">The status to check.</param>
+        /// <returns>The time span the package spent in the specified status.</returns>
         public TimeSpan GetTimeSpanOnStatus(StatusList status)
         {
             List<PackageLogEntry> status1List = [];
@@ -127,6 +142,10 @@ namespace TechSupport.WARE.Warehouse
             return timeSpan;
         }
 
+        /// <summary>
+        /// Gets the total time the package spent in the warehouse.
+        /// </summary>
+        /// <returns>The total time the package spent in the warehouse.</returns>
         public TimeSpan GetTotalTimeInWarehouse()
         {
             return packageHistory[^1].GetDateTime() - packageHistory[0].GetDateTime();

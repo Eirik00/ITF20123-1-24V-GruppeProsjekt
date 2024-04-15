@@ -31,7 +31,7 @@ namespace TechSupport.WARE.Warehouse
 
         /// <summary>
         /// Sets up weekly recurring imports for a list of packages.
-        /// Functions same as RecurringDailyImports,but on a weekly basis,It allows users to specify which day of the week deliveries are to occur.
+        /// Functions same as IncomingDailyPackage,but on a weekly basis,It allows users to specify which day of the week deliveries are to occur.
         /// </summary>
         /// <param name="deliveryDay">The days of the week for imports.</param>
         /// <param name="deliveryHour">The time of the day for import to arrive.</param>

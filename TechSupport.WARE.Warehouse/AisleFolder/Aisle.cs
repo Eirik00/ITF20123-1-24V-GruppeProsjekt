@@ -24,6 +24,17 @@ namespace TechSupport.WARE.Warehouse
             PackageAddedToAisle?.Invoke(this, e);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the Aisle class with specified parameters.
+        /// </summary>
+        /// <param name="amountOfShelves">Number of shelves in the aisle.</param>
+        /// <param name="totalAmountOfSpacesPerShelf">Amount of spaces per shelf.</param>
+        /// <param name="lengthOfAisleInMm">Length of each aisle in millimeters.</param>
+        /// <param name="heightOfAisleInMm">Height of each aisle in millimeters.</param>
+        /// <param name="depthOfAisleInMm">Depth of each aisle in millimeters.</param>
+        /// <param name="totalWeightLimitInGrams">Total weight limit per aisle in grams.</param>
+        /// <param name="spesification">Storage specification for the aisle.</param>
+        /// <param name="aisleId">Unique identifier for the aisle.</param>
         public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInMm, int heightOfAisleInMm, int depthOfAisleInMm, int totalWeightLimitInGrams, StorageSpecification spesification, int aisleId)
         {
             _sections = amountOfShelves;

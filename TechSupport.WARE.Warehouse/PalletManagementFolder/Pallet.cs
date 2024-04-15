@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse.PalletManagement
 {
+    /// <summary>
+    /// Provides data for the PalletUpdated event.
+    /// </summary>
     public class PalletEventArgs : EventArgs
     {
         public string Action { get; set; }
         public int PackageId { get; set; }
     }
 
-    //palle klasse som skal holde max 30 pakker
+    /// <summary>
+    /// Represents a pallet that can hold packages.
+    /// </summary>
     public class Pallet : IPallet
     {
         public int PalletId { get; private set; }
@@ -28,11 +33,20 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         }
         //events end
 
+        /// <summary>
+        /// Initializes a new instance of the Pallet class with the specified ID.
+        /// </summary>
+        /// <param name="palletid">The ID of the pallet.</param>
         public Pallet(int palletid)
         {
             PalletId = palletid;
         }
-        //legger til en enkel pakke i palle så lenge pallen ikke er full
+
+        /// <summary>
+        /// Adds a package to the pallet.
+        /// </summary>
+        /// <param name="package">The package to add.</param>
+        /// <returns>True if the package was successfully added; otherwise, false.</returns>
         public bool AddPackage(Package package)
         {
             if (packages.Count >= MaxCapacity) return false;
@@ -40,7 +54,12 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             OnPalletUpdated(new PalletEventArgs { Action = "Added Pallet", PackageId = package.PackageId });
             return true;
         }
-        //legger til en liste med pakker i palle så lenge den ikke er full
+
+        /// <summary>
+        /// Adds a list of packages to the pallet.
+        /// </summary>
+        /// <param name="packageList">The list of packages to add.</param>
+        /// <returns>True if all packages were successfully added; otherwise, false.</returns>
         public bool AddPackageList(PackageList packageList)
         {
             foreach (var package in packageList.Packages)
@@ -55,7 +74,12 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             OnPalletUpdated(new PalletEventArgs { Action = "PackageList Added", PackageId = -1 });
             return true;
         }
-        // fjerner pakker fra palle
+
+        /// <summary>
+        /// Removes a package from the pallet.
+        /// </summary>
+        /// <param name="packageId">The ID of the package to remove.</param>
+        /// <returns>True if the package was successfully removed; otherwise, false.</returns>
         public bool RemovePackage(int packageId)
         {
             var package = packages.Find(p => p.PackageId == packageId);

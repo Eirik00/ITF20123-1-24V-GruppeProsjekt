@@ -6,12 +6,19 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Represents a storage zone in the warehouse.
+    /// </summary>
     public class StorageZone : IStorageZone
     {
         private int storageZoneAccessLevel;
         private List<Aisle> aislesInZone;
         private StorageSpecification storageSpecification;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StorageZone"/> class with the specified storage specification.
+        /// </summary>
+        /// <param name="storageSpecification">The storage specification for the storage zone.</param>
         public StorageZone(StorageSpecification storageSpecification)
         {
             this.aislesInZone = new List<Aisle>();
@@ -20,6 +27,10 @@ namespace TechSupport.WARE.Warehouse
 
         public StorageSpecification StorageSpecification => this.storageSpecification;
 
+        /// <summary>
+        /// Gets or sets the access level of the storage zone.
+        /// </summary>
+        /// <exception cref="FormatException">Thrown when the access level is set to a negative integer.</exception>
         public int StorageZoneAccessLevel
         {
             get => storageZoneAccessLevel;
@@ -31,6 +42,10 @@ namespace TechSupport.WARE.Warehouse
             }
         }
 
+        /// <summary>
+        /// Adds an aisle to the storage zone.
+        /// </summary>
+        /// <param name="aisle">The aisle to add to the storage zone.</param>
         public void addAisleToZone(Aisle aisle)
         {
             aislesInZone.Add(aisle);

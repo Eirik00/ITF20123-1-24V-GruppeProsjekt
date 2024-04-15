@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace TechSupport.WARE.Warehouse
 {
+    /// <summary>
+    /// Represents an interface for packages in the warehouse system.
+    /// </summary>
     internal interface IPackage
     {
         /// <summary>
