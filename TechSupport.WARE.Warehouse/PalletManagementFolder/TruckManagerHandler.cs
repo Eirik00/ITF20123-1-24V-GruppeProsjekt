@@ -9,13 +9,13 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
     /// <summary>
     /// Defines event arguments for truck-related events.
     /// </summary>
-    public class TruckHandler
+    public class TruckManagerHandler
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TruckHandler"/> class.
+        /// Initializes a new instance of the <see cref="TruckManagerHandler"/> class.
         /// </summary>
         /// <param name="truckManager">The truck manager to handle events for.</param>
-        public TruckHandler(TruckManager truckManager)
+        public TruckManagerHandler(TruckManager truckManager)
         {
             truckManager.TruckUpdated += HandleTruckUpdated;
         }
