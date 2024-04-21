@@ -16,6 +16,11 @@ namespace TechSupport.WARE.Warehouse
             incoming.IncomingPackageEvent += HandleIncomingPackage;
             incoming.IncomingDailyPackageEvent += HandleIncomingDailyPackage;
             incoming.IncomingWeeklyPackageEvent += HandleIncomingWeeklyPackage;
+            HandleIncoming(this);
+        }
+        internal void HandleIncoming(object sender)
+        {
+            Console.WriteLine($"Incoming added to the handler.");
         }
 
         internal void HandleIncomingPackage(object sender, IncomingPackageEventArgs e)

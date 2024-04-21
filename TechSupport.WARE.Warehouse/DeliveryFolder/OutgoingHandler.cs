@@ -15,6 +15,11 @@ namespace TechSupport.WARE.Warehouse
             outgoing.OutgoingWeeklyPackageEvent += HandleOutgoingWeeklyPackage;
             outgoing.PalletPreparedForShipment += HandlePalletPreparedForShipment;
             outgoing.PalletShipped += HandlePalletShipped;
+            HandleOutgoing(this);
+        }
+        internal void HandleOutgoing(object sender)
+        {
+            Console.WriteLine($"Outgoing added to the handler.");
         }
 
         internal void HandleOutgoingPackage(object sender, OutgoingPackageEventArgs e)
