@@ -19,7 +19,7 @@ namespace TechSupport.WARE.Warehouse
         /// Initializes a new instance of the <see cref="Employee"/> class.
         /// </summary>
         /// <param name="employeeID">The unique identifier for the employee.</param>
-        /// <param name="accessLevel">The access level of the employee.</param>
+        /// <param name="accessLevel">The access level of the employee. (1-3)</param>
         /// <param name="firstName">The first name of the employee.</param>
         /// <param name="surname">The surname of the employee.</param>
         /// <param name="email">The email address of the employee.</param>

@@ -33,9 +33,8 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="heightOfAisleInMm">Height of each aisle in millimeters.</param>
         /// <param name="depthOfAisleInMm">Depth of each aisle in millimeters.</param>
         /// <param name="totalWeightLimitInGrams">Total weight limit per aisle in grams.</param>
-        /// <param name="spesification">Storage specification for the aisle.</param>
         /// <param name="aisleId">Unique identifier for the aisle.</param>
-        public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInMm, int heightOfAisleInMm, int depthOfAisleInMm, int totalWeightLimitInGrams, StorageSpecification spesification, int aisleId)
+        public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInMm, int heightOfAisleInMm, int depthOfAisleInMm, int totalWeightLimitInGrams, int aisleId)
         {
             _sections = amountOfShelves;
             _numberOfSpaces = totalAmountOfSpacesPerShelf * amountOfShelves;
