@@ -19,6 +19,12 @@ namespace TechSupport.WARE
             Simulation sim1 = new();
             AisleHandler aisleHandler = new(aisle1, sim1);
             Console.WriteLine(sim1.GetTotalSimulationTime);
+            TruckManager truckManager = new TruckManager();
+            TruckManagerHandler truckManagerHandler = new(truckManager);
+            Pallet pallet1 = new(2);
+            PalletRack palletRack = new(truckManager);
+            palletRack.AddPalletToRack(1, 2, pallet1);
+            palletRack.RemovePallet(1, 2, 1);
             /*Simulation simulation = new Simulation();
             simulation.simulateSinglePackageMovement();*/
             /*TruckManager truckManager = new TruckManager();

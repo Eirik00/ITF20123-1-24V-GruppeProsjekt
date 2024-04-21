@@ -15,7 +15,9 @@ namespace TechSupport.WARE.Warehouse
         private Simulation _simulation;
 
         /// <summary>
-        /// Initializes a new instance of the AisleHandler class and attaches event handlers to the specified aisle.
+        /// Initializes a new instance of the AisleHandler class and attaches event handlers to the specified aisle. 
+        /// 
+        /// It has overloading for Simulation.
         /// </summary>
         /// <param name="aisle">The aisle to manage.</param>
         /// <param name="sim">Simulation context for handling events.</param>
