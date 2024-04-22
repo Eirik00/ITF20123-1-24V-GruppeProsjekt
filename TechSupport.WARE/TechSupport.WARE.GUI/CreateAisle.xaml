@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TechSupport.WARE.GUI"
         mc:Ignorable="d"
-        Title="Create Aisle" Height="216" Width="499">
+        Title="Create Aisle" Height="270" Width="499" Closed="SendEventToMain">
     <Grid Grid.Column="1" Grid.Row="1">
 
         <Grid.RowDefinitions>
@@ -16,10 +16,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="104*" />
+            <ColumnDefinition Width="130*" />
             <ColumnDefinition Width="301*" />
             <ColumnDefinition Width="197*"/>
         </Grid.ColumnDefinitions>
@@ -27,12 +28,17 @@
         <Label Grid.Row="0" Grid.Column="0" >Name:</Label>
         <TextBox x:Name="aisleName" Grid.Row="0" Grid.Column="1"/>
         <Label Grid.Row="1" Grid.Column="0" >Shelves:</Label>
-        <TextBox x:Name="aisleShevles" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="aisleShevles" PreviewTextInput="ForceTextToNumber" Grid.Row="1" Grid.Column="1"/>
         <Label Grid.Row="2" Grid.Column="0" >Places Per Shelf:</Label>
+        <TextBox x:Name="aislePlacesPerShelf" PreviewTextInput="ForceTextToNumber" Grid.Row="2" Grid.Column="1"/>
         <Label Grid.Row="3" Grid.Column="0" >Weight Limit:</Label>
+        <TextBox x:Name="aisleWeight" PreviewTextInput="ForceTextToNumber" Grid.Row="3" Grid.Column="1"/>
         <Label Grid.Row="4" Grid.Column="0" >Length of Aisle:</Label>
+        <TextBox x:Name="aisleLegnth" PreviewTextInput="ForceTextToNumber" Grid.Row="4" Grid.Column="1"/>
         <Label Grid.Row="5" Grid.Column="0" >Height of Aisle:</Label>
+        <TextBox x:Name="aisleHeight" PreviewTextInput="ForceTextToNumber" Grid.Row="5" Grid.Column="1"/>
         <Label Grid.Row="6" Grid.Column="0" >Depth of Aisle:</Label>
-
+        <TextBox x:Name="aisleDepth" PreviewTextInput="ForceTextToNumber" Grid.Row="6" Grid.Column="1"/>
+        <Button Click="createAisleFunction" x:Name="createAisleButton" Grid.Row="7" Margin="0,0,0,5">Create Aisle</Button>
     </Grid>
 </Window>

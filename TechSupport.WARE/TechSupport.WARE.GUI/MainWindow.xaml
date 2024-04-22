@@ -11,26 +11,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="341*" />
+            <ColumnDefinition Width="179*" />
+            <ColumnDefinition Width="260*" />
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0">Aisles:</Label>
-        <ListBox Grid.Column="0" Grid.Row="1" x:Name="lstAisle" />
-        <Grid Grid.Column="0" Grid.Row="2" Grid.RowSpan="2">
+        <ListBox Grid.Column="0" Grid.Row="1" x:Name="lstAisle" SelectionChanged="AisleListSelectionChanged"/>
+        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="0,207,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -38,7 +33,28 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <Button Grid.Column="0" Grid.Row="0" Click="OpenCreateAisleButton" x:Name="createAisle">Create Aisle</Button>
+            <Separator Grid.ColumnSpan="3" />
+            <Label Grid.Column="0" Grid.Row="1" Margin="7,0,0,0" >Current Aisle:</Label>
+            <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="10,0,10,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="curAisleName" Grid.Row="0" Grid.Column="0">Name:</Label>
+                    <Label x:Name="curAisleDim" Grid.Row="0" Grid.Column="1">Dim:</Label>
+                    <Label x:Name="curAislePackages" Grid.Row="1" Grid.Column="0">Packages:</Label>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>
