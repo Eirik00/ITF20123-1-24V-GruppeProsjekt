@@ -16,7 +16,9 @@ namespace TechSupport.WARE.Warehouse
         private Simulation _simulation;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PackageHandler"/> class.
+        /// Initializes a new instance of the PackageHandler class and subscribes event handlers to the specified aisle.
+        /// 
+        /// It has overloading for Simulation.
         /// </summary>
         /// <param name="package">The package to be handled.</param>
         public PackageHandler(Package package)
@@ -28,7 +30,9 @@ namespace TechSupport.WARE.Warehouse
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PackageHandler"/> class.
+        /// Initializes a new instance of the PackageHandler class and subscribes event handlers to the specified aisle.
+        /// 
+        /// It has overloading for Simulation.
         /// </summary>
         /// <param name="package">The package to be handled.</param>
         /// <param name="sim">The simulation instance.</param>

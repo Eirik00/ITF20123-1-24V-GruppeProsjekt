@@ -20,16 +20,23 @@ namespace TechSupport.WARE.Warehouse
         /// It has overloading for Simulation.
         /// </summary>
         /// <param name="aisle">The aisle to manage.</param>
+        public AisleHandler(Aisle aisle)
+        {
+            aisle.PackageAddedToAisle += HandlePackageAddedToAisle;
+            HandleAisle(this, new AisleAndPackageEventArgs(aisle));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the AisleHandler class and subscribes event handlers to the specified aisle. 
+        /// 
+        /// It has overloading for Simulation.
+        /// </summary>
+        /// <param name="aisle">The aisle to manage.</param>
         /// <param name="sim">Simulation context for handling events.</param>
         public AisleHandler(Aisle aisle, Simulation sim)
         {
             aisle.PackageAddedToAisle += HandlePackageAddedToAisle;
             _simulation = sim;
-            HandleAisle(this, new AisleAndPackageEventArgs(aisle));
-        }
-        public AisleHandler(Aisle aisle)
-        {
-            aisle.PackageAddedToAisle += HandlePackageAddedToAisle;
             HandleAisle(this, new AisleAndPackageEventArgs(aisle));
         }
 

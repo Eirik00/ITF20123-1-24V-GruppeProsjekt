@@ -15,9 +15,9 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
-            Aisle aisle1 = new(2, 2, 2, 2, 2, 2, StorageSpecification.Invalid, 2);
+            Aisle aisle1 = new(2, 2, 2, 2, 2, 2, 2);
             Simulation sim1 = new();
-            AisleHandler aisleHandler = new(aisle1, sim1);
+            AisleHandler aisleHandler = new AisleHandler(aisle1, sim1);
             Console.WriteLine(sim1.GetTotalSimulationTime);
             TruckManager truckManager = new TruckManager();
             TruckManagerHandler truckManagerHandler = new(truckManager);
