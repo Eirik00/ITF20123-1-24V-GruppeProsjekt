@@ -1,0 +1,12 @@
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\bin\Debug\net8.0\TechSupport.WARE.Warehouse.deps.json
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\bin\Debug\net8.0\TechSupport.WARE.Warehouse.dll
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\bin\Debug\net8.0\TechSupport.WARE.Warehouse.pdb
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\TechSupport.WARE.Warehouse.GeneratedMSBuildEditorConfig.editorconfig
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\TechSupport.WARE.Warehouse.AssemblyInfoInputs.cache
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\TechSupport.WARE.Warehouse.AssemblyInfo.cs
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\TechSupport.WARE.Warehouse.csproj.CoreCompileInputs.cache
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\TechSupport.WARE.Warehouse.sourcelink.json
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\TechSupport.WARE.Warehouse.dll
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\refint\TechSupport.WARE.Warehouse.dll
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\TechSupport.WARE.Warehouse.pdb
+G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\obj\Debug\net8.0\ref\TechSupport.WARE.Warehouse.dll

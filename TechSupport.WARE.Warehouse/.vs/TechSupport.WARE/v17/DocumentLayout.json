@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\skole\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.Warehouse\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BC7F62A5-3308-4B4F-B831-75A67D263916}|TechSupport.WARE.Warehouse.csproj|g:\\skole\\itf20123-1-24v-gruppeprosjekt\\techsupport.ware.warehouse\\techsupport.ware.warehouse.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{BC7F62A5-3308-4B4F-B831-75A67D263916}|TechSupport.WARE.Warehouse.csproj|solutionrelative:techsupport.ware.warehouse.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC7F62A5-3308-4B4F-B831-75A67D263916}|TechSupport.WARE.Warehouse.csproj|g:\\skole\\itf20123-1-24v-gruppeprosjekt\\techsupport.ware.warehouse\\aislefolder\\aisle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC7F62A5-3308-4B4F-B831-75A67D263916}|TechSupport.WARE.Warehouse.csproj|solutionrelative:aislefolder\\aisle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC7F62A5-3308-4B4F-B831-75A67D263916}|TechSupport.WARE.Warehouse.csproj|g:\\skole\\itf20123-1-24v-gruppeprosjekt\\techsupport.ware.warehouse\\aislefolder\\iaisle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC7F62A5-3308-4B4F-B831-75A67D263916}|TechSupport.WARE.Warehouse.csproj|solutionrelative:aislefolder\\iaisle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TechSupport.WARE.Warehouse",
+              "DocumentMoniker": "G:\\skole\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.Warehouse\\TechSupport.WARE.Warehouse.csproj",
+              "RelativeDocumentMoniker": "TechSupport.WARE.Warehouse.csproj",
+              "ToolTip": "G:\\skole\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.Warehouse\\TechSupport.WARE.Warehouse.csproj",
+              "RelativeToolTip": "TechSupport.WARE.Warehouse.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-04-22T14:26:05.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAisle.cs",
+              "DocumentMoniker": "G:\\skole\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.Warehouse\\AisleFolder\\IAisle.cs",
+              "RelativeDocumentMoniker": "AisleFolder\\IAisle.cs",
+              "ToolTip": "G:\\skole\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.Warehouse\\AisleFolder\\IAisle.cs",
+              "RelativeToolTip": "AisleFolder\\IAisle.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:22:36.969Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Aisle.cs",
+              "DocumentMoniker": "G:\\skole\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.Warehouse\\AisleFolder\\Aisle.cs",
+              "RelativeDocumentMoniker": "AisleFolder\\Aisle.cs",
+              "ToolTip": "G:\\skole\\ITF20123-1-24V-GruppeProsjekt\\TechSupport.WARE.Warehouse\\AisleFolder\\Aisle.cs",
+              "RelativeToolTip": "AisleFolder\\Aisle.cs",
+              "ViewState": "AQIAALoAAAAAAAAAAAAAANsAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T14:22:31.124Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

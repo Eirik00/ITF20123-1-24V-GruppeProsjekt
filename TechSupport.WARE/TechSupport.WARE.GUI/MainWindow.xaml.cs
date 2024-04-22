@@ -49,12 +49,14 @@ namespace TechSupport.WARE.GUI
 
         private void AisleListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Get the clicked ListBoxItem
-            var item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+            var item = lstAisle.SelectedItem;
             if (item != null)
             {
-                Aisle selectedAisle = _aisleList[item.Content.ToString()];
-                curAisleName.Content = "Name: " + item.Content.ToString();
+                Aisle selectedAisle = _aisleList[item.ToString()];
+
+                curAisleName.Content = "Name: " + item.ToString();
+                curAisleDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}mm";
+                curAisleWeight.Content = "Max Weight: " + (selectedAisle.GetWeight/1000);
             }
         }
     }

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>WarehouseSimuAPI1Techsupport</id>
+    <version>1.0.1</version>
+    <title>Warehouse-SimAPITest</title>
+    <authors>Krister Wallin Hognestad, Eirik Rasmussen, Mustafa Sahin, Martin Malo Treseng</authors>
+    <description>Warehouse Simulation API</description>
+    <tags>Api, test</tags>
+    <repository type="git" url="https://github.com/Eirik00/ITF20123-1-24V-GruppeProsjekt" commit="44fda79b8b362267516e80cc6a3fef515a149165" />
+    <dependencies>
+      <group targetFramework="net8.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="G:\skole\ITF20123-1-24V-GruppeProsjekt\TechSupport.WARE.Warehouse\bin\Release\net8.0\TechSupport.WARE.Warehouse.dll" target="lib\net8.0\TechSupport.WARE.Warehouse.dll" />
+  </files>
+</package>
