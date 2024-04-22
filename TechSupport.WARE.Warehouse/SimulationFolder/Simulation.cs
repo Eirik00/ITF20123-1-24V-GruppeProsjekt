@@ -15,7 +15,7 @@ namespace TechSupport.WARE.Warehouse
 
         public Simulation() { }
 
-        public int GetTotalSimulationTime { get => _totalSimulationTime; }
+        public int GetTotalSimulationTimeInSeconds { get => _totalSimulationTime; }
         internal void AddToTotalSimulationTime(int addTime)
         {
             _totalSimulationTime += addTime;

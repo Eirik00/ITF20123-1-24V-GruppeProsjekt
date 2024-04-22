@@ -18,7 +18,7 @@ namespace TechSupport.WARE
             Aisle aisle1 = new(2, 2, 2, 2, 2, 2, 2);
             Simulation sim1 = new();
             AisleHandler aisleHandler = new AisleHandler(aisle1, sim1);
-            Console.WriteLine(sim1.GetTotalSimulationTime);
+            Console.WriteLine(sim1.GetTotalSimulationTimeInSeconds);
             TruckManager truckManager = new TruckManager();
             TruckManagerHandler truckManagerHandler = new(truckManager);
             Pallet pallet1 = new(2);

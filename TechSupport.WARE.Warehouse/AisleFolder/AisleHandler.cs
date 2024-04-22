@@ -43,33 +43,39 @@ namespace TechSupport.WARE.Warehouse
         internal void HandleAisle(object sender, AisleAndPackageEventArgs e)
         {
             Console.WriteLine($"Aisle with ID {e.AisleId} added to the handler.");
-            if( _simulation.GetSimulateBool )
+            if(_simulation != null)
             {
-                Console.WriteLine($"Simulation for Aisle with ID {e.AisleId} has started.");
+                if (_simulation.GetSimulateBool)
+                {
+                    Console.WriteLine($"Simulation for Aisle with ID {e.AisleId} has started.");
+                }
             }
         }
         internal void HandlePackageAddedToAisle(object sender, AisleAndPackageEventArgs e)
         {
             Console.WriteLine($"Package with ID {e.PackageId} was added to Aisle with ID {e.AisleId} on shelf {e.Shelf}");
-            if( _simulation.GetSimulateBool )
+            if(_simulation != null)
             {
-                if(e.StorageSpecification == StorageSpecification.ClimateControlled)
+                if (_simulation.GetSimulateBool)
                 {
-                    int elapsedTime = 70;
-                    _simulation.AddToTotalSimulationTime(elapsedTime);
-                    Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
-                }
-                if (e.StorageSpecification == StorageSpecification.HighValue)
-                {
-                    int elapsedTime = 70;
-                    _simulation.AddToTotalSimulationTime(elapsedTime);
-                    Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
-                }
-                if (e.StorageSpecification == StorageSpecification.SmallItems)
-                {
-                    int elapsedTime = 110;
-                    _simulation.AddToTotalSimulationTime(elapsedTime);
-                    Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
+                    if (e.StorageSpecification == StorageSpecification.ClimateControlled)
+                    {
+                        int elapsedTime = 70;
+                        _simulation.AddToTotalSimulationTime(elapsedTime);
+                        Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
+                    }
+                    if (e.StorageSpecification == StorageSpecification.HighValue)
+                    {
+                        int elapsedTime = 70;
+                        _simulation.AddToTotalSimulationTime(elapsedTime);
+                        Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
+                    }
+                    if (e.StorageSpecification == StorageSpecification.SmallItems)
+                    {
+                        int elapsedTime = 110;
+                        _simulation.AddToTotalSimulationTime(elapsedTime);
+                        Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
+                    }
                 }
             }
         }

@@ -51,32 +51,35 @@ namespace TechSupport.WARE.Warehouse
         internal void HandlePackageStatusChanged(object sender, PackageStatusChangedEventArgs e)
         {
             Console.WriteLine($"Package with ID {e.PackageId} had its status changed to: {e.Status}");
-            if ( _simulation.GetSimulateBool ) 
+            if ( _simulation != null )
             {
-                if (e.Status == StatusList.Delivery)
+                if (_simulation.GetSimulateBool)
                 {
-                    if(e.Aisle != null)
+                    if (e.Status == StatusList.Delivery)
                     {
-                        if (e.StorageSpecification == StorageSpecification.HighValue)
+                        if (e.Aisle != null)
                         {
-                            int timeEstimate = 210;
+                            if (e.StorageSpecification == StorageSpecification.HighValue)
+                            {
+                                int timeEstimate = 210;
+                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                            }
+                            if (e.StorageSpecification == StorageSpecification.ClimateControlled)
+                            {
+                                int timeEstimate = 210;
+                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                            }
+                            if (e.StorageSpecification == StorageSpecification.SmallItems)
+                            {
+                                int timeEstimate = 110;
+                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                            }
+                        }
+                        else
+                        {
+                            int timeEstimate = 55;
                             _simulation.AddToTotalSimulationTime(timeEstimate);
                         }
-                        if (e.StorageSpecification == StorageSpecification.ClimateControlled)
-                        {
-                            int timeEstimate = 210;
-                            _simulation.AddToTotalSimulationTime(timeEstimate);
-                        }
-                        if (e.StorageSpecification == StorageSpecification.SmallItems)
-                        {
-                            int timeEstimate = 110;
-                            _simulation.AddToTotalSimulationTime(timeEstimate);
-                        }
-                    }
-                    else
-                    {
-                        int timeEstimate = 55;
-                        _simulation.AddToTotalSimulationTime(timeEstimate);
                     }
                 }
             }
