@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TechSupport.WARE.Warehouse
 {
     /// <summary>
-    /// Represents a handler for package-related events and actions. 
+    /// Initializes a new instance of the PackageHandler class and subscribes event handlers to the specified aisle.
     /// 
     /// It has overloading for Simulation.
     /// </summary>
