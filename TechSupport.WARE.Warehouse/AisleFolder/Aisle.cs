@@ -209,6 +209,23 @@ namespace TechSupport.WARE.Warehouse
 
         }
         public int GetAisleId => this._aisleId;
+        /// <summary>
+        /// Height in Millimeteres
+        /// </summary>
+        public int GetHeight => this._heightOfSpaceInMm;
+        /// <summary>
+        /// Length in Millimeteres
+        /// </summary>
+        public int GetLength => this._lengthOfSpaceInMm;
+        /// <summary>
+        /// Depth in Millimeteres
+        /// </summary>
+        public int GetDepth => this._depthOfSpaceInMm;
+        /// <summary>
+        /// Weight in Grams
+        /// </summary>
+        public int GetWeight => this._weightLimitInGrams; 
+
 
         public (int, int) GetPackagePlacement(Package package)
         {
