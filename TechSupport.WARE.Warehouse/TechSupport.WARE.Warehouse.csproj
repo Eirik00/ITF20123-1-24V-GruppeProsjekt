@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Title>Warehouse-SimAPITest</Title>
-    <PackageId>WarehouseSimuAPI1</PackageId>
+    <PackageId> WarehouseSimuAPI1Techsupport</PackageId>
     <Authors>Krister Wallin Hognestad, Eirik Rasmussen, Mustafa Sahin, Martin Malo Treseng</Authors>
     <Company>TechSupport</Company>
     <Product>WarehouseAPI</Product>
@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/Eirik00/ITF20123-1-24V-GruppeProsjekt</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Api, test</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
