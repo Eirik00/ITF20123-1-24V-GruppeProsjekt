@@ -20,5 +20,11 @@ namespace TechSupport.WARE.GUI
         {
             InitializeComponent();
         }
+
+        private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
+        {
+            CreateAisle createAisleWindow = new CreateAisle();
+            createAisleWindow.ShowDialog();
+        }
     }
 }
