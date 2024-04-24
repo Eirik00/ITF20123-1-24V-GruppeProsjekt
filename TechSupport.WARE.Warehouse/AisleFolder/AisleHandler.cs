@@ -63,19 +63,19 @@ namespace TechSupport.WARE.Warehouse
                 {
                     if (e.StorageSpecification == StorageSpecification.ClimateControlled)
                     {
-                        int elapsedTime = 70;
+                        int elapsedTime = _simulation.AddPackageToClimateControlledAisleEstimate;
                         _simulation.AddSimulationTimeToEmployee(e.Employee, elapsedTime);
                         Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
                     }
                     if (e.StorageSpecification == StorageSpecification.HighValue)
                     {
-                        int elapsedTime = 70;
+                        int elapsedTime = _simulation.AddPackageToHighValueGoodsAisleEstimate;
                         _simulation.AddSimulationTimeToEmployee(e.Employee, elapsedTime);
                         Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
                     }
                     if (e.StorageSpecification == StorageSpecification.SmallItems)
                     {
-                        int elapsedTime = 110;
+                        int elapsedTime = _simulation.AddPackageToSmallItemsAisleEstimate;
                         _simulation.AddSimulationTimeToEmployee(e.Employee, elapsedTime);
                         Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
                     }
@@ -95,26 +95,26 @@ namespace TechSupport.WARE.Warehouse
                         {
                             if (e.StorageSpecification == StorageSpecification.HighValue)
                             {
-                                int timeEstimate = 210;
+                                int timeEstimate = _simulation.FromHighValueGoodsAisleToDeliveryEstimate;
                                 _simulation.AddSimulationTimeToEmployee (e.Employee, timeEstimate);
                                 Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                             }
                             if (e.StorageSpecification == StorageSpecification.ClimateControlled)
                             {
-                                int timeEstimate = 210;
+                                int timeEstimate = _simulation.FromClimateControlledAisleToDeliveryEstimate;
                                 _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
                                 Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                             }
                             if (e.StorageSpecification == StorageSpecification.SmallItems)
                             {
-                                int timeEstimate = 110;
+                                int timeEstimate = _simulation.FromSmallItemsAisleToDeliveryEstimate;
                                 _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
                                 Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                             }
                         }
                         else
                         {
-                            int timeEstimate = 55;
+                            int timeEstimate = _simulation.FromAisleToDeliveryEstimate;
                             _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
                             Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                         }

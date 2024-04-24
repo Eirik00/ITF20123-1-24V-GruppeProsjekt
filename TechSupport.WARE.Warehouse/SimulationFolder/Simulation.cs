@@ -10,9 +10,16 @@ namespace TechSupport.WARE.Warehouse
 {
     public class Simulation
     {
-        internal int _totalSimulationTime = 0;
-        internal Dictionary<int, int> _simulationDictionary = new Dictionary<int, int>();
-        internal bool _simulate = true;
+        private int _totalSimulationTime = 0;
+        private Dictionary<int, int> _simulationDictionary = new Dictionary<int, int>();
+        private bool _simulate = true;
+        private int _addPackageToHighValueGoodsAisleEstimate = 70;
+        private int _addPackageToClimateControlledAisleEstimate = 70;
+        private int _addPackageToSmallItemsAisleEstimate = 110;
+        private int _fromHighValueGoodsAisleToDeliveryEstimate = 210;
+        private int _fromClimateControlledAisleToDeliveryEstimate = 210;
+        private int _fromSmallItemsAisleToDeliveryEstimate = 110;
+        private int _fromAisleToDeliveryEstimate = 55;
 
         public Simulation() { }
 
@@ -35,6 +42,55 @@ namespace TechSupport.WARE.Warehouse
                 Console.WriteLine($"Worker: {entry.Key} : {entry.Value}Seconds");
             }
         }
+        public void StopSimulation()
+        {
+            if (_simulate)
+            {
+                _simulate = false;
+            }
+        }
+        public void ResumeSimulation()
+        {
+            if (!_simulate)
+            {
+                _simulate = true;
+            }
+        }
+        public int AddPackageToHighValueGoodsAisleEstimate
+        {
+            get => _addPackageToHighValueGoodsAisleEstimate;
+            set => _addPackageToHighValueGoodsAisleEstimate |= value;
+        }
+        public int AddPackageToClimateControlledAisleEstimate
+        {
+            get => _addPackageToClimateControlledAisleEstimate;
+            set => _addPackageToClimateControlledAisleEstimate = value;
+        }
+        public int AddPackageToSmallItemsAisleEstimate
+        {
+            get => _addPackageToSmallItemsAisleEstimate;
+            set => _addPackageToSmallItemsAisleEstimate = value;
+        }
+        public int FromHighValueGoodsAisleToDeliveryEstimate
+        {
+            get => _fromHighValueGoodsAisleToDeliveryEstimate;
+            set => _fromHighValueGoodsAisleToDeliveryEstimate = value;
+        }
+        public int FromClimateControlledAisleToDeliveryEstimate
+        {
+            get => _fromClimateControlledAisleToDeliveryEstimate;
+            set => _fromClimateControlledAisleToDeliveryEstimate = value;
+        }
+        public int FromSmallItemsAisleToDeliveryEstimate
+        {
+            get => _fromSmallItemsAisleToDeliveryEstimate;
+            set => _fromSmallItemsAisleToDeliveryEstimate = value;
+        }
+        public int FromAisleToDeliveryEstimate
+        {
+            get => _fromAisleToDeliveryEstimate;
+            set => _fromAisleToDeliveryEstimate = value;
+        }
         internal void AddToTotalSimulationTime(int addTime)
         {
             _totalSimulationTime += addTime;
@@ -49,20 +105,6 @@ namespace TechSupport.WARE.Warehouse
                 _simulationDictionary[employee.EmployeeID] += time;
         }
         internal bool GetSimulateBool {  get => _simulate; }
-        public void StopSimulation()
-        {
-            if (_simulate)
-            {
-                _simulate = false;
-            }
-        }
-        public void StartSimulation() 
-        { 
-            if (!_simulate) 
-            {
-                _simulate = true;
-            }
-        }
 
         //public void simulateSinglePackageMovement()
         //{
