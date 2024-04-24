@@ -83,7 +83,7 @@ namespace TechSupport.WARE
 
             Console.WriteLine("\nSimulation results\n--------------");
             int totalSimTime = sim1.GetTotalTimeInSeconds();
-            Console.WriteLine($"Most effecient total time to finish all tasks: {totalSimTime}");
+            Console.WriteLine($"Most effecient total time to finish all tasks: {totalSimTime}Seconds");
             Console.WriteLine("Time per worker: ");
             sim1.PrintAllEmployeesTimeInSeconds();
             sim1.StopSimulation();

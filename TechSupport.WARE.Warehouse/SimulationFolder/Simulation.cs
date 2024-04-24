@@ -32,7 +32,7 @@ namespace TechSupport.WARE.Warehouse
         {
             foreach(KeyValuePair<int,int> entry in _simulationDictionary)
             {
-                Console.WriteLine(entry.Key + ": " + entry.Value);
+                Console.WriteLine($"Worker: {entry.Key} : {entry.Value}Seconds");
             }
         }
         internal void AddToTotalSimulationTime(int addTime)
