@@ -11,14 +11,42 @@ namespace TechSupport.WARE.Warehouse
     public class Simulation
     {
         internal int _totalSimulationTime = 0;
+        internal Dictionary<int, int> _simulationDictionary = new Dictionary<int, int>();
         internal bool _simulate = true;
 
         public Simulation() { }
 
-        public int GetTotalSimulationTimeInSeconds { get => _totalSimulationTime; }
+        public int GetTotalTimeInSeconds()
+        {
+            int highestTime = 0;
+            foreach(KeyValuePair<int, int> entry in _simulationDictionary)
+            {
+                if(entry.Value > highestTime)
+                {
+                    highestTime = entry.Value;
+                }
+            }
+            return highestTime + _totalSimulationTime;
+        }
+        public void PrintAllEmployeesTimeInSeconds()
+        {
+            foreach(KeyValuePair<int,int> entry in _simulationDictionary)
+            {
+                Console.WriteLine(entry.Key + ": " + entry.Value);
+            }
+        }
         internal void AddToTotalSimulationTime(int addTime)
         {
             _totalSimulationTime += addTime;
+        }
+        internal void AddSimulationTimeToEmployee(Employee employee, int time)
+        {
+            if(!_simulationDictionary.ContainsKey(employee.EmployeeID))
+            {
+                _simulationDictionary.Add(employee.EmployeeID, time);
+            }
+            else
+                _simulationDictionary[employee.EmployeeID] += time;
         }
         internal bool GetSimulateBool {  get => _simulate; }
         public void StopSimulation()

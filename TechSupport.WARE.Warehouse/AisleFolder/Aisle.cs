@@ -19,9 +19,14 @@ namespace TechSupport.WARE.Warehouse
 
         //Events
         internal event EventHandler<AisleAndPackageEventArgs> PackageAddedToAisle;
+        internal event EventHandler<AisleAndPackageEventArgs> PackageRemovedFromAisle;
         internal virtual void OnPackageAddedToAisle(AisleAndPackageEventArgs e)
         {
             PackageAddedToAisle?.Invoke(this, e);
+        }
+        internal virtual void OnPackageRemovedFromAisle(AisleAndPackageEventArgs e)
+        {
+            PackageRemovedFromAisle?.Invoke(this, e);
         }
 
         /// <summary>
@@ -187,7 +192,7 @@ namespace TechSupport.WARE.Warehouse
             shelf[placement] = package;
 
             // for testing purposes later when simulating
-            OnPackageAddedToAisle(new AisleAndPackageEventArgs(this, package));
+            OnPackageAddedToAisle(new AisleAndPackageEventArgs(this, package, mover));
         }
 
         public void RemovePackage(Package package, Employee mover)
@@ -196,6 +201,7 @@ namespace TechSupport.WARE.Warehouse
             {
                 throw new Exception("Movers access level: " + mover.AccessLevel + ", is not high enough for the storage zone: " + _currentStorageZone.StorageZoneAccessLevel);
             }
+            OnPackageRemovedFromAisle(new AisleAndPackageEventArgs(this, package, mover));
             for (int i = 1; i <= _sections; i++)
             {
                 for (int j = 1; j <= _numberOfSpaces; j++)
@@ -206,7 +212,6 @@ namespace TechSupport.WARE.Warehouse
                     }
                 }
             }
-
         }
         public int GetAisleId => this._aisleId;
         /// <summary>

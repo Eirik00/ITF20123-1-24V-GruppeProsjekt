@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechSupport.WARE.Warehouse.SimulationFolder;
+using TechSupport.WARE.Warehouse.SimulationFolder.Simulation;
 
 namespace TechSupport.WARE.Warehouse
 {
@@ -23,6 +24,7 @@ namespace TechSupport.WARE.Warehouse
         public AisleHandler(Aisle aisle)
         {
             aisle.PackageAddedToAisle += HandlePackageAddedToAisle;
+            aisle.PackageRemovedFromAisle += HandlePackageRemovedFromAisle;
             HandleAisle(this, new AisleAndPackageEventArgs(aisle));
         }
 
@@ -36,6 +38,7 @@ namespace TechSupport.WARE.Warehouse
         public AisleHandler(Aisle aisle, Simulation sim)
         {
             aisle.PackageAddedToAisle += HandlePackageAddedToAisle;
+            aisle.PackageRemovedFromAisle += HandlePackageRemovedFromAisle;
             _simulation = sim;
             HandleAisle(this, new AisleAndPackageEventArgs(aisle));
         }
@@ -43,7 +46,7 @@ namespace TechSupport.WARE.Warehouse
         internal void HandleAisle(object sender, AisleAndPackageEventArgs e)
         {
             Console.WriteLine($"Aisle with ID {e.AisleId} added to the handler.");
-            if(_simulation != null)
+            if (_simulation != null)
             {
                 if (_simulation.GetSimulateBool)
                 {
@@ -54,49 +57,92 @@ namespace TechSupport.WARE.Warehouse
         internal void HandlePackageAddedToAisle(object sender, AisleAndPackageEventArgs e)
         {
             Console.WriteLine($"Package with ID {e.PackageId} was added to Aisle with ID {e.AisleId} on shelf {e.Shelf}");
-            if(_simulation != null)
+            if (_simulation != null)
             {
                 if (_simulation.GetSimulateBool)
                 {
                     if (e.StorageSpecification == StorageSpecification.ClimateControlled)
                     {
                         int elapsedTime = 70;
-                        _simulation.AddToTotalSimulationTime(elapsedTime);
+                        _simulation.AddSimulationTimeToEmployee(e.Employee, elapsedTime);
                         Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
                     }
                     if (e.StorageSpecification == StorageSpecification.HighValue)
                     {
                         int elapsedTime = 70;
-                        _simulation.AddToTotalSimulationTime(elapsedTime);
+                        _simulation.AddSimulationTimeToEmployee(e.Employee, elapsedTime);
                         Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
                     }
                     if (e.StorageSpecification == StorageSpecification.SmallItems)
                     {
                         int elapsedTime = 110;
-                        _simulation.AddToTotalSimulationTime(elapsedTime);
+                        _simulation.AddSimulationTimeToEmployee(e.Employee, elapsedTime);
                         Console.WriteLine($"Time elapsed for placing Package {e.PackageId} is {elapsedTime}s.");
                     }
                 }
             }
         }
+        internal void HandlePackageRemovedFromAisle(object sender, AisleAndPackageEventArgs e)
+        {
+            Console.WriteLine($"Package with ID {e.PackageId} was removed from Aisle with ID {e.AisleId} on shelf {e.Shelf}");
+            if (_simulation != null)
+            {
+                if (_simulation.GetSimulateBool)
+                {
+                    if (e.Status == StatusList.Delivery)
+                    {
+                        if (e.Aisle != null)
+                        {
+                            if (e.StorageSpecification == StorageSpecification.HighValue)
+                            {
+                                int timeEstimate = 210;
+                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                            }
+                            if (e.StorageSpecification == StorageSpecification.ClimateControlled)
+                            {
+                                int timeEstimate = 210;
+                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                            }
+                            if (e.StorageSpecification == StorageSpecification.SmallItems)
+                            {
+                                int timeEstimate = 110;
+                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                            }
+                        }
+                        else
+                        {
+                            int timeEstimate = 55;
+                            _simulation.AddToTotalSimulationTime(timeEstimate);
+                        }
+                    }
+                }
+            }
+        }
     }
-    internal class AisleAndPackageEventArgs : EventArgs
-    {
-        internal int AisleId { get; }
-        internal int PackageId { get; }
-        internal (int, int) Shelf { get; }
-        internal StorageSpecification StorageSpecification { get; }
 
-        internal AisleAndPackageEventArgs(Aisle aisle, Package package)
+        internal class AisleAndPackageEventArgs : EventArgs
         {
-            AisleId = aisle.GetAisleId;
-            PackageId = package.PackageId;
-            Shelf = aisle.GetShelf(package);
-            StorageSpecification = aisle.CurrentStorageZone.StorageSpecification;
-        }
-        internal AisleAndPackageEventArgs(Aisle aisle)
-        {
-            AisleId = aisle.GetAisleId;
+            internal int AisleId { get; }
+            internal Aisle Aisle { get; }
+            internal int PackageId { get; }
+            internal (int, int) Shelf { get; }
+            internal StorageSpecification StorageSpecification { get; }
+            internal StatusList Status { get; }
+            internal Employee Employee { get; }
+
+            internal AisleAndPackageEventArgs(Aisle aisle, Package package, Employee employee)
+            {
+                Aisle = aisle;
+                AisleId = aisle.GetAisleId;
+                PackageId = package.PackageId;
+                Shelf = aisle.GetShelf(package);
+                StorageSpecification = aisle.CurrentStorageZone.StorageSpecification;
+                Employee = employee;
+                Status = package.Status;
+            }
+            internal AisleAndPackageEventArgs(Aisle aisle)
+            {
+                AisleId = aisle.GetAisleId;
+            }
         }
     }
-}

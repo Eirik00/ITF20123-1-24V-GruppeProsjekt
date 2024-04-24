@@ -54,7 +54,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">packages to send. The instance of the package class</param>
         /// <param name="sender">The sender's contact information. The object of the Contact or Company classes</param>
         /// <param name="receiver">The receiver's contact information. The object of the Contact or Company classes</param>
-        public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver)
+        public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Contact sender, Contact receiver, Employee worker)
         {
             if (!double.TryParse(sendingHourAndMinute.ToString(), out double _))
                 throw new ArgumentException("Delivery hour and minute must be a valid double.");
@@ -75,7 +75,11 @@ namespace TechSupport.WARE.Warehouse
                 package.Receiver = receiver;
                 package.DeliveryTime = DateTime.Today.AddHours(sendingHourAndMinute);
                 package.ChangeStatus(StatusList.Delivery);
-                OutgoingPackagesList.Add(packages);    
+                OutgoingPackagesList.Add(packages);
+                if(package.PackageAisle != null)
+                {
+                    package.PackageAisle.RemovePackage(package, worker);
+                }
             }
             //This should delete the sent packet from the original list it was in, plain and simple
             //packages.Packages.Clear();
@@ -83,21 +87,21 @@ namespace TechSupport.WARE.Warehouse
             OnOutgoingPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
         // Overload for sending of 1 single package
-        public void OutgoingPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver)
+        public void OutgoingPackage(double sendingHourAndMinute, Package package, Contact sender, Contact receiver, Employee worker)
         {
             PackageList singlePackageList = [];
             singlePackageList.Add(package);
-            OutgoingPackage(sendingHourAndMinute, singlePackageList, sender, receiver);
+            OutgoingPackage(sendingHourAndMinute, singlePackageList, sender, receiver, worker);
             OnOutgoingPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, package));
         }
 
         // Overload to be able to use Company object as a sender or receiver
-        public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany)
+        public void OutgoingPackage(double sendingHourAndMinute, PackageList packages, Company senderCompany, Company receiverCompany, Employee worker)
         {
             Contact sender = senderCompany.ContactPerson;
             Contact receiver = receiverCompany.ContactPerson;
 
-            OutgoingPackage(sendingHourAndMinute, packages, sender, receiver);
+            OutgoingPackage(sendingHourAndMinute, packages, sender, receiver, worker);
             OnOutgoingPackage(new OutgoingPackageEventArgs(this, sender, receiver, sendingHourAndMinute, packages));
         }
 

@@ -8,6 +8,7 @@ using TechSupport.WARE.Warehouse;
 using System.Diagnostics.Tracing;
 using TechSupport.WARE.Warehouse.PalletManagement;
 using TechSupport.WARE.Warehouse.SimulationFolder.Simulation;
+using System.Numerics;
 
 namespace TechSupport.WARE
 {
@@ -15,10 +16,64 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
-            Aisle aisle1 = new(2, 2, 2, 2, 2, 2, 2);
+            Aisle aisle1 = new(20, 20, 20000, 20000, 20000, 2000000000, 1);
+            StorageZone storageZone = new StorageZone(StorageSpecification.HighValue);
+            storageZone.addAisleToZone(aisle1);
+
+            //Simulation
             Simulation sim1 = new();
             AisleHandler aisleHandler = new AisleHandler(aisle1, sim1);
-            Console.WriteLine(sim1.GetTotalSimulationTimeInSeconds);
+
+            //Pakker
+            Dictionary<int, Package> packages = new Dictionary<int, Package>();
+            for(int i = 1; i <= 20; i++)
+            {
+                packages.Add(i, new(i,200,200,200,200,false,StorageSpecification.HighValue));
+            }
+
+            //PackageHandlers
+            Dictionary<int, PackageHandler> handlers = new Dictionary<int, PackageHandler>();
+            int idPackagHandler = 1;
+            foreach (KeyValuePair<int,Package> entry in packages)
+            {
+                handlers.Add(idPackagHandler, new(packages[entry.Key], sim1));
+                idPackagHandler++;
+            }
+
+            //Arbeidere
+            Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
+            for(int i = 1; i <= 10; i++)
+            {
+                employees.Add(i, new(i, 3, "Dummy", "Dummy", "Dummy@dummy.com", "Dummy", "Dummy", 90909090, 9090));
+            }
+
+            //Legge på hylle
+            int hylleplass = 1;
+            foreach (KeyValuePair<int, Package> entry in packages.Take(7))
+            {
+                aisle1.AddPackage(entry.Value, (1, hylleplass), employees[1]);
+                hylleplass++;
+            }
+            foreach (KeyValuePair<int, Package> entry in packages.Skip(7).Take(3))
+            {
+                aisle1.AddPackage(entry.Value, (1, hylleplass), employees[2]);
+                hylleplass++;
+            }
+            foreach (KeyValuePair<int, Package> entry in packages.Skip(10).Take(10))
+            {
+                aisle1.AddPackage(entry.Value, (1, hylleplass), employees[2]);
+                hylleplass++;
+            }
+
+            Console.WriteLine("Simulation results\n--------------");
+            int totalSimTime = sim1.GetTotalTimeInSeconds();
+            Console.WriteLine($"Most effecient total time to finish all tasks: {totalSimTime}");
+            Console.WriteLine("Time per worker: ");
+            sim1.PrintAllEmployeesTimeInSeconds();
+            sim1.StopSimulation();
+            Console.WriteLine("--------------\nSimulation done...");
+
+
             TruckManager truckManager = new TruckManager();
             TruckManagerHandler truckManagerHandler = new(truckManager);
             Pallet pallet1 = new(2);

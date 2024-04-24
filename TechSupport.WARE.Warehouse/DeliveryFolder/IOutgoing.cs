@@ -21,7 +21,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packages">The list of packages to be delivered.</param>
         /// <param name="sender">The sender of the packages.</param>
         /// <param name="receiver">The receiver of the packages.</param>
-        void OutgoingPackage(double deliveryTime, PackageList packages, Contact sender, Contact receiver);
+        void OutgoingPackage(double deliveryTime, PackageList packages, Contact sender, Contact receiver, Employee worker);
 
         /// <summary>
         /// Sets up daily recurring delivery for a list of packages.It takes a delivery hour, sender, and receiver, and schedules deliveries for each day based on the current date.
