@@ -97,22 +97,26 @@ namespace TechSupport.WARE.Warehouse
                             {
                                 int timeEstimate = 210;
                                 _simulation.AddSimulationTimeToEmployee (e.Employee, timeEstimate);
+                                Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                             }
                             if (e.StorageSpecification == StorageSpecification.ClimateControlled)
                             {
                                 int timeEstimate = 210;
                                 _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
+                                Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                             }
                             if (e.StorageSpecification == StorageSpecification.SmallItems)
                             {
                                 int timeEstimate = 110;
                                 _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
+                                Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                             }
                         }
                         else
                         {
                             int timeEstimate = 55;
                             _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
+                            Console.WriteLine($"Time elapsed for preparing Package with ID: {e.PackageId} for delivery: {timeEstimate}Seconds");
                         }
                     }
                 }
