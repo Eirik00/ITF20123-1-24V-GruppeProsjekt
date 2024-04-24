@@ -65,13 +65,29 @@ namespace TechSupport.WARE
                 hylleplass++;
             }
 
-            Console.WriteLine("Simulation results\n--------------");
+            //Gjøres klar til sending
+            Outgoing outgoing = new(new());
+            Contact dummyContact = new("dummy", "dummy", "dummy@dummy.com", "dummy", "dummy", 90909090, 9090);
+            foreach (KeyValuePair<int, Package> entry in packages.Take(7))
+            {
+                outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[1]);
+            }
+            foreach (KeyValuePair<int, Package> entry in packages.Skip(7).Take(3))
+            {
+                outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[2]);
+            }
+            foreach (KeyValuePair<int, Package> entry in packages.Skip(10).Take(10))
+            {
+                outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[1]);
+            }
+
+            Console.WriteLine("\nSimulation results\n--------------");
             int totalSimTime = sim1.GetTotalTimeInSeconds();
             Console.WriteLine($"Most effecient total time to finish all tasks: {totalSimTime}");
             Console.WriteLine("Time per worker: ");
             sim1.PrintAllEmployeesTimeInSeconds();
             sim1.StopSimulation();
-            Console.WriteLine("--------------\nSimulation done...");
+            Console.WriteLine("--------------\nSimulation done...\n");
 
 
             TruckManager truckManager = new TruckManager();

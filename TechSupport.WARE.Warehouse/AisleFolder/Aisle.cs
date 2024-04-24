@@ -204,7 +204,7 @@ namespace TechSupport.WARE.Warehouse
             OnPackageRemovedFromAisle(new AisleAndPackageEventArgs(this, package, mover));
             for (int i = 1; i <= _sections; i++)
             {
-                for (int j = 1; j <= _numberOfSpaces; j++)
+                for (int j = 1; j <= _numberOfSpaces/_sections; j++)
                 {
                     if (shelf[(i, j)] == package)
                     {

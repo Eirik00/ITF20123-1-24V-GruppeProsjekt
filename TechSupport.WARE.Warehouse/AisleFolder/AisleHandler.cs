@@ -96,23 +96,23 @@ namespace TechSupport.WARE.Warehouse
                             if (e.StorageSpecification == StorageSpecification.HighValue)
                             {
                                 int timeEstimate = 210;
-                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                                _simulation.AddSimulationTimeToEmployee (e.Employee, timeEstimate);
                             }
                             if (e.StorageSpecification == StorageSpecification.ClimateControlled)
                             {
                                 int timeEstimate = 210;
-                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                                _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
                             }
                             if (e.StorageSpecification == StorageSpecification.SmallItems)
                             {
                                 int timeEstimate = 110;
-                                _simulation.AddToTotalSimulationTime(timeEstimate);
+                                _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
                             }
                         }
                         else
                         {
                             int timeEstimate = 55;
-                            _simulation.AddToTotalSimulationTime(timeEstimate);
+                            _simulation.AddSimulationTimeToEmployee(e.Employee, timeEstimate);
                         }
                     }
                 }
