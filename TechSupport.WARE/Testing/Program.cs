@@ -36,7 +36,7 @@ namespace TechSupport.WARE
             int idPackagHandler = 1;
             foreach (KeyValuePair<int,Package> entry in packages)
             {
-                handlers.Add(idPackagHandler, new(packages[entry.Key], sim1));
+                handlers.Add(idPackagHandler, new(packages[entry.Key]));
                 idPackagHandler++;
             }
 
