@@ -56,7 +56,7 @@ namespace TechSupport.WARE.GUI
 
                 curAisleName.Content = "Name: " + item.ToString();
                 curAisleDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}mm";
-                curAisleWeight.Content = "Max Weight: " + (selectedAisle.GetWeight/1000);
+                curAisleWeight.Content = "Max Weight: " + (selectedAisle.GetWeight/1000) + "kg";
             }
         }
     }

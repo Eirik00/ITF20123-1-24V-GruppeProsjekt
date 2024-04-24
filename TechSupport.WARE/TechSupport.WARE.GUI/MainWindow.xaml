@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TechSupport.WARE.GUI"
         mc:Ignorable="d"
         Title="Warehouse API" Height="450" Width="800">
-    <Grid Margin="10">
+    <Grid Margin="10,10,10,0">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,8 +21,8 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0">Aisles:</Label>
-        <ListBox Grid.Column="0" Grid.Row="1" x:Name="lstAisle" SelectionChanged="AisleListSelectionChanged"/>
-        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="0,207,0,0">
+        <ListBox Grid.Column="0" Grid.Row="1" x:Name="lstAisle" SelectionChanged="AisleListSelectionChanged" Margin="0,0,10,0"/>
+        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="0,207,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -34,10 +34,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" Click="OpenCreateAisleButton" x:Name="createAisle">Create Aisle</Button>
-            <Separator Grid.ColumnSpan="3" Margin="0,5,0,20" Grid.Row="1" />
-            <Label Grid.Column="0" Grid.Row="1" Margin="7,0,0,0" >Current Aisle:</Label>
-            <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="10,0,10,0">
+            <Button Grid.Column="0" Grid.Row="0" Click="OpenCreateAisleButton" x:Name="createAisle" Grid.ColumnSpan="2" Margin="0,-5,113,5">Create Aisle</Button>
+            <Separator Grid.ColumnSpan="3" Margin="0,0,0,25" Grid.Row="1" />
+            <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" >Current Aisle:</Label>
+            <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,0,10,0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -57,6 +57,6 @@
                 </Grid>
             </Border>
         </Grid>
-        <Grid/>
+        <Label Grid.Row="0" Grid.Column="1">Packages: </Label>
     </Grid>
 </Window>
