@@ -16,69 +16,49 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
-            Aisle aisle1 = new(20, 20, 20000, 20000, 20000, 2000000000, 1);
-            StorageZone storageZone = new StorageZone(StorageSpecification.HighValue);
-            storageZone.addAisleToZone(aisle1);
-
-            //Simulation
+            //Aisles
+            Aisle aisleHighValue = new(1, 1, 20000, 20000, 20000, 2000000000, 1);
+            Aisle aisleSmallItems = new(1, 1, 20000, 20000, 20000, 2000000000, 1);
             Simulation sim1 = new();
-            AisleHandler aisleHandler = new AisleHandler(aisle1, sim1);
+            AisleHandler aisleHandler1 = new AisleHandler(aisleHighValue, sim1);
+            AisleHandler aisleHandler2 = new AisleHandler(aisleSmallItems, sim1);
+            StorageZone storageZoneHighValue = new StorageZone(StorageSpecification.HighValue);
+            StorageZone storageZoneSmallValue = new StorageZone(StorageSpecification.SmallItems);
+            storageZoneHighValue.addAisleToZone(aisleHighValue);
+            storageZoneSmallValue.addAisleToZone(aisleSmallItems);
 
-            //Pakker
-            Dictionary<int, Package> packages = new Dictionary<int, Package>();
-            for(int i = 1; i <= 20; i++)
-            {
-                packages.Add(i, new(i,200,200,200,200,false,StorageSpecification.HighValue));
-            }
-
-            //PackageHandlers
-            Dictionary<int, PackageHandler> handlers = new Dictionary<int, PackageHandler>();
-            int idPackagHandler = 1;
-            foreach (KeyValuePair<int,Package> entry in packages)
-            {
-                handlers.Add(idPackagHandler, new(packages[entry.Key]));
-                idPackagHandler++;
-            }
-
-            //Arbeidere
+            //Employees
+            int amountOfWorkers = 5;
             Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
-            for(int i = 1; i <= 10; i++)
+            for(int i = 1; i <= amountOfWorkers; i++)
             {
                 employees.Add(i, new(i, 3, "Dummy", "Dummy", "Dummy@dummy.com", "Dummy", "Dummy", 90909090, 9090));
             }
 
-            //Legge på hylle
-            int hylleplass = 1;
-            foreach (KeyValuePair<int, Package> entry in packages.Take(7))
-            {
-                aisle1.AddPackage(entry.Value, (1, hylleplass), employees[1]);
-                hylleplass++;
-            }
-            foreach (KeyValuePair<int, Package> entry in packages.Skip(7).Take(3))
-            {
-                aisle1.AddPackage(entry.Value, (1, hylleplass), employees[2]);
-                hylleplass++;
-            }
-            foreach (KeyValuePair<int, Package> entry in packages.Skip(10).Take(10))
-            {
-                aisle1.AddPackage(entry.Value, (1, hylleplass), employees[2]);
-                hylleplass++;
-            }
+            //Contact
+            Contact dummyContact = new("dummy", "dummy", "dummy@email.com", "dummy", "dummy", 90909090, 9090);
 
-            //Gjøres klar til sending
-            Outgoing outgoing = new(new());
-            Contact dummyContact = new("dummy", "dummy", "dummy@dummy.com", "dummy", "dummy", 90909090, 9090);
-            foreach (KeyValuePair<int, Package> entry in packages.Take(7))
+            //Packages
+            Package packageHighValue = new(1, 10, 10, 10, 10, false, StorageSpecification.HighValue);
+            PackageHandler packageHandler1 = new(packageHighValue);
+            Package packageSmallItems = new(2, 10, 10, 10, 10, false, StorageSpecification.SmallItems);
+            PackageHandler packageHandler2 = new(packageSmallItems);
+
+            //Outgoing
+            Outgoing outgoing1 = new(new());
+
+            //Timer
+            int runningTime = 5;
+            DateTime timer = DateTime.Now.AddSeconds(runningTime);
+
+            //Simulation-while
+            while (DateTime.Now < timer)
             {
-                outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[1]);
-            }
-            foreach (KeyValuePair<int, Package> entry in packages.Skip(7).Take(3))
-            {
-                outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[2]);
-            }
-            foreach (KeyValuePair<int, Package> entry in packages.Skip(10).Take(10))
-            {
-                outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[1]);
+                aisleHighValue.AddPackage(packageHighValue, (1, 1), employees[1]);
+                aisleSmallItems.AddPackage(packageSmallItems, (1, 1), employees[2]);
+                outgoing1.OutgoingPackage(22.10, packageHighValue, dummyContact, dummyContact, employees[1]);
+                outgoing1.OutgoingPackage(22.10, packageSmallItems, dummyContact, dummyContact, employees[2]);
+                System.Threading.Thread.Sleep(500);
             }
 
             Console.WriteLine("\nSimulation results\n--------------");
@@ -89,13 +69,78 @@ namespace TechSupport.WARE
             sim1.StopSimulation();
             Console.WriteLine("--------------\nSimulation done...\n");
 
+            //Aisle aisle1 = new(20, 20, 20000, 20000, 20000, 2000000000, 1);
+            //StorageZone storageZone = new StorageZone(StorageSpecification.HighValue);
+            //storageZone.addAisleToZone(aisle1);
 
-            TruckManager truckManager = new TruckManager();
-            TruckManagerHandler truckManagerHandler = new(truckManager);
-            Pallet pallet1 = new(2);
-            PalletRack palletRack = new(truckManager);
-            palletRack.AddPalletToRack(1, 2, pallet1);
-            palletRack.RemovePallet(1, 2, 1);
+            ////Simulation
+            //
+
+            ////Pakker
+            //Dictionary<int, Package> packages = new Dictionary<int, Package>();
+            //for(int i = 1; i <= 20; i++)
+            //{
+            //    packages.Add(i, new(i,200,200,200,200,false,StorageSpecification.HighValue));
+            //}
+
+            ////PackageHandlers
+            //Dictionary<int, PackageHandler> handlers = new Dictionary<int, PackageHandler>();
+            //int idPackagHandler = 1;
+            //foreach (KeyValuePair<int,Package> entry in packages)
+            //{
+            //    handlers.Add(idPackagHandler, new(packages[entry.Key]));
+            //    idPackagHandler++;
+            //}
+
+            ////Arbeidere
+            //
+
+            ////Legge på hylle
+            //int hylleplass = 1;
+            //foreach (KeyValuePair<int, Package> entry in packages.Take(7))
+            //{
+            //    aisle1.AddPackage(entry.Value, (1, hylleplass), employees[1]);
+            //    hylleplass++;
+            //}
+            //foreach (KeyValuePair<int, Package> entry in packages.Skip(7).Take(3))
+            //{
+            //    aisle1.AddPackage(entry.Value, (1, hylleplass), employees[2]);
+            //    hylleplass++;
+            //}
+            //foreach (KeyValuePair<int, Package> entry in packages.Skip(10).Take(10))
+            //{
+            //    aisle1.AddPackage(entry.Value, (1, hylleplass), employees[2]);
+            //    hylleplass++;
+            //}
+
+            ////Gjøres klar til sending
+            //Outgoing outgoing = new(new());
+            //Contact dummyContact = new("dummy", "dummy", "dummy@dummy.com", "dummy", "dummy", 90909090, 9090);
+            //foreach (KeyValuePair<int, Package> entry in packages.Take(7))
+            //{
+            //    outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[1]);
+            //}
+            //foreach (KeyValuePair<int, Package> entry in packages.Skip(7).Take(3))
+            //{
+            //    outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[2]);
+            //}
+            //foreach (KeyValuePair<int, Package> entry in packages.Skip(10).Take(10))
+            //{
+            //    outgoing.OutgoingPackage(22.30, entry.Value, dummyContact, dummyContact, employees[1]);
+            //}
+
+
+
+
+            //TruckManager truckManager = new TruckManager();
+            //TruckManagerHandler truckManagerHandler = new(truckManager);
+            //Pallet pallet1 = new(2);
+            //PalletRack palletRack = new(truckManager);
+            //palletRack.AddPalletToRack(1, 2, pallet1);
+            //palletRack.RemovePallet(1, 2, 1);
+
+
+
             /*Simulation simulation = new Simulation();
             simulation.simulateSinglePackageMovement();*/
             /*TruckManager truckManager = new TruckManager();
