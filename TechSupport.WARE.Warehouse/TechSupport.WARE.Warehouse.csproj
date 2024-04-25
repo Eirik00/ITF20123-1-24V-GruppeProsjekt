@@ -4,16 +4,25 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+<<<<<<< Updated upstream
     <Title>Warehouse-SimAPITest</Title>
     <PackageId> WarehouseSimuAPI1Techsupport</PackageId>
+=======
+    <Title>Warehouse-APITechsupport</Title>
+    <PackageId>WarehouseSimuAPI1Techsupport</PackageId>
+>>>>>>> Stashed changes
     <Authors>Krister Wallin Hognestad, Eirik Rasmussen, Mustafa Sahin, Martin Malo Treseng</Authors>
     <Company>TechSupport</Company>
     <Product>WarehouseAPI</Product>
-    <Description>Warehouse Simulation API</Description>
+    <Description>Warehouse Simulation API skoleprosjekt</Description>
     <RepositoryUrl>https://github.com/Eirik00/ITF20123-1-24V-GruppeProsjekt</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Api, test</PackageTags>
+<<<<<<< Updated upstream
     <Version>1.0.1</Version>
+=======
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+>>>>>>> Stashed changes
   </PropertyGroup>
 
   <ItemGroup>
