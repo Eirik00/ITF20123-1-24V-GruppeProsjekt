@@ -138,52 +138,16 @@ namespace TechSupport.WARE.Warehouse
 
             }*/
 
-            int[] dimensions = { this._depthOfSpaceInMm, this._heightOfSpaceInMm, this._lengthOfSpaceInMm };
+            int[] aisle_dimensions = { this._depthOfSpaceInMm, this._heightOfSpaceInMm, (this._lengthOfSpaceInMm/this._numberOfSpaces) };
+            int[] package_dimensions = { package.PackageDepthInMm, package.PackageHeightInMm, package.PackageLengthInMm };
 
-            Array.Sort(dimensions);
+            Array.Sort(aisle_dimensions);
+            Array.Sort(package_dimensions);
 
-
-            if (package.PackageLengthInMm <= dimensions[0])
+            if(package_dimensions[0] > aisle_dimensions[0] || package_dimensions[1] > aisle_dimensions[1] || package_dimensions[2] > aisle_dimensions[2])
             {
-                dimensions[0] = 0;
+                throw new NotEnoughSpaceException("Package is too large for this shelf");
             }
-            else if (package.PackageLengthInMm <= dimensions[1])
-            {
-                dimensions[1] = 0;
-            }
-            else if (package.PackageLengthInMm <= dimensions[2])
-            {
-                dimensions[2] = 0;
-            }
-            else throw new NotEnoughSpaceException("Package is too large for this shelf");
-
-            if (package.PackageHeightInMm <= dimensions[0])
-            {
-                dimensions[0] = 0;
-            }
-            else if (package.PackageHeightInMm <= dimensions[1])
-            {
-                dimensions[1] = 0;
-            }
-            else if (package.PackageHeightInMm <= dimensions[2])
-            {
-                dimensions[2] = 0;
-            }
-            else throw new NotEnoughSpaceException("Package is too large for this shelf");
-
-            if (package.PackageDepthInMm <= dimensions[0])
-            {
-                dimensions[0] = 0;
-            }
-            else if (package.PackageDepthInMm <= dimensions[1])
-            {
-                dimensions[1] = 0;
-            }
-            else if (package.PackageDepthInMm <= dimensions[2])
-            {
-                dimensions[2] = 0;
-            }
-            else throw new NotEnoughSpaceException("Package is too large for this shelf");
 
             this._totalWeight += package.PackageWeightInGrams;
             package.AddAisle(this);
