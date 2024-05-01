@@ -23,8 +23,8 @@ namespace TechSupport.WARE
             AisleHandler aisleHandler2 = new AisleHandler(aisleSmallItems, sim1);
             StorageZone storageZoneHighValue = new StorageZone(StorageSpecification.HighValue);
             StorageZone storageZoneSmallValue = new StorageZone(StorageSpecification.SmallItems);
-            storageZoneHighValue.addAisleToZone(aisleHighValue);
-            storageZoneSmallValue.addAisleToZone(aisleSmallItems);
+            storageZoneHighValue.addAisle(aisleHighValue);
+            storageZoneSmallValue.addAisle(aisleSmallItems);
 
             //Employees
             int amountOfWorkers = 5;
@@ -70,7 +70,7 @@ namespace TechSupport.WARE
 
             //Aisle aisle1 = new(20, 20, 20000, 20000, 20000, 2000000000, 1);
             //StorageZone storageZone = new StorageZone(StorageSpecification.HighValue);
-            //storageZone.addAisleToZone(aisle1);
+            //storageZone.addAisle(aisle1);
 
             ////Simulation
             //

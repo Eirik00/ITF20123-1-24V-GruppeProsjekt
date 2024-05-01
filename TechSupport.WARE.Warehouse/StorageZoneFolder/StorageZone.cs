@@ -45,8 +45,11 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Adds an aisle to the storage zone.
         /// </summary>
-        /// <param name="aisle">The aisle to add to the storage zone.</param>
-        public void addAisleToZone(Aisle aisle)
+        /// <param name="aisle">The aisle to be added to the storage zone.</param>
+        /// <remarks>
+        /// This method adds the specified <paramref name="aisle"/> to the storage zone and updates its reference to the current storage zone.
+        /// </remarks>
+        public void addAisle(Aisle aisle)
         {
             aislesInZone.Add(aisle);
             aisle.CurrentStorageZone = this;
