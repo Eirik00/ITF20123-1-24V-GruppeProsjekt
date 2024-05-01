@@ -20,7 +20,7 @@ namespace TechSupport.WARE.Warehouse
         /// 
         /// It has overloading for Simulation.
         /// </summary>
-        /// <param name="package">The package to be handled.</param>
+        /// <param name="package">The package to manage.</param>
         public PackageHandler(Package package)
         {
             package.PackageStatusChangedEvent += HandlePackageStatusChanged;
@@ -34,8 +34,8 @@ namespace TechSupport.WARE.Warehouse
         /// 
         /// It has overloading for Simulation.
         /// </summary>
-        /// <param name="package">The package to be handled.</param>
-        /// <param name="sim">The simulation instance.</param>
+        /// <param name="package">The package to manage.</param>
+        /// <param name="sim">Simulation object to simulate package to.</param>
         public PackageHandler(Package package, Simulation sim)
         {
             _simulation = sim;
