@@ -58,6 +58,9 @@
                 </Grid>
             </Border>
         </Grid>
-        <Label Grid.Row="0" Grid.Column="1">Packages: </Label>
+        <Label Grid.Column="1" Grid.Row="0">Packages: </Label>
+        <ListBox Grid.Column="1" Grid.Row="1" Margin="0,0,10,0"/>
+        <Label Grid.Column="2" Grid.Row="0">Employees:</Label>
+        <ListBox Grid.Column="2" x:Name="listEmployees" Grid.Row="1" Margin="0,0,10,0"/>
     </Grid>
 </Window>

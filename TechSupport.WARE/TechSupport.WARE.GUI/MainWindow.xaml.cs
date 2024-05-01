@@ -35,6 +35,13 @@ namespace TechSupport.WARE.GUI
                 lstAisle.Items.Add(aisle.Key);
         }
 
+        public void RefreshEmployeeList()
+        {
+            listEmployees.Items.Clear();
+            foreach (KeyValuePair<String, Employee> employee in _employeeList)
+                listEmployees.Items.Add(employee.Key);
+        }
+
         private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
         {
             CreateAisle createAisleWindow = new CreateAisle(this);
@@ -70,7 +77,7 @@ namespace TechSupport.WARE.GUI
                 Aisle selectedAisle = _aisleList[item.ToString()];
 
                 curAisleName.Content = "Name: " + item.ToString();
-                curAisleDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}mm";
+                curAisleDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}cm";
                 curAisleWeight.Content = "Max Weight: " + (selectedAisle.GetWeight/1000) + "kg";
             }
         }

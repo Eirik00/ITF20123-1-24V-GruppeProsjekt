@@ -60,7 +60,7 @@ namespace TechSupport.WARE.GUI
 
         private void SendEventToMain(object sender, EventArgs e)
         {
-            //_mainWindow.RefreshAisleList();
+            _mainWindow.RefreshEmployeeList();
         }
     }
 }

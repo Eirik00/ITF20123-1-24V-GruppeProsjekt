@@ -33,16 +33,16 @@
         <TextBox x:Name="aislePlacesPerShelf" PreviewTextInput="ForceTextToNumber" Grid.Row="2" Grid.Column="1"/>
         <Label Grid.Row="3" Grid.Column="0" >Weight Limit:</Label>
         <TextBox x:Name="aisleWeight" PreviewTextInput="ForceTextToNumber" Grid.Row="3" Grid.Column="1"/>
-        <Label Grid.Row="3" Grid.Column="2">Kg</Label>
+        <Label Grid.Row="3" Grid.Column="2">g</Label>
         <Label Grid.Row="4" Grid.Column="0" >Length of Aisle:</Label>
         <TextBox x:Name="aisleLegnth" PreviewTextInput="ForceTextToNumber" Grid.Row="4" Grid.Column="1"/>
-        <Label Grid.Row="4" Grid.Column="2">Mm</Label>
+        <Label Grid.Row="4" Grid.Column="2">Cm</Label>
         <Label Grid.Row="5" Grid.Column="0" >Height of Aisle:</Label>
         <TextBox x:Name="aisleHeight" PreviewTextInput="ForceTextToNumber" Grid.Row="5" Grid.Column="1"/>
-        <Label Grid.Row="5" Grid.Column="2">Mm</Label>
+        <Label Grid.Row="5" Grid.Column="2">Cm</Label>
         <Label Grid.Row="6" Grid.Column="0" >Depth of Aisle:</Label>
         <TextBox x:Name="aisleDepth" PreviewTextInput="ForceTextToNumber" Grid.Row="6" Grid.Column="1"/>
-        <Label Grid.Row="6" Grid.Column="2">Mm</Label>
+        <Label Grid.Row="6" Grid.Column="2">Cm</Label>
         <Button Click="createAisleFunction" x:Name="createAisleButton" Grid.Row="7" Margin="0,0,0,5">Create Aisle</Button>
     </Grid>
 </Window>
