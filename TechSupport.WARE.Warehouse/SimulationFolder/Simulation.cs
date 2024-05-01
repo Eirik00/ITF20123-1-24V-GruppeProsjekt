@@ -21,6 +21,9 @@ namespace TechSupport.WARE.Warehouse
         private int _fromSmallItemsAisleToDeliveryEstimate = 110;
         private int _fromAisleToDeliveryEstimate = 55;
 
+        /// <summary>
+        /// Initializes a new instance of the Simulation class with Simulation bool set to true.
+        /// </summary>
         public Simulation() { }
 
         public int GetTotalTimeInSeconds()
