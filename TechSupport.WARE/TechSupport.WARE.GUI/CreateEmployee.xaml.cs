@@ -25,6 +25,7 @@ namespace TechSupport.WARE.GUI
         public CreateEmployee(MainWindow mainWindow)
         {
             InitializeComponent();
+            _mainWindow = mainWindow;
         }
 
         private void ForceTextToNumber(object sender, TextCompositionEventArgs e)
