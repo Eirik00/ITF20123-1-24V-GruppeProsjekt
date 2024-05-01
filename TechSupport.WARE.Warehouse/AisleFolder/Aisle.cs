@@ -110,6 +110,18 @@ namespace TechSupport.WARE.Warehouse
             }
         }
 
+        /// <summary>
+        /// This method uses enum for status change
+        /// Adds a package to the storage zone at a specified shelf placement.
+        /// </summary>
+        /// <param name="package">The package to be added to the storage zone.</param>
+        /// <param name="shelfPlacement">The shelf placement where the package will be stored.</param>
+        /// <param name="spaceInShelfPlacement">The specific space within the shelf placement where the package will be stored.</param>
+        /// <param name="mover">The employee responsible for moving the package.</param>
+        /// <exception cref="Exception">Thrown when the mover's access level is insufficient for the storage zone.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the package's specification is not compatible with the storage zone, when the package is too heavy for the aisle, or when the specified shelf space does not exist or is already taken.</exception>
+        /// <exception cref="WeightLimitException">Thrown when the package exceeds the weight limit of the aisle.</exception>
+        /// <exception cref="NotEnoughSpaceException">Thrown when the package is too large for the specified shelf space.</exception>
         public void AddPackage(Package package, int shelfPlacement, int spaceInShelfPlacement, Employee mover)
         {
             (int, int) placement = (shelfPlacement, spaceInShelfPlacement);
