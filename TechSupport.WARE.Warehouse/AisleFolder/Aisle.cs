@@ -110,8 +110,9 @@ namespace TechSupport.WARE.Warehouse
             }
         }
 
-        public void AddPackage(Package package, (int, int) placement, Employee mover)
+        public void AddPackage(Package package, int shelfPlacement, int spaceInShelfPlacement, Employee mover)
         {
+            (int, int) placement = (shelfPlacement, spaceInShelfPlacement);
             List<(int, int)> available = new(this.GetAvailableSpaces());
             if (mover.AccessLevel < _currentStorageZone.StorageZoneAccessLevel)
             {

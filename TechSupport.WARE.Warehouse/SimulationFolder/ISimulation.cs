@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse.SimulationFolder.Simulation
+namespace TechSupport.WARE.Warehouse
 {
-    internal interface ISimulation
+    public interface ISimulation
     {
-
+        int GetTotalTimeInSeconds();
+        void PrintAllEmployeesTimesInSeconds();
+        void StopSimulation();
+        void ResumeSimulation();
     }
 }

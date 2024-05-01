@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechSupport.WARE.Warehouse.SimulationFolder;
-using TechSupport.WARE.Warehouse.SimulationFolder.Simulation;
+using TechSupport.WARE.Warehouse;
 
 namespace TechSupport.WARE.Warehouse
 {

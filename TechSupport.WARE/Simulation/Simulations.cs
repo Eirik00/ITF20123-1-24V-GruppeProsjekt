@@ -15,6 +15,8 @@ namespace TechSupport.WARE
     {
         static void Main(string[] args)
         {
+
+
             //EventHandling handling = new EventHandling();
             //Package pakke = new Package(2, 2, 2, 2, 2, true, StorageSpecification.Invalid);
             //pakke.StatusChange += handling.StatusChangeEvent;

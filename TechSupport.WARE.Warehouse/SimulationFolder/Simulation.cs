@@ -8,10 +8,10 @@ using TechSupport.WARE.Warehouse.PalletManagement;
 namespace TechSupport.WARE.Warehouse
 
 {
-    public class Simulation
+    public class Simulation : ISimulation
     {
         private int _totalSimulationTime = 0;
-        private Dictionary<int, int> _simulationDictionary = new Dictionary<int, int>();
+        private Dictionary<int, int> _simulationWorkerTimes = new Dictionary<int, int>();
         private bool _simulate = true;
         private int _addPackageToHighValueGoodsAisleEstimate = 70;
         private int _addPackageToClimateControlledAisleEstimate = 70;
@@ -26,7 +26,7 @@ namespace TechSupport.WARE.Warehouse
         public int GetTotalTimeInSeconds()
         {
             int highestTime = 0;
-            foreach(KeyValuePair<int, int> entry in _simulationDictionary)
+            foreach(KeyValuePair<int, int> entry in _simulationWorkerTimes)
             {
                 if(entry.Value > highestTime)
                 {
@@ -35,9 +35,9 @@ namespace TechSupport.WARE.Warehouse
             }
             return highestTime + _totalSimulationTime;
         }
-        public void PrintAllEmployeesTimeInSeconds()
+        public void PrintAllEmployeesTimesInSeconds()
         {
-            foreach(KeyValuePair<int,int> entry in _simulationDictionary)
+            foreach(KeyValuePair<int,int> entry in _simulationWorkerTimes)
             {
                 Console.WriteLine($"Worker: {entry.Key} : {entry.Value}Seconds");
             }
@@ -97,12 +97,12 @@ namespace TechSupport.WARE.Warehouse
         }
         internal void AddSimulationTimeToEmployee(Employee employee, int time)
         {
-            if(!_simulationDictionary.ContainsKey(employee.EmployeeID))
+            if(!_simulationWorkerTimes.ContainsKey(employee.EmployeeID))
             {
-                _simulationDictionary.Add(employee.EmployeeID, time);
+                _simulationWorkerTimes.Add(employee.EmployeeID, time);
             }
             else
-                _simulationDictionary[employee.EmployeeID] += time;
+                _simulationWorkerTimes[employee.EmployeeID] += time;
         }
         internal bool GetSimulateBool {  get => _simulate; }
 

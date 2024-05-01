@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\TechSupport.WARE.Warehouse\TechSupport.WARE.Warehouse.csproj" />
   </ItemGroup>
 

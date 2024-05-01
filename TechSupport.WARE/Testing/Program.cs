@@ -7,7 +7,6 @@ using System.Threading;
 using TechSupport.WARE.Warehouse;
 using System.Diagnostics.Tracing;
 using TechSupport.WARE.Warehouse.PalletManagement;
-using TechSupport.WARE.Warehouse.SimulationFolder.Simulation;
 using System.Numerics;
 
 namespace TechSupport.WARE
@@ -18,7 +17,7 @@ namespace TechSupport.WARE
         {
             //Aisles
             Aisle aisleHighValue = new(1, 1, 20000, 20000, 20000, 2000000000, 1);
-            Aisle aisleSmallItems = new(1, 1, 20000, 20000, 20000, 2000000000, 1);
+            Aisle aisleSmallItems = new(1, 1, 20000, 20000, 20000, 2000000000, 2);
             Simulation sim1 = new();
             AisleHandler aisleHandler1 = new AisleHandler(aisleHighValue, sim1);
             AisleHandler aisleHandler2 = new AisleHandler(aisleSmallItems, sim1);
@@ -30,7 +29,7 @@ namespace TechSupport.WARE
             //Employees
             int amountOfWorkers = 5;
             Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
-            for(int i = 1; i <= amountOfWorkers; i++)
+            for (int i = 1; i <= amountOfWorkers; i++)
             {
                 employees.Add(i, new(i, 3, "Dummy", "Dummy", "Dummy@dummy.com", "Dummy", "Dummy", 90909090, 9090));
             }
@@ -54,8 +53,8 @@ namespace TechSupport.WARE
             //Simulation-while
             while (DateTime.Now < timer)
             {
-                aisleHighValue.AddPackage(packageHighValue, (1, 1), employees[1]);
-                aisleSmallItems.AddPackage(packageSmallItems, (1, 1), employees[2]);
+                aisleHighValue.AddPackage(packageHighValue, 1, 1, employees[1]);
+                aisleSmallItems.AddPackage(packageSmallItems, 1, 1, employees[2]);
                 outgoing1.OutgoingPackage(22.10, packageHighValue, dummyContact, dummyContact, employees[1]);
                 outgoing1.OutgoingPackage(22.10, packageSmallItems, dummyContact, dummyContact, employees[2]);
                 System.Threading.Thread.Sleep(500);
@@ -65,7 +64,7 @@ namespace TechSupport.WARE
             int totalSimTime = sim1.GetTotalTimeInSeconds();
             Console.WriteLine($"Total time to finish all tasks: {totalSimTime}Seconds");
             Console.WriteLine("Time per worker: ");
-            sim1.PrintAllEmployeesTimeInSeconds();
+            sim1.PrintAllEmployeesTimesInSeconds();
             sim1.StopSimulation();
             Console.WriteLine("--------------\nSimulation done...\n");
 
