@@ -12,6 +12,6 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Adds aisle to the zone.
         /// </summary>
-        public void addAisleToZone(Aisle aisle);
+        public void addAisle(Aisle aisle);
     }
 }
