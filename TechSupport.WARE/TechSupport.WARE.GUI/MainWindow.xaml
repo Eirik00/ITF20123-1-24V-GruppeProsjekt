@@ -15,14 +15,15 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="341*" />
-            <ColumnDefinition Width="179*" />
-            <ColumnDefinition Width="260*" />
+            <ColumnDefinition Width="170*" />
+            <ColumnDefinition Width="170*" />
+            <ColumnDefinition Width="170*" />
+            <ColumnDefinition Width="170*" />
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0">Aisles:</Label>
         <ListBox Grid.Column="0" Grid.Row="1" x:Name="lstAisle" SelectionChanged="AisleListSelectionChanged" Margin="0,0,10,0"/>
-        <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Margin="0,207,0,10">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Margin="0,207,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
