@@ -11,7 +11,7 @@ namespace TechSupport.WARE.Warehouse
     public class Aisle : IAisle
     {
         public Dictionary<(int, int), Package?> shelf;
-        private int _numberOfSpaces, _totalWeight, _aisleId, _sections;
+        private int _numberOfSpaces, _totalWeightOnAisleInGrams, _aisleId, _sections;
         private readonly int _lengthOfSpaceInCm, _heightOfSpaceInCm, _depthOfSpaceInCm, _weightLimitInKg;
         private bool _accessToBothSides;
         private StorageZone _currentStorageZone;
@@ -135,10 +135,10 @@ namespace TechSupport.WARE.Warehouse
                     $" StorageSpesification.{package.Specification}," +
                     " is not compatible with Aisle storage spesification," +
                     $" StorageSpesification.{_currentStorageZone.StorageSpecification}");
-            if ((this._totalWeight + package.PackageWeightInGrams)/1000 > this._weightLimitInKg)
+            if ((this._totalWeightOnAisleInGrams + package.PackageWeightInGrams)/1000 > this._weightLimitInKg)
                 throw new WeightLimitException($"Package({package.PackageWeightInGrams}g)" +
                     " is too heavy for the " +
-                    $"Aisle({this._totalWeight}/{this._weightLimitInKg}g)");
+                    $"Aisle({this._totalWeightOnAisleInGrams}/{this._weightLimitInKg}g)");
             if (!available.Contains(placement))
                 throw new InvalidOperationException("This shelf space does not exist or is already taken");
 
@@ -162,7 +162,7 @@ namespace TechSupport.WARE.Warehouse
                 throw new NotEnoughSpaceException("Package is too large for this shelf");
             }
 
-            this._totalWeight += package.PackageWeightInGrams;
+            this._totalWeightOnAisleInGrams += package.PackageWeightInGrams;
             package.AddAisle(this);
             package.ChangeStatus(StatusList.Storage);
 
