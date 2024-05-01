@@ -18,7 +18,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Initializes a new instance of the <see cref="StorageZone"/> class with the specified storage specification.
         /// </summary>
-        /// <param name="storageSpecification">The storage specification for the storage zone.</param>
+        /// <param name="storageSpecification">The storage specification as ENUM for the storage zone.</param>
         public StorageZone(StorageSpecification storageSpecification)
         {
             this.aislesInZone = new List<Aisle>();

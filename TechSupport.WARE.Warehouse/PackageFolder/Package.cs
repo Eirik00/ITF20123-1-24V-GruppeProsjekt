@@ -57,7 +57,7 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="packageDepthInMm">The package depth in millimeters.</param>
         /// <param name="packageWeightInGrams">The package weight in grams.</param>
         /// <param name="isFragile">if set to <c>true</c> [is fragile].</param>
-        /// <param name="specification">The package specification.</param>
+        /// <param name="specification">The spesification of the package as ENUM.</param>
         public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
         {
             if (idCheck.Contains(packageId))
