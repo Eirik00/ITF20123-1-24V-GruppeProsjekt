@@ -20,7 +20,9 @@ namespace TechSupport.WARE.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int _employeeIDCounter = 0;
         private Dictionary<String, Aisle> _aisleList = new Dictionary<String, Aisle>();
+        private Dictionary<String, Employee> _employeeList = new Dictionary<String, Employee>();
         public MainWindow()
         {
             InitializeComponent();
@@ -38,15 +40,28 @@ namespace TechSupport.WARE.GUI
             CreateAisle createAisleWindow = new CreateAisle(this);
             createAisleWindow.ShowDialog();
         }
+        private void OpenCreateEmployeeButton(object sender, RoutedEventArgs e)
+        {
+            CreateEmployee createEmployeeWindow = new CreateEmployee(this);
+            createEmployeeWindow.ShowDialog();
+        }
         public void AddAisletoList(String key, Aisle aisle)
         {
             _aisleList.Add(key, aisle);
+        }
+        public void AddEmployeetoList(String key, Employee employee)
+        {
+            _employeeList.Add(key, employee);
         }
         public int GetNextAvailableAisleId()
         {
             return _aisleList.Count;
         }
-
+        public int GetNextAvailableEmployeeID()
+        {
+            _employeeIDCounter += 1;
+            return _employeeIDCounter;
+        }
         private void AisleListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var item = lstAisle.SelectedItem;
