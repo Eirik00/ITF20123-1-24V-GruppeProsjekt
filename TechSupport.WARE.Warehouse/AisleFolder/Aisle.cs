@@ -12,7 +12,7 @@ namespace TechSupport.WARE.Warehouse
     {
         public Dictionary<(int, int), Package?> shelf;
         private int _numberOfSpaces, _totalWeight, _aisleId, _sections;
-        private readonly int _lengthOfSpaceInMm, _heightOfSpaceInMm, _depthOfSpaceInMm, _weightLimitInGrams;
+        private readonly int _lengthOfSpaceInCm, _heightOfSpaceInCm, _depthOfSpaceInCm, _weightLimitInKg;
         private bool _accessToBothSides;
         private StorageZone _currentStorageZone;
 
@@ -34,18 +34,18 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <param name="amountOfShelves">Number of shelves in the aisle.</param>
         /// <param name="totalAmountOfSpacesPerShelf">Amount of spaces per shelf.</param>
-        /// <param name="lengthOfAisleInMm">Length of each aisle in millimeters.</param>
-        /// <param name="heightOfAisleInMm">Height of each aisle in millimeters.</param>
-        /// <param name="depthOfAisleInMm">Depth of each aisle in millimeters.</param>
-        /// <param name="totalWeightLimitInGrams">Total weight limit per aisle in grams.</param>
+        /// <param name="lengthOfAisleInCm">Length of each aisle in millimeters.</param>
+        /// <param name="heightOfAisleInCm">Height of each aisle in millimeters.</param>
+        /// <param name="depthOfAisleInCm">Depth of each aisle in millimeters.</param>
+        /// <param name="totalWeightLimitInKg">Total weight limit per aisle in grams.</param>
         /// <param name="aisleId">Unique identifier for the aisle.</param>
-        public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInMm, int heightOfAisleInMm, int depthOfAisleInMm, int totalWeightLimitInGrams, int aisleId)
+        public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInCm, int heightOfAisleInCm, int depthOfAisleInCm, int totalWeightLimitInKg, int aisleId)
         {
             _sections = amountOfShelves;
             _numberOfSpaces = totalAmountOfSpacesPerShelf * amountOfShelves;
-            _lengthOfSpaceInMm = lengthOfAisleInMm;
-            _heightOfSpaceInMm = heightOfAisleInMm;
-            _weightLimitInGrams = totalWeightLimitInGrams;
+            _lengthOfSpaceInCm = lengthOfAisleInCm;
+            _heightOfSpaceInCm = heightOfAisleInCm;
+            _weightLimitInKg = totalWeightLimitInKg;
             _aisleId = aisleId;
             shelf = [];
             _currentStorageZone = new StorageZone(StorageSpecification.Invalid);
@@ -56,10 +56,10 @@ namespace TechSupport.WARE.Warehouse
             }
             if (_accessToBothSides)
             {
-                _depthOfSpaceInMm = depthOfAisleInMm/2;
+                _depthOfSpaceInCm = depthOfAisleInCm/2;
             }
             else
-                _depthOfSpaceInMm = depthOfAisleInMm;
+                _depthOfSpaceInCm = depthOfAisleInCm;
         }
 
         public (int, int) GetShelf(Package package)
@@ -135,10 +135,10 @@ namespace TechSupport.WARE.Warehouse
                     $" StorageSpesification.{package.Specification}," +
                     " is not compatible with Aisle storage spesification," +
                     $" StorageSpesification.{_currentStorageZone.StorageSpecification}");
-            if (this._totalWeight + package.PackageWeightInGrams > this._weightLimitInGrams)
+            if ((this._totalWeight + package.PackageWeightInGrams)/1000 > this._weightLimitInKg)
                 throw new WeightLimitException($"Package({package.PackageWeightInGrams}g)" +
                     " is too heavy for the " +
-                    $"Aisle({this._totalWeight}/{this._weightLimitInGrams}g)");
+                    $"Aisle({this._totalWeight}/{this._weightLimitInKg}g)");
             if (!available.Contains(placement))
                 throw new InvalidOperationException("This shelf space does not exist or is already taken");
 
@@ -151,7 +151,7 @@ namespace TechSupport.WARE.Warehouse
 
             }*/
 
-            int[] aisle_dimensions = { this._depthOfSpaceInMm, this._heightOfSpaceInMm, (this._lengthOfSpaceInMm/this._numberOfSpaces) };
+            int[] aisle_dimensions = { this._depthOfSpaceInCm, this._heightOfSpaceInCm, (this._lengthOfSpaceInCm/this._numberOfSpaces) };
             int[] package_dimensions = { package.PackageDepthInMm, package.PackageHeightInMm, package.PackageLengthInMm };
 
             Array.Sort(aisle_dimensions);
@@ -194,19 +194,19 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Height in Millimeteres
         /// </summary>
-        public int GetHeight => this._heightOfSpaceInMm;
+        public int GetHeight => this._heightOfSpaceInCm;
         /// <summary>
         /// Length in Millimeteres
         /// </summary>
-        public int GetLength => this._lengthOfSpaceInMm;
+        public int GetLength => this._lengthOfSpaceInCm;
         /// <summary>
         /// Depth in Millimeteres
         /// </summary>
-        public int GetDepth => this._depthOfSpaceInMm;
+        public int GetDepth => this._depthOfSpaceInCm;
         /// <summary>
         /// Weight in Grams
         /// </summary>
-        public int GetWeight => this._weightLimitInGrams; 
+        public int GetWeight => this._weightLimitInKg; 
 
 
         public (int, int) GetPackagePlacement(Package package)

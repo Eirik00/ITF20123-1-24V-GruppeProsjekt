@@ -52,13 +52,13 @@ namespace TechSupport.WARE.Warehouse
         /// Initializes a new instance of the <see cref="Package"/> class.
         /// </summary>
         /// <param name="packageId">The package identifier.</param>
-        /// <param name="packageLenghtInMm">The package length in millimeters.</param>
-        /// <param name="packageHeightInMm">The package height in millimeters.</param>
-        /// <param name="packageDepthInMm">The package depth in millimeters.</param>
+        /// <param name="packageLenghtInCm">The package length in millimeters.</param>
+        /// <param name="packageHeightInCm">The package height in millimeters.</param>
+        /// <param name="packageDepthInCm">The package depth in millimeters.</param>
         /// <param name="packageWeightInGrams">The package weight in grams.</param>
         /// <param name="isFragile">if set to <c>true</c> [is fragile].</param>
         /// <param name="specification">The spesification of the package as ENUM.</param>
-        public Package(int packageId, int packageLenghtInMm, int packageHeightInMm, int packageDepthInMm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
+        public Package(int packageId, int packageLenghtInCm, int packageHeightInCm, int packageDepthInCm, int packageWeightInGrams, bool isFragile, StorageSpecification specification)
         {
             if (idCheck.Contains(packageId))
             {
@@ -67,9 +67,9 @@ namespace TechSupport.WARE.Warehouse
             else
             {
                 this.packageId = packageId;
-                this.packageLenghtInMm = packageLenghtInMm;
-                this.packageHeightInMm = packageHeightInMm;
-                this.packageDepthInMm = packageDepthInMm;
+                this.packageLenghtInMm = packageLenghtInCm;
+                this.packageHeightInMm = packageHeightInCm;
+                this.packageDepthInMm = packageDepthInCm;
                 this.packageWeighInGrams = packageWeightInGrams;
                 this.isFragile = isFragile;
                 this.specification = specification;
