@@ -15,6 +15,8 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="10" />
             <RowDefinition Height="150" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -48,7 +50,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" x:Name="infoBoxTitle">Current Aisle:</Label>
             <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,0,10,0">
                 <Grid>
@@ -70,13 +72,14 @@
                 </Grid>
             </Border>
         </Grid>
-        
-        
+
+
         <Grid Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2" Margin="0,0,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -86,5 +89,7 @@
             <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" x:Name="infoBox2Title">Packages in Aisle:</Label>
             <ListBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" x:Name="lstPackagesInAisle" SelectionChanged="ListSelectionChanged" Margin="0,0,10,0"/>
         </Grid>
+        <Button Grid.Column="3" Content="Save" HorizontalAlignment="Center" Margin="0,8,0,0" Grid.Row="7" VerticalAlignment="Top" Height="20" Width="110" Click="SaveWarehouse"/>
+        <Label Grid.Column="2" x:Name="unsavedChanges" Content="" HorizontalAlignment="Right" Margin="0,0,0,0" Grid.Row="7" VerticalAlignment="Top" RenderTransformOrigin="-0.342,0.387"/>
     </Grid>
 </Window>

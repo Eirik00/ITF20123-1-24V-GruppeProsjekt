@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TechSupport.WARE.Warehouse;
 using System.IO;
+using System.Text.Json;
 
 namespace TechSupport.WARE.GUI
 {
@@ -21,6 +22,9 @@ namespace TechSupport.WARE.GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string saveFolderPath = "";
+        public bool notSaved = false;
+
         private int _employeeIDCounter = 0;
         private int _packageIDCounter = 0;
         private Dictionary<String, Aisle> _aisleList = new Dictionary<String, Aisle>();
@@ -28,12 +32,30 @@ namespace TechSupport.WARE.GUI
         private Dictionary<String, Package> _packageList = new Dictionary<String, Package>();
         public MainWindow()
         {
-            string saveFolderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "techsupport\\warehouse");
+            saveFolderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "techsupport\\warehouse");
             try
             {
                 if(!Directory.Exists(saveFolderPath))
                 {
                     Directory.CreateDirectory(saveFolderPath);
+                }
+                else
+                {
+                    string[] saveFiles = Directory.GetFiles(saveFolderPath);
+                    using (StreamReader reader = new StreamReader(saveFiles[saveFiles.Length - 1]))
+                    {
+                        string line;
+                        while((line = reader.ReadLine()) != null)
+                        {
+                            string[] lists = line.Split("[LIST]");
+                            foreach(string item in lists[0].Split("{next}"))
+                            {
+                                Aisle? newAisle = JsonSerializer.Deserialize<Aisle>(item.Split(":")[1]);
+                                _aisleList.Add(item.Split(":")[0], newAisle);
+                                
+                            }
+                        }
+                    }
                 }
             }catch (Exception ex)
             {
@@ -41,6 +63,12 @@ namespace TechSupport.WARE.GUI
             }
 
             InitializeComponent();
+        }
+
+        public void WarehouseChanged()
+        {
+            notSaved = true;
+            unsavedChanges.Content = "*There are unsaved changes";
         }
 
         public void RefreshAisleList()
@@ -158,6 +186,39 @@ namespace TechSupport.WARE.GUI
                 }
                 lstAisle.SelectedItem = null;
             }
+        }
+
+        private void SaveWarehouse(object sender, RoutedEventArgs e)
+        {
+            string aisleJson = "";
+            string packageJson = "";
+            string employeeJson = "";
+
+            foreach (KeyValuePair<string, Aisle> item in _aisleList)
+            {
+                aisleJson += item.Key + ":" + JsonSerializer.Serialize(item.Value) + ",";
+            }
+            foreach (KeyValuePair<string, Package> item in _packageList)
+            {
+                packageJson += item.Key + ":" + JsonSerializer.Serialize(item.Value) + ",";
+            }
+            foreach (KeyValuePair<string, Employee> item in _employeeList)
+            {
+                employeeJson += item.Key + ":" + JsonSerializer.Serialize(item.Value) + ",";
+            }
+
+            string[] fileNames = Directory.GetFiles(saveFolderPath);
+            foreach (string fileName in fileNames)
+            {
+                File.Move(fileName, saveFolderPath + "\\old\\" + System.IO.Path.GetFileName(fileName));
+            }
+
+            using (StreamWriter writer = new StreamWriter(saveFolderPath + "\\ws." + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt"))
+            {
+                writer.WriteLine(aisleJson + "[LIST]" + packageJson + "[LIST]" + employeeJson);
+            }
+
+            unsavedChanges.Content = "";
         }
     }
 }
