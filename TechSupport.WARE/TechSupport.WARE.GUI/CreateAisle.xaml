@@ -33,7 +33,7 @@
         <TextBox x:Name="aislePlacesPerShelf" PreviewTextInput="ForceTextToNumber" Grid.Row="2" Grid.Column="1"/>
         <Label Grid.Row="3" Grid.Column="0" >Weight Limit:</Label>
         <TextBox x:Name="aisleWeight" PreviewTextInput="ForceTextToNumber" Grid.Row="3" Grid.Column="1"/>
-        <Label Grid.Row="3" Grid.Column="2">g</Label>
+        <Label Grid.Row="3" Grid.Column="2">Kg</Label>
         <Label Grid.Row="4" Grid.Column="0" >Length of Aisle:</Label>
         <TextBox x:Name="aisleLegnth" PreviewTextInput="ForceTextToNumber" Grid.Row="4" Grid.Column="1"/>
         <Label Grid.Row="4" Grid.Column="2">Cm</Label>

@@ -61,8 +61,9 @@ namespace TechSupport.WARE.GUI
             {
                 Console.WriteLine(ex.Message);
             }
-
             InitializeComponent();
+            lstPackagesInAisle.Visibility = Visibility.Collapsed;
+            addPackageButton.Visibility = Visibility.Collapsed;
         }
 
         public void WarehouseChanged()
@@ -104,6 +105,17 @@ namespace TechSupport.WARE.GUI
         //            }
         //        }
         //}
+
+        private void AddPackageToAisleButton(object sender, EventArgs e)
+        {
+            var AisleItem = lstAisle.SelectedItem;
+            var PackageItem = lstPackages.SelectedItem;
+            var EmployeeItem = lstPackages.SelectedItem;
+            Aisle selectedAisle = _aisleList[AisleItem.ToString()];
+            Package package = _packageList[PackageItem.ToString()];
+            Employee employee = _employeeList[EmployeeItem.ToString()];
+            selectedAisle.AddPackage(package, 1, 1, employee);
+        }
 
         private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
         {
@@ -157,9 +169,13 @@ namespace TechSupport.WARE.GUI
                     infoBoxTitle.Content = "Current Aisle:";
                     curInfoName.Content = "Name: " + item.ToString();
                     curInfoDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}cm";
-                    curInfoWeight.Content = "Max Weight: " + (selectedAisle.GetWeight / 1000) + "kg";
+                    curInfoWeight.Content = "Max Weight: " + selectedAisle.GetWeight + "kg";
+                    infoBox2Title.Content = "Packages in Aisle:";
+                    lstPackagesInAisle.Visibility = Visibility.Visible;
+                    addPackageButton.Visibility = Visibility.Collapsed;
                 }
                 lstEmployees.SelectedItem = null;
+                lstPackages.SelectedItem = null;
             }
             else if(sender == lstEmployees)
             {
@@ -183,8 +199,12 @@ namespace TechSupport.WARE.GUI
                     curInfoName.Content = $"ID: {package.PackageId}";
                     curInfoDim.Content = $"Dim: {package.PackageLengthInCm}x{package.PackageHeightInCm}x{package.PackageDepthInCm}";
                     curInfoWeight.Content = "Weight: " + package.PackageWeightInGrams;
+                    infoBox2Title.Content = "Packages Options:";
+                    lstPackagesInAisle.Visibility = Visibility.Collapsed;
+                    addPackageButton.Visibility = Visibility.Visible;
                 }
                 lstAisle.SelectedItem = null;
+                lstEmployees.SelectedItem = null;
             }
         }
 

@@ -84,8 +84,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" x:Name="infoBox2Title">Packages in Aisle:</Label>
+            <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" x:Name="infoBox2Title"></Label>
             <ListBox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" x:Name="lstPackagesInAisle" SelectionChanged="ListSelectionChanged" Margin="0,0,0,0"/>
+            <Button Grid.Column="0" x:Name="addPackageButton" Content="Add to aisle" Margin="0,0,0,0" Grid.Row="2" VerticalAlignment="Top" Height="20" Click="AddPackageToAisleButton"/>
+            
         </Grid>
         <Button Grid.Column="3" Content="Save" HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="7" VerticalAlignment="Top" Height="20" Width="110" Click="SaveWarehouse"/>
         <Label Grid.Column="3" x:Name="unsavedChanges" Content="" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="7" VerticalAlignment="Top" RenderTransformOrigin="-0.342,0.387"/>
