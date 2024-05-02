@@ -34,7 +34,7 @@ namespace TechSupport.WARE.GUI
             e.Handled = regx.IsMatch(e.Text);
         }
 
-        private void createEmployeeFunction(object sender, RoutedEventArgs e)
+        private void createPackageFunction(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace TechSupport.WARE.GUI
                 StorageSpecification specification = (StorageSpecification)((ComboBoxItem)comboBox.SelectedItem).Content;
 
                 Package newPackage = new(PackageID, packageLengthInCm, packageHeightInCm, packageDepthInCm, packageWeightInGrams, packageIsFragile, specification);
-                _mainWindow.AddPackagetoList(PackageID, newPackage);
+                _mainWindow.AddPackagetoList(PackageID.ToString(), newPackage);
                 this.Close();
             }
             catch (Exception ex)
@@ -58,7 +58,7 @@ namespace TechSupport.WARE.GUI
 
         private void SendEventToMain(object sender, EventArgs e)
         {
-            _mainWindow.RefreshEmployeeList();
+            _mainWindow.RefreshPackageList();
         }
     }
 }

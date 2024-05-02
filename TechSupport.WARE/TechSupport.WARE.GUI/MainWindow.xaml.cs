@@ -24,7 +24,7 @@ namespace TechSupport.WARE.GUI
         private int _packageIDCounter = 0;
         private Dictionary<String, Aisle> _aisleList = new Dictionary<String, Aisle>();
         private Dictionary<String, Employee> _employeeList = new Dictionary<String, Employee>();
-        private Dictionary<int, Package> _packageList = new Dictionary<int, Package>();
+        private Dictionary<String, Package> _packageList = new Dictionary<String, Package>();
         public MainWindow()
         {
             InitializeComponent();
@@ -46,9 +46,9 @@ namespace TechSupport.WARE.GUI
 
         public void RefreshPackageList()
         {
-            lstPackage.Items.Clear();
-            foreach (KeyValuePair<int, Package> employee in _packageList)
-                lstPackage.Items.Add(employee.Key);
+            lstPackages.Items.Clear();
+            foreach (KeyValuePair<String, Package> employee in _packageList)
+                lstPackages.Items.Add(employee.Key);
         }
 
         private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
@@ -61,6 +61,11 @@ namespace TechSupport.WARE.GUI
             CreateEmployee createEmployeeWindow = new CreateEmployee(this);
             createEmployeeWindow.ShowDialog();
         }
+        private void OpenCreatePackageButton(object sender, RoutedEventArgs e)
+        {
+            CreatePackage createPackageWindow = new CreatePackage(this);
+            createPackageWindow.ShowDialog();
+        }
         public void AddAisletoList(String key, Aisle aisle)
         {
             _aisleList.Add(key, aisle);
@@ -69,7 +74,7 @@ namespace TechSupport.WARE.GUI
         {
             _employeeList.Add(key, employee);
         }
-        public void AddPackagetoList(int key, Package package)
+        public void AddPackagetoList(String key, Package package)
         {
             _packageList.Add(key, package);
         }
@@ -111,6 +116,17 @@ namespace TechSupport.WARE.GUI
                     curInfoDim.Content = "Phone Number: " + employee.PhoneNumber;
                     curInfoPackages.Content = "Email: " + employee.Email;
                     curInfoWeight.Content = "Access Level: " + employee.AccessLevel;
+                }
+            }else if (sender == lstPackages)
+            {
+                var item = lstPackages.SelectedItem;
+                if (item != null)
+                {
+                    Package package = _packageList[item.ToString()];
+                    infoBoxTitle.Content = "Current Package:";
+                    curInfoName.Content = $"ID: {package.PackageId}";
+                    curInfoDim.Content = $"Dim: {package.PackageLengthInMm}x{package.PackageHeightInMm}x{package.PackageDepthInMm}";
+                    curInfoWeight.Content = "Weight: " + package.PackageWeightInGrams;
                 }
             }
         }

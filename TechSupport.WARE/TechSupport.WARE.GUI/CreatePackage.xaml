@@ -41,8 +41,7 @@
             </Grid.ColumnDefinitions>
             <ContentControl x:Name="selectedItemDisplay" Grid.Column="0" VerticalAlignment="Center"
                             Content="{Binding SelectedItem.Content, ElementName=comboBox}" Margin="5"/>
-            <ToggleButton Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right"
-                          Template="{StaticResource ComboBoxToggleButton}"/>
+            <ToggleButton Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <ComboBox x:Name="comboBox" IsDropDownOpen="{Binding IsChecked, ElementName=toggleButton}" 
                       Width="200" Margin="0,25,0,5">
                 <ComboBoxItem Content="Item 1"/>
