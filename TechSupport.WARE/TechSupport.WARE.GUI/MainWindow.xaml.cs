@@ -36,14 +36,14 @@ namespace TechSupport.WARE.GUI
             saveFolderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "techsupport\\warehouse");
             try
             {
-                if(!Directory.Exists(saveFolderPath))
+                if (!Directory.Exists(saveFolderPath))
                 {
-                    Directory.CreateDirectory(saveFolderPath+"\\old");
+                    Directory.CreateDirectory(saveFolderPath + "\\old");
                 }
                 else
                 {
                     string[] saveFiles = Directory.GetFiles(saveFolderPath);
-                    foreach(string file in saveFiles)
+                    foreach (string file in saveFiles)
                     {
                         switch (System.IO.Path.GetFileName(file.Split(".")[0]))
                         {
@@ -51,7 +51,7 @@ namespace TechSupport.WARE.GUI
                                 using (StreamReader reader = new StreamReader(file))
                                 {
                                     string line;
-                                    while((line = reader.ReadLine()) != null)
+                                    while ((line = reader.ReadLine()) != null)
                                     {
                                         _aisleList = JsonSerializer.Deserialize<Dictionary<String, Aisle>>(line);
                                     }
@@ -80,7 +80,7 @@ namespace TechSupport.WARE.GUI
                         }
                     }
                 }
-            }catch (Exception ex)
+            } catch (Exception ex)
             {
                 throw ex;
             }
@@ -133,7 +133,7 @@ namespace TechSupport.WARE.GUI
             var aisleItem = comboBoxAisle.SelectedItem;
             var packageItem = lstPackages.SelectedItem;
             var employeeItem = comboBoxEmployee.SelectedItem;
-            var shelf = comboBoxShelf.SelectedItem as Tuple<int, int>;
+            var shelf = (ValueTuple<int, int>)comboBoxShelf.SelectedItem;
             Aisle selectedAisle = _aisleList[aisleItem.ToString()];
             Package package = _packageList[packageItem.ToString()];
             Employee employee = _employeeList[employeeItem.ToString()];
@@ -154,16 +154,6 @@ namespace TechSupport.WARE.GUI
         {
             CreatePackage createPackageWindow = new CreatePackage(this);
             createPackageWindow.ShowDialog();
-        }
-        private void ComboBoxAisleButton(object sender, SelectionChangedEventArgs e)
-        {
-            if (comboBoxAisle.SelectedItem != null)
-                comboBoxAisle.ItemsSource = _aisleList.Keys;
-        }
-        private void ComboBoxEmployeeButton(object sender, SelectionChangedEventArgs e)
-        {
-            if (comboBoxEmployee.SelectedItem != null)
-                comboBoxEmployee.ItemsSource = _employeeList.Keys;
         }
         private void ComboBoxShelfButton(object sender, SelectionChangedEventArgs e)
         {
