@@ -51,7 +51,7 @@ namespace TechSupport.WARE.GUI
                             foreach(string item in lists[0].Split(","))
                             {
                                 string[] savedAisle = item.Split(":");
-                                _aisleList.Add(item.Split(":")[0], newAisle);
+                                //_aisleList.Add(item.Split(":")[0], newAisle);
                                 
                             }
                         }
@@ -62,8 +62,6 @@ namespace TechSupport.WARE.GUI
                 Console.WriteLine(ex.Message);
             }
             InitializeComponent();
-            lstPackagesInAisle.Visibility = Visibility.Collapsed;
-            addPackageButton.Visibility = Visibility.Collapsed;
         }
 
         public void WarehouseChanged()
@@ -158,6 +156,28 @@ namespace TechSupport.WARE.GUI
             _packageIDCounter += 1;
             return _packageIDCounter;
         }
+        private void AisleSelected()
+        {
+            lstPackagesInAisle.Visibility = Visibility.Collapsed;
+            addPackageButton.Visibility = Visibility.Visible;
+            packageAisleSelection.Visibility = Visibility.Collapsed;
+            packageEmployeeSelection.Visibility = Visibility.Collapsed;
+            packageShelfSelection.Visibility = Visibility.Collapsed;
+            comboBoxAisle.Visibility = Visibility.Collapsed;
+            comboBoxEmployee.Visibility = Visibility.Collapsed;
+            comboBoxShelf.Visibility = Visibility.Collapsed;
+        }
+        private void PackageSelected()
+        {
+            lstPackagesInAisle.Visibility = Visibility.Collapsed;
+            addPackageButton.Visibility = Visibility.Visible;
+            packageAisleSelection.Visibility = Visibility.Visible;
+            packageEmployeeSelection.Visibility = Visibility.Visible;
+            packageShelfSelection.Visibility = Visibility.Visible;
+            comboBoxAisle.Visibility = Visibility.Visible;
+            comboBoxEmployee.Visibility = Visibility.Visible;
+            comboBoxShelf.Visibility = Visibility.Visible;
+        }
         private void ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(sender == lstAisle)
@@ -171,8 +191,7 @@ namespace TechSupport.WARE.GUI
                     curInfoDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}cm";
                     curInfoWeight.Content = "Max Weight: " + selectedAisle.GetWeight + "kg";
                     infoBox2Title.Content = "Packages in Aisle:";
-                    lstPackagesInAisle.Visibility = Visibility.Visible;
-                    addPackageButton.Visibility = Visibility.Collapsed;
+                    AisleSelected();
                 }
                 lstEmployees.SelectedItem = null;
                 lstPackages.SelectedItem = null;
@@ -200,8 +219,7 @@ namespace TechSupport.WARE.GUI
                     curInfoDim.Content = $"Dim: {package.PackageLengthInCm}x{package.PackageHeightInCm}x{package.PackageDepthInCm}";
                     curInfoWeight.Content = "Weight: " + package.PackageWeightInGrams;
                     infoBox2Title.Content = "Packages Options:";
-                    lstPackagesInAisle.Visibility = Visibility.Collapsed;
-                    addPackageButton.Visibility = Visibility.Visible;
+                    PackageSelected();
                 }
                 lstAisle.SelectedItem = null;
                 lstEmployees.SelectedItem = null;
