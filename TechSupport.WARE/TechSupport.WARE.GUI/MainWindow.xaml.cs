@@ -98,9 +98,9 @@ namespace TechSupport.WARE.GUI
         //    foreach (KeyValuePair<String, Aisle> aisle in _aisleList)
         //        if (aisle.Value.GetAisleId == AisleId)
         //        {
-        //            foreach (Package package in aisle.Value.GetPackagesInAisle)
+        //            foreach (Package package in aisle.Value.PackagesInAisle)
         //            {
-        //                lstPackagesInAisle.Items.Add(package)
+        //                lstPackagesInAisle.Items.Add(package);
         //            }
         //        }
         //}
