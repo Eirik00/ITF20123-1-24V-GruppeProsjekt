@@ -97,6 +97,6 @@
             
         </Grid>
         <Button Grid.Column="3" Content="Save" HorizontalAlignment="Right" Margin="0,8,0,0" Grid.Row="7" VerticalAlignment="Top" Height="20" Width="110" Click="SaveWarehouse"/>
-        <Label Grid.Column="3" x:Name="unsavedChanges" Content="" HorizontalAlignment="Left" Margin="0,8,0,0" Grid.Row="7" VerticalAlignment="Top" RenderTransformOrigin="-0.342,0.387"/>
+        <Label Grid.ColumnSpan="2" Grid.Column="2" x:Name="unsavedChanges" Content="" HorizontalAlignment="Center" Margin="0,3,0,0" Grid.Row="7" VerticalAlignment="Top" RenderTransformOrigin="-0.342,0.387"/>
     </Grid>
 </Window>
