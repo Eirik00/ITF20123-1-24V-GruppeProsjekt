@@ -15,6 +15,7 @@ namespace TechSupport.WARE.Warehouse
         private readonly int _lengthOfSpaceInCm, _heightOfSpaceInCm, _depthOfSpaceInCm, _weightLimitInKg;
         private bool _accessToBothSides;
         private StorageZone _currentStorageZone;
+        private List<Package> _packagesInAisle;
 
 
         //Events
@@ -166,6 +167,8 @@ namespace TechSupport.WARE.Warehouse
             package.AddAisle(this);
             package.ChangeStatus(StatusList.Storage);
 
+            this._packagesInAisle.Add(package);
+
             shelf[placement] = package;
 
             // for testing purposes later when simulating
@@ -189,6 +192,7 @@ namespace TechSupport.WARE.Warehouse
                     }
                 }
             }
+            this._packagesInAisle.Remove(package);
         }
         public int GetAisleId => this._aisleId;
         /// <summary>
@@ -233,6 +237,11 @@ namespace TechSupport.WARE.Warehouse
                 }
             }
             return freeSpaces;
+        }
+
+        public List<Package> getPackagesInAisle()
+        {
+            return this._packagesInAisle;
         }
 
         public StorageZone CurrentStorageZone
