@@ -24,7 +24,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" >Length:</Label>
-        <TextBox x:Name="packageLengthField" PreviewTextInput="ForceTextToNumber" Grid.Row="0" Grid.Column="1"/>
+        <TextBox x:Name="packageLengthInCmField" PreviewTextInput="ForceTextToNumber" Grid.Row="0" Grid.Column="1"/>
         <Label Grid.Row="1" Grid.Column="0" >Height:</Label>
         <TextBox x:Name="packageHeightInCmField" PreviewTextInput="ForceTextToNumber" Grid.Row="1" Grid.Column="1"/>
         <Label Grid.Row="2" Grid.Column="0" >Depth:</Label>
@@ -52,7 +52,6 @@
                 <ComboBoxItem Content="Item 5"/>
             </ComboBox>
         </Grid>
-                Margin="20,50,0,0" Click="Button_Click"/>
         <Button Click="createPackageFunction" x:Name="createPackageButton" Grid.Row="6" Margin="0,0,0,5">Create Package</Button>
     </Grid>
 </Window>

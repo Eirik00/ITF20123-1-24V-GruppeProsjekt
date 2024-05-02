@@ -38,17 +38,15 @@ namespace TechSupport.WARE.GUI
         {
             try
             {
-                int PackageID = _mainWindow.GetNextAvailableEmployeeID();
-                int accessLevel = Int32.Parse(accessLevelField.Text);
-                string firstName = firstNameField.Text;
-                string surname = surnameField.Text;
-                string email = emailField.Text;
-                string address = addressField.Text;
-                string country = countryField.Text;
-                int phoneNumber = Int32.Parse(phoneNumberField.Text);
-                int postalCode = Int32.Parse(postalCodeField.Text);
+                int PackageID = _mainWindow.GetNextAvailablePackageID();
+                int packageLengthInCm = Int32.Parse(packageLengthInCmField.Text);
+                int packageHeightInCm = Int32.Parse(packageHeightInCmField.Text);
+                int packageDepthInCm = Int32.Parse(packageDepthInCmField.Text);
+                int packageWeightInGrams = Int32.Parse(packageWeightInGramsField.Text);
+                bool packageIsFragile = bool.Parse(isFragileField.Text);
+                StorageSpecification specification = (StorageSpecification)((ComboBoxItem)comboBox.SelectedItem).Content;
 
-                Employee newEmployee = new(employeeID, accessLevel, firstName, surname, email, address, "test", 9, 9);
+                Package newPackage = new(PackageID, packageLengthInCm, packageHeightInCm, packageDepthInCm, packageWeightInGrams, packageIsFragile, specification);
                 _mainWindow.AddEmployeetoList(firstNameField.Text, newEmployee);
                 this.Close();
             }
