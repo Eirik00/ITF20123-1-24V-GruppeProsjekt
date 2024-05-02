@@ -50,6 +50,7 @@ namespace TechSupport.WARE.Warehouse
             _aisleId = aisleId;
             shelf = [];
             _currentStorageZone = new StorageZone(StorageSpecification.Invalid);
+            _packagesInAisle = new List<Package>();
             for (int i = 1; i <= amountOfShelves; i++)
             {
                 for (int j = 1; j <= totalAmountOfSpacesPerShelf ; j++)
@@ -248,6 +249,13 @@ namespace TechSupport.WARE.Warehouse
         {
             get => this._currentStorageZone;
             set => this._currentStorageZone = value;
+
+        }
+
+        public List<Package> PackagesInAisle
+        {
+            get => this._packagesInAisle;
+            set => this.PackagesInAisle = value;
 
         }
     }

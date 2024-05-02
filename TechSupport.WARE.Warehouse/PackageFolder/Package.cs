@@ -125,6 +125,7 @@ namespace TechSupport.WARE.Warehouse
         internal void AddAisle(Aisle aisle)
         {
             this.packageAisle = aisle;
+            aisle.PackagesInAisle.Remove(this);
         }
 
         public (int,int)? GetShelf()
