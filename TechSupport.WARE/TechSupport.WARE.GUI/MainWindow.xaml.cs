@@ -21,6 +21,7 @@ namespace TechSupport.WARE.GUI
     public partial class MainWindow : Window
     {
         private int _employeeIDCounter = 0;
+        private int _packageIDCounter = 0;
         private Dictionary<String, Aisle> _aisleList = new Dictionary<String, Aisle>();
         private Dictionary<String, Employee> _employeeList = new Dictionary<String, Employee>();
         public MainWindow()
@@ -68,6 +69,11 @@ namespace TechSupport.WARE.GUI
         {
             _employeeIDCounter += 1;
             return _employeeIDCounter;
+        }
+        public int GetNextAvailablePackageID()
+        {
+            _packageIDCounter += 1;
+            return _packageIDCounter;
         }
         private void ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {

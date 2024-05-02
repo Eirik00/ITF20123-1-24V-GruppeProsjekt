@@ -34,15 +34,24 @@
         <Label Grid.Row="4" Grid.Column="0" >Fragile:</Label>
         <TextBox x:Name="isFragileField" Grid.Row="4" Grid.Column="1"/>
         <Label Grid.Row="5" Grid.Column="0" >Storage Spesification:</Label>
-        <ComboBox x:Name="comboBox" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20"
-                  Width="200" SelectedIndex="0">
-            <ComboBoxItem Content="Item 1"/>
-            <ComboBoxItem Content="Item 2"/>
-            <ComboBoxItem Content="Item 3"/>
-            <ComboBoxItem Content="Item 4"/>
-            <ComboBoxItem Content="Item 5"/>
-        </ComboBox>
-        <Button Grid.Row="5" Grid.Column="1" Content="Show Selected Item" HorizontalAlignment="Left" VerticalAlignment="Top"
+        <Grid Grid.Row="5" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ContentControl x:Name="selectedItemDisplay" Grid.Column="0" VerticalAlignment="Center"
+                            Content="{Binding SelectedItem.Content, ElementName=comboBox}" Margin="5"/>
+            <ToggleButton Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                          Template="{StaticResource ComboBoxToggleButton}"/>
+            <ComboBox x:Name="comboBox" IsDropDownOpen="{Binding IsChecked, ElementName=toggleButton}" 
+                      Width="200" Margin="0,25,0,5">
+                <ComboBoxItem Content="Item 1"/>
+                <ComboBoxItem Content="Item 2"/>
+                <ComboBoxItem Content="Item 3"/>
+                <ComboBoxItem Content="Item 4"/>
+                <ComboBoxItem Content="Item 5"/>
+            </ComboBox>
+        </Grid>
                 Margin="20,50,0,0" Click="Button_Click"/>
         <Button Click="createPackageFunction" x:Name="createPackageButton" Grid.Row="6" Margin="0,0,0,5">Create Package</Button>
     </Grid>
