@@ -64,6 +64,19 @@ namespace TechSupport.WARE.GUI
                 lstPackages.Items.Add(employee.Key);
         }
 
+        //public void RefreshPackageListInAisle(int AisleId)
+        //{
+        //    lstPackagesInAisle.Items.Clear();
+        //    foreach (KeyValuePair<String, Aisle> aisle in _aisleList)
+        //        if (aisle.Value.GetAisleId == AisleId)
+        //        {
+        //            foreach (Package package in aisle.Value.GetPackagesInAisle)
+        //            {
+        //                lstPackagesInAisle.Items.Add(package)
+        //            }
+        //        }
+        //}
+
         private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
         {
             CreateAisle createAisleWindow = new CreateAisle(this);
