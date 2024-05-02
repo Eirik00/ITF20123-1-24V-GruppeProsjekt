@@ -37,7 +37,7 @@ namespace TechSupport.WARE.GUI
             {
                 if(!Directory.Exists(saveFolderPath))
                 {
-                    Directory.CreateDirectory(saveFolderPath);
+                    Directory.CreateDirectory(saveFolderPath+"\\old");
                 }
                 else
                 {
