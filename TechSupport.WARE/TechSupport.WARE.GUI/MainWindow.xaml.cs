@@ -15,6 +15,7 @@ using TechSupport.WARE.Warehouse;
 using System.IO;
 using System.Text.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TechSupport.WARE.GUI
 {
@@ -42,43 +43,25 @@ namespace TechSupport.WARE.GUI
                 }
                 else
                 {
-                    string[] saveFiles = Directory.GetFiles(saveFolderPath);
-                    foreach (string file in saveFiles)
-                    {
-                        switch (System.IO.Path.GetFileName(file.Split(".")[0]))
-                        {
-                            case "wsAisle":
-                                using (StreamReader reader = new StreamReader(file))
-                                {
-                                    string line;
-                                    while ((line = reader.ReadLine()) != null)
-                                    {
-                                        _aisleList = JsonSerializer.Deserialize<Dictionary<String, Aisle>>(line);
-                                    }
-                                }
-                                break;
-                            case "wsEmployee":
-                                using (StreamReader reader = new StreamReader(file))
-                                {
-                                    string line;
-                                    while ((line = reader.ReadLine()) != null)
-                                    {
-                                        _employeeList = JsonSerializer.Deserialize<Dictionary<String, Employee>>(line);
-                                    }
-                                }
-                                break;
-                            case "wsPackage":
-                                using (StreamReader reader = new StreamReader(file))
-                                {
-                                    string line;
-                                    while ((line = reader.ReadLine()) != null)
-                                    {
-                                        _packageList = JsonSerializer.Deserialize<Dictionary<String, Package>>(line);
-                                    }
-                                }
-                                break;
-                        }
-                    }
+                    //string[] saveFiles = Directory.GetFiles(saveFolderPath); Trenger en løsning på denne
+                    //foreach(string file in saveFiles)
+                    //{
+                    //    switch (System.IO.Path.GetFileName(file.Split(".")[0]))
+                    //    {
+                    //        case "wsAisle":
+                    //            var jsonAisle = File.ReadAllText(file);
+                    //            _aisleList = JsonSerializer.Deserialize<Dictionary<String, Aisle>>(jsonAisle, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    //            break;
+                    //        case "wsEmployee":
+                    //            var jsonEmployee = File.ReadAllText(file);
+                    //            _employeeList = JsonSerializer.Deserialize<Dictionary<String, Employee>>(jsonEmployee, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    //            break;
+                    //        case "wsPackage":
+                    //            var jsonPackage = File.ReadAllText(file);
+                    //            _packageList = JsonSerializer.Deserialize<Dictionary<String, Package>>(jsonPackage, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    //            break;
+                    //    }
+                    //}
                 }
             } catch (Exception ex)
             {
