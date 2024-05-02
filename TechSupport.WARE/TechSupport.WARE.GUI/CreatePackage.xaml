@@ -34,13 +34,8 @@
         <Label Grid.Row="4" Grid.Column="0" >Fragile:</Label>
         <CheckBox Grid.Row="4" Grid.Column="1" x:Name="fragileCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Grid.Row="5" Grid.Column="0" >Storage Spesification:</Label>
-        <ComboBox x:Name="comboBox" IsDropDownOpen="{Binding IsChecked, ElementName=toggleButton}" 
-                  Width="Auto" Height="Auto" Margin="0,0,0,0" Grid.Row="5" Grid.Column="1">
-            <ComboBoxItem Content="Invalid"/>
-            <ComboBoxItem Content="ClimateControlled"/>
-            <ComboBoxItem Content="SmallItems"/>
-            <ComboBoxItem Content="HighValue"/>
-        </ComboBox>
-            <Button Click="createPackageFunction" x:Name="createPackageButton" Grid.Row="6" Margin="0,0,0,5">Create Package</Button>
+        <ComboBox x:Name="comboBox" SelectedItem="{Binding SelectedStorageSpecification, Mode=TwoWay}" 
+          Width="Auto" Height="Auto" Margin="0,0,0,0" Grid.Row="5" Grid.Column="1"/>
+        <Button Click="createPackageFunction" x:Name="createPackageButton" Grid.Row="6" Margin="0,0,0,5">Create Package</Button>
     </Grid>
 </Window>
