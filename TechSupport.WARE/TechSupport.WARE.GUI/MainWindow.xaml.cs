@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using TechSupport.WARE.Warehouse;
 using System.IO;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace TechSupport.WARE.GUI
 {
@@ -62,6 +63,7 @@ namespace TechSupport.WARE.GUI
                 Console.WriteLine(ex.Message);
             }
             InitializeComponent();
+            comboBoxAisle.SelectionChanged += ComboBoxShelfButton;
         }
 
         public void WarehouseChanged()
@@ -106,13 +108,14 @@ namespace TechSupport.WARE.GUI
 
         private void AddPackageToAisleButton(object sender, EventArgs e)
         {
-            var AisleItem = lstAisle.SelectedItem;
-            var PackageItem = lstPackages.SelectedItem;
-            var EmployeeItem = lstPackages.SelectedItem;
-            Aisle selectedAisle = _aisleList[AisleItem.ToString()];
-            Package package = _packageList[PackageItem.ToString()];
-            Employee employee = _employeeList[EmployeeItem.ToString()];
-            selectedAisle.AddPackage(package, 1, 1, employee);
+            var aisleItem = comboBoxAisle.SelectedItem;
+            var packageItem = lstPackages.SelectedItem;
+            var employeeItem = comboBoxEmployee.SelectedItem;
+            var shelf = comboBoxShelf.SelectedItem as Tuple<int, int>;
+            Aisle selectedAisle = _aisleList[aisleItem.ToString()];
+            Package package = _packageList[packageItem.ToString()];
+            Employee employee = _employeeList[employeeItem.ToString()];
+            selectedAisle.AddPackage(package, shelf.Item1, shelf.Item2, employee);
         }
 
         private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
@@ -129,6 +132,24 @@ namespace TechSupport.WARE.GUI
         {
             CreatePackage createPackageWindow = new CreatePackage(this);
             createPackageWindow.ShowDialog();
+        }
+        private void ComboBoxAisleButton(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBoxAisle.SelectedItem != null)
+                comboBoxAisle.ItemsSource = _aisleList.Keys;
+        }
+        private void ComboBoxEmployeeButton(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBoxEmployee.SelectedItem != null)
+                comboBoxEmployee.ItemsSource = _employeeList.Keys;
+        }
+        private void ComboBoxShelfButton(object sender, SelectionChangedEventArgs e)
+        {
+            if (comboBoxAisle.SelectedItem != null)
+            {
+                var selectedAisle = comboBoxAisle.SelectedItem;
+                comboBoxShelf.ItemsSource = _aisleList[selectedAisle.ToString()].GetAvailableSpaces();
+            }
         }
         public void AddAisletoList(String key, Aisle aisle)
         {
@@ -177,6 +198,10 @@ namespace TechSupport.WARE.GUI
             comboBoxAisle.Visibility = Visibility.Visible;
             comboBoxEmployee.Visibility = Visibility.Visible;
             comboBoxShelf.Visibility = Visibility.Visible;
+            comboBoxAisle.ItemsSource = null;
+            comboBoxEmployee.ItemsSource = null;
+            comboBoxAisle.ItemsSource = _aisleList.Keys;
+            comboBoxEmployee.ItemsSource = _employeeList.Keys;
         }
         private void ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -225,7 +250,6 @@ namespace TechSupport.WARE.GUI
                 lstEmployees.SelectedItem = null;
             }
         }
-
         private void SaveWarehouse(object sender, RoutedEventArgs e)
         {
             string aisleJson = "";
