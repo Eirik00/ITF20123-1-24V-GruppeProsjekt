@@ -235,8 +235,8 @@ namespace TechSupport.WARE.GUI
                     Aisle selectedAisle = _aisleList[item.ToString()];
                     infoBoxTitle.Content = "Current Aisle:";
                     curInfoName.Content = "Name: " + item.ToString();
-                    curInfoDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}cm";
-                    curInfoWeight.Content = "Max Weight: " + selectedAisle.GetWeight + "kg";
+                    curInfoDim.Content = $"Dim: {selectedAisle.HeightOfAisleInCm}x{selectedAisle.LengthOfAisleInCm}x{selectedAisle.DepthOfAisleInCm}cm";
+                    curInfoWeight.Content = "Max Weight: " + selectedAisle.TotalWeightLimitInKg + "kg";
                     infoBox2Title.Content = "Packages in Aisle:";
                     AisleSelected();
                 }
