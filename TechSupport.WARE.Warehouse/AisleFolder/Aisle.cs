@@ -68,28 +68,28 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="depthOfAisleInCm">Depth of each aisle in centimeters.</param>
         /// <param name="totalWeightLimitInKg">Total weight limit per aisle in grams.</param>
         /// <param name="aisleId">Unique identifier for the aisle.</param>
-        public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInCm, int heightOfAisleInCm, int depthOfAisleInCm, int totalWeightLimitInKg, int aisleId)
+        public Aisle(int AmountOfShelves, int TotalAmountOfSpacesPerShelf, int LengthOfAisleInCm, int HeightOfAisleInCm, int DepthOfAisleInCm, int TotalWeightLimitInKg, int AisleId)
         {
-            _sections = amountOfShelves;
-            _numberOfSpaces = totalAmountOfSpacesPerShelf * amountOfShelves;
-            _lengthOfSpaceInCm = lengthOfAisleInCm;
-            _heightOfSpaceInCm = heightOfAisleInCm;
-            _weightLimitInKg = totalWeightLimitInKg;
-            _aisleId = aisleId;
-            shelf = [];
+            _sections = AmountOfShelves;
+            _numberOfSpaces = TotalAmountOfSpacesPerShelf * AmountOfShelves;
+            _lengthOfSpaceInCm = LengthOfAisleInCm;
+            _heightOfSpaceInCm = HeightOfAisleInCm;
+            _weightLimitInKg = TotalWeightLimitInKg;
+            _aisleId = AisleId;
             _currentStorageZone = new StorageZone(StorageSpecification.Invalid);
             _packagesInAisle = new List<Package>();
-            for (int i = 1; i <= amountOfShelves; i++)
+            ShelfSerialized = new List<KeyValuePair<string, Package?>>();
+            for (int i = 1; i <= AmountOfShelves; i++)
             {
-                for (int j = 1; j <= totalAmountOfSpacesPerShelf ; j++)
+                for (int j = 1; j <= TotalAmountOfSpacesPerShelf; j++)
                     ShelfSerialized.Add(new KeyValuePair<string, Package?>($"{i},{j}", null));
             }
             if (_accessToBothSides)
             {
-                _depthOfSpaceInCm = depthOfAisleInCm/2;
+                _depthOfSpaceInCm = DepthOfAisleInCm / 2;
             }
             else
-                _depthOfSpaceInCm = depthOfAisleInCm;
+                _depthOfSpaceInCm = DepthOfAisleInCm;
         }
 
         public (int, int) GetShelf(Package package)
@@ -108,7 +108,7 @@ namespace TechSupport.WARE.Warehouse
         {
             if (GetAvailableSpaces().Count != _numberOfSpaces * _sections) 
             {
-                throw new NotEmptyException($"Aisle: {GetAisleId} is not empty!");
+                throw new NotEmptyException($"Aisle: {_aisleId} is not empty!");
             }
             else
             {
@@ -126,7 +126,7 @@ namespace TechSupport.WARE.Warehouse
         {
             if (GetAvailableSpaces().Count != _numberOfSpaces * _sections)
             {
-                throw new NotEmptyException($"Aisle: {GetAisleId} is not empty!");
+                throw new NotEmptyException($"Aisle: {_aisleId} is not empty!");
             }
             else
             {
@@ -227,31 +227,31 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Returns Aisleid (int)
         /// </summary>
-        public int GetAisleId => this._aisleId;
+        public int AisleId => this._aisleId;
         /// <summary>
         /// Height in Centimeteres
         /// </summary>
-        public int GetHeight => this._heightOfSpaceInCm;
+        public int HeightOfAisleInCm => this._heightOfSpaceInCm;
         /// <summary>
         /// Length in Centimeteres
         /// </summary>
-        public int GetLength => this._lengthOfSpaceInCm;
+        public int LengthOfAisleInCm => this._lengthOfSpaceInCm;
         /// <summary>
         /// Depth in Centimeteres
         /// </summary>
-        public int GetDepth => this._depthOfSpaceInCm;
+        public int DepthOfAisleInCm => this._depthOfSpaceInCm;
         /// <summary>
         /// Weight in Grams
         /// </summary>
-        public int GetWeight => this._weightLimitInKg;
+        public int TotalWeightLimitInKg => this._weightLimitInKg;
         /// <summary>
         /// Ammount of shelves
         /// </summary>
-        public int GetAmmountofShelves => _sections;
+        public int AmountOfShelves => _sections;
         /// <summary>
         /// Ammount of spaces on shelf
         /// </summary>
-        public int GetAmmountOfShelveSpaces => _numberOfSpaces / _sections;
+        public int TotalAmountOfSpacesPerShelf => _numberOfSpaces / _sections;
 
 
         public (int, int) GetPackagePlacement(Package package)

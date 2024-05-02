@@ -63,7 +63,7 @@ namespace TechSupport.WARE.Warehouse
             if(this.aisle == null) 
                 return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: null";
             else 
-                return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: " + this.aisle.GetAisleId;
+                return "Package changed from satus: " + previousStatus + " to " + newStatus + " at " + timeStamp + " on isleid: " + this.aisle.AisleId;
 
         }
     }
