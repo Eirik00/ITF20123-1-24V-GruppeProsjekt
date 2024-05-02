@@ -18,17 +18,17 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         int PackageId { get; }
         /// <summary>
-        /// Gets the package length in millimeter
+        /// Gets the package length in Centimeter
         /// </summary>
-        int PackageLengthInMm { get; }
+        int PackageLengthInCm { get; }
         /// <summary>
-        /// Gets the packagge height in millimeter
+        /// Gets the packagge height in Centimeter
         /// </summary>
-        int PackageHeightInMm { get; }
+        int PackageHeightInCm { get; }
         /// <summary>
-        /// Gets the package depth in millimeter
+        /// Gets the package depth in Centimeter
         /// </summary>
-        int PackageDepthInMm { get; }
+        int PackageDepthInCm { get; }
         /// <summary>
         /// Gets the package weight in grams
         /// </summary>

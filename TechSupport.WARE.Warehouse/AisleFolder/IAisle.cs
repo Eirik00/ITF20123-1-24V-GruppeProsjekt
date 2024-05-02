@@ -25,7 +25,7 @@ namespace TechSupport.WARE.Warehouse
         /// <summary>
         /// Gets the isle id
         /// </summary>
-        int GetAisleId { get; }
+        ///int GetAisleId { get; }
 
         (int,int) GetShelf(Package package);
 

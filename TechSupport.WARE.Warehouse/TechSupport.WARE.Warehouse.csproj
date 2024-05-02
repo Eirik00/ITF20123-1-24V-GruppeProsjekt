@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/Eirik00/ITF20123-1-24V-GruppeProsjekt</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Api, test</PackageTags>
-    <Version>1.0.1</Version>
+    <Version>1.2.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

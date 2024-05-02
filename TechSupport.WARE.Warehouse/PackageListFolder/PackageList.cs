@@ -61,7 +61,7 @@ namespace TechSupport.WARE.Warehouse
                 for (int j = 0; j < tempList.Count; j++)
                 {
 
-                    if (tempList[i].PackageLengthInMm > tempList[j].PackageLengthInMm)
+                    if (tempList[i].PackageLengthInCm > tempList[j].PackageLengthInCm)
                     {
                         (tempList[j], tempList[i]) = (tempList[i], tempList[j]);
                     }
@@ -70,7 +70,7 @@ namespace TechSupport.WARE.Warehouse
 
             foreach (Package package in tempList)
             {
-                tempString += "PackageId: " + package.PackageId + ", Lenght: " + package.PackageLengthInMm + "\n";
+                tempString += "PackageId: " + package.PackageId + ", Lenght: " + package.PackageLengthInCm + "\n";
             }
 
             return tempString;
@@ -90,7 +90,7 @@ namespace TechSupport.WARE.Warehouse
                 for (int j = 0; j < tempList.Count; j++)
                 {
 
-                    if (tempList[i].PackageHeightInMm > tempList[j].PackageHeightInMm)
+                    if (tempList[i].PackageHeightInCm > tempList[j].PackageHeightInCm)
                     {
                         (tempList[j], tempList[i]) = (tempList[i], tempList[j]);
                     }
@@ -99,7 +99,7 @@ namespace TechSupport.WARE.Warehouse
 
             foreach (Package package in tempList)
             {
-                tempString += "PackageId: " + package.PackageId + ", Height: " + package.PackageHeightInMm + "mm\n";
+                tempString += "PackageId: " + package.PackageId + ", Height: " + package.PackageHeightInCm + "mm\n";
             }
 
             return tempString;
@@ -119,7 +119,7 @@ namespace TechSupport.WARE.Warehouse
                 for (int j = 0; j < tempList.Count; j++)
                 {
 
-                    if (tempList[i].PackageDepthInMm > tempList[j].PackageDepthInMm)
+                    if (tempList[i].PackageDepthInCm > tempList[j].PackageDepthInCm)
                     {
                         (tempList[j], tempList[i]) = (tempList[i], tempList[j]);
                     }
@@ -128,7 +128,7 @@ namespace TechSupport.WARE.Warehouse
 
             foreach (Package package in tempList)
             {
-                tempString += "PackageId: " + package.PackageId + ", Depth: " + package.PackageDepthInMm + "mm\n";
+                tempString += "PackageId: " + package.PackageId + ", Depth: " + package.PackageDepthInCm + "mm\n";
             }
 
             return tempString;

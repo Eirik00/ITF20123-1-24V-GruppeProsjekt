@@ -15,7 +15,7 @@ namespace TechSupport.WARE.Warehouse
         ///     Package object.
         /// </summary>
         private readonly static List<int> idCheck = [];
-        private readonly int packageId, packageLenghtInMm, packageHeightInMm, packageDepthInMm, packageWeighInGrams;
+        private readonly int packageId, packageLenghtInCm, packageHeightInCm, packageDepthInCm, packageWeighInGrams;
         private readonly bool isFragile;
         private readonly StorageSpecification specification;
         private StatusList status;
@@ -23,7 +23,7 @@ namespace TechSupport.WARE.Warehouse
         private Contact receiver;
         public DateTime DeliveryTime;
         readonly PackageLog packageLog = new();
-        private Aisle? packageAisle;
+        private Aisle? packageAisle = null;
 
         //shipment number feature ''attempts''
         //Skal prøve å gi hver pakke instanse av Package som er oprettet en random forsendelse nummer.
@@ -52,9 +52,9 @@ namespace TechSupport.WARE.Warehouse
         /// Initializes a new instance of the <see cref="Package"/> class.
         /// </summary>
         /// <param name="packageId">The package identifier.</param>
-        /// <param name="packageLenghtInCm">The package length in millimeters.</param>
-        /// <param name="packageHeightInCm">The package height in millimeters.</param>
-        /// <param name="packageDepthInCm">The package depth in millimeters.</param>
+        /// <param name="packageLenghtInCm">The package length in Centimeters.</param>
+        /// <param name="packageHeightInCm">The package height in Centimeters.</param>
+        /// <param name="packageDepthInCm">The package depth in Centimeters.</param>
         /// <param name="packageWeightInGrams">The package weight in grams.</param>
         /// <param name="isFragile">if set to <c>true</c> [is fragile].</param>
         /// <param name="specification">The spesification of the package as ENUM.</param>
@@ -67,9 +67,9 @@ namespace TechSupport.WARE.Warehouse
             else
             {
                 this.packageId = packageId;
-                this.packageLenghtInMm = packageLenghtInCm;
-                this.packageHeightInMm = packageHeightInCm;
-                this.packageDepthInMm = packageDepthInCm;
+                this.packageLenghtInCm = packageLenghtInCm;
+                this.packageHeightInCm = packageHeightInCm;
+                this.packageDepthInCm = packageDepthInCm;
                 this.packageWeighInGrams = packageWeightInGrams;
                 this.isFragile = isFragile;
                 this.specification = specification;
@@ -83,10 +83,11 @@ namespace TechSupport.WARE.Warehouse
 
         //LAG TOSTRING
         public int PackageId => packageId;
-        public int PackageLengthInMm => packageLenghtInMm;
-        public int PackageHeightInMm => packageHeightInMm;
-        public int PackageDepthInMm => packageDepthInMm;
+        public int PackageLengthInCm => packageLenghtInCm;
+        public int PackageHeightInCm => packageHeightInCm;
+        public int PackageDepthInCm => packageDepthInCm;
         public int PackageWeightInGrams => packageWeighInGrams;
+        public bool IsFragile => isFragile;
         public StorageSpecification Specification => specification;
         public Aisle? PackageAisle => packageAisle;
         public Contact Sender { 
@@ -122,10 +123,9 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <returns>Aisle <c>aisle</c>, String <c>spesification</c>, int <c>place</c></returns>
         /// 
-        internal void AddAisle(Aisle aisle)
+        internal void AddAisle(Aisle? aisle)
         {
             this.packageAisle = aisle;
-            aisle.PackagesInAisle.Remove(this);
         }
 
         public (int,int)? GetShelf()

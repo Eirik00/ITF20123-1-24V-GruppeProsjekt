@@ -136,7 +136,7 @@ namespace TechSupport.WARE.Warehouse
             internal AisleAndPackageEventArgs(Aisle aisle, Package package, Employee employee)
             {
                 Aisle = aisle;
-                AisleId = aisle.GetAisleId;
+                AisleId = aisle.AisleId;
                 PackageId = package.PackageId;
                 Shelf = aisle.GetShelf(package);
                 StorageSpecification = aisle.CurrentStorageZone.StorageSpecification;
@@ -145,7 +145,7 @@ namespace TechSupport.WARE.Warehouse
             }
             internal AisleAndPackageEventArgs(Aisle aisle)
             {
-                AisleId = aisle.GetAisleId;
+                AisleId = aisle.AisleId;
             }
         }
     }
