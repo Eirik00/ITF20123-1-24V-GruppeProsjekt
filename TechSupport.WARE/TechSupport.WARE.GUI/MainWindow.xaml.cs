@@ -48,9 +48,9 @@ namespace TechSupport.WARE.GUI
                         while((line = reader.ReadLine()) != null)
                         {
                             string[] lists = line.Split("[LIST]");
-                            foreach(string item in lists[0].Split("{next}"))
+                            foreach(string item in lists[0].Split(","))
                             {
-                                Aisle? newAisle = JsonSerializer.Deserialize<Aisle>(item.Split(":")[1]);
+                                string[] savedAisle = item.Split(":");
                                 _aisleList.Add(item.Split(":")[0], newAisle);
                                 
                             }
