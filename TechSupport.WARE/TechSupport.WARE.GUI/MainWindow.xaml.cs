@@ -24,6 +24,7 @@ namespace TechSupport.WARE.GUI
         private int _packageIDCounter = 0;
         private Dictionary<String, Aisle> _aisleList = new Dictionary<String, Aisle>();
         private Dictionary<String, Employee> _employeeList = new Dictionary<String, Employee>();
+        private Dictionary<int, Package> _packageList = new Dictionary<int, Package>();
         public MainWindow()
         {
             InitializeComponent();
@@ -43,6 +44,13 @@ namespace TechSupport.WARE.GUI
                 lstEmployees.Items.Add(employee.Key);
         }
 
+        public void RefreshPackageList()
+        {
+            lstPackage.Items.Clear();
+            foreach (KeyValuePair<int, Package> employee in _packageList)
+                lstPackage.Items.Add(employee.Key);
+        }
+
         private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
         {
             CreateAisle createAisleWindow = new CreateAisle(this);
@@ -60,6 +68,10 @@ namespace TechSupport.WARE.GUI
         public void AddEmployeetoList(String key, Employee employee)
         {
             _employeeList.Add(key, employee);
+        }
+        public void AddPackagetoList(int key, Package package)
+        {
+            _packageList.Add(key, package);
         }
         public int GetNextAvailableAisleId()
         {

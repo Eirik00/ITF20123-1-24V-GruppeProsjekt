@@ -47,7 +47,7 @@ namespace TechSupport.WARE.GUI
                 StorageSpecification specification = (StorageSpecification)((ComboBoxItem)comboBox.SelectedItem).Content;
 
                 Package newPackage = new(PackageID, packageLengthInCm, packageHeightInCm, packageDepthInCm, packageWeightInGrams, packageIsFragile, specification);
-                _mainWindow.AddEmployeetoList(firstNameField.Text, newEmployee);
+                _mainWindow.AddPackagetoList(PackageID, newPackage);
                 this.Close();
             }
             catch (Exception ex)
@@ -59,17 +59,6 @@ namespace TechSupport.WARE.GUI
         private void SendEventToMain(object sender, EventArgs e)
         {
             _mainWindow.RefreshEmployeeList();
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // Get the selected item from the ComboBox
-            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
-
-            // Display the content of the selected item in the TextBlock
-            if (selectedItem != null)
-            {
-                selectedItemTextBlock.Text = "Selected Item: " + selectedItem.Content.ToString();
-            }
         }
     }
 }
