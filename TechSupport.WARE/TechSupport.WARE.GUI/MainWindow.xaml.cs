@@ -43,24 +43,46 @@ namespace TechSupport.WARE.GUI
                 else
                 {
                     string[] saveFiles = Directory.GetFiles(saveFolderPath);
-                    using (StreamReader reader = new StreamReader(saveFiles[saveFiles.Length - 1]))
+                    foreach(string file in saveFiles)
                     {
-                        string line;
-                        while((line = reader.ReadLine()) != null)
+                        switch (System.IO.Path.GetFileName(file.Split(".")[0]))
                         {
-                            string[] lists = line.Split("[LIST]");
-                            foreach(string item in lists[0].Split(","))
-                            {
-                                string[] savedAisle = item.Split(":");
-                                //_aisleList.Add(item.Split(":")[0], newAisle);
-                                
-                            }
+                            case "wsAisle":
+                                using (StreamReader reader = new StreamReader(file))
+                                {
+                                    string line;
+                                    while((line = reader.ReadLine()) != null)
+                                    {
+                                        _aisleList = JsonSerializer.Deserialize<Dictionary<String, Aisle>>(line);
+                                    }
+                                }
+                                break;
+                            case "wsEmployee":
+                                using (StreamReader reader = new StreamReader(file))
+                                {
+                                    string line;
+                                    while ((line = reader.ReadLine()) != null)
+                                    {
+                                        _employeeList = JsonSerializer.Deserialize<Dictionary<String, Employee>>(line);
+                                    }
+                                }
+                                break;
+                            case "wsPackage":
+                                using (StreamReader reader = new StreamReader(file))
+                                {
+                                    string line;
+                                    while ((line = reader.ReadLine()) != null)
+                                    {
+                                        _packageList = JsonSerializer.Deserialize<Dictionary<String, Package>>(line);
+                                    }
+                                }
+                                break;
                         }
                     }
                 }
             }catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw ex;
             }
             InitializeComponent();
             comboBoxAisle.SelectionChanged += ComboBoxShelfButton;
@@ -252,34 +274,24 @@ namespace TechSupport.WARE.GUI
         }
         private void SaveWarehouse(object sender, RoutedEventArgs e)
         {
-            string aisleJson = "";
-            string packageJson = "";
-            string employeeJson = "";
-
-            foreach (KeyValuePair<string, Aisle> item in _aisleList)
-            {
-                aisleJson += item.Key + ":" + JsonSerializer.Serialize(item.Value) + ",";
-            }
-            foreach (KeyValuePair<string, Package> item in _packageList)
-            {
-                packageJson += item.Key + ":" + JsonSerializer.Serialize(item.Value) + ",";
-            }
-            foreach (KeyValuePair<string, Employee> item in _employeeList)
-            {
-                employeeJson += item.Key + ":" + JsonSerializer.Serialize(item.Value) + ",";
-            }
-
             string[] fileNames = Directory.GetFiles(saveFolderPath);
             foreach (string fileName in fileNames)
             {
                 File.Move(fileName, saveFolderPath + "\\old\\" + System.IO.Path.GetFileName(fileName));
             }
-
-            using (StreamWriter writer = new StreamWriter(saveFolderPath + "\\ws." + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt"))
+            //Aisle
+            using (StreamWriter writer = new StreamWriter(saveFolderPath + "\\wsAisle." + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt"))
             {
-                writer.WriteLine(aisleJson + "[LIST]" + packageJson + "[LIST]" + employeeJson);
+                writer.WriteLine(JsonSerializer.Serialize(_aisleList));
             }
-
+            using (StreamWriter writer = new StreamWriter(saveFolderPath + "\\wsPackage." + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt"))
+            {
+                writer.WriteLine(JsonSerializer.Serialize(_packageList));
+            }
+            using (StreamWriter writer = new StreamWriter(saveFolderPath + "\\wsEmployee." + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".txt"))
+            {
+                writer.WriteLine(JsonSerializer.Serialize(_employeeList));
+            }
             unsavedChanges.Content = "";
         }
     }
