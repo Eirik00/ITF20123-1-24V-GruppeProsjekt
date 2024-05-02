@@ -22,10 +22,12 @@ namespace TechSupport.WARE.GUI
     public partial class CreatePackage : Window
     {
         private MainWindow _mainWindow;
+
         public CreatePackage(MainWindow mainWindow)
         {
             InitializeComponent();
             _mainWindow = mainWindow;
+            comboBox.ItemsSource = Enum.GetValues(typeof(StorageSpecification));
         }
 
         private void ForceTextToNumber(object sender, TextCompositionEventArgs e)
@@ -33,7 +35,6 @@ namespace TechSupport.WARE.GUI
             Regex regx = new Regex("[^0-9]+");
             e.Handled = regx.IsMatch(e.Text);
         }
-
         private void createPackageFunction(object sender, RoutedEventArgs e)
         {
             try
@@ -43,10 +44,9 @@ namespace TechSupport.WARE.GUI
                 int packageHeightInCm = Int32.Parse(packageHeightInCmField.Text);
                 int packageDepthInCm = Int32.Parse(packageDepthInCmField.Text);
                 int packageWeightInGrams = Int32.Parse(packageWeightInGramsField.Text);
-                bool packageIsFragile = bool.Parse(isFragileField.Text);
-                StorageSpecification specification = (StorageSpecification)((ComboBoxItem)comboBox.SelectedItem).Content;
-
-                Package newPackage = new(PackageID, packageLengthInCm, packageHeightInCm, packageDepthInCm, packageWeightInGrams, packageIsFragile, specification);
+                StorageSpecification storageSpecification = (StorageSpecification)comboBox.SelectedItem;
+                bool packageIsFragile = fragileCheckBox.IsChecked ?? false;
+                Package newPackage = new(PackageID, packageLengthInCm, packageHeightInCm, packageDepthInCm, packageWeightInGrams, packageIsFragile, storageSpecification);
                 _mainWindow.AddPackagetoList(PackageID.ToString(), newPackage);
                 this.Close();
             }

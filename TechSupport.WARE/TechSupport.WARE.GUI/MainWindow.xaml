@@ -11,7 +11,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="150" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -28,8 +31,13 @@
         <ListBox Grid.Column="1" Grid.Row="1" x:Name="lstPackages" SelectionChanged="ListSelectionChanged" Margin="0,0,10,0"/>
         <Label Grid.Column="2" Grid.Row="0">Employees:</Label>
         <ListBox Grid.Column="2" x:Name="lstEmployees" Grid.Row="1" Margin="0,0,10,0" SelectionChanged="ListSelectionChanged"/>
-        
-        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Margin="0,207,0,10">
+        <Separator VerticalAlignment="Center" Grid.ColumnSpan="4" Margin="0,0,0,2" Grid.Row="2" />
+        <Button Grid.Column="0" Grid.Row="3" Click="OpenCreateAisleButton" x:Name="createAisle" Margin="0,0,50,0">Create Aisle</Button>
+        <Button Grid.Column="1" Grid.Row="3" Click="OpenCreatePackageButton" x:Name="createPackage" Margin="0,0,50,0">Create Package</Button>
+        <Button Grid.Column="2" Grid.Row="3" Click="OpenCreateEmployeeButton" x:Name="createEmployee" Margin="0,0,50,0">Create Employee</Button>
+        <Separator VerticalAlignment="Center" Grid.ColumnSpan="4" Margin="0,0,0,2" Grid.Row="4" />
+
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="2" Margin="0,0,0,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -40,11 +48,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Grid.Row="0" Click="OpenCreateAisleButton" x:Name="createAisle" Grid.ColumnSpan="2" Margin="0,-5,113,5">Create Aisle</Button>
-            <Button Grid.Column="1" Grid.Row="0" Click="OpenCreateEmployeeButton" x:Name="createEmployee" Grid.ColumnSpan="2" Margin="0,-5,113,5">Create Employee</Button>
-            <Button Grid.Column="2" Grid.Row="0" Click="OpenCreatePackageButton" x:Name="createPackage" Grid.ColumnSpan="2" Margin="0,-5,113,5">Create Employee</Button>
-            <Separator Grid.ColumnSpan="3" Margin="0,0,0,25" Grid.Row="1" />
+            
             <Label Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" x:Name="infoBoxTitle">Current Aisle:</Label>
             <Border BorderBrush="DarkGray" BorderThickness="2" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,0,10,0">
                 <Grid>
