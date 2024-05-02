@@ -158,8 +158,8 @@ namespace TechSupport.WARE.GUI
         }
         private void AisleSelected()
         {
-            lstPackagesInAisle.Visibility = Visibility.Collapsed;
-            addPackageButton.Visibility = Visibility.Visible;
+            lstPackagesInAisle.Visibility = Visibility.Visible;
+            addPackageButton.Visibility = Visibility.Collapsed;
             packageAisleSelection.Visibility = Visibility.Collapsed;
             packageEmployeeSelection.Visibility = Visibility.Collapsed;
             packageShelfSelection.Visibility = Visibility.Collapsed;
