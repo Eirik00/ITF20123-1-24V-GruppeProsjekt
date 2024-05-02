@@ -35,9 +35,9 @@ namespace TechSupport.WARE.Warehouse
         /// </summary>
         /// <param name="amountOfShelves">Number of shelves in the aisle.</param>
         /// <param name="totalAmountOfSpacesPerShelf">Amount of spaces per shelf.</param>
-        /// <param name="lengthOfAisleInCm">Length of each aisle in millimeters.</param>
-        /// <param name="heightOfAisleInCm">Height of each aisle in millimeters.</param>
-        /// <param name="depthOfAisleInCm">Depth of each aisle in millimeters.</param>
+        /// <param name="lengthOfAisleInCm">Length of each aisle in centimeters.</param>
+        /// <param name="heightOfAisleInCm">Height of each aisle in centimeters.</param>
+        /// <param name="depthOfAisleInCm">Depth of each aisle in centimeters.</param>
         /// <param name="totalWeightLimitInKg">Total weight limit per aisle in grams.</param>
         /// <param name="aisleId">Unique identifier for the aisle.</param>
         public Aisle(int amountOfShelves, int totalAmountOfSpacesPerShelf, int lengthOfAisleInCm, int heightOfAisleInCm, int depthOfAisleInCm, int totalWeightLimitInKg, int aisleId)
@@ -113,7 +113,6 @@ namespace TechSupport.WARE.Warehouse
         }
 
         /// <summary>
-        /// This method uses enum for status change
         /// Adds a package to the storage zone at a specified shelf placement.
         /// </summary>
         /// <param name="package">The package to be added to the storage zone.</param>
@@ -145,8 +144,8 @@ namespace TechSupport.WARE.Warehouse
                 throw new InvalidOperationException("This shelf space does not exist or is already taken");
 
             /*
-            List<int> aisleDimensions = new List<int>{this.depthOfSpaceInMm, this.heightOfSpaceInMm, this.lengthOfSpaceInMm};
-            List<int> packageDimensions = new List<int> { package.PackageDepthInMm, package.PackageHeightInMm, package.PackageLengthInMm };
+            List<int> aisleDimensions = new List<int>{this.depthOfSpaceInCm, this.heightOfSpaceInCm, this.lengthOfSpaceInCm};
+            List<int> packageDimensions = new List<int> { package.PackageDepthInCm, package.PackageHeightInCm, package.PackageLengthInCm };
             for(int i = 0; i < aisleDimensions.Count; i++)
             {
                 if (aisleDimensions[0] <= packageDimensions[0] && aisleDimensions[1] <= packageDimensions[1] && aisleDimensions[2] <= packageDimensions[2]) ;
@@ -154,7 +153,7 @@ namespace TechSupport.WARE.Warehouse
             }*/
 
             int[] aisle_dimensions = { this._depthOfSpaceInCm, this._heightOfSpaceInCm, (this._lengthOfSpaceInCm/this._numberOfSpaces) };
-            int[] package_dimensions = { package.PackageDepthInMm, package.PackageHeightInMm, package.PackageLengthInMm };
+            int[] package_dimensions = { package.PackageDepthInCm, package.PackageHeightInCm, package.PackageLengthInCm };
 
             Array.Sort(aisle_dimensions);
             Array.Sort(package_dimensions);
@@ -194,24 +193,37 @@ namespace TechSupport.WARE.Warehouse
                 }
             }
             this._packagesInAisle.Remove(package);
+            package.AddAisle(null);
         }
+
+        /// <summary>
+        /// Returns Aisleid (int)
+        /// </summary>
         public int GetAisleId => this._aisleId;
         /// <summary>
-        /// Height in Millimeteres
+        /// Height in Centimeteres
         /// </summary>
         public int GetHeight => this._heightOfSpaceInCm;
         /// <summary>
-        /// Length in Millimeteres
+        /// Length in Centimeteres
         /// </summary>
         public int GetLength => this._lengthOfSpaceInCm;
         /// <summary>
-        /// Depth in Millimeteres
+        /// Depth in Centimeteres
         /// </summary>
         public int GetDepth => this._depthOfSpaceInCm;
         /// <summary>
         /// Weight in Grams
         /// </summary>
-        public int GetWeight => this._weightLimitInKg; 
+        public int GetWeight => this._weightLimitInKg;
+        /// <summary>
+        /// Ammount of shelves
+        /// </summary>
+        public int GetAmmountofShelves => _sections;
+        /// <summary>
+        /// Ammount of spaces on shelf
+        /// </summary>
+        public int GetAmmountOfShelveSpaces => _numberOfSpaces / _sections;
 
 
         public (int, int) GetPackagePlacement(Package package)
@@ -256,7 +268,6 @@ namespace TechSupport.WARE.Warehouse
         {
             get => this._packagesInAisle;
             set => this.PackagesInAisle = value;
-
         }
     }
 }
