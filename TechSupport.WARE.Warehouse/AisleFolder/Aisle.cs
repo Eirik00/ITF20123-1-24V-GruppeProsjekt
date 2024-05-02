@@ -5,12 +5,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechSupport.WARE.Warehouse;
+using System.Text.Json.Serialization;
 
 namespace TechSupport.WARE.Warehouse
 {
     public class Aisle : IAisle
     {
-        public Dictionary<(int, int), Package?> shelf;
+        // De/ -Serialization for shelf
+        public List<KeyValuePair<string, Package?>> ShelfSerialized { get; set; }
+        [JsonIgnore]
+        public Dictionary<(int, int), Package?> shelf
+        {
+            get
+            {
+                var dictionary = new Dictionary<(int, int), Package?>();
+                foreach (var item in ShelfSerialized)
+                {
+                    var keyParts = item.Key.Split(',');
+                    var key = (int.Parse(keyParts[0]), int.Parse(keyParts[1]));
+                    dictionary.Add(key, item.Value);
+                }
+                return dictionary;
+            }
+            set
+            {
+                var list = new List<KeyValuePair<string, Package?>>();
+                foreach(var item in value)
+                {
+                    var key = $"{item.Key.Item1},{item.Key.Item2}";
+                    list.Add(new KeyValuePair<string, Package?>(key, item.Value));
+                }
+                ShelfSerialized = list;
+            }
+        }
+
         private int _numberOfSpaces, _totalWeightOnAisleInGrams, _aisleId, _sections;
         private readonly int _lengthOfSpaceInCm, _heightOfSpaceInCm, _depthOfSpaceInCm, _weightLimitInKg;
         private bool _accessToBothSides;
@@ -54,7 +82,7 @@ namespace TechSupport.WARE.Warehouse
             for (int i = 1; i <= amountOfShelves; i++)
             {
                 for (int j = 1; j <= totalAmountOfSpacesPerShelf ; j++)
-                    shelf.Add((i,j), null);
+                    ShelfSerialized.Add(new KeyValuePair<string, Package?>($"{i},{j}", null));
             }
             if (_accessToBothSides)
             {
