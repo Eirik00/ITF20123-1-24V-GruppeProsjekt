@@ -240,6 +240,7 @@ namespace TechSupport.WARE.Warehouse
             return freeSpaces;
         }
 
+        //Possibly redundant when _packagesInAisle has a getter
         public List<Package> getPackagesInAisle()
         {
             return this._packagesInAisle;
@@ -255,7 +256,6 @@ namespace TechSupport.WARE.Warehouse
         public List<Package> PackagesInAisle
         {
             get => this._packagesInAisle;
-            set => this.PackagesInAisle = value;
 
         }
     }
