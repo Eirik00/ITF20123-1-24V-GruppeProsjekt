@@ -33,24 +33,15 @@
         <TextBox x:Name="packageWeightInGramsField" PreviewTextInput="ForceTextToNumber" Grid.Row="3" Grid.Column="1"/>
         <Label Grid.Row="4" Grid.Column="0" >Fragile:</Label>
         <TextBox x:Name="isFragileField" Grid.Row="4" Grid.Column="1"/>
+        <CheckBox Grid.Row="4" Grid.Column="1" x:Name="fragileCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Grid.Row="5" Grid.Column="0" >Storage Spesification:</Label>
-        <Grid Grid.Row="5" Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ContentControl x:Name="selectedItemDisplay" Grid.Column="0" VerticalAlignment="Center"
-                            Content="{Binding SelectedItem.Content, ElementName=comboBox}" Margin="5"/>
-            <ToggleButton Grid.Column="1" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <ComboBox x:Name="comboBox" IsDropDownOpen="{Binding IsChecked, ElementName=toggleButton}" 
-                      Width="200" Margin="0,25,0,5">
-                <ComboBoxItem Content="Item 1"/>
-                <ComboBoxItem Content="Item 2"/>
-                <ComboBoxItem Content="Item 3"/>
-                <ComboBoxItem Content="Item 4"/>
-                <ComboBoxItem Content="Item 5"/>
-            </ComboBox>
-        </Grid>
-        <Button Click="createPackageFunction" x:Name="createPackageButton" Grid.Row="6" Margin="0,0,0,5">Create Package</Button>
+        <ComboBox x:Name="comboBox" IsDropDownOpen="{Binding IsChecked, ElementName=toggleButton}" 
+                  Width="Auto" Height="Auto" Margin="0,0,0,0" Grid.Row="5" Grid.Column="1">
+            <ComboBoxItem Content="Invalid"/>
+            <ComboBoxItem Content="ClimateControlled"/>
+            <ComboBoxItem Content="SmallItems"/>
+            <ComboBoxItem Content="HighValue"/>
+        </ComboBox>
+            <Button Click="createPackageFunction" x:Name="createPackageButton" Grid.Row="6" Margin="0,0,0,5">Create Package</Button>
     </Grid>
 </Window>

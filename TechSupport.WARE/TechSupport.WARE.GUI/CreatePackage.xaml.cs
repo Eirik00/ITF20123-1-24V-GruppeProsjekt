@@ -43,7 +43,7 @@ namespace TechSupport.WARE.GUI
                 int packageHeightInCm = Int32.Parse(packageHeightInCmField.Text);
                 int packageDepthInCm = Int32.Parse(packageDepthInCmField.Text);
                 int packageWeightInGrams = Int32.Parse(packageWeightInGramsField.Text);
-                bool packageIsFragile = bool.Parse(isFragileField.Text);
+                bool packageIsFragile = fragileCheckBox.IsChecked ?? false;
                 StorageSpecification specification = (StorageSpecification)((ComboBoxItem)comboBox.SelectedItem).Content;
 
                 Package newPackage = new(PackageID, packageLengthInCm, packageHeightInCm, packageDepthInCm, packageWeightInGrams, packageIsFragile, specification);
