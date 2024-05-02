@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WarehouseSimuAPI1Techsupport" Version="1.0.1" />
+    <PackageReference Include="WarehouseSimuAPI1Techsupport" Version="1.2.0" />
   </ItemGroup>
 
 </Project>

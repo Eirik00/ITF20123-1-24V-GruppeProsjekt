@@ -181,7 +181,7 @@ namespace TechSupport.WARE.GUI
                     Package package = _packageList[item.ToString()];
                     infoBoxTitle.Content = "Current Package:";
                     curInfoName.Content = $"ID: {package.PackageId}";
-                    curInfoDim.Content = $"Dim: {package.PackageLengthInMm}x{package.PackageHeightInMm}x{package.PackageDepthInMm}";
+                    curInfoDim.Content = $"Dim: {package.PackageLengthInCm}x{package.PackageHeightInCm}x{package.PackageDepthInCm}";
                     curInfoWeight.Content = "Weight: " + package.PackageWeightInGrams;
                 }
                 lstAisle.SelectedItem = null;
