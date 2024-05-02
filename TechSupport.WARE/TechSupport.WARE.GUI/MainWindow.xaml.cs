@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TechSupport.WARE.Warehouse;
+using System.IO;
 
 namespace TechSupport.WARE.GUI
 {
@@ -27,6 +28,18 @@ namespace TechSupport.WARE.GUI
         private Dictionary<String, Package> _packageList = new Dictionary<String, Package>();
         public MainWindow()
         {
+            string saveFolderPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "techsupport\\warehouse");
+            try
+            {
+                if(!Directory.Exists(saveFolderPath))
+                {
+                    Directory.CreateDirectory(saveFolderPath);
+                }
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
             InitializeComponent();
         }
 
@@ -105,7 +118,9 @@ namespace TechSupport.WARE.GUI
                     curInfoDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}cm";
                     curInfoWeight.Content = "Max Weight: " + (selectedAisle.GetWeight / 1000) + "kg";
                 }
-            }else if(sender == lstEmployees)
+                lstEmployees.SelectedItem = null;
+            }
+            else if(sender == lstEmployees)
             {
                 var item = lstEmployees.SelectedItem;
                 if(item != null)
@@ -128,6 +143,7 @@ namespace TechSupport.WARE.GUI
                     curInfoDim.Content = $"Dim: {package.PackageLengthInMm}x{package.PackageHeightInMm}x{package.PackageDepthInMm}";
                     curInfoWeight.Content = "Weight: " + package.PackageWeightInGrams;
                 }
+                lstAisle.SelectedItem = null;
             }
         }
     }
