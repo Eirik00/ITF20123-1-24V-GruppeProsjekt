@@ -32,7 +32,6 @@
         <Label Grid.Row="3" Grid.Column="0" >Weight:</Label>
         <TextBox x:Name="packageWeightInGramsField" PreviewTextInput="ForceTextToNumber" Grid.Row="3" Grid.Column="1"/>
         <Label Grid.Row="4" Grid.Column="0" >Fragile:</Label>
-        <TextBox x:Name="isFragileField" Grid.Row="4" Grid.Column="1"/>
         <CheckBox Grid.Row="4" Grid.Column="1" x:Name="fragileCheckBox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Label Grid.Row="5" Grid.Column="0" >Storage Spesification:</Label>
         <ComboBox x:Name="comboBox" IsDropDownOpen="{Binding IsChecked, ElementName=toggleButton}" 
