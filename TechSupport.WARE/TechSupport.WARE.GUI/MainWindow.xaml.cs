@@ -37,9 +37,9 @@ namespace TechSupport.WARE.GUI
 
         public void RefreshEmployeeList()
         {
-            listEmployees.Items.Clear();
+            lstEmployees.Items.Clear();
             foreach (KeyValuePair<String, Employee> employee in _employeeList)
-                listEmployees.Items.Add(employee.Key);
+                lstEmployees.Items.Add(employee.Key);
         }
 
         private void OpenCreateAisleButton(object sender, RoutedEventArgs e)
@@ -69,16 +69,31 @@ namespace TechSupport.WARE.GUI
             _employeeIDCounter += 1;
             return _employeeIDCounter;
         }
-        private void AisleListSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = lstAisle.SelectedItem;
-            if (item != null)
+            if(sender == lstAisle)
             {
-                Aisle selectedAisle = _aisleList[item.ToString()];
-
-                curAisleName.Content = "Name: " + item.ToString();
-                curAisleDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}cm";
-                curAisleWeight.Content = "Max Weight: " + (selectedAisle.GetWeight/1000) + "kg";
+                var item = lstAisle.SelectedItem;
+                if (item != null)
+                {
+                    Aisle selectedAisle = _aisleList[item.ToString()];
+                    infoBoxTitle.Content = "Current Aisle:";
+                    curInfoName.Content = "Name: " + item.ToString();
+                    curInfoDim.Content = $"Dim: {selectedAisle.GetHeight}x{selectedAisle.GetLength}x{selectedAisle.GetDepth}cm";
+                    curInfoWeight.Content = "Max Weight: " + (selectedAisle.GetWeight / 1000) + "kg";
+                }
+            }else if(sender == lstEmployees)
+            {
+                var item = lstEmployees.SelectedItem;
+                if(item != null)
+                {
+                    Employee employee = _employeeList[item.ToString()];
+                    infoBoxTitle.Content = "Current Employee:";
+                    curInfoName.Content = $"Name: {employee.FirstName} {employee.Surname}";
+                    curInfoDim.Content = "Phone Number: " + employee.PhoneNumber;
+                    curInfoPackages.Content = "Email: " + employee.Email;
+                    curInfoWeight.Content = "Access Level: " + employee.AccessLevel;
+                }
             }
         }
     }
