@@ -18,7 +18,7 @@ namespace TechSupport.WARE.Warehouse
         private readonly StatusList newStatus;
         private readonly String description;
         private readonly Aisle? aisle;
-        internal PackageLogEntry(Aisle? aisle, StatusList newStatus, StatusList previousStatus, String description)
+        internal PackageLogEntry(Aisle? aisle, StatusList previousStatus, StatusList newStatus, String description)
         {
             this.timeStamp = DateTime.Now;
             this.previousStatus = previousStatus;

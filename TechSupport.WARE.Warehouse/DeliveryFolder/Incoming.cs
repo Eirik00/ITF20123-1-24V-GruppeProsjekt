@@ -12,9 +12,9 @@ namespace TechSupport.WARE.Warehouse
     {
         private List<Package> incomingPackagesList;
         //Events
-        internal event EventHandler<IncomingPackageEventArgs> IncomingPackageEvent;
-        internal event EventHandler<IncomingPackageEventArgs> IncomingDailyPackageEvent;
-        internal event EventHandler<IncomingPackageEventArgs> IncomingWeeklyPackageEvent;
+        internal event EventHandler<IncomingPackageEventArgs>? IncomingPackageEvent;
+        internal event EventHandler<IncomingPackageEventArgs>? IncomingDailyPackageEvent;
+        internal event EventHandler<IncomingPackageEventArgs>? IncomingWeeklyPackageEvent;
         internal virtual void OnIncomingPackage(IncomingPackageEventArgs e)
         {
             IncomingPackageEvent?.Invoke(this, e);
@@ -30,7 +30,7 @@ namespace TechSupport.WARE.Warehouse
 
         public Incoming()
         {
-            incomingPackagesList = [];
+            incomingPackagesList = new List<Package>();
         }
 
         /// <summary>
