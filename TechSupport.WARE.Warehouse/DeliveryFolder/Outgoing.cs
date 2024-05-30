@@ -222,6 +222,10 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="receiver">The receiver's contact information.</param>
         public void PreparePalletsForShipment(PackageList packages, Contact sender, Contact receiver)
         {
+            if (packages == null || packages.Packages.Count == 0)
+                throw new ArgumentNullException("packages", "Package list cannot be null or empty.");
+
+
             foreach (var package in packages.Packages)
             {
                 if (currentPallet == null || currentPallet.PackageCount >= 30)
@@ -248,6 +252,9 @@ namespace TechSupport.WARE.Warehouse
         /// <returns>True if the package was successfully added; otherwise, false.</returns>
         private bool TryAddPackageToPallet(Package package)
         {
+            if (currentPallet == null)
+                throw new InvalidOperationException("Current pallet is not initialized.");
+
             return currentPallet.AddPackage(package);
         }
 
@@ -263,6 +270,9 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="receiver">The receiver's contact information.</param>
         private void FinalizeCurrentPallet(Contact sender, Contact receiver)
         {
+            if (currentPallet == null)
+                throw new InvalidOperationException("Current pallet is not initialized.");
+
             foreach (var package in currentPallet.Packages)
             {
                 package.Sender = sender;
@@ -279,6 +289,9 @@ namespace TechSupport.WARE.Warehouse
         /// <param name="receiver">The receiver's contact information.</param>
         public void ShipOutPallets(Contact sender, Contact receiver)
         {
+            if (readyForShipmentPallets.Count == 0)
+                throw new InvalidOperationException("No pallets are prepared for shipment.");
+
             foreach (var pallet in readyForShipmentPallets.ToList())
             {
                 if (!truckManager.UseTruck()) break;
@@ -305,6 +318,9 @@ namespace TechSupport.WARE.Warehouse
         //GetNextWeekDay metoden brukes i ukentlig sending,denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres sending den dagen til neste uke.
         private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {
+            if (day < DayOfWeek.Sunday || day > DayOfWeek.Saturday)
+                throw new ArgumentException("Invalid day of the week.", nameof(day));
+
             int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
             return start.AddDays(daysToAdd);
         }

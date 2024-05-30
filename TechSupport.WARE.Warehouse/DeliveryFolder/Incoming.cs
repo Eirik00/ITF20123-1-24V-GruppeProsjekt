@@ -48,6 +48,13 @@ namespace TechSupport.WARE.Warehouse
             if (deliveryHourAndMinute.ToString().Length > 4)
                 throw new ArgumentException("Delivery hour and minute cannot exceed 4 digits.");
 
+            if (deliveryHourAndMinute < 0 || deliveryHourAndMinute >= 24)
+                throw new ArgumentOutOfRangeException(nameof(deliveryHourAndMinute), "Delivery hour and minute must be between 0 and 23.59.");
+
+            if (string.IsNullOrEmpty(sender.Address) || string.IsNullOrEmpty(sender.Email) ||
+                string.IsNullOrEmpty(receiver.Address) || string.IsNullOrEmpty(receiver.Email))
+                throw new ArgumentException("Sender and receiver must have valid address and email.");
+
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
                 throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
@@ -98,6 +105,13 @@ namespace TechSupport.WARE.Warehouse
 
             if (deliveryHourAndMinute.ToString().Length > 4)
                 throw new ArgumentException("Delivery hour and minute cannot exceed 4 digits.");
+
+            if (deliveryHourAndMinute < 0 || deliveryHourAndMinute >= 24)
+                throw new ArgumentOutOfRangeException(nameof(deliveryHourAndMinute), "Delivery hour and minute must be between 0 and 23.59.");
+
+            if (string.IsNullOrEmpty(sender.Address) || string.IsNullOrEmpty(sender.Email) ||
+                string.IsNullOrEmpty(receiver.Address) || string.IsNullOrEmpty(receiver.Email))
+                throw new ArgumentException("Sender and receiver must have valid address and email.");
 
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
@@ -151,6 +165,13 @@ namespace TechSupport.WARE.Warehouse
             if (deliveryHourAndMinute.ToString().Length > 4)
                 throw new ArgumentException("Delivery hour and minute cannot exceed 4 digits.");
 
+            if (deliveryHourAndMinute < 0 || deliveryHourAndMinute >= 24)
+                throw new ArgumentOutOfRangeException(nameof(deliveryHourAndMinute), "Delivery hour and minute must be between 0 and 23.59.");
+
+            if (string.IsNullOrEmpty(sender.Address) || string.IsNullOrEmpty(sender.Email) ||
+                string.IsNullOrEmpty(receiver.Address) || string.IsNullOrEmpty(receiver.Email))
+                throw new ArgumentException("Sender and receiver must have valid address and email.");
+
             if (sender == null || receiver == null || string.IsNullOrEmpty(sender.FirstName) || string.IsNullOrEmpty(sender.Surname) ||
                 string.IsNullOrEmpty(receiver.FirstName) || string.IsNullOrEmpty(receiver.Surname))
                 throw new InvalidContactCompanyInfoException("Sender or receiver information is incomplete or invalid.");
@@ -199,6 +220,10 @@ namespace TechSupport.WARE.Warehouse
         //Denne metoden sikrer at selv om den angitte ukedagen allerede har passert i gjeldende uke så registreres mottal til neste forekomst av den dagen i neste uke.
         private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
         {
+
+            if (day < DayOfWeek.Sunday || day > DayOfWeek.Saturday)
+                throw new ArgumentException("Invalid day of the week.", nameof(day));
+
             int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
             return start.AddDays(daysToAdd);
         }
