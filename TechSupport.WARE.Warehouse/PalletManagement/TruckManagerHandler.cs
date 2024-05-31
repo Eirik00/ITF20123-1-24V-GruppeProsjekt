@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse.PalletManagement
+namespace TechSupport.WARE.Warehouse
 {
     /// <summary>
     /// Defines event arguments for truck-related events.

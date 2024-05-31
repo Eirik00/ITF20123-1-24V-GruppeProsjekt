@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse.PalletManagement
+namespace TechSupport.WARE.Warehouse
 {
     /// <summary>
     /// Handles events related to pallet updates.
@@ -20,9 +20,9 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             pallet.PalletUpdated += HandlePalletUpdated;
         }
 
-        private void HandlePalletUpdated(object sender, PalletEventArgs e)
+        private void HandlePalletUpdated(object sender, PalletsEventArgs e)
         {
-            Console.WriteLine($"Pallet update: Action = {e.Action}, Package ID = {e.PackageId}");
+            Console.WriteLine($"Pallet update: Action = {e.PalletAction}, Package ID = {e.PackageId}");
         }
     }
 }

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse.PalletManagement
+namespace TechSupport.WARE.Warehouse
 {
     public interface IPallet
     {
         int PalletId { get; }
 
-        event EventHandler<PalletEventArgs> PalletUpdated;
+        event EventHandler<PalletsEventArgs> PalletUpdated;
 
         /// <summary>
         /// Adds a package to the pallet.

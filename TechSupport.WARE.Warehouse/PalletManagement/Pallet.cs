@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechSupport.WARE.Warehouse.PalletManagement
+namespace TechSupport.WARE.Warehouse
 {
     /// <summary>
     /// Provides data for the PalletUpdated event.
     /// </summary>
-    public class PalletEventArgs : EventArgs
+    public class PalletsEventArgs : EventArgs
     {
-        public string Action { get; set; }
+        public string ?PalletAction { get; set; }
         public int PackageId { get; set; }
     }
 
@@ -25,9 +25,9 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         public const int MaxCapacity = 30;
 
         //events
-        public event EventHandler<PalletEventArgs> PalletUpdated;
+        public event EventHandler<PalletsEventArgs> PalletUpdated;
 
-        protected virtual void OnPalletUpdated(PalletEventArgs e)
+        protected virtual void OnPalletUpdated(PalletsEventArgs e)
         {
             PalletUpdated?.Invoke(this, e);
         }
@@ -51,7 +51,7 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
         {
             if (packages.Count >= MaxCapacity) return false;
             packages.Add(package);
-            OnPalletUpdated(new PalletEventArgs { Action = "Added Pallet", PackageId = package.PackageId });
+            OnPalletUpdated(new PalletsEventArgs { PalletAction = "Added Pallet", PackageId = package.PackageId });
             return true;
         }
 
@@ -66,12 +66,12 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             {
                 if (packages.Count >= MaxCapacity)
                 {
-                    OnPalletUpdated(new PalletEventArgs { Action = "Attempted PackageList Add", PackageId = package.PackageId });
+                    OnPalletUpdated(new PalletsEventArgs { PalletAction = "Attempted PackageList Add", PackageId = package.PackageId });
                     return false;
                 }
                 packages.Add(package);
             }
-            OnPalletUpdated(new PalletEventArgs { Action = "PackageList Added", PackageId = -1 });
+            OnPalletUpdated(new PalletsEventArgs { PalletAction = "PackageList Added", PackageId = -1 });
             return true;
         }
 
@@ -85,7 +85,7 @@ namespace TechSupport.WARE.Warehouse.PalletManagement
             var package = packages.Find(p => p.PackageId == packageId);
             if (package != null && packages.Remove(package))
             {
-                OnPalletUpdated(new PalletEventArgs { Action = "Removed", PackageId = packageId });
+                OnPalletUpdated(new PalletsEventArgs { PalletAction = "Removed", PackageId = packageId });
                 return true;
             }
             return false;
